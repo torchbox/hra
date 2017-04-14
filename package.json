@@ -23,6 +23,7 @@
     "url": "git@github.com:torchbox/hra.git"
   },
   "scripts": {
+    "jscs": "gulp jscs",
     "watch": "gulp watch",
     "prod": "gulp prod"
   }
