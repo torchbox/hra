@@ -80,7 +80,8 @@ gulp.task('jshint', function() {
 gulp.task('jscs', function() {
     return gulp.src(js_input)
         .pipe(jscs())
-        .pipe(jscs.reporter());
+        .pipe(jscs.reporter())
+        .pipe(jscs.reporter('fail'));
 });
 
 // JS development task - copies the files (uncompressed)
