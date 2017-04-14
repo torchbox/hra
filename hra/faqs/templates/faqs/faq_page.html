@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags static %}
+
+{% block content %}
+    <h1>{{ page.title }}</h1>
+
+    <section class="listing">
+        {% with page.get_faqs as faqs %}
+            {% if faqs %}
+                <ul role="list">
+                    {% for faq in faqs %}
+                        <li>
+                            <h2>{{ faq.title }}</h2>
+                            {{ faq.body|richtext }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                {# no items #}
+            {% endif %}
+        {% endwith %}
+    </section>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags static %}
+
+{% block content %}
+
+    <h1>{{ page.title }}</h1>
+    <p>{{ page.intro }}</p>
+
+    <section class="listing">
+        {% if subpages.paginator.count %}
+            {% if subpages.object_list.exists %}
+                <ul role="list">
+                    {% for subpage in subpages.object_list.specific %}
+                        <li>
+                            <a href="{% pageurl subpage %}">
+                                {% if subpage.listing_image %}
+                                    {% image subpage.listing_image fill-450x300 %}
+                                {% endif %}
+                                <div>
+                                    <h2 role="listitem">
+                                        {% if subpage.listing_title %}
+                                            {{ subpage.listing_title }}
+                                        {% else %}
+                                            {{ subpage.title }}
+                                        {% endif %}
+                                    </h2>
+                                    {% if subpage.listing_summary %}
+                                        <p>{{ subpage.listing_summary }}</p>
+                                    {% endif %}
+                                </div>
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                {# no items on this page #}
+            {% endif %}
+
+            {% include "includes/pagination.html" %}
+
+        {% else %}
+            {# no items on any page #}
+        {% endif %}
+
+    </section>
+
+{% endblock %}

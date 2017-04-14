@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <div class="intro">
+        <div class="container">
+            <h1>{{ page.title }}</h1>
+        </div>
+    </div>
+
+    <section class="main-body">
+        <div class="container">
+            {% if people.paginator.count %}
+                {% for person in people %}
+                    <article class="person">
+                        <h2><a href="{{ person.url }}">{{ person.first_name }} {{ person.last_name }}</a></h2>
+                        <p>{{ person.introduction }}</p>
+                    </article>
+                {% endfor %}
+
+                {% if people.paginator.count > 1 %}
+                    {% include "includes/pagination.html" with subpages=people %}
+                {% endif %}
+            {% else %}
+                {# no results #}
+            {% endif %}
+        </div>
+    </section>
+
+{% endblock %}

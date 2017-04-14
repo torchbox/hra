@@ -1,0 +1,53 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% if page.related_documents.exists or page.related_content.exists or page.related_news.exists %}
+    <section class="related">
+        <div class="container">
+            <ul>
+
+                {% for related_document in page.related_documents.all %}
+                    {% with related_document.document as document %}
+                        <li>
+                            <a href="{{ document.url }}">
+                                <h2>
+                                    {% if related_document.title %}
+                                        {{ related_document.title }}
+                                        ({{ document.file_extension }})
+                                    {% else %}
+                                        {{ document.filename }}
+                                    {% endif %}
+                                </h2>
+                            </a>
+                        </li>
+                    {% endwith %}
+                {% endfor %}
+
+                {% for related_content in page.related_content.live %}
+                    {# a related_content object links to the original page (related_content.source_page) and a related one (related_content.page) #}
+                    {% with related_content.page as specific_related_page %}
+                        <li>
+                            <a href="{% pageurl specific_related_page %}">
+                                {% if specific_related_page.listing_image %}
+                                    {% image specific_related_page.listing_image fill-450x300 %}
+                                {% endif %}
+                                <div>
+                                    <h2>
+                                        {% if specific_related_page.listing_title %}
+                                            {{ specific_related_page.listing_title }}
+                                        {% else %}
+                                            {{ specific_related_page.title }}
+                                        {% endif %}
+                                    </h2>
+                                    {% if specific_related_page.listing_summary %}
+                                        <p>{{ specific_related_page.listing_summary }}</p>
+                                    {% endif %}
+                                </div>
+                            </a>
+                        </li>
+                    {% endwith %}
+                {% endfor %}
+
+            </ul>
+        </div>
+    </section>
+{% endif %}

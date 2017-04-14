@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags static %}
+
+{% block content %}
+
+    <h1>{{ page.title }}</h1>
+
+    <section class="listing">
+        <form method="GET">
+            <select name="category">
+                <option value="">All</option>
+                {% for category in categories %}
+                    <option value="{{ category.0 }}" {% if request.GET.category == category.0|slugify %}selected="selected"{% endif %}>{{ category.1 }}</option>
+                {% endfor %}
+            </select>
+        </form>
+
+        {% if news %}
+            <ul role="list">
+                {% for n in news %}
+                    <li>
+                        <a href="{% pageurl n %}">
+                            {% if n.listing_image %}
+                                {% image n.listing_image fill-450x300 %}
+                            {% endif %}
+                            <div>
+                                <h2 role="listitem">
+                                    {% if n.listing_title %}
+                                        {{ n.listing_title }}
+                                    {% else %}
+                                        {{ n.title }}
+                                    {% endif %}
+                                </h2>
+                                <span>{{ n.display_date }}</span>
+                                {% if n.listing_summary %}
+                                    <p>{{ n.listing_summary }}</p>
+                                {% endif %}
+                            </div>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+            {% include "includes/pagination.html" %}
+        {% else %}
+            {# no items #}
+        {% endif %}
+    </section>
+{% endblock %}

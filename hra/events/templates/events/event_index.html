@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags static %}
+
+{% block content %}
+
+    <h1>{{ page.title }}</h1>
+    <p>{{ page.intro }}</p>
+
+    {% include "includes/call_to_action.html" %}
+
+    <section class="listing">
+        {% if events %}
+            This is TRUE 'if events', (i.e. not looking at events.paginator.count)
+        {% else %}
+            This is FALSE 'if events', (i.e. not looking at events.paginator.count)
+        {% endif %}
+        {% if events.paginator.count %}
+            {% if events.object_list.exists %}
+                <ul role="list">
+                    {% for event in events.object_list.specific %}
+                        <li>
+                                {% if event.listing_image %}
+                                    <a href="{% pageurl event %}">
+                                    {% image event.listing_image fill-450x300 %}
+                                    </a>
+                                {% endif %}
+                                <div>
+                                    <h2 role="listitem">
+                                        <a href="{% pageurl event %}">
+                                            {% if event.listing_title %}
+                                                {{ event.listing_title }}
+                                            {% else %}
+                                                {{ event.title }}
+                                            {% endif %}
+                                        </a>
+                                    </h2>
+                                    {% if event.end_date and not event.end_date == event.start_date %}
+                                        {{ event.start_time }} {{ event.start_date }} to {{ event.end_time }} {{ event.end_date }}
+                                    {% elif event.end_time %}
+                                        {{ event.start_date }} {{ event.start_time }}&ndash;{{ event.end_time }}
+                                    {% else %}
+                                        {{ event.start_date }} {{ event.start_time }}
+                                    {% endif %}
+                                    {% if event.listing_summary %}
+                                        <p>{{ event.listing_summary }}</p>
+                                    {% endif %}
+                                </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                {# no items on this page #}
+            {% endif %}
+
+            {% include "includes/pagination.html" %}
+
+        {% else %}
+            {# no items on any page #}
+        {% endif %}
+
+        {% if show_past and upcoming_events.exists %}
+            <a href="{% pageurl page %}">View upcoming events</a>
+        {% elif past_events.exists %}
+            <a href="{% pageurl page %}?past=True">View past events</a>
+        {% endif %}
+
+    </section>
+
+{% endblock %}

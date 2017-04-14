@@ -1,0 +1,17 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+<div class="call-to-action">
+
+    {{ page.call_to_action.title }}
+
+    {{ page.call_to_action.summary|richtext }}
+
+    {% image page.call_to_action.image fill-450x300 %}
+
+    {% if page.call_to_action.internal_link %}
+        <a href="{{ page.call_to_action.get_internal_link.href }}">{{ page.call_to_action.get_internal_link.text }}</a>
+    {% elif call_to_action.external_link  %}
+        <a href="{{ page.call_to_action.get_external_link.href }}">{{ page.call_to_action.get_external_link.text }}</a>
+    {% endif %}
+
+</div>
