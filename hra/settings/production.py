@@ -2,7 +2,7 @@ import os
 
 import django_cache_url
 import dj_database_url
-# import raven
+import raven
 
 from .base import *  # noqa
 
@@ -16,19 +16,6 @@ SECURE_SSL_REDIRECT = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # enable HSTS only once the site is working properly on https with the actual live domain name
 # SECURE_HSTS_SECONDS = 31536000  # 1 year
-
-# Raven (sentry) configuration.
-# See instructions on the intranet:
-# https://intranet.torchbox.com/delivering-projects/tech/starting-new-project/#sentry
-
-# INSTALLED_APPS += (
-#     'raven.contrib.django.raven_compat',
-# )
-
-# RAVEN_CONFIG = {
-#     'dsn': '<PUT DSN URL HERE>?verify_ssl=0',
-#     'release': raven.fetch_git_sha(BASE_DIR),
-# }
 
 
 # Cache everything for 10 minutes
@@ -218,6 +205,14 @@ if 'LOG_DIR' in env:
     }
     LOGGING['loggers']['django.request']['handlers'].append('errors_file')
     LOGGING['loggers']['django.security']['handlers'].append('errors_file')
+
+
+# Raven (sentry) configuration.
+if 'RAVEN_DSN' in env:
+    RAVEN_CONFIG = {
+        'dsn': env['RAVEN_DSN'],
+        'release': raven.fetch_git_sha(BASE_DIR),
+    }
 
 
 try:

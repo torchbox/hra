@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'template_debug',
     'captcha',
     'wagtailcaptcha',
+    'raven.contrib.django.raven_compat',
 
     'django.contrib.admin',
     'django.contrib.auth',
