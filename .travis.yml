@@ -1,7 +1,11 @@
 language: python
 python:
   - 3.6
-cache: pip
+cache:
+  pip: true
+  directories:
+    - node_modules
+
 
 # Use container-based infrastructure
 dist: trusty
@@ -33,9 +37,13 @@ install:
   # Install test dependencies
   - pip install flake8
 
+  # Install node dependencies
+  - npm install --quiet
+
 # Run the tests
 script:
-  # Run python code style check
+  # Run python code style checks
+  - npm run jscs
   - flake8 hra --ignore=E501,F405 --exclude=*/migrations/*
 
   # Run system checks
