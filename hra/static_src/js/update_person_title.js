@@ -1,12 +1,12 @@
-$(document).ready(function() {
+$(document).ready(function () {
     var $lastNameInput = $('#id_last_name');
     var $firstNameInput = $('#id_first_name');
     var $titleInput = $('#id_title');
     var $slugInput = $('#id_slug');
 
-    $firstNameInput.on('input', function() {joinFirstNameLastName();});
+    $firstNameInput.on('input', function () {joinFirstNameLastName();});
 
-    $lastNameInput.on('input', function() {joinFirstNameLastName();});
+    $lastNameInput.on('input', function () {joinFirstNameLastName();});
 
     function joinFirstNameLastName() {
         var firstName = $firstNameInput.val();
