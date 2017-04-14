@@ -4,7 +4,7 @@ from fabric.api import *
 
 env.roledefs = {
     'production': [],  # CHANGEME
-    'staging': [],  # CHANGEME
+    'staging': ['hra@by-staging-1.torchbox.com'],
 }
 
 
@@ -26,9 +26,6 @@ def deploy_production():
 
 @roles('staging')
 def deploy_staging():
-    # Remove this line when you're happy that this task is correct
-    raise RuntimeError("Please check the fabfile before using it")
-
     run('git pull')
     run('pip install -r requirements.txt')
     _run_migrate()
@@ -58,9 +55,6 @@ def pull_production_data():
 @runs_once
 @roles('staging')
 def pull_staging_data():
-    # Remove this line when you're happy that this task is correct
-    raise RuntimeError("Please check the fabfile before using it")
-
     _pull_data(
         env_name='staging',
         remote_db_name='hra',
