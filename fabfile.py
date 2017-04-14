@@ -117,7 +117,11 @@ def _run_migrate():
 @runs_once
 def _post_deploy():
     # clear frontend cache
-    run('ats-cache-purge $CFG_PRIMARY_HOST')
+    run(
+        'for host in $(echo $CFG_HOSTNAMES | tr \',\' \' \'); do echo "Purge cache for $host";'
+        'ats-cache-purge $host; '
+        'done'
+    )
 
     # update search index
     run('django-admin update_index')
