@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'hra.events',
     'hra.faqs',
     'hra.forms',
+    'hra.glossary',
     'hra.home',
     'hra.images',
     'hra.navigation',
