@@ -9,7 +9,7 @@ a fabfile for running common commands with Fabric.
 To set up a new build:
 
 ``` bash
-git clone [URL TO GIT REMOTE]
+git clone git@github.com:torchbox/hra.git
 cd hra
 vagrant up
 vagrant ssh
