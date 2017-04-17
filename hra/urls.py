@@ -3,6 +3,7 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.views.decorators.cache import cache_control
 from django.views.generic import TemplateView
+from rest_framework.documentation import include_docs_urls
 
 from wagtail.utils.urlpatterns import decorate_urlpatterns
 from wagtail.contrib.wagtailsitemaps.views import sitemap
@@ -10,6 +11,7 @@ from wagtail.wagtailadmin import urls as wagtailadmin_urls
 from wagtail.wagtailcore import urls as wagtail_urls
 from wagtail.wagtaildocs import urls as wagtaildocs_urls
 
+from hra.api import api_router
 from hra.esi import views as esi_views
 from hra.search import views as search_views
 
@@ -22,6 +24,9 @@ urlpatterns = [
     url(r'^search/$', search_views.search, name='search'),
     url(r'^esi/(.*)/$', esi_views.esi, name='esi'),
     url('^sitemap\.xml$', sitemap),
+
+    url(r'^api/', include_docs_urls(title='HRA API docs')),
+    url(r'^api/v2/', include(api_router.urls)),
 ]
 
 

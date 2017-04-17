@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'wagtail.wagtailsearch',
     'wagtail.wagtailadmin',
     'wagtail.wagtailcore',
+    'wagtail.api.v2',
 
     'modelcluster',
     'taggit',
@@ -61,6 +62,9 @@ INSTALLED_APPS = [
     'captcha',
     'wagtailcaptcha',
     'raven.contrib.django.raven_compat',
+
+    # API
+    'rest_framework',
 
     'django.contrib.admin',
     'django.contrib.auth',
