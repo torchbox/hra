@@ -1,1 +1,0 @@
-$(document).ready(function(){function a(){var a=i.val(),u=n.val(),v=a+" "+u;l.data("previous-val",l.val()),t.data("previous-val",t.val()),t.val(v),t.blur()}var n=$("#id_last_name"),i=$("#id_first_name"),t=$("#id_title"),l=$("#id_slug");i.on("input",function(){a()}),n.on("input",function(){a()})});
