@@ -1,2 +1,12 @@
 {% include "molecules-site-header" %}
 {% include "molecules-hero" %}
+{% spaceless %}
+  <div class="grid grid--full">
+    <div class="grid__item three-tenths">
+      {% include "molecules-site-sidebar" %}
+    </div>
+    <div class="grid__item seven-tenths">
+      {% include "molecules-standard-body" %}
+    </div>
+  </div>
+{% endspaceless %}

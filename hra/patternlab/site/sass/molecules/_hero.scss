@@ -4,5 +4,8 @@
 
 .hero {
     height: 500px;
-    background: #e0e0e0;
+    background: {
+        size: cover;
+        image: url('../images/hero.png');
+    }
 }
