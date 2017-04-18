@@ -29,7 +29,7 @@ CACHE_CONTROL_MAX_AGE = 600
 
 env = os.environ.copy()
 
-# On Torchbox servers, many environment variables are prefixed with "CFG_"
+# CFG_ prefixed environment variables are made available for use by the application
 for key, value in os.environ.items():
     if key.startswith('CFG_'):
         env[key[4:]] = value
