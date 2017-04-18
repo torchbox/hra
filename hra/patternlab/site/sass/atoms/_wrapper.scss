@@ -1,0 +1,16 @@
+/*------------------------------------*\
+    $WRAPPERS
+\*------------------------------------*/
+
+.wrapper {
+    max-width: $wrapper-width;
+    margin: 0 auto;
+
+    &--fluid {
+        max-width: 100%;
+    }
+
+    &--relative {
+        position: relative;
+    }
+}

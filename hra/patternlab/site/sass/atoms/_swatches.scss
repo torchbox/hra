@@ -1,0 +1,40 @@
+/*------------------------------------*\
+    $SWATCHES
+\*------------------------------------*/
+
+.swatches {
+    max-width: 700px;
+    padding: 30px;
+}
+
+.swatch {
+    display: inline-block;
+    width: 130px;
+    height: 130px;
+    margin: 10px;
+    font-size: 12px;
+    border-radius: 50%;
+    box-shadow: 1px 4px 7px rgba(0, 0, 0, 0.2);
+    transition: background-color $default-transition-speed ease;
+
+    @each $i, $j in $button-colours {
+        &--#{$i} {
+            color: (map-get($j, 'color'));
+            background-color: (map-get($j, 'bg'));
+
+            &:hover {
+                background-color: darken((map-get($j, 'bg')), 15%);
+            }
+        }
+    }
+
+    span {
+        position: relative;
+        top: 50%;
+        display: block;
+        letter-spacing: 1px;
+        text-align: center;
+        text-transform: uppercase;
+        transform: translateY(-50%);
+    }
+}

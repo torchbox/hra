@@ -1,0 +1,36 @@
+/*------------------------------------*\
+    $BUTTONS
+\*------------------------------------*/
+
+.button {
+    @include font-size(zeta);
+    display: inline-block;
+    padding: 15px 30px;
+    overflow: hidden;
+    font-weight: 300;
+    color: #fff;
+    text-align: center;
+    vertical-align: top;
+    cursor: pointer;
+    border: 0;
+    box-sizing: border-box;
+    transition: background-color $default-transition-speed ease;
+
+    &:focus {
+        outline: 0;
+    }
+
+    /* ============================================
+        Coloured buttons
+    */
+    @each $i, $j in $button-colours {
+        &--#{$i} {
+            color: (map-get($j, 'color'));
+            background-color: (map-get($j, 'bg'));
+
+            &:hover {
+                background-color: darken((map-get($j, 'bg')), 15%);
+            }
+        }
+    }
+}

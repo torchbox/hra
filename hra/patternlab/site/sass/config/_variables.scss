@@ -1,0 +1,125 @@
+/*------------------------------------*\
+    $VARIABLES
+\*------------------------------------*/
+
+
+/* ============================================
+   Colours
+*/
+
+// Main colours
+$color--blue: #0d61b5;
+$color--light-blue: #1174cb;
+$color--cyan: #48b6e4;
+$color--yellow: #f9df32;
+$color--purple: #ac2a73;
+$color--dark-grey: #435663;
+$color--light-grey: #d0d0d0;
+$color--bright-grey: #f5f4f4;
+
+// Defaults
+$color--foreground: $color--dark-grey;
+$color--brand: $color--blue;
+
+// Theme colours
+$color--primary: $color--blue;
+$color--secondary: $color--light-blue;
+$color--tertiary: $color--cyan;
+$color--quaternary: $color--yellow;
+$color--quinary: $color--purple;
+$color--senary: $color--dark-grey;
+$color--septenary: $color--bright-grey;
+
+// Type colours
+$color--default: #000;
+$color--link: #000;
+
+// Button colours
+$button-colours: (
+    primary:    (bg: $color--primary, color: #fff),
+    secondary:  (bg: $color--secondary, color: #fff),
+    tertiary:   (bg: $color--tertiary, color: #fff),
+    quaternary: (bg: $color--quaternary, color: #000),
+    quinary:    (bg: $color--quinary, color: #fff),
+    senary:     (bg: $color--senary, color: #fff),
+    septenary:  (bg: $color--septenary, color: #000)
+);
+
+
+/* ============================================
+   Typography
+   :: Default to system font stack
+*/
+$font--primary: 'FrutigerLTW01-45Light', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+$font--secondary: 'FrutigerLTW01-45Light', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+$base-font-size: 16px;
+$base-line-height: 25px;
+$font-sizes: (
+
+    // non-standard large sizes
+    giga:    80px,
+    mega:    60px,
+    kilo:    48px,
+
+    // standard sizes
+    alpha:   42px,
+    beta:    32px,
+    gamma:   28px,
+    delta:   22px,
+    epsilon: 20px,
+    zeta:    16px,
+
+    // non-standard small sizes
+    milli:   14px
+);
+
+
+/* ============================================
+    Wrappers and grids
+*/
+$wrapper-width: 1300px;
+$gutter: 40px;
+
+
+/* ============================================
+   Breakpoints
+*/
+$breakpoints: (
+    'wide'          '(max-width: 1440px)',
+    'desktop'       '(max-width: 1330px)',
+    'laptop'        '(max-width: 1000px)',
+    'tablet'        '(max-width: 700px)',
+    'mobile'        '(max-width: 650px)',
+);
+
+$breakpoint-has-widths: (
+    'wide',
+    'desktop',
+    'laptop',
+    'tablet',
+    'mobile'
+);
+
+
+/* ============================================
+    Transition speeds
+*/
+$default-transition-speed: 300ms;
+
+
+/* ============================================
+    Z-index 
+*/
+$z-alpha:       7;
+$z-beta:        6;
+$z-gamma:       5;
+$z-delta:       4;
+$z-epsilon:     3;
+$z-zeta:        2;
+$z-milli:       1;
+$z-base:        0;
+$z-hidden:     -1;
+
+$z-giga:        9999;
+$z-mega:        110;
+$z-kilo:        109;

@@ -1,0 +1,18 @@
+dploy.yaml
+node_modules
+.sass-cache
+.tmp
+.DS_Store
+*.zip
+patternlab/source/_patterns/**
+patternlab/source/images/**
+
+# Exclude dist apart from the patternlab styleguide
+/dist/*
+!/dist/patternlab/
+/dist/patternlab/*
+!/dist/patternlab/index.html
+!/dist/patternlab/styleguide/
+/dist/patternlab/styleguide/html/styleguide.html
+/dist/patternlab/styleguide/data/patternlab-data.js
+npm-debug.log

@@ -1,0 +1,11 @@
+/*------------------------------------*\
+    $SITE CONTAINER
+\*------------------------------------*/
+
+.site-container {
+    transition: transform $default-transition-speed cubic-bezier(0.445, 0.05, 0.55, 0.95);
+
+    &--push {
+        transform: translate3d(0, 300px, 0);
+    }
+}
