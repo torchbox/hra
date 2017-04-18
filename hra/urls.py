@@ -11,7 +11,7 @@ from wagtail.wagtailadmin import urls as wagtailadmin_urls
 from wagtail.wagtailcore import urls as wagtail_urls
 from wagtail.wagtaildocs import urls as wagtaildocs_urls
 
-from hra.api import api_router
+from hra.api.routers import api_router
 from hra.esi import views as esi_views
 from hra.search import views as search_views
 
