@@ -5,7 +5,7 @@
 .site-header {
     position: relative;
     width: 100%;
-    padding: 25px 110px 25px 35px;
+    padding: 25px 35px;
     background-color: #fcfcfc;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 
@@ -21,38 +21,17 @@
         @include placeholder-text {
             font-family: $font--primary;
             font-size: 16px;
-            color: $color--blue;
+            color: #fff;
             opacity: 1;
         }
 
         display: inline-block;
         padding: 11px 20px;
-        margin: 0 35px 0 70px;
+        margin: 0 0 0 70px;
         color: #000;
-        vertical-align: -18px;
-        border: 1px solid $color--blue;
-        border-radius: 35px;
-    }
-
-    &__quick-links-button {
-        position: absolute;
-        top: 0;
-        right: 0;
-        height: 100%;
-        padding: 0 20px;
-        font-size: 14px;
-        color: #fff;
-        cursor: pointer;
-        background-color: $color--senary;
+        vertical-align: -16px;
+        background-color: $color--blue;
         border: 0;
-        transition: background-color $default-transition-speed ease;
-
-        &:focus {
-            outline: 0;
-        }
-
-        &:hover {
-            background-color: darken($color--senary, 10%);
-        }
+        border-radius: 35px;
     }
 }
