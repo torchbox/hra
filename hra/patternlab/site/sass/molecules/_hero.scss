@@ -3,9 +3,31 @@
 \*------------------------------------*/
 
 .hero {
-    height: 500px;
+    height: 600px;
     background: {
         size: cover;
         image: url('../images/hero.png');
+    }
+
+    &--with-caption {
+        position: relative;
+    }
+
+    &__caption {
+        position: absolute;
+        top: 245px;
+        right: 0;
+        padding: 50px 170px 60px 50px;
+        margin: auto 0;
+        background-color: rgba(9, 89, 169, 0.95);
+    }
+
+    &__caption-title {
+        color: #fff;
+    }
+
+    &__caption-subtitle {
+        @include font-size(epsilon);
+        color: #fff;
     }
 }

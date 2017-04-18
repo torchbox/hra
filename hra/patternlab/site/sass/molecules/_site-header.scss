@@ -4,6 +4,7 @@
 
 .site-header {
     position: absolute;
+    z-index: $z-milli;
     width: 100%;
     padding: 25px 35px;
     background-color: rgba(252, 252, 252, 0.95);
