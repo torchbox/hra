@@ -21,8 +21,7 @@
         margin: auto 0;
         background-color: rgba(9, 89, 169, 0.95);
 
-        &::before,
-        &::after {
+        &::before {
             position: absolute;
             width: 44px;
             height: 50px;
@@ -40,11 +39,11 @@
         }
 
         // Bottom arrow
-        &::after {
-            right: 32px;
-            bottom: 0;
-            transform: rotate(180deg);
-        }
+        // &::after {
+        //     right: 32px;
+        //     bottom: 0;
+        //     transform: rotate(180deg);
+        // }
     }
 
     &__caption-title {
