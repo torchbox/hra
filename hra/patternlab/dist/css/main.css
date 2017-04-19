@@ -1945,6 +1945,7 @@ input:focus {
 \*------------------------------------*/
 .site-body {
   padding: 80px 40px;
+  overflow: auto;
 }
 
 .site-body__inner {
