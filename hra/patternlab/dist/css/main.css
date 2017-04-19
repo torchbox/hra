@@ -1921,7 +1921,7 @@ input:focus {
   font-size: 18px;
   font-size: 1.125rem;
   display: block;
-  padding: 20px 15px;
+  padding: 20px 55px 20px 15px;
   color: #000;
   border-bottom: 1px solid #d5e4f2;
   transition: color 300ms ease, background-color 300ms ease;
@@ -1930,15 +1930,33 @@ input:focus {
 .site-sidebar__menu-item > svg {
   position: absolute;
   top: 0;
-  right: 15px;
+  right: 0;
   bottom: 0;
+  width: 25px;
+  height: 25px;
   margin: auto 0;
-  transform: rotate(-90deg);
+  transform: rotate(-90deg) translate3d(0, -15px, 0);
+  transition: transform 300ms ease;
+}
+
+.site-sidebar__menu-item > svg path {
+  transition: stroke 300ms ease;
+  stroke: #0d61b5;
+  stroke-width: 2px;
+  fill: none;
 }
 
 .site-sidebar__menu-item--active > a, .site-sidebar__menu-item:hover > a {
   color: #fff;
   background-color: #0d61b5;
+}
+
+.site-sidebar__menu-item--active > svg path, .site-sidebar__menu-item:hover > svg path {
+  stroke: #fff;
+}
+
+.site-sidebar__menu-item:hover > svg {
+  transform: rotate(-90deg) translate3d(0, -10px, 0);
 }
 
 .site-sidebar__menu-item:first-of-type > a {

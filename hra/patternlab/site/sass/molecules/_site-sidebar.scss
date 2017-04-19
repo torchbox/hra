@@ -25,7 +25,7 @@
         > a {
             @include rem-font-size(18px);
             display: block;
-            padding: 20px 15px;
+            padding: 20px 55px 20px 15px;
             color: #000;
             border-bottom: 1px solid $color--border;
             transition: color $default-transition-speed ease, background-color $default-transition-speed ease;
@@ -34,10 +34,20 @@
         > svg {
             position: absolute;
             top: 0;
-            right: 15px;
+            right: 0;
             bottom: 0;
+            width: 25px;
+            height: 25px;
             margin: auto 0;
-            transform: rotate(-90deg);
+            transform: rotate(-90deg) translate3d(0, -15px, 0);
+            transition: transform $default-transition-speed ease;
+
+            path {
+                transition: stroke $default-transition-speed ease;
+                stroke: $color--primary;
+                stroke-width: 2px;
+                fill: none;
+            }
         }
 
         &--active,
@@ -48,7 +58,15 @@
             }
 
             > svg {
+                path {
+                    stroke: #fff;
+                }
+            }
+        }
 
+        &:hover {
+            > svg {
+                transform: rotate(-90deg) translate3d(0, -10px, 0);
             }
         }
 
