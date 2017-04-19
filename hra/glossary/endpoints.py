@@ -1,12 +1,13 @@
 from wagtail.api.v2.endpoints import BaseAPIEndpoint
 from wagtail.api.v2.filters import FieldsFilter, OrderingFilter, SearchFilter
 
+from hra.api.compat import CoreAPICompatibilityMixin
 from hra.glossary.filters import GlossaryTermsStartsWithFilter
 from hra.glossary.models import GlossaryTerm
 from hra.glossary.serializers import GlossaryTermSerializer
 
 
-class GlossaryTermsAPIEndpoint(BaseAPIEndpoint):
+class GlossaryTermsAPIEndpoint(CoreAPICompatibilityMixin, BaseAPIEndpoint):
     base_serializer_class = GlossaryTermSerializer
     filter_backends = [FieldsFilter, OrderingFilter, SearchFilter, GlossaryTermsStartsWithFilter]
     body_fields = BaseAPIEndpoint.body_fields + ['name', 'description', 'is_noun']

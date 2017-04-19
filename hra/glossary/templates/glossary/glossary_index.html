@@ -14,9 +14,11 @@
     <script>
         var coreapi = window.coreapi;
         var schema = window.schema;
-
         var client = new coreapi.Client();
-        client.action(schema, ['api', 'v2', 'glossary_terms', 'list']).then(function(result) {
+
+        var action = ['glossary_terms', 'list'];
+        var params = {} // Can be something like {term_startswith: 'a'}
+        client.action(schema, action, params).then(function(result) {
             console.log(result);
         });
 
