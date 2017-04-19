@@ -39,12 +39,6 @@ if settings.DEBUG:
         url(r'^test500/$', TemplateView.as_view(template_name='500.html')),
     ]
 
-if settings.DEBUG or settings.ENABLE_STYLEGUIDE:
-    urlpatterns += [
-        # Add styleguide
-        url(r'^styleguide/$', TemplateView.as_view(template_name='styleguide.html')),
-    ]
-
 urlpatterns += [
     url(r'', include(wagtail_urls)),
 ]
