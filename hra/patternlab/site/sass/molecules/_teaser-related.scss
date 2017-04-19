@@ -1,17 +1,16 @@
 /*------------------------------------*\
-    $SEARCH TEASER
+    $TEASER RELATED
 \*------------------------------------*/
 
-.teaser-search {
+.teaser-related {
     position: relative;
     display: block;
-    padding: 48px 30px 60px;
-    margin-bottom: 61px;
-    background: linear-gradient(to right, #ad2378, #943886);
+    padding: 45px 30px;
+    background: linear-gradient(to right, #0f5faf, #235789);
 
     &::before {
         position: absolute;
-        top: 0;
+        top: 40px;
         right: 18px;
         width: 40px;
         height: 46px;
@@ -20,10 +19,20 @@
             image: url('../images/svg/plain-arrow.svg');
         }
         content: '';
+        transform: rotate(-90deg);
     }
 
     &__heading {
+        padding: 0 60px 0 0;
         margin-bottom: 10px;
+        font-family: $font--secondary;
+        line-height: 1.2;
+        color: #fff;
+    }
+
+    &__description {
+        @include font-size(milli);
+        margin: 0;
         color: #fff;
     }
 }

@@ -1953,7 +1953,7 @@ input:focus {
 .site-body__inner {
   float: left;
   width: 100%;
-  max-width: 900px;
+  max-width: 1000px;
 }
 
 .site-body__grid {
@@ -2144,14 +2144,60 @@ input:focus {
 .teaser-search {
   position: relative;
   display: block;
-  height: 187px;
-  padding: 30px;
-  margin-bottom: 30px;
+  padding: 48px 30px 60px;
+  margin-bottom: 61px;
   background: linear-gradient(to right, #ad2378, #943886);
+}
+
+.teaser-search::before {
+  position: absolute;
+  top: 0;
+  right: 18px;
+  width: 40px;
+  height: 46px;
+  background-size: cover;
+  background-image: url("../images/svg/plain-arrow.svg");
+  content: '';
 }
 
 .teaser-search__heading {
   margin-bottom: 10px;
+  color: #fff;
+}
+
+/*------------------------------------*    $TEASER RELATED
+\*------------------------------------*/
+.teaser-related {
+  position: relative;
+  display: block;
+  padding: 45px 30px;
+  background: linear-gradient(to right, #0f5faf, #235789);
+}
+
+.teaser-related::before {
+  position: absolute;
+  top: 40px;
+  right: 18px;
+  width: 40px;
+  height: 46px;
+  background-size: cover;
+  background-image: url("../images/svg/plain-arrow.svg");
+  content: '';
+  transform: rotate(-90deg);
+}
+
+.teaser-related__heading {
+  padding: 0 60px 0 0;
+  margin-bottom: 10px;
+  font-family: "FrutigerLTW01-55Roman", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  line-height: 1.2;
+  color: #fff;
+}
+
+.teaser-related__description {
+  font-size: 14px;
+  font-size: 0.875rem;
+  margin: 0;
   color: #fff;
 }
 
