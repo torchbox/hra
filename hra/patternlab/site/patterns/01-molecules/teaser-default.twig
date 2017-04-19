@@ -1,16 +1,16 @@
 <a class="teaser" href="">
-  <div class="teaser__image" style="background-image:url('../../../images/teaser.png')">
+  <div class="teaser__image" style="background-image:url('{{ teaser.image }}')">
     <div class="teaser__meta">
-      <div class="teaser__section-label">Improving research</div>
+      <div class="teaser__section-label">{{ teaser.label }}</div>
       <div class="teaser__title">
-        Best practice
+        {{ teaser.title }}
         {% include "atoms-default-arrow" %}
       </div>
     </div>
   </div>
   <div class="teaser__description">
     <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut cursus lacus. Aliquam quis vulputate arcu.
+      {{ teaser.description }}
     </p>
   </div>
 </a>

@@ -1,0 +1,1 @@
+Standard index/section index page.

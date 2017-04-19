@@ -1806,19 +1806,19 @@ input:focus {
 /*------------------------------------*    $SITE HEADER
 \*------------------------------------*/
 .site-header {
-  position: absolute;
   z-index: 1;
   width: 100%;
-  padding: 25px 5%;
+  padding: 20px 5%;
   background-color: rgba(252, 252, 252, 0.95);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 .site-header__logo {
-  display: block;
+  display: inline-block;
 }
 
 .site-header__right {
+  margin-top: 7px;
   text-align: right;
 }
 
@@ -2059,7 +2059,9 @@ input:focus {
 /*------------------------------------*    $HERO
 \*------------------------------------*/
 .hero {
+  z-index: -1;
   height: 600px;
+  margin-top: -103px;
   background-size: cover;
   background-image: url("../images/hero.png");
 }
