@@ -23,6 +23,8 @@
 
         &::before {
             position: absolute;
+            top: 0;
+            left: 32px;
             width: 44px;
             height: 50px;
             background: {
@@ -31,22 +33,10 @@
             }
             content: '';
         }
-
-        // Top arrow
-        &::before {
-            top: 0;
-            left: 32px;
-        }
-
-        // Bottom arrow
-        // &::after {
-        //     right: 32px;
-        //     bottom: 0;
-        //     transform: rotate(180deg);
-        // }
     }
 
     &__caption-title {
+        @include rem-font-size(50px);
         color: #fff;
     }
 

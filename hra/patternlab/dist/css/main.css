@@ -1459,13 +1459,13 @@ blockquote {
     Default sizes
 */
 h1, .alpha {
-  font-size: 42px;
-  font-size: 2.625rem;
+  font-size: 38px;
+  font-size: 2.375rem;
 }
 
 h2, .beta {
-  font-size: 32px;
-  font-size: 2rem;
+  font-size: 30px;
+  font-size: 1.875rem;
 }
 
 h3, .gamma {
@@ -1727,6 +1727,21 @@ input:focus {
   transform: translate3d(0, 300px, 0);
 }
 
+/*------------------------------------*    $ARTICLE
+    Default rich text styles
+\*------------------------------------*/
+.article h1 {
+  color: #000;
+  font-family: "FrutigerLTW01-55Roman", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+.article p {
+  font-size: 20px;
+  font-size: 1.25rem;
+  margin: 10px 0;
+  line-height: 1.5;
+}
+
 /*------------------------------------*    $MOLECULES
 \*------------------------------------*/
 /*------------------------------------*    $SITE HEADER
@@ -1792,6 +1807,95 @@ input:focus {
   font-size: 16px;
   color: #fff;
   opacity: 1;
+}
+
+/*------------------------------------*    $SITE SIDEBAR
+\*------------------------------------*/
+.site-sidebar {
+  width: 100%;
+  padding: 60px;
+  margin-top: -130px;
+  overflow: auto;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.7), #fff 20%);
+}
+
+.site-sidebar__inner {
+  float: right;
+  max-width: 350px;
+}
+
+.site-sidebar__heading {
+  font-size: 30px;
+  font-size: 1.875rem;
+  margin-bottom: 30px;
+  font-family: "FrutigerLTW01-65Bold", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  color: #000;
+}
+
+.site-sidebar__menu {
+  list-style: none;
+}
+
+.site-sidebar__menu-item {
+  position: relative;
+}
+
+.site-sidebar__menu-item > a {
+  font-size: 18px;
+  font-size: 1.125rem;
+  display: block;
+  padding: 17px 55px 17px 15px;
+  color: #000;
+  border-bottom: 1px solid #d5e4f2;
+  transition: color 300ms ease, background-color 300ms ease;
+}
+
+.site-sidebar__menu-item > svg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 25px;
+  height: 25px;
+  margin: auto 0;
+  transform: rotate(-90deg) translate3d(0, -15px, 0);
+  transition: transform 300ms ease;
+}
+
+.site-sidebar__menu-item > svg path {
+  transition: stroke 300ms ease;
+  stroke: #0d61b5;
+  stroke-width: 2px;
+  fill: none;
+}
+
+.site-sidebar__menu-item--active > a, .site-sidebar__menu-item:hover > a {
+  color: #fff;
+  background-color: #0d61b5;
+}
+
+.site-sidebar__menu-item--active > svg path, .site-sidebar__menu-item:hover > svg path {
+  stroke: #fff;
+}
+
+.site-sidebar__menu-item:hover > svg {
+  transform: rotate(-90deg) translate3d(0, -10px, 0);
+}
+
+.site-sidebar__menu-item:first-of-type > a {
+  border-top: 1px solid #d5e4f2;
+}
+
+/*------------------------------------*    $SITE BODY
+\*------------------------------------*/
+.site-body {
+  padding: 80px 40px;
+}
+
+.site-body__inner {
+  float: left;
+  width: 100%;
+  max-width: 900px;
 }
 
 /*------------------------------------*    $MAIN MENU
@@ -1871,6 +1975,8 @@ input:focus {
 
 .hero__caption::before {
   position: absolute;
+  top: 0;
+  left: 32px;
   width: 44px;
   height: 50px;
   background-size: cover;
@@ -1878,12 +1984,9 @@ input:focus {
   content: '';
 }
 
-.hero__caption::before {
-  top: 0;
-  left: 32px;
-}
-
 .hero__caption-title {
+  font-size: 50px;
+  font-size: 3.125rem;
   color: #fff;
 }
 
@@ -1891,76 +1994,6 @@ input:focus {
   font-size: 20px;
   font-size: 1.25rem;
   color: #fff;
-}
-
-/*------------------------------------*    $SITE SIDEBAR
-\*------------------------------------*/
-.site-sidebar {
-  width: 100%;
-  height: 600px;
-  padding: 60px;
-  margin-top: -130px;
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.7), #fff 20%);
-}
-
-.site-sidebar__heading {
-  margin-bottom: 30px;
-  font-family: "FrutigerLTW01-65Bold", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-  color: #000;
-}
-
-.site-sidebar__menu {
-  list-style: none;
-}
-
-.site-sidebar__menu-item {
-  position: relative;
-}
-
-.site-sidebar__menu-item > a {
-  font-size: 18px;
-  font-size: 1.125rem;
-  display: block;
-  padding: 20px 55px 20px 15px;
-  color: #000;
-  border-bottom: 1px solid #d5e4f2;
-  transition: color 300ms ease, background-color 300ms ease;
-}
-
-.site-sidebar__menu-item > svg {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: 25px;
-  height: 25px;
-  margin: auto 0;
-  transform: rotate(-90deg) translate3d(0, -15px, 0);
-  transition: transform 300ms ease;
-}
-
-.site-sidebar__menu-item > svg path {
-  transition: stroke 300ms ease;
-  stroke: #0d61b5;
-  stroke-width: 2px;
-  fill: none;
-}
-
-.site-sidebar__menu-item--active > a, .site-sidebar__menu-item:hover > a {
-  color: #fff;
-  background-color: #0d61b5;
-}
-
-.site-sidebar__menu-item--active > svg path, .site-sidebar__menu-item:hover > svg path {
-  stroke: #fff;
-}
-
-.site-sidebar__menu-item:hover > svg {
-  transform: rotate(-90deg) translate3d(0, -10px, 0);
-}
-
-.site-sidebar__menu-item:first-of-type > a {
-  border-top: 1px solid #d5e4f2;
 }
 
 /*------------------------------------*    $ORGANISMS

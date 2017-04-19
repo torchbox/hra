@@ -1,0 +1,17 @@
+/*------------------------------------*\
+    $ARTICLE
+    Default rich text styles
+\*------------------------------------*/
+
+.article {
+    h1 {
+        color: #000;
+        font-family: $font--secondary;
+    }
+
+    p {
+        @include rem-font-size(20px);
+        margin: 10px 0;
+        line-height: 1.5;
+    }
+}

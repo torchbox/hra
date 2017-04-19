@@ -58,21 +58,24 @@
 @import 'atoms/wrapper';
 @import 'atoms/logo';
 @import 'atoms/site-container';
+@import 'atoms/article';
 
 
 /*------------------------------------*\
     $MOLECULES
 \*------------------------------------*/
 @import 'molecules/site-header';
+@import 'molecules/site-sidebar';
+@import 'molecules/site-body';
 @import 'molecules/main-menu';
 @import 'molecules/hero';
-@import 'molecules/site-sidebar';
 
 
 /*------------------------------------*\
     $ORGANISMS
 \*------------------------------------*/
 @import 'organisms/body-default';
+
 
 /*------------------------------------*\
     $TEMPLATES

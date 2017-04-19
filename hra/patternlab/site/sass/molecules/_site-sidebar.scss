@@ -4,12 +4,18 @@
 
 .site-sidebar {
     width: 100%;
-    height: 600px;
     padding: 60px;
     margin-top: -130px;
+    overflow: auto;
     background: linear-gradient(to bottom, rgba(255, 255, 255, 0.7), #fff 20%);
 
+    &__inner {
+        float: right;
+        max-width: 350px;
+    }
+
     &__heading {
+        @include font-size(beta);
         margin-bottom: 30px;
         font-family: $font--tertiary;
         color: #000;
@@ -25,7 +31,7 @@
         > a {
             @include rem-font-size(18px);
             display: block;
-            padding: 20px 55px 20px 15px;
+            padding: 17px 55px 17px 15px;
             color: #000;
             border-bottom: 1px solid $color--border;
             transition: color $default-transition-speed ease, background-color $default-transition-speed ease;
