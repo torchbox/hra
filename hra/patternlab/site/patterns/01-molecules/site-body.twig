@@ -6,5 +6,31 @@
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut cursus lacus. Nullam bibendum ullamcorper lorem ultrices convallis. Pellentesque id tincidunt elit. Donec nec fermentum ante. Aliquam quis vulputate arcu. Vivamus imperdiet dictum nibh, eget ullamcorper turpis pulvinar sit amet. 
       </p>
     </article>
+
+    {% spaceless %}
+    <div class="site-body__grid">
+      <div class="grid">
+        <div class="grid__item three-fifths">
+          <div class="grid">
+            <div class="grid__item one-half">
+              {% include "molecules-teaser-default" %}
+            </div>
+            <div class="grid__item one-half">
+              {% include "molecules-teaser-default" %}
+            </div>
+            <div class="grid__item one-half">
+              {% include "molecules-teaser-default" %}
+            </div>
+            <div class="grid__item one-half">
+              {% include "molecules-teaser-default" %}
+            </div>
+          </div>
+        </div>
+        <div class="grid__item two-fifths">
+          {% include "molecules-teaser-search" %}
+        </div>
+      </div>
+    </div>
+    {% endspaceless %}
   </div>
 </div>

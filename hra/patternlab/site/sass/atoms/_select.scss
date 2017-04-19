@@ -1,0 +1,55 @@
+/*------------------------------------*\
+    $CUSTOM SELECT STYLES
+\*------------------------------------*/
+
+.custom-select {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    background-color: #fff;
+
+    &::after {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        z-index: $z-zeta;
+        width: $select-height;
+        margin: auto 0;
+        font-size: 16px;
+        font-weight: bold;
+        color: $color--purple;
+        text-align: center;
+        pointer-events: none;
+        content: '❮';
+        transform: rotate(-90deg);
+    }
+
+    &::before {
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: $z-milli;
+        display: block;
+        width: $select-height;
+        height: $select-height;
+        pointer-events: none;
+        background-color: #fff;
+        content: '';
+    }
+
+    select {
+        @include font-size(milli);
+        position: relative;
+        width: 100%;
+        height: $select-height;
+        padding: 10px;
+        margin: 0;
+        font-family: $font--secondary;
+        color: $color--purple;
+        cursor: pointer;
+        background-color: #fff;
+        border: 0;
+        outline: none;
+    }
+}

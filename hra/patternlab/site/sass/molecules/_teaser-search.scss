@@ -1,0 +1,17 @@
+/*------------------------------------*\
+    $SEARCH TEASER
+\*------------------------------------*/
+
+.teaser-search {
+    position: relative;
+    display: block;
+    height: 187px;
+    padding: 30px;
+    margin-bottom: 30px;
+    background: linear-gradient(to right, #ad2378, #943886);
+
+    &__heading {
+        margin-bottom: 10px;
+        color: #fff;
+    }
+}
