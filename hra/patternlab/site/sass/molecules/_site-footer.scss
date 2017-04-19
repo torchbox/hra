@@ -1,0 +1,46 @@
+/*------------------------------------*\
+    $SITE FOOTER
+\*------------------------------------*/
+
+.site-footer {
+    width: 100%;
+    padding: 25px 5%;
+    background-color: $color--dark-grey;
+    border-top: 20px solid #697b88;
+
+    &__heading {
+        color: #fff;
+    }
+
+    &__list {
+        padding-right: 80px;
+
+        > li {
+            position: relative;
+            border-bottom: 1px solid #949037;
+
+            &::after {
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                width: 14px;
+                height: 18px;
+                margin: auto 0;
+                background: {
+                    size: cover;
+                    image: url('../images/svg/plain-arrow.svg');
+                }
+                content: '';
+                transform: rotate(-90deg);
+            }
+
+            a {
+                @include rem-font-size(13px);
+                display: block;
+                padding: 9px 0;
+                color: #fff;
+            }
+        }
+    }
+}

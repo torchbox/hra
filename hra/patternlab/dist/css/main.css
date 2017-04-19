@@ -1411,6 +1411,7 @@ button, input, select, textarea {
 ul {
   padding: 0;
   margin: 0;
+  list-style: none;
 }
 
 a {
@@ -1808,7 +1809,7 @@ input:focus {
   position: absolute;
   z-index: 1;
   width: 100%;
-  padding: 25px 35px;
+  padding: 25px 5%;
   background-color: rgba(252, 252, 252, 0.95);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
@@ -1890,10 +1891,6 @@ input:focus {
   color: #000;
 }
 
-.site-sidebar__menu {
-  list-style: none;
-}
-
 .site-sidebar__menu-item {
   position: relative;
 }
@@ -1958,6 +1955,50 @@ input:focus {
 
 .site-body__grid {
   margin-top: 60px;
+}
+
+/*------------------------------------*    $SITE FOOTER
+\*------------------------------------*/
+.site-footer {
+  width: 100%;
+  padding: 25px 5%;
+  background-color: #435663;
+  border-top: 20px solid #697b88;
+}
+
+.site-footer__heading {
+  color: #fff;
+}
+
+.site-footer__list {
+  padding-right: 80px;
+}
+
+.site-footer__list > li {
+  position: relative;
+  border-bottom: 1px solid #949037;
+}
+
+.site-footer__list > li::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 14px;
+  height: 18px;
+  margin: auto 0;
+  background-size: cover;
+  background-image: url("../images/svg/plain-arrow.svg");
+  content: '';
+  transform: rotate(-90deg);
+}
+
+.site-footer__list > li a {
+  font-size: 13px;
+  font-size: 0.8125rem;
+  display: block;
+  padding: 9px 0;
+  color: #fff;
 }
 
 /*------------------------------------*    $MAIN MENU
