@@ -1,0 +1,15 @@
+/*------------------------------------*\
+    $SVG
+\*------------------------------------*/
+
+.svg-default-arrow {
+    width: 25px;
+    height: 25px;
+
+    path {
+        transition: stroke $default-transition-speed ease;
+        stroke: $color--primary;
+        stroke-width: 2px;
+        fill: none;
+    }
+}

@@ -1805,6 +1805,20 @@ input:focus {
   outline: none;
 }
 
+/*------------------------------------*    $SVG
+\*------------------------------------*/
+.svg-default-arrow {
+  width: 25px;
+  height: 25px;
+}
+
+.svg-default-arrow path {
+  transition: stroke 300ms ease;
+  stroke: #0d61b5;
+  stroke-width: 2px;
+  fill: none;
+}
+
 /*------------------------------------*    $MOLECULES
 \*------------------------------------*/
 /*------------------------------------*    $SITE HEADER
