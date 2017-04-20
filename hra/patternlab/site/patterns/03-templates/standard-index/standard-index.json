@@ -1,5 +1,5 @@
 {
-    "title" : "Overview",
+    "title" : "Standard Index Page",
     "introduction" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut cursus lacus. Nullam bibendum ullamcorper lorem ultrices convallis. Pellentesque id tincidunt elit. Donec nec fermentum ante. Aliquam quis vulputate arcu. Vivamus imperdiet dictum nibh, eget ullamcorper turpis pulvinar sit amet.",
     "heroTitle" : "Improving research",
     "heroSubtitle" : "Lorem ipsum dolor sit amet",
@@ -18,7 +18,7 @@
             "label" : "Research planning"
         },
         {
-            "label" : "Policies, standards &amp; legislation"
+            "label" : "Policies, standards & legislation"
         }
     ],
     "teasers" : [

@@ -2226,20 +2226,19 @@ var jquery = createCommonjsModule(function (module) {
   });
 });
 
-// We have to manually make jQuery a global variable.
-// By default it will be in a closure and renamed to lowercase.
 window.jQuery = jquery;
 
-/* ============================================
-    Quick Links
- */
-var quickLinks = function quickLinks() {
+function glossaryTab() {
 
-    var $trigger = jquery('.site-header__quick-links-button'),
-        $siteContainer = jquery('.site-container'),
-        siteContainerPush = 'site-container--push',
-        displayBuffer = 10,
-        state = {
+    var $glossaryTab = jquery('.glossary-tab'),
+        $glossaryLabel = jquery('.glossary-tab__label'),
+        tabOpen = 'glossary-tab--open',
+        tabFixed = 'glossary-tab--fixed',
+        stickValue = 600,
+        animSpeed = 200,
+        displayBuffer = 10;
+
+    var state = {
         open: false,
         busy: false
     };
@@ -2247,9 +2246,8 @@ var quickLinks = function quickLinks() {
     function open() {
         if (!state.busy) {
             state.busy = true;
-
             setTimeout(function () {
-                $siteContainer.addClass(siteContainerPush);
+                $glossaryTab.addClass(tabOpen);
                 state.open = true;
                 state.busy = false;
             }, displayBuffer);
@@ -2259,12 +2257,12 @@ var quickLinks = function quickLinks() {
     function close() {
         if (!state.busy) {
             state.busy = true;
-
             setTimeout(function () {
-                $siteContainer.removeClass(siteContainerPush);
+                $glossaryTab.removeClass(tabOpen);
+                $glossaryTab.blur();
                 state.open = false;
                 state.busy = false;
-            }, displayBuffer);
+            }, animSpeed);
         }
     }
 
@@ -2276,12 +2274,42 @@ var quickLinks = function quickLinks() {
         }
     }
 
-    $trigger.on('click', function () {
-        toggle();
-    });
-};
+    function stick() {
+        if (jquery(document).scrollTop() >= stickValue) {
+            $glossaryTab.addClass(tabFixed);
+        } else {
+            $glossaryTab.removeClass(tabFixed);
+        }
+    }
 
-quickLinks();
+    function outOfBounds(element) {
+        if (!$glossaryTab.is(element.target) && $glossaryTab.has(element.target).length === 0) {
+            close();
+        }
+    }
+
+    function bindEvents() {
+
+        // Toggle tab on click
+        $glossaryLabel.on('click', function () {
+            return toggle();
+        });
+
+        // Stick tab on scroll
+        jquery(document).on('scroll', function () {
+            return stick();
+        });
+
+        // Close tab on click outside
+        jquery(document).on('mouseup', function (e) {
+            return outOfBounds(e);
+        });
+    }
+
+    bindEvents();
+}
+
+glossaryTab();
 
 })));
 //# sourceMappingURL=main.js.map

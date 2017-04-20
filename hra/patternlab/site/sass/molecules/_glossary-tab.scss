@@ -1,0 +1,62 @@
+/*------------------------------------*\
+    $GLOSSARY TAB
+\*------------------------------------*/
+
+.glossary-tab {
+    position: absolute;
+    top: 720px;
+    right: 0;
+    z-index: $z-epsilon;
+    width: 360px;
+    height: 160px;
+    background: linear-gradient(to right, #0d61b5, #0c5196);
+    transform: translate3d(301px, 0, 0);
+    transition: transform $default-transition-speed ease;
+
+    &--open {
+        transform: translate3d(0, 0, 0);
+    }
+
+    &--fixed {
+        position: fixed;
+        top: 121px;
+    }
+
+    &__label {
+        @include font-size(epsilon);
+        position: absolute;
+        top: 50px;
+        left: -50px;
+        width: 160px;
+        height: 60px;
+        padding: 0 20px;
+        letter-spacing: 1px;
+        color: #fff;
+        text-align: left;
+        cursor: pointer;
+        background-color: transparent;
+        border: 0;
+        border-bottom: 1px solid #5a96ce;
+        transform: rotate(-90deg);
+        transition: background-color $default-transition-speed ease;
+
+        svg {
+            margin: 5px 0 0 5px;
+            transform: rotate(90deg);
+        }
+
+        &:hover,
+        &:focus {
+            background-color: #0b4c8e;
+            outline: 0;
+        }
+    }
+
+    &__content {
+        position: absolute;
+        top: 0;
+        left: 65px;
+        padding: 15px;
+        color: #fff;
+    }
+}

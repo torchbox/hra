@@ -16,6 +16,10 @@ html {
     -webkit-text-size-adjust: 100%;
 }
 
+body {
+    overflow-x: hidden;
+}
+
 // Prevent empty space below images appearing
 img,
 svg {
