@@ -23,27 +23,23 @@
     ],
     "teasers" : [
         {
-            "label" : "Improving research",
             "title" : "Best practice",
-            "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut cursus lacus. Aliquam quis vulputate arcu.",
+            "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
             "image" : "../../../images/teaser.png"
         },
         {
-            "label" : "Improving research",
             "title" : "Best practice",
-            "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut cursus lacus. Aliquam quis vulputate arcu.",
+            "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
             "image" : "../../../images/teaser.png"
         },
         {
-            "label" : "Improving research",
             "title" : "Best practice",
-            "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut cursus lacus. Aliquam quis vulputate arcu.",
+            "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
             "image" : "../../../images/teaser.png"
         },
         {
-            "label" : "Improving research",
             "title" : "Best practice",
-            "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut cursus lacus. Aliquam quis vulputate arcu.",
+            "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
             "image" : "../../../images/teaser.png"
         }
     ]

@@ -11,7 +11,8 @@
     height: 160px;
     background: linear-gradient(to right, #0d61b5, #0c5196);
     transform: translate3d(301px, 0, 0);
-    transition: transform $default-transition-speed ease;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.35);
+    transition: transform $default-transition-speed ease, box-shadow $default-transition-speed ease;
 
     &--open {
         transform: translate3d(0, 0, 0);

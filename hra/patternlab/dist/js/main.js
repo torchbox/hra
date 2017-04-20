@@ -2226,6 +2226,8 @@ var jquery = createCommonjsModule(function (module) {
   });
 });
 
+// We have to manually make jQuery a global variable.
+// By default it will be in a closure and renamed to lowercase.
 window.jQuery = jquery;
 
 function glossaryTab() {
@@ -2235,7 +2237,6 @@ function glossaryTab() {
         tabOpen = 'glossary-tab--open',
         tabFixed = 'glossary-tab--fixed',
         stickValue = 600,
-        animSpeed = 200,
         displayBuffer = 10;
 
     var state = {
@@ -2262,7 +2263,7 @@ function glossaryTab() {
                 $glossaryTab.blur();
                 state.open = false;
                 state.busy = false;
-            }, animSpeed);
+            }, displayBuffer);
         }
     }
 

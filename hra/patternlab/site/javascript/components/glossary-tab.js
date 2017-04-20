@@ -1,13 +1,12 @@
 import $ from '../globals';
 
 function glossaryTab() {
-    
+
     const $glossaryTab          = $('.glossary-tab'),
         $glossaryLabel          = $('.glossary-tab__label'),
         tabOpen                 = 'glossary-tab--open',
         tabFixed                = 'glossary-tab--fixed',
         stickValue              = 600,
-        animSpeed               = 200,
         displayBuffer           = 10;
 
     let state       = {
@@ -34,7 +33,7 @@ function glossaryTab() {
                 $glossaryTab.blur();
                 state.open = false;
                 state.busy = false;
-            }, animSpeed);
+            }, displayBuffer);
         }
     }
 

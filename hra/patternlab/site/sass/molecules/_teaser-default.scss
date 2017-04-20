@@ -36,22 +36,26 @@
         width: 100%;
     }
 
-    &__section-label {
-        @include rem-font-size(14px);
+    &__title {
+        @include font-size(epsilon);
+        position: relative;
         display: inline-block;
-        padding: 15px 24px 1px 0;
-        font-family: $font--tertiary;
-        color: $color--primary;
+        padding: 10px 20px 0 0;
+        font-family: $font--secondary;
+        color: #231f20;
         background-color: #fff;
     }
 
-    &__title {
-        @include rem-font-size(17px);
+    &__description {
         position: relative;
-        display: block;
-        padding: 0 0 9px;
-        color: #231f20;
-        background-color: #fff;
+        padding: 15px 40px 0 0;
+
+        > p {
+            @include font-size(milli);
+            margin: 0;
+            line-height: 1.4;
+            color: #7b7b7b;
+        }
 
         svg {
             position: absolute;
@@ -72,13 +76,6 @@
         }
     }
 
-    &__description > p {
-        @include font-size(milli);
-        margin: 0;
-        line-height: 1.4;
-        color: #7b7b7b;
-    }
-
     &:hover {
         #{$root}__image {
             &::after {
@@ -86,7 +83,7 @@
             }
         }
 
-        #{$root}__title {
+        #{$root}__description {
             svg {
                 transform: rotate(-90deg) translate3d(0, 0, 0);
             }
