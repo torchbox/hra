@@ -1966,9 +1966,9 @@ input:focus {
 \*------------------------------------*/
 .site-footer {
   width: 100%;
-  padding: 25px 5%;
-  background-color: #435663;
-  border-top: 20px solid #697b88;
+  padding: 40px 5% 25px;
+  background: linear-gradient(to right, #415564, #3d5d75);
+  border-top: 20px solid #2f4250;
 }
 
 .site-footer__heading {
@@ -1976,15 +1976,27 @@ input:focus {
 }
 
 .site-footer__list {
-  padding-right: 80px;
+  padding-right: 70px;
 }
 
 .site-footer__list > li {
-  position: relative;
-  border-bottom: 1px solid #949037;
+  border-bottom: 1px solid #32424f;
 }
 
-.site-footer__list > li::after {
+.site-footer__list > li:last-of-type {
+  border-bottom: 0;
+}
+
+.site-footer__list > li a {
+  font-size: 13px;
+  font-size: 0.8125rem;
+  position: relative;
+  display: block;
+  padding: 9px 0;
+  color: #fff;
+}
+
+.site-footer__list > li a::after {
   position: absolute;
   top: 0;
   right: 0;
@@ -1995,15 +2007,81 @@ input:focus {
   background-size: cover;
   background-image: url("../images/svg/plain-arrow.svg");
   content: '';
-  transform: rotate(-90deg);
+  transform: rotate(-90deg) translate3d(0, -5px, 0);
+  transition: transform 300ms ease;
 }
 
-.site-footer__list > li a {
+.site-footer__list > li a:hover::after {
+  transform: rotate(-90deg) translate3d(0, 0, 0);
+}
+
+.site-footer__social {
+  margin-top: 20px;
+}
+
+.site-footer__social li {
+  display: inline-block;
+  margin-right: 30px;
+}
+
+.site-footer__social li:last-of-type {
+  margin-right: 0;
+}
+
+.site-footer__social li a {
+  display: block;
+  width: 50px;
+  height: 50px;
+  background-color: #fff;
+  border-radius: 50%;
+  transition: background-color 300ms ease;
+}
+
+.site-footer__social li a:hover {
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+.site-footer__social-info {
   font-size: 13px;
   font-size: 0.8125rem;
-  display: block;
-  padding: 9px 0;
   color: #fff;
+}
+
+.site-footer__social-info span {
+  display: block;
+  font-weight: bold;
+}
+
+.site-footer__credits {
+  padding: 25px 5%;
+  background: linear-gradient(to right, #415564, #3d5d75);
+  border-top: 1px solid #32424f;
+}
+
+.site-footer__credits a,
+.site-footer__credits span {
+  font-size: 13px;
+  font-size: 0.8125rem;
+  color: #fff;
+}
+
+.site-footer__credits ul {
+  display: table;
+  width: 100%;
+  text-align: center;
+}
+
+.site-footer__credits ul li {
+  display: inline-block;
+  margin-right: 50px;
+}
+
+.site-footer__credits ul li:last-of-type {
+  margin-right: 0;
+}
+
+.site-footer__credits-last-link {
+  float: right;
 }
 
 /*------------------------------------*    $DEFAULT TEASER
