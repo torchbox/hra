@@ -10,6 +10,7 @@ from wagtail.wagtailadmin import urls as wagtailadmin_urls
 from wagtail.wagtailcore import urls as wagtail_urls
 from wagtail.wagtaildocs import urls as wagtaildocs_urls
 
+from hra.api import urls as api_urls
 from hra.esi import views as esi_views
 from hra.search import views as search_views
 
@@ -21,7 +22,8 @@ urlpatterns = [
     url(r'^documents/', include(wagtaildocs_urls)),
     url(r'^search/$', search_views.search, name='search'),
     url(r'^esi/(.*)/$', esi_views.esi, name='esi'),
-    url('^sitemap\.xml$', sitemap),
+    url(r'^sitemap\.xml$', sitemap),
+    url(r'^', include(api_urls)),
 ]
 
 
@@ -37,12 +39,6 @@ if settings.DEBUG:
         # Add views for testing 404 and 500 templates
         url(r'^test404/$', TemplateView.as_view(template_name='404.html')),
         url(r'^test500/$', TemplateView.as_view(template_name='500.html')),
-    ]
-
-if settings.DEBUG or settings.ENABLE_STYLEGUIDE:
-    urlpatterns += [
-        # Add styleguide
-        url(r'^styleguide/$', TemplateView.as_view(template_name='styleguide.html')),
     ]
 
 urlpatterns += [

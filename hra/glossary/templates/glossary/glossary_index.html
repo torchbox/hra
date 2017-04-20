@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+
+    <h1>{{ page.title }}</h1>
+
+{% endblock %}
+
+
+{% block extra_js %}
+    <script src="{% static 'rest_framework/js/coreapi-0.1.0.js' %}"></script>
+    <script src="{% url 'api-docs:schema-js' %}"></script>
+    <script>
+        var coreapi = window.coreapi;
+        var schema = window.schema;
+        var client = new coreapi.Client();
+
+        var action = ['glossary_terms', 'list'];
+        var params = {} // Can be something like {term_startswith: 'a'}
+        client.action(schema, action, params).then(function(result) {
+            console.log(result);
+        });
+
+    </script>
+{% endblock %}
