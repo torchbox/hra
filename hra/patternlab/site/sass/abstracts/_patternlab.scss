@@ -1,0 +1,32 @@
+/*------------------------------------*\
+    $PATTERNLAB 
+    Override styles for styleguide
+\*------------------------------------*/
+
+// sass-lint:disable-all
+.sg-pattern-example {
+    .hero {
+        margin-top: 0;
+    }
+
+    .site-sidebar {
+        padding: 20px;
+        margin: 0;
+    }
+
+    .site-sidebar__inner {
+        float: none;
+    }
+
+    .teaser,
+    .teaser-related,
+    .teaser-search {
+        max-width: 500px;
+    }
+}
+
+#atoms-site-search {
+    .site-header__search  {
+        margin: 0;
+    }
+}
