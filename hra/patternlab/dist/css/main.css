@@ -1516,6 +1516,32 @@ small, .milli {
   font-size: 0.875rem;
 }
 
+/*------------------------------------*    $PATTERNLAB 
+    Override styles for styleguide
+\*------------------------------------*/
+.sg-pattern-example .hero {
+  margin-top: 0;
+}
+
+.sg-pattern-example .site-sidebar {
+  padding: 20px;
+  margin: 0;
+}
+
+.sg-pattern-example .site-sidebar__inner {
+  float: none;
+}
+
+.sg-pattern-example .teaser,
+.sg-pattern-example .teaser-related,
+.sg-pattern-example .teaser-search {
+  max-width: 500px;
+}
+
+#atoms-site-search .site-header__search {
+  margin: 0;
+}
+
 /*------------------------------------*    $ATOMS
 \*------------------------------------*/
 /*------------------------------------*    $BUTTONS
@@ -2035,7 +2061,7 @@ input:focus {
 
 .site-footer__social li {
   display: inline-block;
-  margin-right: 30px;
+  margin-right: 25px;
 }
 
 .site-footer__social li:last-of-type {
