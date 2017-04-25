@@ -9,6 +9,7 @@
     background-color: #fff;
 
     &::after {
+        @include font-size(zeta);
         position: absolute;
         top: 0;
         right: 0;
@@ -16,7 +17,6 @@
         z-index: $z-zeta;
         width: $select-height;
         margin: auto 0;
-        font-size: 16px;
         font-weight: bold;
         color: $color--purple;
         text-align: center;

@@ -2226,8 +2226,6 @@ var jquery = createCommonjsModule(function (module) {
   });
 });
 
-// We have to manually make jQuery a global variable.
-// By default it will be in a closure and renamed to lowercase.
 window.jQuery = jquery;
 
 function glossaryTab() {
@@ -2312,63 +2310,6 @@ function glossaryTab() {
     bindEvents();
 }
 
-function mobileMenu() {
-
-    var $menuTrigger = jquery('.js-mobile-menu-trigger'),
-        $menu = jquery('.js-mobile-menu'),
-        $hamburger = jquery('.site-header__hamburger'),
-        menuOpen = 'site-header__right--open',
-        hamburgerToggle = 'site-header__hamburger--toggle',
-        displayBuffer = 10;
-
-    var state = {
-        open: false,
-        busy: false
-    };
-
-    function open() {
-        if (!state.busy) {
-            state.busy = true;
-            setTimeout(function () {
-                $menu.addClass(menuOpen);
-                $hamburger.addClass(hamburgerToggle);
-                state.open = true;
-                state.busy = false;
-            }, displayBuffer);
-        }
-    }
-
-    function close() {
-        if (!state.busy) {
-            state.busy = true;
-            setTimeout(function () {
-                $menu.removeClass(menuOpen);
-                $hamburger.removeClass(hamburgerToggle);
-                state.open = false;
-                state.busy = false;
-            }, displayBuffer);
-        }
-    }
-
-    function toggle() {
-        if (state.open) {
-            close();
-        } else {
-            open();
-        }
-    }
-
-    function bindEvents() {
-
-        // Toggle tab on click
-        $menuTrigger.on('click', function () {
-            return toggle();
-        });
-    }
-
-    bindEvents();
-}
-
 function disableTransition() {
 
     var transitionElements = jquery('.site-header__right'),
@@ -2386,9 +2327,75 @@ jquery(window).resize(function () {
     disableTransition();
 });
 
+function sidebarMenu() {
+
+    var $sidebarMenu = jquery('.site-sidebar__menu'),
+        $sidebarMenuToggle = jquery('.site-sidebar__label'),
+        activeItemLabel = jquery('.site-sidebar__menu-item--active'),
+        labelActive = 'site-sidebar__label--active',
+        slideSpeed = 300,
+        displayBuffer = 10;
+
+    var state = {
+        open: false,
+        busy: false
+    };
+
+    function open() {
+        if (!state.busy) {
+            state.busy = true;
+            setTimeout(function () {
+                $sidebarMenu.slideDown(slideSpeed);
+                $sidebarMenuToggle.addClass(labelActive);
+                state.open = true;
+                state.busy = false;
+            }, displayBuffer);
+        }
+    }
+
+    function close() {
+        if (!state.busy) {
+            state.busy = true;
+            setTimeout(function () {
+                $sidebarMenu.slideUp(slideSpeed);
+                $sidebarMenuToggle.removeClass(labelActive);
+                state.open = false;
+                state.busy = false;
+            }, displayBuffer);
+        }
+    }
+
+    function toggle() {
+        if (state.open) {
+            close();
+        } else {
+            open();
+        }
+    }
+
+    function populateLabel() {
+
+        $sidebarMenuToggle.html(activeItemLabel.text());
+    }
+
+    function bindEvents() {
+
+        // Toggle menu on click
+        $sidebarMenuToggle.on('click', function () {
+            return toggle();
+        });
+
+        jquery(window).on('load', function () {
+            return populateLabel();
+        });
+    }
+
+    bindEvents();
+}
+
 glossaryTab();
-mobileMenu();
 disableTransition();
+sidebarMenu();
 
 })));
 //# sourceMappingURL=main.js.map

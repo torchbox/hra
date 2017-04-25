@@ -16,6 +16,7 @@
     @include media-query(tablet) {
         float: right;
         width: calc(100% - 20px);
+        padding-bottom: 0;
         padding-left: 60px;
         margin-top: 50px;
         background: #f4f4f4;
@@ -29,10 +30,6 @@
             float: none;
             max-width: 100%;
         }
-
-        @include media-query(tablet) {
-            height: 100px;
-        }
     }
 
     &__heading {
@@ -44,6 +41,55 @@
         @include media-query(mobile) {
             @include rem-font-size(25px);
             margin-bottom: 10px;
+        }
+    }
+
+    &__label {
+        display: none;
+
+        @include media-query(tablet) {
+            @include rem-font-size(18px);
+            position: relative;
+            display: block;
+            width: 100%;
+            padding: 0;
+            margin-bottom: 20px;
+            color: $color--primary;
+            text-align: left;
+            cursor: pointer;
+            background-color: transparent;
+            border: 0;
+
+            &:focus {
+                outline: 0;
+            }
+
+            &::after {
+                @include font-size(zeta);
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                width: 40px;
+                margin: auto 0;
+                font-weight: bold;
+                color: $color--primary;
+                text-align: center;
+                content: '❮';
+                transform: rotate(-90deg);
+            }
+
+            &--active {
+                &::after {
+                    transform: rotate(90deg);
+                }
+            }
+        }
+    }
+
+    &__menu {
+        @include media-query(tablet) {
+            display: none;
+            margin-bottom: 25px;
         }
     }
 
@@ -101,6 +147,12 @@
         &:first-of-type {
             > a {
                 border-top: 1px solid $color--border;
+            }
+        }
+
+        @include media-query(tablet) {
+            > a {
+                padding: 15px 55px 12px 15px;
             }
         }
     }

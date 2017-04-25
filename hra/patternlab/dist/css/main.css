@@ -1808,6 +1808,8 @@ input:focus {
 }
 
 .custom-select::after {
+  font-size: 16px;
+  font-size: 1rem;
   position: absolute;
   top: 0;
   right: 0;
@@ -1815,7 +1817,6 @@ input:focus {
   z-index: 2;
   width: 40px;
   margin: auto 0;
-  font-size: 16px;
   font-weight: bold;
   color: #ac2a73;
   text-align: center;
@@ -1921,8 +1922,8 @@ input:focus {
     margin: 17px 0 0 15px;
   }
   .site-header__logo svg {
-    width: 111px;
-    height: 48px;
+    width: 100px;
+    height: 43px;
   }
 }
 
@@ -2062,6 +2063,7 @@ input:focus {
   .site-sidebar {
     float: right;
     width: calc(100% - 20px);
+    padding-bottom: 0;
     padding-left: 60px;
     margin-top: 50px;
     background: #f4f4f4;
@@ -2080,12 +2082,6 @@ input:focus {
   }
 }
 
-@media only screen and (max-width: 800px) {
-  .site-sidebar__inner {
-    height: 100px;
-  }
-}
-
 .site-sidebar__heading {
   font-size: 30px;
   font-size: 1.875rem;
@@ -2099,6 +2095,54 @@ input:focus {
     font-size: 25px;
     font-size: 1.5625rem;
     margin-bottom: 10px;
+  }
+}
+
+.site-sidebar__label {
+  display: none;
+}
+
+@media only screen and (max-width: 800px) {
+  .site-sidebar__label {
+    font-size: 18px;
+    font-size: 1.125rem;
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 0;
+    margin-bottom: 20px;
+    color: #0d61b5;
+    text-align: left;
+    cursor: pointer;
+    background-color: transparent;
+    border: 0;
+  }
+  .site-sidebar__label:focus {
+    outline: 0;
+  }
+  .site-sidebar__label::after {
+    font-size: 16px;
+    font-size: 1rem;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 40px;
+    margin: auto 0;
+    font-weight: bold;
+    color: #0d61b5;
+    text-align: center;
+    content: '❮';
+    transform: rotate(-90deg);
+  }
+  .site-sidebar__label--active::after {
+    transform: rotate(90deg);
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .site-sidebar__menu {
+    display: none;
+    margin-bottom: 25px;
   }
 }
 
@@ -2150,6 +2194,12 @@ input:focus {
 
 .site-sidebar__menu-item:first-of-type > a {
   border-top: 1px solid #d5e4f2;
+}
+
+@media only screen and (max-width: 800px) {
+  .site-sidebar__menu-item > a {
+    padding: 15px 55px 12px 15px;
+  }
 }
 
 /*------------------------------------*    $SITE BODY

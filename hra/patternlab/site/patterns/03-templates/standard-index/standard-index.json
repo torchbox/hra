@@ -5,11 +5,11 @@
     "heroSubtitle" : "Lorem ipsum dolor sit amet",
     "sidebarMenu" : [
         {
-            "label" : "Overview",
-            "activeState" : "site-sidebar__menu-item--active"
+            "label" : "Overview"
         },
         {
-            "label" : "Best practice"
+            "label" : "Best practice",
+            "activeState" : "site-sidebar__menu-item--active"
         },
         {
             "label" : "Learning"
