@@ -10,18 +10,24 @@
     {% spaceless %}
     <div class="site-body__grid">
       <div class="grid grid--wide">
-        <div class="grid__item three-fifths">
+        <div class="grid__item three-fifths desktop--one-whole">
           <div class="grid grid--wide">
             {% for teaser in teasers %}
-              <div class="grid__item one-half">
+              <div class="grid__item one-half mobile--one-whole">
                 {% include "molecules-teaser-default" %}
               </div>
             {% endfor %}
           </div>
         </div>
-        <div class="grid__item two-fifths">
-          {% include "molecules-teaser-search" %}
-          {% include "molecules-teaser-related" %}
+        <div class="grid__item two-fifths desktop--one-whole">
+          <div class="grid grid--wide">
+            <div class="grid__item one-whole desktop--one-half mobile--one-whole">
+              {% include "molecules-teaser-search" %}
+            </div>
+            <div class="grid__item one-whole desktop--one-half mobile--one-whole">
+              {% include "molecules-teaser-related" %}
+            </div>
+          </div>
         </div>
       </div>
     </div>

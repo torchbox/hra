@@ -7,11 +7,20 @@
     h1 {
         font-family: $font--secondary;
         color: #000;
+
+        @include media-query(tablet) {
+            @include font-size(gamma);
+        }
     }
 
     p {
         @include rem-font-size(20px);
         margin: 10px 0;
         line-height: 1.5;
+
+        @include media-query(tablet) {
+            @include rem-font-size(17px);
+            line-height: 1.4;
+        }
     }
 }

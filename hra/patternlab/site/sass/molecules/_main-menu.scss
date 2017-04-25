@@ -6,11 +6,25 @@
     display: inline-block;
     vertical-align: top;
 
+    @include media-query(tablet) {
+        width: 100%;
+    }
+
     &__item {
         display: inline-block;
         padding: 10px 30px;
         vertical-align: -16px;
         border-right: 1px solid $color--border;
+
+        @include media-query(desktop) {
+            padding: 10px 20px;
+        }
+
+        @include media-query(tablet) {
+            display: block;
+            padding: 10px 0;
+            border-right: 0;
+        }
 
         &:first-of-type {
             padding-left: 0;
@@ -26,6 +40,11 @@
             padding-bottom: 8px;
             font-weight: 600;
             color: #425563;
+
+            @include media-query(tablet) {
+                display: block;
+                text-align: left;
+            }
 
             &::after {
                 position: absolute;

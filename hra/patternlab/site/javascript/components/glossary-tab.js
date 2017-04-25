@@ -60,15 +60,17 @@ function glossaryTab() {
     }
 
     function bindEvents(){
+        if ($(window).width() >= 800) {
 
-        // Toggle tab on click
-        $glossaryLabel.on('click', () => toggle());
+            // Toggle tab on click
+            $glossaryLabel.on('click', () => toggle());
 
-        // Stick tab on scroll
-        $(document).on('scroll', () => stick());
+            // Stick tab on scroll
+            $(document).on('scroll', () => stick());
 
-        // Close tab on click outside
-        $(document).on('mouseup', e => outOfBounds(e));
+            // Close tab on click outside
+            $(document).on('mouseup', e => outOfBounds(e));
+        }
     }
 
     bindEvents();

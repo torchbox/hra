@@ -6,6 +6,10 @@
     padding: 80px 60px 80px 40px;
     overflow: auto;
 
+    @include media-query(desktop) {
+        padding: 40px 20px;
+    }
+
     &__inner {
         float: left;
         width: 100%;

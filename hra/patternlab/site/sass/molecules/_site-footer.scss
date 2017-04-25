@@ -8,6 +8,10 @@
     background: linear-gradient(to right, #415564, #3d5d75);
     border-top: 20px solid #2f4250;
 
+    @include media-query(desktop) {
+        padding: 40px 20px;
+    }
+
     &__heading {
         color: #fff;
     }
@@ -53,6 +57,18 @@
                 }
             }
         }
+
+        @include media-query(desktop) {
+            &:nth-child(1),
+            &:nth-child(2),
+            &:nth-child(3) {
+                margin-bottom: 30px;
+            }
+        }
+
+        @include media-query(tablet) {
+            padding-right: 0;
+        }
     }
 
     &__social {
@@ -96,10 +112,21 @@
         background: linear-gradient(to right, #415564, #3d5d75);
         border-top: 1px solid #32424f;
 
+        @include media-query(desktop) {
+            padding: 25px 20px;
+        }
+
         a,
         span {
             @include rem-font-size(13px);
             color: #fff;
+        }
+
+        span {
+            @include media-query(tablet) {
+                display: block;
+                margin-bottom: 15px;
+            }
         }
 
         ul {
@@ -107,9 +134,22 @@
             width: 100%;
             text-align: center;
 
+            @include media-query(tablet) {
+                text-align: right;
+            }
+
+            @include media-query(mobile) {
+                margin-bottom: 15px;
+                text-align: left;
+            }
+
             li {
                 display: inline-block;
                 margin-right: 50px;
+
+                @include media-query(tablet) {
+                    margin-right: 15px;
+                }
 
                 &:last-of-type {
                     margin-right: 0;
@@ -119,6 +159,10 @@
 
         &-last-link {
             float: right;
+
+            @include media-query(tablet) {
+                float: none;
+            }
         }
     }
 }

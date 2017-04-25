@@ -2226,8 +2226,6 @@ var jquery = createCommonjsModule(function (module) {
   });
 });
 
-// We have to manually make jQuery a global variable.
-// By default it will be in a closure and renamed to lowercase.
 window.jQuery = jquery;
 
 function glossaryTab() {
@@ -2290,20 +2288,75 @@ function glossaryTab() {
     }
 
     function bindEvents() {
+        if (jquery(window).width() >= 800) {
+
+            // Toggle tab on click
+            $glossaryLabel.on('click', function () {
+                return toggle();
+            });
+
+            // Stick tab on scroll
+            jquery(document).on('scroll', function () {
+                return stick();
+            });
+
+            // Close tab on click outside
+            jquery(document).on('mouseup', function (e) {
+                return outOfBounds(e);
+            });
+        }
+    }
+
+    bindEvents();
+}
+
+function mobileMenu() {
+
+    var $menuTrigger = jquery('.js-mobile-menu-trigger'),
+        $menu = jquery('.js-mobile-menu'),
+        menuOpen = 'site-header__right--open',
+        displayBuffer = 10;
+
+    var state = {
+        open: false,
+        busy: false
+    };
+
+    function open() {
+        if (!state.busy) {
+            state.busy = true;
+            setTimeout(function () {
+                $menu.addClass(menuOpen);
+                state.open = true;
+                state.busy = false;
+            }, displayBuffer);
+        }
+    }
+
+    function close() {
+        if (!state.busy) {
+            state.busy = true;
+            setTimeout(function () {
+                $menu.removeClass(menuOpen);
+                state.open = false;
+                state.busy = false;
+            }, displayBuffer);
+        }
+    }
+
+    function toggle() {
+        if (state.open) {
+            close();
+        } else {
+            open();
+        }
+    }
+
+    function bindEvents() {
 
         // Toggle tab on click
-        $glossaryLabel.on('click', function () {
+        $menuTrigger.on('click', function () {
             return toggle();
-        });
-
-        // Stick tab on scroll
-        jquery(document).on('scroll', function () {
-            return stick();
-        });
-
-        // Close tab on click outside
-        jquery(document).on('mouseup', function (e) {
-            return outOfBounds(e);
         });
     }
 
@@ -2311,6 +2364,7 @@ function glossaryTab() {
 }
 
 glossaryTab();
+mobileMenu();
 
 })));
 //# sourceMappingURL=main.js.map

@@ -8,6 +8,10 @@
     display: block;
     margin-bottom: 60px;
 
+    @include media-query(sidebar) {
+        margin-bottom: 30px;
+    }
+
     &__image {
         position: relative;
         width: 100%;
