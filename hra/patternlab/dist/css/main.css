@@ -1890,6 +1890,10 @@ input:focus {
   }
 }
 
+.site-header__right.disable-transition {
+  transition: none;
+}
+
 .site-header__search {
   display: inline-block;
   padding: 11px 20px;

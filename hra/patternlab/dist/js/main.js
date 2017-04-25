@@ -2363,8 +2363,26 @@ function mobileMenu() {
     bindEvents();
 }
 
+function disableTransition() {
+
+    var transitionElements = jquery('.site-header__right'),
+        disabledClass = 'disable-transition',
+        delaySpeed = '300';
+
+    transitionElements.addClass(disabledClass);
+
+    setTimeout(function () {
+        transitionElements.removeClass(disabledClass);
+    }, delaySpeed);
+}
+
+jquery(window).resize(function () {
+    disableTransition();
+});
+
 glossaryTab();
 mobileMenu();
+disableTransition();
 
 })));
 //# sourceMappingURL=main.js.map
