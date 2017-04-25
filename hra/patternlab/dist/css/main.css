@@ -1878,8 +1878,8 @@ input:focus {
     margin-top: 0;
     background: #fff;
     opacity: 0;
-    transform: translate3d(0, -10px, 0);
-    transition: transform 300ms ease, opacity 300ms ease;
+    transform: translate3d(0, -350px, 0);
+    transition: opacity 300ms ease;
   }
 }
 

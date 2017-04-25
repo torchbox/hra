@@ -35,8 +35,8 @@
             margin-top: 0;
             background: #fff;
             opacity: 0;
-            transform: translate3d(0, -10px, 0);
-            transition: transform $default-transition-speed ease, opacity $default-transition-speed ease;
+            transform: translate3d(0, -350px, 0);
+            transition: opacity $default-transition-speed ease;
         }
 
         &--open {

@@ -2367,7 +2367,7 @@ function disableTransition() {
 
     var transitionElements = jquery('.site-header__right'),
         disabledClass = 'disable-transition',
-        delaySpeed = '300';
+        delaySpeed = 300;
 
     transitionElements.addClass(disabledClass);
 
