@@ -2020,6 +2020,14 @@ input:focus {
   color: #000;
 }
 
+@media only screen and (max-width: 650px) {
+  .site-sidebar__heading {
+    font-size: 25px;
+    font-size: 1.5625rem;
+    margin-bottom: 10px;
+  }
+}
+
 .site-sidebar__menu-item {
   position: relative;
 }
@@ -2600,10 +2608,24 @@ input:focus {
   }
 }
 
+@media only screen and (max-width: 650px) {
+  .hero__caption-title {
+    font-size: 30px;
+    font-size: 1.875rem;
+  }
+}
+
 .hero__caption-subtitle {
   font-size: 20px;
   font-size: 1.25rem;
   color: #fff;
+}
+
+@media only screen and (max-width: 650px) {
+  .hero__caption-subtitle {
+    font-size: 16px;
+    font-size: 1rem;
+  }
 }
 
 /*------------------------------------*    $GLOSSARY TAB

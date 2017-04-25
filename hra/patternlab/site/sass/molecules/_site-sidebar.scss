@@ -40,6 +40,11 @@
         margin-bottom: 30px;
         font-family: $font--tertiary;
         color: #000;
+
+        @include media-query(mobile) {
+            @include rem-font-size(25px);
+            margin-bottom: 10px;
+        }
     }
 
     &__menu-item {

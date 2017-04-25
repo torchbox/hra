@@ -94,10 +94,18 @@
         @include media-query(tablet) {
             @include rem-font-size(40px);
         }
+
+        @include media-query(mobile) {
+            @include font-size(beta);
+        }
     }
 
     &__caption-subtitle {
         @include font-size(epsilon);
         color: #fff;
+
+        @include media-query(mobile) {
+            @include font-size(zeta);
+        }
     }
 }
