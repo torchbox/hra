@@ -52,4 +52,9 @@
         border: 0;
         outline: none;
     }
+
+    &__label {
+        position: absolute;
+        visibility: hidden;
+    }
 }

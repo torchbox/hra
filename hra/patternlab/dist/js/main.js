@@ -2226,6 +2226,8 @@ var jquery = createCommonjsModule(function (module) {
   });
 });
 
+// We have to manually make jQuery a global variable.
+// By default it will be in a closure and renamed to lowercase.
 window.jQuery = jquery;
 
 function glossaryTab() {
@@ -2314,7 +2316,9 @@ function mobileMenu() {
 
     var $menuTrigger = jquery('.js-mobile-menu-trigger'),
         $menu = jquery('.js-mobile-menu'),
+        $hamburger = jquery('.site-header__hamburger'),
         menuOpen = 'site-header__right--open',
+        hamburgerToggle = 'site-header__hamburger--toggle',
         displayBuffer = 10;
 
     var state = {
@@ -2327,6 +2331,7 @@ function mobileMenu() {
             state.busy = true;
             setTimeout(function () {
                 $menu.addClass(menuOpen);
+                $hamburger.addClass(hamburgerToggle);
                 state.open = true;
                 state.busy = false;
             }, displayBuffer);
@@ -2338,6 +2343,7 @@ function mobileMenu() {
             state.busy = true;
             setTimeout(function () {
                 $menu.removeClass(menuOpen);
+                $hamburger.removeClass(hamburgerToggle);
                 state.open = false;
                 state.busy = false;
             }, displayBuffer);

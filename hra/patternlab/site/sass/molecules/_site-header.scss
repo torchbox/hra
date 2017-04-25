@@ -13,41 +13,39 @@
         padding: 20px;
     }
 
-    @include media-query(tablet) {
+    @include media-query(laptop) {
         height: 100px;
+        background-color: #fff;
+    }
+
+    @include media-query(mobile) {
+        height: 64px;
+        padding: 0;
     }
 
     &__logo {
         display: inline-block;
+
+        > span {
+            @include hidden;
+        }
+
+        @include media-query(mobile) {
+            margin: 17px 0 0 15px;
+
+            svg {
+                width: 111px;
+                height: 48px;
+            }
+        }
     }
 
     &__right {
         margin-top: 7px;
         text-align: right;
 
-        @include media-query(tablet) {
-            position: absolute;
-            top: 100px;
-            left: 0;
-            z-index: $z-zeta;
-            width: 100%;
-            padding: 0 20px 20px;
+        @include media-query(mobile) {
             margin-top: 0;
-            background: #fff;
-            opacity: 0;
-            transform: translate3d(0, -350px, 0);
-            transition: opacity $default-transition-speed ease;
-        }
-
-        &--open {
-            @include media-query(tablet) {
-                opacity: 1;
-                transform: translate3d(0, 0, 0);
-            }
-        }
-
-        &.disable-transition {
-            transition: none;
         }
     }
 
@@ -72,22 +70,46 @@
             margin-left: 30px;
         }
 
-        @include media-query(tablet) {
-            width: 100%;
+        @include media-query(laptop) {
             margin-left: 0;
         }
+
+        @include media-query(mobile) {
+            width: 100%;
+            padding: 20px;
+            vertical-align: top;
+            border-radius: 0;
+        }
+    }
+
+    &__search-label {
+        @include hidden;
     }
 
     &__menu-trigger-container {
         display: none;
 
-        @include media-query(tablet) {
+        @include media-query(laptop) {
             display: inline-block;
             text-align: right;
+            vertical-align: -30px;
         }
     }
 
     &__menu-trigger {
+        @include font-size(milli);
+        position: relative;
+        z-index: $z-epsilon;
+        padding-top: 20px;
+        font-family: $font--secondary;
+        color: $color--primary;
+        text-transform: uppercase;
         cursor: pointer;
+        background: transparent;
+        border: 0;
+
+        &:focus {
+            outline: 0;
+        }
     }
 }
