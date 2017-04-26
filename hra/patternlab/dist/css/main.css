@@ -2785,6 +2785,13 @@ input:focus {
   margin: 60px -150px;
 }
 
+@media only screen and (max-width: 1100px) {
+  .highlight {
+    display: block;
+    margin: 60px 0;
+  }
+}
+
 .highlight__left, .highlight__right {
   display: inline-block;
   width: 100%;
@@ -2792,10 +2799,28 @@ input:focus {
   vertical-align: top;
 }
 
+@media only screen and (max-width: 800px) {
+  .highlight__left, .highlight__right {
+    min-height: 0;
+  }
+}
+
 .highlight__left {
   position: relative;
   padding: 75px 75px 65px 130px;
   background-color: #f2f2f2;
+}
+
+@media only screen and (max-width: 800px) {
+  .highlight__left {
+    padding: 35px 35px 25px 130px;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .highlight__left {
+    padding: 20px;
+  }
 }
 
 .highlight__left::before {
@@ -2810,9 +2835,27 @@ input:focus {
   transform: rotate(-90deg);
 }
 
+@media only screen and (max-width: 1100px) {
+  .highlight__left::before {
+    left: 6px;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .highlight__left::before {
+    display: none;
+  }
+}
+
 .highlight__right {
   background-position: center;
   background-size: cover;
+}
+
+@media only screen and (max-width: 800px) {
+  .highlight__right {
+    min-height: 200px;
+  }
 }
 
 .highlight__heading {

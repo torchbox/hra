@@ -8,18 +8,35 @@ $highlight-min-height: 300px;
     display: flex;
     margin: 60px -150px;
 
+    @include media-query(desktop) {
+        display: block;
+        margin: 60px 0;
+    }
+
     &__left,
     &__right {
         display: inline-block;
         width: 100%;
         min-height: $highlight-min-height;
         vertical-align: top;
+
+        @include media-query(tablet) {
+            min-height: 0;
+        }
     }
 
     &__left {
         position: relative;
         padding: 75px 75px 65px 130px;
         background-color: #f2f2f2;
+
+        @include media-query(tablet) {
+            padding: 35px 35px 25px 130px;
+        }
+
+        @include media-query(mobile) {
+            padding: 20px;
+        }
 
         &::before {
             position: absolute;
@@ -33,6 +50,14 @@ $highlight-min-height: 300px;
             }
             content: '';
             transform: rotate(-90deg);
+
+            @include media-query(desktop) {
+                left: 6px;
+            }
+
+            @include media-query(mobile) {
+                display: none;
+            }
         }
     }
 
@@ -40,6 +65,10 @@ $highlight-min-height: 300px;
         background: {
             position: center;
             size: cover;
+        }
+
+        @include media-query(tablet) {
+            min-height: 200px;
         }
     }
 
