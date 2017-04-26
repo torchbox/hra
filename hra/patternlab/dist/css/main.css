@@ -2918,13 +2918,14 @@ input:focus {
 
 @media only screen and (max-width: 900px) {
   .standard-page-body__wrapper {
-    margin-top: 0;
+    background: #fff;
+    transform: none;
   }
 }
 
 .standard-page-body__content {
   max-width: 800px;
-  padding-top: 60px;
+  padding: 60px 20px 40px;
   margin: 0 auto;
 }
 

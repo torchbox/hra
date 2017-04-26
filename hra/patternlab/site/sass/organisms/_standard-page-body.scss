@@ -14,13 +14,14 @@
         transform: translate3d(0, -200px, 0);
 
         @include media-query(laptop) {
-            margin-top: 0;
+            background: #fff;
+            transform: none;
         }
     }
 
     &__content {
         max-width: $standard-body-width;
-        padding-top: 60px;
+        padding: 60px 20px 40px;
         margin: 0 auto;
     }
 }
