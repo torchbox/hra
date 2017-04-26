@@ -1545,6 +1545,11 @@ small, .milli {
   max-width: 500px;
 }
 
+.sg-pattern-example .highlight {
+  margin-left: 0;
+  margin-right: 0;
+}
+
 #atoms-site-search .site-header__search {
   margin: 0;
 }
@@ -2711,7 +2716,6 @@ input:focus {
 .teaser-related__heading {
   padding: 0 60px 0 0;
   margin-bottom: 10px;
-  font-family: "FrutigerLTW01-55Roman", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   line-height: 1.2;
   color: #fff;
 }
@@ -2872,6 +2876,46 @@ input:focus {
   line-height: 1.4;
 }
 
+/*------------------------------------*    $CALL TO ACTION
+\*------------------------------------*/
+.call-to-action {
+  position: relative;
+  display: block;
+  max-width: 400px;
+  padding: 45px 30px;
+  background: linear-gradient(to right, #0f5faf, #235789);
+}
+
+.call-to-action::before {
+  position: absolute;
+  top: 40px;
+  right: 18px;
+  width: 40px;
+  height: 46px;
+  background-size: cover;
+  background-image: url("../images/svg/plain-arrow.svg");
+  content: '';
+  transform: rotate(-90deg);
+}
+
+.call-to-action__heading,
+.article .call-to-action__heading {
+  padding: 0 60px 0 0;
+  margin-bottom: 10px;
+  line-height: 1.2;
+  color: #fff;
+}
+
+.call-to-action__description,
+.article .call-to-action__description {
+  font-size: 14px;
+  font-size: 0.875rem;
+  margin: 0;
+  color: #fff;
+}
+
+/*------------------------------------*    $RELATED
+\*------------------------------------*/
 /*------------------------------------*    $MAIN MENU
 \*------------------------------------*/
 .main-menu {
