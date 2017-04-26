@@ -2916,6 +2916,93 @@ input:focus {
 
 /*------------------------------------*    $RELATED
 \*------------------------------------*/
+.related-container {
+  margin: 20px 0;
+}
+
+.related {
+  position: relative;
+  display: block;
+  max-width: 400px;
+  margin: 0 0 60px;
+}
+
+.related__image {
+  position: relative;
+  width: 100%;
+  height: 180px;
+  background-position: center;
+  background-size: cover;
+}
+
+.related__image::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+  content: '';
+  transition: opacity 300ms ease;
+}
+
+.related__meta {
+  position: absolute;
+  bottom: 0;
+  z-index: 1;
+  width: 100%;
+}
+
+.related__title {
+  font-size: 20px;
+  font-size: 1.25rem;
+  position: relative;
+  display: inline-block;
+  padding: 10px 20px 0 0;
+  font-family: "FrutigerLTW01-55Roman", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  color: #231f20;
+  background-color: #fff;
+}
+
+.related__description {
+  position: relative;
+  padding: 15px 40px 0 0;
+}
+
+.related__description > p {
+  font-size: 14px;
+  font-size: 0.875rem;
+  margin: 0;
+  line-height: 1.4;
+  color: #7b7b7b;
+}
+
+.related__description svg {
+  position: absolute;
+  top: 3px;
+  right: 0;
+  bottom: 0;
+  width: 20px;
+  height: 20px;
+  margin: auto 0;
+  transform: rotate(-90deg) translate3d(0, -5px, 0);
+  transition: transform 300ms ease;
+}
+
+.related__description svg path {
+  stroke: #0d61b5;
+  stroke-width: 2px;
+  fill: none;
+}
+
+.related:hover .related__image::after {
+  opacity: 0;
+}
+
+.related:hover .related__description svg {
+  transform: rotate(-90deg) translate3d(0, 0, 0);
+}
+
 /*------------------------------------*    $MAIN MENU
 \*------------------------------------*/
 .main-menu {

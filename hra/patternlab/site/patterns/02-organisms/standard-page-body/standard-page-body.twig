@@ -9,5 +9,16 @@
         {% include "molecules-call-to-action" %}
       </article>
     </div>
+    <div class="related-container">
+      {% spaceless %}
+      <div class="grid grid--wide">
+        {% for relatedItem in related %}
+          <div class="grid__item one-third">
+            {% include "molecules-related" %}
+          </div>
+        {% endfor %}
+      </div>
+      {% endspaceless %}
+    </div>
   </div>
 </div>
