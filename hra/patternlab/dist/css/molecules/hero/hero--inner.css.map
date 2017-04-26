@@ -1,9 +1,0 @@
-{
-	"version": 3,
-	"file": "hero--inner.css",
-	"sources": [
-		"../../../../site/sass/molecules/hero/hero--inner.scss"
-	],
-	"names": [],
-	"mappings": "AAAA;wCAEwC;AAGpC,AAAA,YAAQ,CAAC;EACL,QAAQ,EAAE,IAAI;EAEV,gBAAK,EAAE,IAAI;CAElB;;AAED,AAAA,cAAU,CAAC;EACP,SAAS,EAAE,KAAK;EAChB,MAAM,EAAE,YAAY;EACpB,KAAK,EAAE,IAAI;CACd"
-}
