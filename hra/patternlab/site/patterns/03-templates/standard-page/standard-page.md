@@ -1,1 +1,1 @@
-## Standard index/section index page.
+## Standard page.

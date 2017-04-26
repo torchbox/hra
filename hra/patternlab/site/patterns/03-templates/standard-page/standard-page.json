@@ -1,7 +1,7 @@
 {
     "title" : "Standard Page",
     "introduction" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut cursus lacus. Nullam bibendum ullamcorper lorem ultrices convallis. Pellentesque id tincidunt elit. Donec nec fermentum ante. Aliquam quis vulputate arcu. Vivamus imperdiet dictum nibh, eget ullamcorper turpis pulvinar sit amet.",
-    "heroTitle" : "Improving research",
+    "heroTitle" : "Data from standard-page.json",
     "heroSubtitle" : "Lorem ipsum dolor sit amet",
     "sidebarMenu" : [
         {

@@ -1,0 +1,51 @@
+/*------------------------------------*\
+    $BLOCKQUOTE
+\*------------------------------------*/
+
+.blockquote {
+    display: flex;
+    max-width: 650px;
+    margin: 60px 0;
+
+    &__image {
+        display: inline-block;
+        width: 120px;
+        padding-right: 30px;
+        vertical-align: top;
+
+        > img {
+            width: 100%;
+            border-radius: 50%;
+        }
+
+        @include media-query(mobile) {
+            display: none;
+        }
+    }
+
+    &__content {
+        display: inline-block;
+        width: calc(100% - 120px);
+        padding-left: 30px;
+        vertical-align: top;
+        border-left: 1px solid $color--yellow;
+
+        @include media-query(mobile) {
+            width: 100%;
+            padding-left: 20px;
+        }
+    }
+
+    &__quote {
+        @include font-size(epsilon);
+        margin: 0;
+        font-style: normal;
+        line-height: 1.2;
+    }
+
+    &__cite {
+        display: block;
+        margin: 15px 0 0;
+        font-style: normal;
+    }
+}

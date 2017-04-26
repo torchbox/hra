@@ -2723,6 +2723,61 @@ input:focus {
   color: #fff;
 }
 
+/*------------------------------------*    $BLOCKQUOTE
+\*------------------------------------*/
+.blockquote {
+  display: flex;
+  max-width: 650px;
+  margin: 60px 0;
+}
+
+.blockquote__image {
+  display: inline-block;
+  width: 120px;
+  padding-right: 30px;
+  vertical-align: top;
+}
+
+.blockquote__image > img {
+  width: 100%;
+  border-radius: 50%;
+}
+
+@media only screen and (max-width: 650px) {
+  .blockquote__image {
+    display: none;
+  }
+}
+
+.blockquote__content {
+  display: inline-block;
+  width: calc(100% - 120px);
+  padding-left: 30px;
+  vertical-align: top;
+  border-left: 1px solid #f9df32;
+}
+
+@media only screen and (max-width: 650px) {
+  .blockquote__content {
+    width: 100%;
+    padding-left: 20px;
+  }
+}
+
+.blockquote__quote {
+  font-size: 20px;
+  font-size: 1.25rem;
+  margin: 0;
+  font-style: normal;
+  line-height: 1.2;
+}
+
+.blockquote__cite {
+  display: block;
+  margin: 15px 0 0;
+  font-style: normal;
+}
+
 /*------------------------------------*    $MAIN MENU
 \*------------------------------------*/
 .main-menu {
@@ -2925,7 +2980,7 @@ input:focus {
   padding: 0 20px;
   margin: 0 auto;
   overflow: auto;
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.7), #fff 70%);
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.7) 0, #fff 150px);
   transform: translate3d(0, -200px, 0);
 }
 
