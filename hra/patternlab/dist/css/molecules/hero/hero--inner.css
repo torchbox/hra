@@ -1,0 +1,14 @@
+/*------------------------------------*    $HERO INNER
+\*------------------------------------*/
+.hero--inner {
+  overflow: auto;
+  background-image: none;
+}
+
+.hero__content {
+  max-width: 800px;
+  margin: 180px auto 0;
+  color: #fff;
+}
+
+/*# sourceMappingURL=hero--inner.css.map */

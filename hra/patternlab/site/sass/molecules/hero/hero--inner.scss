@@ -1,0 +1,32 @@
+/*------------------------------------*\
+    $HERO INNER
+\*------------------------------------*/
+
+.hero {
+    &--inner {
+        height: 520px;
+        overflow: auto;
+        background: {
+            color: $color--primary;
+            image: none;
+        }
+    }
+
+    &__content {
+        max-width: $standard-body-width;
+        margin: 180px auto 0;
+        color: #fff;
+    }
+
+    &__breadcrumbs {
+        
+    }
+
+    &__heading {
+        
+    }
+
+    &__date {
+
+    }
+}

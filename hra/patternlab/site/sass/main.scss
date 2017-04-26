@@ -71,18 +71,24 @@
 @import 'molecules/site-sidebar';
 @import 'molecules/site-body';
 @import 'molecules/site-footer';
+
+@import 'molecules/hero/hero';
+@import 'molecules/hero/hero--caption';
+@import 'molecules/hero/hero--inner';
+
 @import 'molecules/teaser-default';
 @import 'molecules/teaser-search';
 @import 'molecules/teaser-related';
+
 @import 'molecules/main-menu';
-@import 'molecules/hero';
 @import 'molecules/glossary-tab';
 
 
 /*------------------------------------*\
     $ORGANISMS
 \*------------------------------------*/
-@import 'organisms/body-default';
+@import 'organisms/standard-index-body';
+@import 'organisms/standard-page-body';
 
 
 /*------------------------------------*\

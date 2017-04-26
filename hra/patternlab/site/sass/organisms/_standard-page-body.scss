@@ -1,0 +1,21 @@
+/*------------------------------------*\
+    $STANDARD PAGE BODY
+\*------------------------------------*/
+
+.standard-page-body {
+    position: relative;
+    z-index: $z-milli;
+
+    &__wrapper {
+        width: ($standard-body-width + 300px);
+        min-height: 1000px;
+        margin: -200px auto;
+        background-color: #fff;
+    }
+
+    &__content {
+        width: $standard-body-width;
+        padding-top: 60px;
+        margin: 0 auto;
+    }
+}

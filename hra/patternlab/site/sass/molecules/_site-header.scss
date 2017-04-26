@@ -3,7 +3,7 @@
 \*------------------------------------*/
 
 .site-header {
-    z-index: $z-milli;
+    position: relative;
     width: 100%;
     padding: 20px 5%;
     background-color: rgba(252, 252, 252, 0.95);

@@ -1878,7 +1878,7 @@ input:focus {
 /*------------------------------------*    $SITE HEADER
 \*------------------------------------*/
 .site-header {
-  z-index: 1;
+  position: relative;
   width: 100%;
   padding: 20px 5%;
   background-color: rgba(252, 252, 252, 0.95);
@@ -2408,6 +2408,142 @@ input:focus {
   }
 }
 
+/*------------------------------------*    $HERO
+\*------------------------------------*/
+.hero {
+  position: relative;
+  z-index: -1;
+  height: 600px;
+  margin-top: -103px;
+  background-size: cover;
+  background-image: url("../images/hero.png");
+}
+
+@media only screen and (max-width: 800px) {
+  .hero {
+    z-index: 1;
+    height: 300px;
+    margin-top: 0;
+  }
+}
+
+/*------------------------------------*    $HERO WITH CAPTION
+\*------------------------------------*/
+.hero__caption {
+  position: absolute;
+  top: 245px;
+  right: 0;
+  padding: 45px 120px 60px 65px;
+  margin: auto 0;
+  background-color: rgba(9, 89, 169, 0.95);
+}
+
+.hero__caption::before {
+  position: absolute;
+  top: 74px;
+  left: 3px;
+  width: 44px;
+  height: 50px;
+  background-size: cover;
+  background-image: url("../images/svg/plain-arrow.svg");
+  content: '';
+  transform: rotate(-90deg);
+}
+
+@media only screen and (max-width: 1100px) {
+  .hero__caption {
+    padding: 30px 30px 30px 60px;
+  }
+  .hero__caption::before {
+    top: 60px;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .hero__caption {
+    top: auto;
+    bottom: -50px;
+    width: calc(100% - 20px);
+  }
+  .hero__caption::before {
+    top: 0;
+    left: 10px;
+    width: 26px;
+    height: 31px;
+    transform: none;
+  }
+}
+
+.hero__caption-breadcrumbs {
+  font-size: 14px;
+  font-size: 0.875rem;
+  color: #fff;
+}
+
+.hero__caption-breadcrumbs > ul li {
+  display: inline-block;
+}
+
+.hero__caption-breadcrumbs > ul li a,
+.hero__caption-breadcrumbs > ul li span {
+  color: #fff;
+}
+
+@media only screen and (max-width: 800px) {
+  .hero__caption-breadcrumbs {
+    display: none;
+  }
+}
+
+.hero__caption-title {
+  font-size: 50px;
+  font-size: 3.125rem;
+  line-height: 1.3;
+  color: #fff;
+}
+
+@media only screen and (max-width: 800px) {
+  .hero__caption-title {
+    font-size: 40px;
+    font-size: 2.5rem;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .hero__caption-title {
+    font-size: 30px;
+    font-size: 1.875rem;
+  }
+}
+
+.hero__caption-subtitle {
+  font-size: 20px;
+  font-size: 1.25rem;
+  color: #fff;
+}
+
+@media only screen and (max-width: 650px) {
+  .hero__caption-subtitle {
+    font-size: 16px;
+    font-size: 1rem;
+  }
+}
+
+/*------------------------------------*    $HERO INNER
+\*------------------------------------*/
+.hero--inner {
+  height: 520px;
+  overflow: auto;
+  background-color: #0d61b5;
+  background-image: none;
+}
+
+.hero__content {
+  max-width: 800px;
+  margin: 180px auto 0;
+  color: #fff;
+}
+
 /*------------------------------------*    $DEFAULT TEASER
 \*------------------------------------*/
 .teaser {
@@ -2623,7 +2759,7 @@ input:focus {
 .main-menu__item > a {
   position: relative;
   padding-bottom: 8px;
-  font-weight: 600;
+  font-family: "FrutigerLTW01-55Roman", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   color: #425563;
 }
 
@@ -2665,128 +2801,6 @@ input:focus {
 .main-menu__item--active > a::after {
   opacity: 1;
   transform: translate3d(0, 0, 0);
-}
-
-/*------------------------------------*    $HERO
-\*------------------------------------*/
-.hero {
-  z-index: -1;
-  height: 600px;
-  margin-top: -103px;
-  background-size: cover;
-  background-image: url("../images/hero.png");
-}
-
-@media only screen and (max-width: 800px) {
-  .hero {
-    z-index: 1;
-    height: 300px;
-    margin-top: 0;
-  }
-}
-
-.hero--with-caption {
-  position: relative;
-}
-
-.hero__caption {
-  position: absolute;
-  top: 245px;
-  right: 0;
-  padding: 45px 120px 60px 65px;
-  margin: auto 0;
-  background-color: rgba(9, 89, 169, 0.95);
-}
-
-.hero__caption::before {
-  position: absolute;
-  top: 74px;
-  left: 3px;
-  width: 44px;
-  height: 50px;
-  background-size: cover;
-  background-image: url("../images/svg/plain-arrow.svg");
-  content: '';
-  transform: rotate(-90deg);
-}
-
-@media only screen and (max-width: 1100px) {
-  .hero__caption {
-    padding: 30px 30px 30px 60px;
-  }
-  .hero__caption::before {
-    top: 60px;
-  }
-}
-
-@media only screen and (max-width: 800px) {
-  .hero__caption {
-    top: auto;
-    bottom: -50px;
-    width: calc(100% - 20px);
-  }
-  .hero__caption::before {
-    top: 0;
-    left: 10px;
-    width: 26px;
-    height: 31px;
-    transform: none;
-  }
-}
-
-.hero__caption-breadcrumbs {
-  font-size: 14px;
-  font-size: 0.875rem;
-  color: #fff;
-}
-
-.hero__caption-breadcrumbs > ul li {
-  display: inline-block;
-}
-
-.hero__caption-breadcrumbs > ul li a,
-.hero__caption-breadcrumbs > ul li span {
-  color: #fff;
-}
-
-@media only screen and (max-width: 800px) {
-  .hero__caption-breadcrumbs {
-    display: none;
-  }
-}
-
-.hero__caption-title {
-  font-size: 50px;
-  font-size: 3.125rem;
-  line-height: 1.3;
-  color: #fff;
-}
-
-@media only screen and (max-width: 800px) {
-  .hero__caption-title {
-    font-size: 40px;
-    font-size: 2.5rem;
-  }
-}
-
-@media only screen and (max-width: 650px) {
-  .hero__caption-title {
-    font-size: 30px;
-    font-size: 1.875rem;
-  }
-}
-
-.hero__caption-subtitle {
-  font-size: 20px;
-  font-size: 1.25rem;
-  color: #fff;
-}
-
-@media only screen and (max-width: 650px) {
-  .hero__caption-subtitle {
-    font-size: 16px;
-    font-size: 1rem;
-  }
 }
 
 /*------------------------------------*    $GLOSSARY TAB
@@ -2859,11 +2873,31 @@ input:focus {
 
 /*------------------------------------*    $ORGANISMS
 \*------------------------------------*/
-/*------------------------------------*    $DEFAULT BODY
+/*------------------------------------*    $STANDARD INDEX BODY
 \*------------------------------------*/
-.default-body {
+.standard-index-body {
   position: relative;
   z-index: 1;
+}
+
+/*------------------------------------*    $STANDARD PAGE BODY
+\*------------------------------------*/
+.standard-page-body {
+  position: relative;
+  z-index: 1;
+}
+
+.standard-page-body__wrapper {
+  width: 1100px;
+  min-height: 1000px;
+  margin: -200px auto;
+  background-color: #fff;
+}
+
+.standard-page-body__content {
+  width: 800px;
+  padding-top: 60px;
+  margin: 0 auto;
 }
 
 /*------------------------------------*    $TEMPLATES

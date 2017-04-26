@@ -1,0 +1,20 @@
+/*------------------------------------*\
+    $HERO
+\*------------------------------------*/
+
+.hero {
+    position: relative;
+    z-index: -1;
+    height: 600px;
+    margin-top: -103px;
+    background: {
+        size: cover;
+        image: url('../images/hero.png');
+    }
+
+    @include media-query(tablet) {
+        z-index: $z-milli;
+        height: 300px;
+        margin-top: 0;
+    }
+}
