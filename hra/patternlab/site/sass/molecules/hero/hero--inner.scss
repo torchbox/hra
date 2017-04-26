@@ -5,10 +5,20 @@
 .hero {
     &--inner {
         height: 520px;
+        padding: 0 20px;
         overflow: auto;
         background: {
             color: $color--primary;
             image: none;
+        }
+
+        @include media-query(laptop) {
+            height: auto;
+            padding: 40px 20px;
+        }
+
+        @include media-query(tablet) {
+            padding: 100px 20px 40px;
         }
     }
 
@@ -16,6 +26,10 @@
         max-width: $standard-body-width;
         margin: 180px auto 0;
         color: #fff;
+
+        @include media-query(tablet) {
+            margin-top: 0;
+        }
     }
 
     &__breadcrumbs {

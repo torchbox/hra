@@ -1879,6 +1879,7 @@ input:focus {
 \*------------------------------------*/
 .site-header {
   position: relative;
+  z-index: 2;
   width: 100%;
   padding: 20px 5%;
   background-color: rgba(252, 252, 252, 0.95);
@@ -2046,6 +2047,7 @@ input:focus {
 /*------------------------------------*    $SITE SIDEBAR
 \*------------------------------------*/
 .site-sidebar {
+  position: relative;
   width: 100%;
   padding: 60px;
   margin-top: -130px;
@@ -2412,7 +2414,6 @@ input:focus {
 \*------------------------------------*/
 .hero {
   position: relative;
-  z-index: -1;
   height: 600px;
   margin-top: -103px;
   background-size: cover;
@@ -2533,15 +2534,35 @@ input:focus {
 \*------------------------------------*/
 .hero--inner {
   height: 520px;
+  padding: 0 20px;
   overflow: auto;
   background-color: #0d61b5;
   background-image: none;
+}
+
+@media only screen and (max-width: 900px) {
+  .hero--inner {
+    height: auto;
+    padding: 40px 20px;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .hero--inner {
+    padding: 100px 20px 40px;
+  }
 }
 
 .hero__content {
   max-width: 800px;
   margin: 180px auto 0;
   color: #fff;
+}
+
+@media only screen and (max-width: 800px) {
+  .hero__content {
+    margin-top: 0;
+  }
 }
 
 /*------------------------------------*    $DEFAULT TEASER
@@ -2888,14 +2909,21 @@ input:focus {
 }
 
 .standard-page-body__wrapper {
-  width: 1100px;
-  min-height: 1000px;
-  margin: -200px auto;
-  background-color: #fff;
+  max-width: 1100px;
+  margin: 0 auto;
+  overflow: auto;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.7), #fff 70%);
+  transform: translate3d(0, -200px, 0);
+}
+
+@media only screen and (max-width: 900px) {
+  .standard-page-body__wrapper {
+    margin-top: 0;
+  }
 }
 
 .standard-page-body__content {
-  width: 800px;
+  max-width: 800px;
   padding-top: 60px;
   margin: 0 auto;
 }
