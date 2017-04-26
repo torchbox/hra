@@ -2778,6 +2778,57 @@ input:focus {
   font-style: normal;
 }
 
+/*------------------------------------*    $HIGHLIGHT
+\*------------------------------------*/
+.highlight {
+  display: flex;
+  margin: 60px -150px;
+}
+
+.highlight__left, .highlight__right {
+  display: inline-block;
+  width: 100%;
+  min-height: 300px;
+  vertical-align: top;
+}
+
+.highlight__left {
+  position: relative;
+  padding: 75px 75px 65px 130px;
+  background-color: #f2f2f2;
+}
+
+.highlight__left::before {
+  position: absolute;
+  top: 65px;
+  left: 0;
+  width: 82px;
+  height: 94px;
+  background-size: cover;
+  background-image: url("../images/svg/blue-arrow.svg");
+  content: '';
+  transform: rotate(-90deg);
+}
+
+.highlight__right {
+  background-position: center;
+  background-size: cover;
+}
+
+.highlight__heading {
+  font-size: 22px;
+  font-size: 1.375rem;
+  margin-bottom: 20px;
+  font-family: "FrutigerLTW01-55Roman", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  line-height: 1.3;
+}
+
+.article .highlight__description {
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
 /*------------------------------------*    $MAIN MENU
 \*------------------------------------*/
 .main-menu {

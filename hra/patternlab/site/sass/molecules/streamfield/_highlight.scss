@@ -1,0 +1,59 @@
+/*------------------------------------*\
+    $HIGHLIGHT
+\*------------------------------------*/
+
+$highlight-min-height: 300px;
+
+.highlight {
+    display: flex;
+    margin: 60px -150px;
+
+    &__left,
+    &__right {
+        display: inline-block;
+        width: 100%;
+        min-height: $highlight-min-height;
+        vertical-align: top;
+    }
+
+    &__left {
+        position: relative;
+        padding: 75px 75px 65px 130px;
+        background-color: #f2f2f2;
+
+        &::before {
+            position: absolute;
+            top: 65px;
+            left: 0;
+            width: 82px;
+            height: 94px;
+            background: {
+                size: cover;
+                image: url('../images/svg/blue-arrow.svg');
+            }
+            content: '';
+            transform: rotate(-90deg);
+        }
+    }
+
+    &__right {
+        background: {
+            position: center;
+            size: cover;
+        }
+    }
+
+    &__heading {
+        @include font-size(delta);
+        margin-bottom: 20px;
+        font-family: $font--secondary;
+        line-height: 1.3;
+    }
+
+    &__description {
+        .article & {
+            @include font-size(zeta);
+            line-height: 1.4;
+        }
+    }
+}
