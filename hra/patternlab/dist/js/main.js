@@ -2226,8 +2226,6 @@ var jquery = createCommonjsModule(function (module) {
   });
 });
 
-// We have to manually make jQuery a global variable.
-// By default it will be in a closure and renamed to lowercase.
 window.jQuery = jquery;
 
 function glossaryTab() {
@@ -2307,6 +2305,33 @@ function glossaryTab() {
                 return outOfBounds(e);
             });
         }
+    }
+
+    bindEvents();
+}
+
+function glossaryBorder() {
+
+    var $glossaryResult = jquery('.glossary__result'),
+        $glossaryHeading = jquery('.glossary__result-heading'),
+        $glossaryBorder = jquery('.glossary__result-border');
+
+    function setResultBorder() {
+        $glossaryResult.each(function () {
+            var headingWidth = jquery(this).closest('li').find($glossaryHeading).width();
+
+            jquery(this).closest('li').find($glossaryBorder).css({
+                width: headingWidth
+            });
+        });
+    }
+
+    function bindEvents() {
+        jquery(window).on('load', function () {
+            if (jquery('.glossary__result').length) {
+                setResultBorder();
+            }
+        });
     }
 
     bindEvents();
@@ -2396,6 +2421,7 @@ function sidebarMenu() {
 }
 
 glossaryTab();
+glossaryBorder();
 disableTransition();
 sidebarMenu();
 
