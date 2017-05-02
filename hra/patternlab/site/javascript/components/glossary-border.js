@@ -12,14 +12,14 @@ function glossaryBorder() {
 
             $(this).closest('li').find($glossaryBorder).css({
                 width : headingWidth
-            })
+            });
         });
     }
 
     function bindEvents(){
         $(window).on('load', function(){
             if ($('.glossary__result').length) {
-                setResultBorder()
+                setResultBorder();
             }
         });
     }
