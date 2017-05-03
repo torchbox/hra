@@ -28,10 +28,28 @@
         margin-left: 0;
         margin-right: 0;
     }
+
+    .standard-page-body__wrapper {
+        transform: none;
+    }
+
+    .standard-page-body__content {
+        max-width: 1200px;
+    }
 }
 
 #atoms-site-search {
     .site-header__search  {
         margin: 0;
     }
+}
+
+#atoms-custom-select {
+    .sg-pattern-example {
+        max-width: 300px;
+    }
+}
+
+#viewall-molecules-glossary-tab {
+    display: none;
 }

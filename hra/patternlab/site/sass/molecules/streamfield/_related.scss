@@ -10,7 +10,6 @@
     $root: &;
     position: relative;
     display: block;
-    max-width: 400px;
     margin: 0 0 60px;
 
     @include media-query(sidebar) {

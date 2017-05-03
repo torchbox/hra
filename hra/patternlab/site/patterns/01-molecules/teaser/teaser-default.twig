@@ -1,12 +1,12 @@
 <a class="teaser" href="#">
-  <div class="teaser__image" style="background-image:url('{{ teaser.image }}')">
+  <div class="teaser__image" style="background-image:url('{{ teaser.image|default('../../../images/teaser.png') }}')">
     <div class="teaser__meta">
-      <div class="teaser__title">{{ teaser.title }}</div>
+      <div class="teaser__title">{{ teaser.title|default('Best practice') }}</div>
     </div>
   </div>
   <div class="teaser__description">
     <p>
-      {{ teaser.description }}
+      {{ teaser.description|default('Lorem ipsum dolor sit amet, consectetur adipiscing elit') }}
     </p>
     {% include "atoms-default-arrow" %}
   </div>
