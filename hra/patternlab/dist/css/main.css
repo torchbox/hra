@@ -3153,7 +3153,7 @@ input:focus {
   padding: 16px 30px;
   color: #fff;
   background-color: transparent;
-  border: 1px solid #74a3cf;
+  border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 30px;
 }
 
@@ -3219,7 +3219,6 @@ input:focus {
 .results-container__left {
   width: 40%;
   padding: 80px;
-  background: linear-gradient(to bottom, #0058b5, #004c97);
 }
 
 .results-container__right {
@@ -3235,6 +3234,14 @@ input:focus {
 
 .results-container__heading > span {
   font-weight: bold;
+}
+
+.results-container--blue .results-container__left {
+  background: linear-gradient(to bottom, #0058b5, #004c97);
+}
+
+.results-container--purple .results-container__left {
+  background: linear-gradient(to bottom, #913a87, #ad2378);
 }
 
 /*------------------------------------*    $RESULTS LISTING

@@ -3,6 +3,7 @@
 \*------------------------------------*/
 
 .results-container {
+    $root: &;
     display: flex;
     min-height: 100vh;
 
@@ -15,7 +16,6 @@
     &__left {
         width: ( (100% / 5) * 2 );
         padding: 80px;
-        background: linear-gradient(to bottom, #0058b5, #004c97);
     }
 
     &__right {
@@ -29,6 +29,18 @@
 
         > span {
             font-weight: bold;
+        }
+    }
+
+    &--blue {
+        #{$root}__left {
+            background: linear-gradient(to bottom, #0058b5, #004c97);
+        }
+    }
+
+    &--purple {
+        #{$root}__left {
+            background: linear-gradient(to bottom, #913a87, #ad2378);
         }
     }
 }
