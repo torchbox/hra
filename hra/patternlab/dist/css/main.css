@@ -1881,6 +1881,54 @@ input:focus {
   visibility: hidden;
 }
 
+.custom-select--blue {
+  margin-left: 10px;
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.custom-select--blue select {
+  height: 60px;
+  color: #fff;
+  background-color: transparent;
+}
+
+.custom-select--blue::before {
+  width: 60px;
+  height: 60px;
+  background-color: #034384;
+}
+
+.custom-select--blue::after {
+  right: -2px;
+  width: 30px;
+  color: #fff;
+}
+
+.custom-select--purple {
+  margin-left: 10px;
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.custom-select--purple select {
+  height: 60px;
+  color: #fff;
+  background-color: transparent;
+}
+
+.custom-select--purple::before {
+  width: 60px;
+  height: 60px;
+  background-color: #792870;
+}
+
+.custom-select--purple::after {
+  right: -2px;
+  width: 30px;
+  color: #fff;
+}
+
 /*------------------------------------*    $SVG
 \*------------------------------------*/
 .svg-default-arrow {
@@ -3197,10 +3245,17 @@ input:focus {
   opacity: 1;
 }
 
-.search-filters__filter-heading {
+.search-filters__filter-main-heading {
   font-size: 28px;
   font-size: 1.75rem;
   margin-top: 50px;
+  color: #fff;
+}
+
+.search-filters__filter-sub-heading {
+  font-size: 20px;
+  font-size: 1.25rem;
+  margin-top: 20px;
   color: #fff;
 }
 

@@ -25,9 +25,15 @@
         border-radius: 30px;
     }
 
-    &__filter-heading {
+    &__filter-main-heading {
         @include font-size(gamma);
         margin-top: 50px;
+        color: #fff;
+    }
+
+    &__filter-sub-heading {
+        @include font-size(epsilon);
+        margin-top: 20px;
         color: #fff;
     }
 }

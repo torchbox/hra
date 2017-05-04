@@ -2,6 +2,7 @@
     $CUSTOM SELECT STYLES
 \*------------------------------------*/
 
+// Default (solid bg)
 .custom-select {
     position: relative;
     display: inline-block;
@@ -56,5 +57,55 @@
     &__label {
         position: absolute;
         visibility: hidden;
+    }
+}
+
+// Blue
+.custom-select--blue {
+    margin-left: 10px;
+    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+
+    select {
+        height: 60px;
+        color: #fff;
+        background-color: transparent;
+    }
+
+    &::before {
+        width: 60px;
+        height: 60px;
+        background-color: #034384;
+    }
+
+    &::after {
+        right: -2px;
+        width: 30px;
+        color: #fff;
+    }
+}
+
+// Purple
+.custom-select--purple {
+    margin-left: 10px;
+    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+
+    select {
+        height: 60px;
+        color: #fff;
+        background-color: transparent;
+    }
+
+    &::before {
+        width: 60px;
+        height: 60px;
+        background-color: #792870;
+    }
+
+    &::after {
+        right: -2px;
+        width: 30px;
+        color: #fff;
     }
 }
