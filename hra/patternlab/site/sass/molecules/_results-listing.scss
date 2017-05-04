@@ -1,0 +1,69 @@
+/*------------------------------------*\
+    $RESULTS LISTING
+\*------------------------------------*/
+
+.results-listing {
+    margin-top: 20px;
+
+    &__item {
+        position: relative;
+        padding: 20px 0 40px;
+        border-top: 1px solid #eee;
+
+        > a {
+            color: #000;
+        }
+    }
+
+    &__item-border {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100px;
+        height: 4px;
+        background-color: #eee;
+    }
+
+    &__item-heading {
+        @include font-size(delta);
+        display: inline-block;
+        font-family: $font--secondary;
+        font-weight: 600;
+    }
+
+    &__item-meta {
+        margin: -5px 0 10px;
+
+        > li {
+            @include rem-font-size(12px);
+            display: inline-block;
+            padding: 0 8px;
+            border-right: 1px solid #eee;
+
+            &:first-of-type {
+                padding-left: 0;
+            }
+
+            &:last-of-type {
+                padding-right: 0;
+                border-right: 0;
+            }
+        }
+
+        .date {
+    
+        }
+
+        .author {
+
+        }
+
+        .category {
+
+        }
+    }
+
+    &__item-content {
+        font-size: 16px;
+    }
+}

@@ -2312,17 +2312,17 @@ function glossaryTab() {
     bindEvents();
 }
 
-function glossaryBorder() {
+function resultsBorder() {
 
-    var $glossaryResult = jquery('.glossary__result'),
-        $glossaryHeading = jquery('.glossary__result-heading'),
-        $glossaryBorder = jquery('.glossary__result-border');
+    var $resultsResult = jquery('.js-border-result'),
+        $resultsHeading = jquery('.js-border-result__heading'),
+        $resultsBorder = jquery('.js-border-result__border');
 
     function setResultBorder() {
-        $glossaryResult.each(function () {
-            var headingWidth = jquery(this).closest('li').find($glossaryHeading).width();
+        $resultsResult.each(function () {
+            var headingWidth = jquery(this).closest('li').find($resultsHeading).width();
 
-            jquery(this).closest('li').find($glossaryBorder).css({
+            jquery(this).closest('li').find($resultsBorder).css({
                 width: headingWidth
             });
         });
@@ -2330,7 +2330,7 @@ function glossaryBorder() {
 
     function bindEvents() {
         jquery(window).on('load', function () {
-            if (jquery('.glossary__result').length) {
+            if (jquery('.js-border-result').length) {
                 setResultBorder();
             }
         });
@@ -2423,7 +2423,7 @@ function sidebarMenu() {
 }
 
 glossaryTab();
-glossaryBorder();
+resultsBorder();
 disableTransition();
 sidebarMenu();
 

@@ -1,0 +1,33 @@
+/*------------------------------------*\
+    $RESULTS CONTAINER
+\*------------------------------------*/
+
+.results-container {
+    display: flex;
+    min-height: 100vh;
+
+    &__left,
+    &__right {
+        display: inline-block;
+        padding: 80px;
+        vertical-align: top;
+    }
+
+    &__left {
+        width: ( (100% / 5) * 2 );
+        background: linear-gradient(to bottom, #0058b5, #004c97);
+    }
+
+    &__right {
+        width: ( (100% / 5) * 3 );
+        background-color: #fff;
+    }
+
+    &__heading {
+        @include font-size(gamma);
+
+        > span {
+            font-weight: bold;
+        }
+    }
+}

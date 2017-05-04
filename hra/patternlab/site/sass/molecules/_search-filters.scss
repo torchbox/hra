@@ -1,0 +1,33 @@
+/*------------------------------------*\
+    $SEARCH FILTERS
+\*------------------------------------*/
+
+.search-filters {
+    &__heading {
+        @include rem-font-size(40px);
+        margin-bottom: 15px;
+        color: #fff;
+    }
+
+    &__search {
+        @include placeholder-text {
+            @include rem-font-size(18px);
+            font-family: $font--primary;
+            color: #fff;
+            opacity: 1;
+        }
+        @include font-size(epsilon);
+        width: 100%;
+        padding: 16px 30px;
+        color: #fff;
+        background-color: transparent;
+        border: 1px solid #74a3cf;
+        border-radius: 30px;
+    }
+
+    &__filter-heading {
+        @include font-size(gamma);
+        margin-top: 50px;
+        color: #fff;
+    }
+}

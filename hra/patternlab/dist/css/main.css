@@ -1904,8 +1904,7 @@ input:focus {
   z-index: 2;
   width: 100%;
   padding: 20px 5%;
-  background-color: rgba(252, 252, 252, 0.95);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  background-color: rgba(255, 255, 255, 0.98);
 }
 
 @media only screen and (max-width: 1100px) {
@@ -2564,7 +2563,8 @@ input:focus {
   padding: 0 20px;
   overflow: auto;
   background-color: #0d61b5;
-  background-image: none;
+  background-size: 69px 85px;
+  background-image: url("../images/svg/hero-pattern-1.svg");
 }
 
 @media only screen and (max-width: 900px) {
@@ -3135,6 +3135,163 @@ input:focus {
 .main-menu__item--active > a::after {
   opacity: 1;
   transform: translate3d(0, 0, 0);
+}
+
+/*------------------------------------*    $SEARCH FILTERS
+\*------------------------------------*/
+.search-filters__heading {
+  font-size: 40px;
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+  color: #fff;
+}
+
+.search-filters__search {
+  font-size: 20px;
+  font-size: 1.25rem;
+  width: 100%;
+  padding: 16px 30px;
+  color: #fff;
+  background-color: transparent;
+  border: 1px solid #74a3cf;
+  border-radius: 30px;
+}
+
+.search-filters__search.placeholder {
+  font-size: 18px;
+  font-size: 1.125rem;
+  font-family: "FrutigerLTW01-45Light", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  color: #fff;
+  opacity: 1;
+}
+
+.search-filters__search:-moz-placeholder {
+  font-size: 18px;
+  font-size: 1.125rem;
+  font-family: "FrutigerLTW01-45Light", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  color: #fff;
+  opacity: 1;
+}
+
+.search-filters__search::-moz-placeholder {
+  font-size: 18px;
+  font-size: 1.125rem;
+  font-family: "FrutigerLTW01-45Light", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  color: #fff;
+  opacity: 1;
+}
+
+.search-filters__search:-ms-input-placeholder {
+  font-size: 18px;
+  font-size: 1.125rem;
+  font-family: "FrutigerLTW01-45Light", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  color: #fff;
+  opacity: 1;
+}
+
+.search-filters__search::-webkit-input-placeholder {
+  font-size: 18px;
+  font-size: 1.125rem;
+  font-family: "FrutigerLTW01-45Light", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  color: #fff;
+  opacity: 1;
+}
+
+.search-filters__filter-heading {
+  font-size: 28px;
+  font-size: 1.75rem;
+  margin-top: 50px;
+  color: #fff;
+}
+
+/*------------------------------------*    $RESULTS CONTAINER
+\*------------------------------------*/
+.results-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.results-container__left, .results-container__right {
+  display: inline-block;
+  padding: 80px;
+  vertical-align: top;
+}
+
+.results-container__left {
+  width: 40%;
+  background: linear-gradient(to bottom, #0058b5, #004c97);
+}
+
+.results-container__right {
+  width: 60%;
+  background-color: #fff;
+}
+
+.results-container__heading {
+  font-size: 28px;
+  font-size: 1.75rem;
+}
+
+.results-container__heading > span {
+  font-weight: bold;
+}
+
+/*------------------------------------*    $RESULTS LISTING
+\*------------------------------------*/
+.results-listing {
+  margin-top: 20px;
+}
+
+.results-listing__item {
+  position: relative;
+  padding: 20px 0 40px;
+  border-top: 1px solid #eee;
+}
+
+.results-listing__item > a {
+  color: #000;
+}
+
+.results-listing__item-border {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100px;
+  height: 4px;
+  background-color: #eee;
+}
+
+.results-listing__item-heading {
+  font-size: 22px;
+  font-size: 1.375rem;
+  display: inline-block;
+  font-family: "FrutigerLTW01-55Roman", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  font-weight: 600;
+}
+
+.results-listing__item-meta {
+  margin: -5px 0 10px;
+}
+
+.results-listing__item-meta > li {
+  font-size: 12px;
+  font-size: 0.75rem;
+  display: inline-block;
+  padding: 0 8px;
+  border-right: 1px solid #eee;
+}
+
+.results-listing__item-meta > li:first-of-type {
+  padding-left: 0;
+}
+
+.results-listing__item-meta > li:last-of-type {
+  padding-right: 0;
+  border-right: 0;
+}
+
+.results-listing__item-content {
+  font-size: 16px;
 }
 
 /*------------------------------------*    $GLOSSARY
