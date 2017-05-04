@@ -39,7 +39,7 @@
                     image: url('../images/svg/blue-arrow.svg');
                 }
                 content: '';
-                transform: rotate(-90deg) translate3d(0, -25px, 0);
+                transform: rotate(-90deg) translate3d(0, -15px, 0);
                 transition: transform $default-transition-speed ease;
             }
         }
@@ -49,7 +49,7 @@
                 background-color: #eee;
 
                 &::after {
-                    transform: rotate(-90deg) translate3d(0, -15px, 0);
+                    transform: rotate(-90deg) translate3d(0, -10px, 0);
                 }
             }
         }
