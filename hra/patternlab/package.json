@@ -16,10 +16,12 @@
     "src_js": "site/javascript",
     "src_css": "site/sass",
     "src_img": "site/images",
+    "src_font": "site/fonts",
     "dest_html": "patternlab/source/_patterns",
     "dest_js": "dist/js",
     "dest_css": "dist/css",
     "dest_img": "dist/images",
+    "dest_font": "dist/fonts",
     "dist": "dist"
   },
   "scripts": {
@@ -50,6 +52,7 @@
     "//[ Watches ]//": "",
     "watch:html": "onchange $npm_package_config_src_html'/**/**' -- npm-run-all sync:html reload",
     "watch:img": "onchange $npm_package_config_src_img'/**/**' -- npm-run-all sync:img reload",
+    "watch:font": "onchange $npm_package_config_src_font'/**/**' -- npm-run-all sync:font reload",
     "watch:js": "onchange $npm_package_config_dest_js'/**/**' -- npm-run-all -p reload lint:js",
     "watch:css": "onchange $npm_package_config_dest_css -- npm-run-all -p reload:css lint:css",
     "watch": "npm-run-all -p watch:*",
@@ -57,6 +60,7 @@
     "sync:html": "rsync -rtvu --delete $npm_package_config_src_html/ $npm_package_config_dest_html/",
     "postsync:html": "npm run compile:lab:build",
     "sync:img": "rsync -rtvu --delete $npm_package_config_src_img/ $npm_package_config_dest_img/",
+    "sync:font": "rsync -rtvu --delete $npm_package_config_src_font/ $npm_package_config_dest_font/",
     "sync": "npm-run-all -p sync:*",
     "//[ Patternlab ]//": "",
     "compile:lab": "cd patternlab && php core/console --generate",
