@@ -87,14 +87,15 @@
 @import 'molecules/streamfield/call-to-action';
 @import 'molecules/streamfield/related';
 
-@import 'molecules/main-menu';
-@import 'molecules/search-filters';
-
 @import 'molecules/results-container';
 @import 'molecules/results-listing';
 
 @import 'molecules/glossary';
 @import 'molecules/glossary-tab';
+
+@import 'molecules/main-menu';
+@import 'molecules/search-filters';
+@import 'molecules/pagination';
 
 
 /*------------------------------------*\
@@ -107,7 +108,6 @@
 /*------------------------------------*\
     $TEMPLATES
 \*------------------------------------*/
-@import 'templates/welcome';
 
 
 /*------------------------------------*\

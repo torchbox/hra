@@ -1,0 +1,80 @@
+/*------------------------------------*\
+    $PAGINATION
+\*------------------------------------*/
+
+.pagination {
+    padding: 0 0 40px;
+    margin-top: 30px;
+
+    &__item {
+        display: inline-block;
+        margin-right: 20px;
+
+        &:last-of-type {
+            margin-right: 0;
+        }
+
+        > a {
+            display: block;
+            width: 45px;
+            height: 45px;
+            padding-top: 8px;
+            font-family: $font--secondary;
+            color: $color--quinary;
+            text-align: center;
+            vertical-align: top;
+            border: 2px solid transparent;
+            border-radius: 50%;
+            transition: border-color $default-transition-speed ease;
+        }
+
+        &:hover,
+        &--active {
+            > a {
+                border-color: $color--quinary;
+            }
+        }
+    }
+
+    &__back,
+    &__forward {
+        display: inline-block;
+
+        > a {
+            position: relative;
+            padding: 0 40px;
+
+            &::before {
+                position: absolute;
+                top: 0;
+                right: 0;
+                left: 0;
+                width: 16px;
+                height: 20px;
+                margin: auto;
+                background: {
+                    size: cover;
+                }
+                content: '';
+            }
+
+            span {
+                @include hidden;
+            }
+        }
+    }
+
+    &__back {
+        > a::before {
+            background-image: url('../images/svg/grey-arrow.svg');
+            transform: rotate(90deg);
+        }
+    }
+
+    &__forward {
+        > a::before {
+            background-image: url('../images/svg/purple-arrow.svg');
+            transform: rotate(-90deg);
+        }
+    }
+}
