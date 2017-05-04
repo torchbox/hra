@@ -26,6 +26,7 @@
 
     &__heading {
         @include font-size(gamma);
+        padding-left: 10px;
 
         > span {
             font-weight: bold;
