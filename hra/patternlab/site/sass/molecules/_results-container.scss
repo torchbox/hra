@@ -16,12 +16,20 @@
     &__left {
         width: ( (100% / 5) * 2 );
         padding: 80px;
+
+        @include media-query(desktop) {
+            padding: 50px 30px;
+        }
     }
 
     &__right {
         width: ( (100% / 5) * 3 );
         padding: 80px 150px 80px 100px;
         background-color: #fff;
+
+        @include media-query(desktop) {
+            padding: 50px 30px;
+        }
     }
 
     &__heading {

@@ -3142,10 +3142,22 @@ input:focus {
   padding: 80px;
 }
 
+@media only screen and (max-width: 1100px) {
+  .results-container__left {
+    padding: 50px 30px;
+  }
+}
+
 .results-container__right {
   width: 60%;
   padding: 80px 150px 80px 100px;
   background-color: #fff;
+}
+
+@media only screen and (max-width: 1100px) {
+  .results-container__right {
+    padding: 50px 30px;
+  }
 }
 
 .results-container__heading {
