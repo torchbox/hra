@@ -3213,17 +3213,18 @@ input:focus {
 
 .results-container__left, .results-container__right {
   display: inline-block;
-  padding: 80px;
   vertical-align: top;
 }
 
 .results-container__left {
   width: 40%;
+  padding: 80px;
   background: linear-gradient(to bottom, #0058b5, #004c97);
 }
 
 .results-container__right {
   width: 60%;
+  padding: 80px 150px 80px 100px;
   background-color: #fff;
 }
 

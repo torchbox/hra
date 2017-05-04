@@ -9,17 +9,18 @@
     &__left,
     &__right {
         display: inline-block;
-        padding: 80px;
         vertical-align: top;
     }
 
     &__left {
         width: ( (100% / 5) * 2 );
+        padding: 80px;
         background: linear-gradient(to bottom, #0058b5, #004c97);
     }
 
     &__right {
         width: ( (100% / 5) * 3 );
+        padding: 80px 150px 80px 100px;
         background-color: #fff;
     }
 
