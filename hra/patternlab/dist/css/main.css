@@ -3252,12 +3252,36 @@ input:focus {
 
 .results-listing__item {
   position: relative;
-  padding: 20px 0 40px;
   border-top: 1px solid #eee;
 }
 
 .results-listing__item > a {
+  position: relative;
+  display: block;
+  padding: 20px 0 40px;
   color: #000;
+  transition: background-color 300ms ease;
+}
+
+.results-listing__item > a::after {
+  position: absolute;
+  top: 30px;
+  right: 0;
+  width: 20px;
+  height: 23px;
+  background-size: cover;
+  background-image: url("../images/svg/blue-arrow.svg");
+  content: '';
+  transform: rotate(-90deg) translate3d(0, -5px, 0);
+  transition: transform 300ms ease;
+}
+
+.results-listing__item:hover .results-listing__item-border {
+  background-color: #ccc;
+}
+
+.results-listing__item:hover > a::after {
+  transform: rotate(-90deg) translate3d(0, 0, 0);
 }
 
 .results-listing__item-border {
@@ -3267,6 +3291,7 @@ input:focus {
   width: 100px;
   height: 4px;
   background-color: #eee;
+  transition: background-color 300ms ease;
 }
 
 .results-listing__item-heading {
