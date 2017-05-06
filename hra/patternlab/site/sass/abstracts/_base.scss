@@ -37,13 +37,3 @@ ul {
     margin: 0;
     list-style: none;
 }
-
-a {
-    color: $color--primary;
-    text-decoration: none;
-    transition: color ease $default-transition-speed;
-
-    &:focus {
-        outline: 1px dotted #eee;
-    }
-}

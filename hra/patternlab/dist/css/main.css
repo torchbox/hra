@@ -1422,16 +1422,6 @@ ul {
   list-style: none;
 }
 
-a {
-  color: #0d61b5;
-  text-decoration: none;
-  transition: color ease 300ms;
-}
-
-a:focus {
-  outline: 1px dotted #eee;
-}
-
 /*------------------------------------*    $TYPOGRAPHY
 \*------------------------------------*/
 /* ============================================
@@ -1702,6 +1692,18 @@ small, .milli {
 
 .button--septenary:hover {
   background-color: #d1cccc;
+}
+
+/*------------------------------------*    $LINKS
+\*------------------------------------*/
+a {
+  color: #0d61b5;
+  text-decoration: none;
+  transition: color ease 300ms;
+}
+
+a:focus {
+  outline: 1px dotted #eee;
 }
 
 /*------------------------------------*    $SWATCHES
