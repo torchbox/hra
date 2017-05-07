@@ -1517,6 +1517,23 @@ small, .milli {
 /*------------------------------------*    $PATTERNLAB 
     Override styles for styleguide
 \*------------------------------------*/
+.welcome-demo {
+  margin-top: 20px;
+}
+
+.welcome-demo h2 {
+  color: #0d61b5;
+}
+
+.welcome-demo p {
+  margin-top: 0;
+}
+
+.sg-subtype h2 {
+  font-size: 24px;
+  margin: 80px 0 -10px;
+}
+
 .sg-pattern-example .hero {
   margin-top: 0;
 }
@@ -1602,6 +1619,24 @@ small, .milli {
   max-width: 700px;
   padding: 20px;
   background-color: #0d61b5;
+}
+
+#viewall-atoms-welcome {
+  display: none;
+}
+
+#atoms-welcome {
+  padding: 30px;
+  margin: 0 -0.5em 20px;
+  background-color: #f7f7f7;
+}
+
+#atoms-welcome .sg-pattern-head {
+  display: none;
+}
+
+#atoms-welcome .sg-pattern-extra {
+  border: 0;
 }
 
 /*------------------------------------*    $ATOMS

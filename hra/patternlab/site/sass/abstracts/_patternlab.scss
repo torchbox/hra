@@ -4,6 +4,24 @@
 \*------------------------------------*/
 
 // sass-lint:disable-all
+
+.welcome-demo {
+    margin-top: 20px;
+
+    h2 {
+        color: $color--primary;
+    }
+
+    p {
+        margin-top: 0;
+    }
+}
+
+.sg-subtype h2 {
+    font-size: 24px;
+    margin: 80px 0 -10px;
+}
+
 .sg-pattern-example {
     .hero {
         margin-top: 0;
@@ -99,4 +117,22 @@
     max-width: 700px;
     padding: 20px;
     background-color: $color--primary;
+}
+
+#viewall-atoms-welcome {
+    display: none;
+}
+
+#atoms-welcome {
+    padding: 30px;
+    margin: 0 -0.5em 20px;
+    background-color: #f7f7f7;
+
+    .sg-pattern-head {
+        display: none;
+    }
+
+    .sg-pattern-extra {
+        border: 0;
+    }
 }
