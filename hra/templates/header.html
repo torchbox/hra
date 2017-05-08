@@ -1,0 +1,30 @@
+{% load wagtailcore_tags %}
+
+<header class="site-header">
+    {% spaceless %}
+        <div class="grid">
+            <div class="grid__item two-tenths mobile--one-third">
+                <a href="{% slugurl 'home' %}" class="site-header__logo">
+                    <span>Home page</span>
+                    <svg width="134px" height="63px">
+                        <use xlink:href="#site-logo"></use>
+                    </svg>
+                </a>
+            </div>
+            <div class="grid__item eight-tenths mobile--two-thirds">
+                <div class="site-header__right js-mobile-menu">
+                    {% spaceless %}
+                        {# TODO: Must be replaced with editable menu #}
+                        <ul class="main-menu">
+                            <li class="main-menu__item"><a href="#">Improving research</a></li>
+                            <li class="main-menu__item"><a href="#">Approvals &amp; amendments</a></li>
+                            <li class="main-menu__item"><a href="#">About us</a></li>
+                        </ul>
+                    {% endspaceless %}
+                    <label class="site-header__search-label" for="site-search">Search HRA</label>
+                    <input type="text" class="site-header__search" id="site-search" placeholder="Search&hellip;">
+                </div>
+            </div>
+        </div>
+    {% endspaceless %}
+</header>

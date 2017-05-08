@@ -1,7 +1,6 @@
 {% load static wagtailuserbar wagtailcore_tags wagtailimages_tags navigation_tags util_tags %}<!doctype html>
 <html class="no-js" lang="">
     <head>
-        <!-- TODO fallbacks if page is not defined e.g. for 404 page -->
         <meta charset="utf-8" />
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title>{% block title_prefix %}{{ TITLE_PREFIX }}{% endblock %}{% block title %}{% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }}{% endif %}{% endblock %}{% block title_suffix %}{{ TITLE_SUFFIX }}{% endblock %}</title>
@@ -59,66 +58,18 @@
             <!-- End Google Tag Manager -->
         {% endif %}
 
+        {# Note that we use images from  #}
+        {% include 'includes/svg_sprite.html' %}
+
         {% wagtailuserbar %}
 
-        <header>
-            <div class="container logo-container">
-                <a href="/" class="logo">
-                    Health Research Authority
-                </a>
-            </div>
-            <section>
-                <a href="#" class="menu-button">Menu</a>
-                <div class="container">
-
-                    {% primarynav %}
-
-                    {% secondarynav %}
-
-                    <form action="{% url 'search' %}" method="get" role="search">
-                        <input type="text" placeholder="Search…" name="query"{% if search_query %} value="{{ search_query }}{% endif %}">
-                        <input type="submit" value="Search">
-                    </form>
-
-                </div>
-            </section>
-
-            {% block breadcrumbs %}
-                {% include "navigation/breadcrumbs.html" %}
-            {% endblock %}
-
-        </header>
+        {% include 'header.html' %}
 
         <main>
             {% block content %}{% endblock %}
         </main>
 
-        <footer>
-
-            <div class="newsletter">
-                <h1>Stay up to date</h1>
-                <p>Sign up to receive our quarterly newsletter</p>
-            </div>
-
-            <section>
-                <h2> Follow us </h2>
-                <a href="https://twitter.com/{{ TWITTER_HANDLE }}"> <i class="ion-social-twitter"></i> </a>
-                <a href="https://www.linkedin.com/company/{{ LINKEDIN_COMPANY_ID }}"> <i class="ion-social-linkedin"></i> </a>
-            </section>
-
-            <section>
-                {% footernav %}
-            </section>
-
-            <div class="container copyright" role="contentinfo">
-                {% if COPYRIGHT %}
-                    <p>© {% now "Y" %} {{ COPYRIGHT }}</p>
-                {% endif %}
-
-                <div class="site-credit">Site by <a href="https://torchbox.com/">Torchbox</a></div>
-            </div>
-
-        </footer>
+        {% include 'footer.html' %}
 
         <script type="text/javascript" src="{% static 'dist/js/main.js' %}"></script>
 

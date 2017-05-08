@@ -8,7 +8,7 @@
                     {% if ancestor_page.depth > 2 %}
                         <li><a href="{% pageurl ancestor_page %}" title="{{ ancestor_page.title }}">{{ ancestor_page.title }}</a></li>
                     {% else %}
-                        <li><a href="/" title="Home">Home</a></li>
+                        <li><a href="{% slugurl 'home' %}" title="Home">Home</a></li>
                     {% endif %}
                 {% endif %}
             {% endfor %}
