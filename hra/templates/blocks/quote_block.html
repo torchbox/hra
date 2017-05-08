@@ -1,3 +1,29 @@
-<blockquote{% if value.citation_link %} cite="{{ value.citation_link }}"{% endif %}>
-    {{ value.quote }}
-</blockquote>
+{% load wagtailimages_tags %}
+
+<div class="blockquote">
+    {% spaceless %}
+        {% if value.image %}
+
+            <div class="blockquote__image">
+                {% image value.image fill-100x100-c75 as image %}
+                <img src="{{ image.url }}" alt="{{ value.image.alt }}">
+            </div>
+
+        {% endif %}
+
+        <div class="blockquote__content">
+            <blockquote class="blockquote__quote">
+                "{{ value.quote }}"
+            </blockquote>
+
+            {% if value.quotee %}
+
+                <cite class="blockquote__cite">
+                    {{ value.quotee }}
+                </cite>
+
+            {% endif %}
+
+        </div>
+    {% endspaceless %}
+</div>
