@@ -7,28 +7,40 @@
         @include rem-font-size(40px);
         margin-bottom: 15px;
         color: #fff;
+
+        @include media-query(laptop) {
+            @include font-size(beta);
+        }
     }
 
     &__search {
+        @include font-size(epsilon);
         @include placeholder-text {
             @include rem-font-size(18px);
             font-family: $font--primary;
             color: #fff;
             opacity: 1;
         }
-        @include font-size(epsilon);
         width: 100%;
         padding: 16px 30px;
         color: #fff;
         background-color: transparent;
         border: 2px solid rgba(255, 255, 255, 0.45);
         border-radius: 40px;
+
+        @include media-query(laptop) {
+            padding: 10px 20px;
+        }
     }
 
     &__filter-main-heading {
         @include font-size(gamma);
         margin-top: 50px;
         color: #fff;
+
+        @include media-query(laptop) {
+            margin-top: 30px;
+        }
     }
 
     &__filter-sub-heading {
@@ -40,5 +52,9 @@
     &__section-heading {
         margin: 30px 0 10px;
         color: #fff;
+
+        @include media-query(laptop) {
+            margin-top: 20px;
+        }
     }
 }

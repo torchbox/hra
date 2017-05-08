@@ -6,9 +6,18 @@
     padding: 0 0 40px;
     margin-top: 30px;
 
+    @include media-query(tablet) {
+        display: table;
+        margin: 0 auto;
+    }
+
     &__item {
         display: inline-block;
         margin-right: 20px;
+
+        @include media-query(tablet) {
+            margin-right: 15px;
+        }
 
         &:last-of-type {
             margin-right: 0;
@@ -26,6 +35,12 @@
             border: 2px solid transparent;
             border-radius: 50%;
             transition: border-color $default-transition-speed ease;
+
+            @include media-query(tablet) {
+                width: 35px;
+                height: 35px;
+                padding-top: 4px;
+            }
         }
 
         &:hover,
@@ -43,6 +58,10 @@
         > a {
             position: relative;
             padding: 0 40px;
+
+            @include media-query(tablet) {
+                padding: 0 20px;
+            }
 
             &::before {
                 position: absolute;
