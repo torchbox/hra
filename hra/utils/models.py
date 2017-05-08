@@ -49,7 +49,7 @@ class LinkFields(models.Model):
 
     content_panels = [
         MultiFieldPanel([
-            FieldPanel('link_page'),
+            PageChooserPanel('link_page'),
             FieldPanel('link_url'),
             FieldPanel('link_text'),
         ], 'Link'),
