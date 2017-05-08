@@ -110,11 +110,18 @@
         width: 60px;
         height: 60px;
         background-color: #792870;
+        transition: background-color $default-transition-speed ease;
     }
 
     &::after {
         right: -3px;
         width: 30px;
         color: #fff;
+    }
+
+    &:hover {
+        &::before {
+            background-color: darken(#792870, 10%);
+        }
     }
 }
