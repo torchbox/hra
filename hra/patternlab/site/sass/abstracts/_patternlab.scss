@@ -4,6 +4,23 @@
 \*------------------------------------*/
 
 // sass-lint:disable-all
+
+.welcome-demo {
+    margin-top: 20px;
+
+    h2 {
+        color: $color--primary;
+    }
+
+    p {
+        margin-top: 0;
+    }
+}
+
+.sg-subtype h2 {
+    font-size: 24px;
+}
+
 .sg-pattern-example {
     .hero {
         margin-top: 0;
@@ -24,7 +41,6 @@
         max-width: 500px;
     }
 
-
     .highlight {
         margin-left: 0;
         margin-right: 0;
@@ -38,6 +54,30 @@
         max-width: 1200px;
     }
 
+    .custom-select {
+        max-width: 300px;
+    }
+
+    .glossary__left, 
+    .glossary__right {
+        height: auto;
+    }
+}
+
+#atoms-custom-select--blue .custom-select--blue {
+    border-color: #034384;
+
+    select {
+        color: $color--primary;
+    }
+}
+
+#atoms-custom-select--purple .custom-select--purple {
+    border-color: #792870;
+    
+    select {
+        color: $color--quinary;
+    }
 }
 
 #atoms-site-search {
@@ -47,11 +87,51 @@
 }
 
 #atoms-custom-select {
-    .sg-pattern-example {
-        max-width: 300px;
-    }
+
 }
 
 #viewall-molecules-glossary-tab {
     display: none;
+}
+
+#atoms-checkbox {
+    .sg-pattern-example {
+        max-width: 300px;
+
+        .checkbox-label {
+            color: #000;
+
+            &::before {
+                border-color: #949494;
+            }
+
+            &::after {
+                border-color: #949494;
+            }
+        }
+    }
+}
+
+#molecules-search-filters {
+    max-width: 700px;
+    padding: 20px;
+    background-color: $color--primary;
+}
+
+#viewall-atoms-welcome {
+    display: none;
+}
+
+#atoms-welcome {
+    padding: 30px;
+    margin: 0 -0.5em 20px;
+    background-color: #f7f7f7;
+
+    .sg-pattern-head {
+        display: none;
+    }
+
+    .sg-pattern-extra {
+        border: 0;
+    }
 }

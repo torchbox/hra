@@ -55,8 +55,10 @@
     $ATOMS
 \*------------------------------------*/
 @import 'atoms/buttons';
+@import 'atoms/links';
 @import 'atoms/swatches';
 @import 'atoms/inputs';
+@import 'atoms/checkbox';
 @import 'atoms/wrapper';
 @import 'atoms/logo';
 @import 'atoms/site-container';
@@ -98,6 +100,7 @@
 
 @import 'molecules/main-menu';
 @import 'molecules/search-filters';
+@import 'molecules/pagination';
 
 
 /*------------------------------------*\
@@ -110,7 +113,6 @@
 /*------------------------------------*\
     $TEMPLATES
 \*------------------------------------*/
-@import 'templates/welcome';
 
 
 /*------------------------------------*\

@@ -7,18 +7,59 @@
 
     &__item {
         position: relative;
-        padding: 20px 0 40px;
-        border-top: 1px solid #eee;
 
         > a {
+            position: relative;
+            display: block;
+            padding: 20px 10px;
+            margin-bottom: 20px;
             color: #000;
+            transition: background-color $default-transition-speed ease;
+
+            // Top border
+            &::before {
+                position: absolute;
+                top: 0;
+                left: 10px;
+                width: calc(100% - 10px);
+                height: 1px;
+                background-color: #eee;
+                content: '';
+            }
+
+            // Arrow
+            &::after {
+                position: absolute;
+                top: 30px;
+                right: 0;
+                width: 20px;
+                height: 23px;
+                background: {
+                    size: cover;
+                    image: url('../images/svg/blue-arrow.svg');
+                }
+                content: '';
+                transform: rotate(-90deg) translate3d(0, -15px, 0);
+                transition: transform $default-transition-speed ease;
+            }
+        }
+
+        &:hover {
+            > a {
+                background-color: #eee;
+
+                &::after {
+                    transform: rotate(-90deg) translate3d(0, -10px, 0);
+                }
+            }
         }
     }
 
+    // Thicker, flexible border - width overridden with js
     &__item-border {
         position: absolute;
         top: 0;
-        left: 0;
+        left: 10px;
         width: 100px;
         height: 4px;
         background-color: #eee;

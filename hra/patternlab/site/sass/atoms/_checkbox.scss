@@ -1,0 +1,49 @@
+/*------------------------------------*\
+    $CUSTOM CHECKBOX
+\*------------------------------------*/
+
+// Hide checkbox from view
+.checkbox {
+    padding: 0;
+    opacity: 0;
+}
+
+.checkbox-label {
+    @include font-size(milli);
+    position: relative;
+    display: block;
+    padding: 3px 0 0 35px;
+    margin-top: -8px;
+    color: #fff;
+    cursor: pointer;
+
+    // Background border
+    &::before {
+        position: absolute;
+        top: 1px;
+        left: 0;
+        display: inline-block;
+        width: 22px;
+        height: 22px;
+        border: 2px solid rgba(255, 255, 255, 0.45);
+        content: '';
+    }
+
+    // Tick
+    &::after {
+        position: absolute;
+        top: 3px;
+        left: 7px;
+        display: inline-block;
+        width: 8px;
+        height: 14px;
+        border: solid #fff;
+        border-width: 0 2px 2px 0;
+        content: none;
+        transform: rotate(45deg);
+
+        .checkbox:checked + & {
+            content: '';
+        }
+    }
+}
