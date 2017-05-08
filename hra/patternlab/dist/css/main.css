@@ -1881,6 +1881,56 @@ input:focus {
   visibility: hidden;
 }
 
+/*------------------------------------*    $DEFAULT INPUT
+\*------------------------------------*/
+.default-form label {
+  font-size: 14px;
+  font-size: 0.875rem;
+  display: block;
+  margin-bottom: 5px;
+  color: #fff;
+}
+
+.default-form label > span {
+  margin-left: 3px;
+  opacity: 0.5;
+}
+
+.default-form input[type='text'],
+.default-form input[type='email'],
+.default-form textarea {
+  display: block;
+  width: 100%;
+  max-width: 500px;
+  padding: 15px 20px;
+  margin-bottom: 35px;
+  font-family: "FrutigerLTW01-45Light", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  color: #fff;
+  background-color: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.45);
+}
+
+@media only screen and (max-width: 900px) {
+  .default-form input[type='text'],
+  .default-form input[type='email'],
+  .default-form textarea {
+    max-width: 100%;
+  }
+}
+
+.default-form textarea {
+  min-height: 200px;
+  resize: horizontal;
+}
+
+.default-form input[type='submit'] {
+  padding: 10px 20px;
+  font-family: "FrutigerLTW01-45Light", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  color: #0d61b5;
+  background-color: #fff;
+  border: 0;
+}
+
 /*------------------------------------*    $SVG
 \*------------------------------------*/
 .svg-default-arrow {
@@ -3346,6 +3396,59 @@ input:focus {
   color: #fff;
 }
 
+/*------------------------------------*    $CONTACT
+\*------------------------------------*/
+.contact__left, .contact__right {
+  display: inline-block;
+  min-height: calc(100vh - 103px);
+  vertical-align: top;
+}
+
+@media only screen and (max-width: 900px) {
+  .contact__left, .contact__right {
+    min-height: 0;
+  }
+}
+
+.contact__left {
+  width: 60%;
+  padding: 100px 100px 100px 150px;
+  background-color: #0d61b5;
+}
+
+@media only screen and (max-width: 900px) {
+  .contact__left {
+    width: 100%;
+    padding: 100px 20px 50px;
+  }
+}
+
+.contact__right {
+  width: 40%;
+  padding: 100px;
+  overflow: scroll;
+}
+
+@media only screen and (max-width: 900px) {
+  .contact__right {
+    width: 100%;
+    padding: 50px 20px;
+  }
+}
+
+.contact__heading {
+  font-size: 40px;
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+  color: #fff;
+}
+
+/*------------------------------------*    $CONTACT FORM
+\*------------------------------------*/
+.contact-form {
+  width: 100%;
+}
+
 /*------------------------------------*    $MAIN MENU
 \*------------------------------------*/
 .main-menu {
@@ -3523,33 +3626,6 @@ input:focus {
   font-size: 28px;
   font-size: 1.75rem;
   margin-top: 50px;
-  color: #fff;
-}
-
-/*------------------------------------*    $CONTACT
-\*------------------------------------*/
-.contact__left, .contact__right {
-  display: inline-block;
-  height: calc(100vh - 103px);
-  vertical-align: top;
-}
-
-.contact__left {
-  width: 60%;
-  padding: 100px 100px 100px 150px;
-  background-color: #0d61b5;
-}
-
-.contact__right {
-  width: 40%;
-  padding: 100px;
-  overflow: scroll;
-}
-
-.contact__search-heading {
-  font-size: 40px;
-  font-size: 2.5rem;
-  margin-bottom: 15px;
   color: #fff;
 }
 

@@ -1,0 +1,48 @@
+/*------------------------------------*\
+    $DEFAULT INPUT
+\*------------------------------------*/
+
+.default-form {
+    label {
+        @include font-size(milli);
+        display: block;
+        margin-bottom: 5px;
+        color: #fff;
+
+        > span {
+            margin-left: 3px;
+            opacity: 0.5;
+        }
+    }
+
+    input[type='text'],
+    input[type='email'],
+    textarea {
+        display: block;
+        width: 100%;
+        max-width: 500px;
+        padding: 15px 20px;
+        margin-bottom: 35px;
+        font-family: $font--primary;
+        color: #fff;
+        background-color: transparent;
+        border: 2px solid rgba(255, 255, 255, 0.45);
+
+        @include media-query(laptop) {
+            max-width: 100%;
+        }
+    }
+
+    textarea {
+        min-height: 200px;
+        resize: horizontal;
+    }
+
+    input[type='submit'] {
+        padding: 10px 20px;
+        font-family: $font--primary;
+        color: $color--primary;
+        background-color: #fff;
+        border: 0;
+    }
+}

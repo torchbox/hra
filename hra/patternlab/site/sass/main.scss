@@ -62,6 +62,7 @@
 @import 'atoms/site-container';
 @import 'atoms/article';
 @import 'atoms/select';
+@import 'atoms/input';
 @import 'atoms/svg';
 
 
@@ -92,9 +93,11 @@
 @import 'molecules/glossary';
 @import 'molecules/glossary-tab';
 
+@import 'molecules/contact';
+@import 'molecules/contact-form';
+
 @import 'molecules/main-menu';
 @import 'molecules/search-filters';
-@import 'molecules/contact';
 
 
 /*------------------------------------*\
