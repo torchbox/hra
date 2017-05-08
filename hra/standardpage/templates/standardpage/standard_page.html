@@ -2,22 +2,46 @@
 {% load wagtailcore_tags wagtailimages_tags static %}
 
 {% block content %}
-    {% include "navigation/breadcrumbs.html" %}
-
-    <div class="intro">
-        <div class="container">
-            {% include "includes/share.html" %}
-            <h1>{{ page.title }}</h1>
-            <p>{{ page.introduction }}</p>
+    <div class="hero hero--inner">
+        <div class="hero__content">
+            <div class="hero__breadcrumbs">
+                {# TODO: Needs styling #}
+                {# {% include "navigation/breadcrumbs.html" %}#}
+            </div>
+            {# TODO: Is this title? #}
+            <h1 class="hero__heading">{{ page.title }}</h1>
+            <div class="hero__date">Last updated on <span>01/01/01</span></div>
         </div>
     </div>
 
-    <section class="main-body">
-        <div class="container">
-            {{ page.body }}
-        </div>
-    </section>
+    <div class="standard-page-body">
+        <div class="standard-page-body__wrapper">
+            <div class="standard-page-body__content">
+                <article class="article">
+                    <h1>{{ page.title }}</h1>
+                    <p>{{ page.introduction }}</p>
 
-    {% include "includes/relatedcontent.html" %}
+                    {% include_block page.body %}
+                    {#  TODO: remove once templates for stream field blocks are updated #}
+                    {# {% include "molecules-blockquote" %} #}
+                    {# {% include "molecules-highlight" %} #}
+                    {# {% include "molecules-call-to-action" %} #}
+                </article>
+            </div>
+            <div class="related-container">
+                {% spaceless %}
+                    <div class="grid grid--wide">
+                        {% for relatedItem in related %}
+                            <div class="grid__item one-third laptop--one-whole">
+                                {# TODO: replace with real code. See includes/relatedcontent.html #}
+                                {#{% include "molecules-related" %}#}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endspaceless %}
+            </div>
+        </div>
+    </div>
+
 
 {% endblock %}
