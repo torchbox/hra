@@ -1531,7 +1531,6 @@ small, .milli {
 
 .sg-subtype h2 {
   font-size: 24px;
-  margin: 80px 0 -10px;
 }
 
 .sg-pattern-example .hero {
@@ -2054,12 +2053,17 @@ input:focus {
   width: 60px;
   height: 60px;
   background-color: #792870;
+  transition: background-color 300ms ease;
 }
 
 .custom-select--purple::after {
   right: -3px;
   width: 30px;
   color: #fff;
+}
+
+.custom-select--purple:hover::before {
+  background-color: #531b4d;
 }
 
 /*------------------------------------*    $SVG
