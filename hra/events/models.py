@@ -108,7 +108,8 @@ class EventPage(Page, SocialFields, ListingFields):
         FieldPanel('introduction'),
         StreamFieldPanel('body'),
 
-        InlinePanel('related_documents', label="Related documents"),
+        # TODO: Cleanup if we decide that we don't need related docs here
+        # InlinePanel('related_documents', label="Related documents"),
         InlinePanel('related_pages', label="Related pages"),
     ]
 
