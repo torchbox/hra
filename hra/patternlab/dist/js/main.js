@@ -2226,6 +2226,8 @@ var jquery = createCommonjsModule(function (module) {
   });
 });
 
+// We have to manually make jQuery a global variable.
+// By default it will be in a closure and renamed to lowercase.
 window.jQuery = jquery;
 
 function glossaryTab() {
@@ -2288,20 +2290,132 @@ function glossaryTab() {
     }
 
     function bindEvents() {
+        if (jquery(window).width() >= 800) {
 
-        // Toggle tab on click
-        $glossaryLabel.on('click', function () {
+            // Toggle tab on click
+            $glossaryLabel.on('click', function () {
+                return toggle();
+            });
+
+            // Stick tab on scroll
+            jquery(document).on('scroll', function () {
+                return stick();
+            });
+
+            // Close tab on click outside
+            jquery(document).on('mouseup', function (e) {
+                return outOfBounds(e);
+            });
+        }
+    }
+
+    bindEvents();
+}
+
+function resultsBorder() {
+
+    var $resultsResult = jquery('.js-border-result'),
+        $resultsHeading = jquery('.js-border-result__heading'),
+        $resultsBorder = jquery('.js-border-result__border');
+
+    function setResultBorder() {
+        $resultsResult.each(function () {
+            var headingWidth = jquery(this).closest('li').find($resultsHeading).width();
+
+            jquery(this).closest('li').find($resultsBorder).css({
+                width: headingWidth
+            });
+        });
+    }
+
+    function bindEvents() {
+        jquery(window).on('load', function () {
+            if (jquery('.js-border-result').length) {
+                setResultBorder();
+            }
+        });
+    }
+
+    bindEvents();
+}
+
+function disableTransition() {
+
+    var transitionElements = jquery('.site-header__right'),
+        disabledClass = 'disable-transition',
+        delaySpeed = 300;
+
+    transitionElements.addClass(disabledClass);
+
+    setTimeout(function () {
+        transitionElements.removeClass(disabledClass);
+    }, delaySpeed);
+}
+
+jquery(window).resize(function () {
+    disableTransition();
+});
+
+function sidebarMenu() {
+
+    var $sidebarMenu = jquery('.site-sidebar__menu'),
+        $sidebarMenuToggle = jquery('.site-sidebar__label'),
+        activeItemLabel = jquery('.site-sidebar__menu-item--active'),
+        labelActive = 'site-sidebar__label--active',
+        slideSpeed = 300,
+        displayBuffer = 10;
+
+    var state = {
+        open: false,
+        busy: false
+    };
+
+    function open() {
+        if (!state.busy) {
+            state.busy = true;
+            setTimeout(function () {
+                $sidebarMenu.slideDown(slideSpeed);
+                $sidebarMenuToggle.addClass(labelActive);
+                state.open = true;
+                state.busy = false;
+            }, displayBuffer);
+        }
+    }
+
+    function close() {
+        if (!state.busy) {
+            state.busy = true;
+            setTimeout(function () {
+                $sidebarMenu.slideUp(slideSpeed);
+                $sidebarMenuToggle.removeClass(labelActive);
+                state.open = false;
+                state.busy = false;
+            }, displayBuffer);
+        }
+    }
+
+    function toggle() {
+        if (state.open) {
+            close();
+        } else {
+            open();
+        }
+    }
+
+    function populateLabel() {
+
+        $sidebarMenuToggle.html(activeItemLabel.text());
+    }
+
+    function bindEvents() {
+
+        // Toggle menu on click
+        $sidebarMenuToggle.on('click', function () {
             return toggle();
         });
 
-        // Stick tab on scroll
-        jquery(document).on('scroll', function () {
-            return stick();
-        });
-
-        // Close tab on click outside
-        jquery(document).on('mouseup', function (e) {
-            return outOfBounds(e);
+        jquery(window).on('load', function () {
+            return populateLabel();
         });
     }
 
@@ -2309,6 +2423,9 @@ function glossaryTab() {
 }
 
 glossaryTab();
+resultsBorder();
+disableTransition();
+sidebarMenu();
 
 })));
 //# sourceMappingURL=main.js.map
