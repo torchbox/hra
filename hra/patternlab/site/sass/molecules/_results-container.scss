@@ -7,6 +7,14 @@
     display: flex;
     min-height: 100vh;
 
+    @include media-query(laptop) {
+        margin-top: 65px;
+    }
+
+    @include media-query(tablet) {
+        display: block;
+    }
+
     &__left,
     &__right {
         display: inline-block;
@@ -20,6 +28,11 @@
         @include media-query(desktop) {
             padding: 50px 30px;
         }
+
+        @include media-query(tablet) {
+            width: 100%;
+            padding: 30px 20px;
+        }
     }
 
     &__right {
@@ -29,6 +42,11 @@
 
         @include media-query(desktop) {
             padding: 50px 30px;
+        }
+
+        @include media-query(tablet) {
+            width: 100%;
+            padding: 30px 10px;
         }
     }
 
