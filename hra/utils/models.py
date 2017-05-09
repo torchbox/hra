@@ -153,7 +153,7 @@ class ListingFields(models.Model):
 @register_snippet
 class CallToActionSnippet(LinkFields):
     title = models.CharField(max_length=255)
-    summary = RichTextField(blank=True, max_length=255)
+    summary = models.TextField(blank=True, max_length=255)
     image = models.ForeignKey(CustomImage, null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
 
     panels = [
