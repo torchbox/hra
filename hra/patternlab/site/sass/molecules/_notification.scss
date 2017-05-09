@@ -6,13 +6,24 @@
     $root: &;
     position: relative;
     width: 100%;
-    height: 100px;
-    padding: 20px 5%;
+    padding: 30px 5%;
     background-color: #32424c;
-    transition: border-color $default-transition-speed ease, background-color $default-transition-speed ease;
+    transition: border-color $default-transition-speed ease, background-color $default-transition-speed ease, opacity $default-transition-speed ease, margin-top $default-transition-speed ease;
 
     &--darken {
         background-color: darken(#32424c, 5%);
+    }
+
+    &--hide {
+        opacity: 0;
+    }
+
+    &--close {
+        display: none;
+    }
+
+    @include media-query(desktop) {
+        padding: 20px;
     }
 
     // Notification types
@@ -30,6 +41,7 @@
 
     &__content {
         @include font-size(milli);
+        padding-right: 30px;
         margin: 5px 0 0;
         color: #c7c7c7;
     }
@@ -46,6 +58,10 @@
         cursor: pointer;
         background-color: transparent;
         border: 0;
+
+        @include media-query(desktop) {
+            right: 20px;
+        }
 
         // Close icon
         &::before,
