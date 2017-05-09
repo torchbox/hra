@@ -1,0 +1,20 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+<div class="highlight">
+    {% spaceless %}
+        <div class="highlight__left">
+            <div class="highlight__heading">
+                {{ value.title }}
+            </div>
+            <div class="highlight__description">
+                {{ value.text|richtext }}
+            </div>
+        </div>
+
+        {% if value.image %}
+            {% image value.image width-800 as image %}
+
+            <div class="highlight__right" style="background-image:url('{{ image.url }}')"></div>
+        {% endif %}
+    {% endspaceless %}
+</div>

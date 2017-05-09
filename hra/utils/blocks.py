@@ -34,6 +34,16 @@ class CallToActionWithTextBlock(blocks.StructBlock):
         template = "blocks/call_to_action_with_text_block.html"
 
 
+class HighlightBlock(blocks.StructBlock):
+    title = blocks.CharBlock()
+    text = blocks.RichTextBlock()
+    image = ImageChooserBlock(required=False)
+
+    class Meta:
+        icon = "pick"
+        template = "blocks/highlight_block.html"
+
+
 class StoryBlock(blocks.StreamBlock):
     """
     Main streamfield block to be inherited by Pages
@@ -45,6 +55,7 @@ class StoryBlock(blocks.StreamBlock):
     quote = QuoteBlock()
     embed = EmbedBlock()
     call_to_action = CallToActionWithTextBlock()
+    highlight = HighlightBlock()
 
     class Meta:
         template = "blocks/stream_block.html"
