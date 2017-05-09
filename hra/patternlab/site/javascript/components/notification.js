@@ -24,7 +24,7 @@ function notification() {
 
         // Move out of viewport
         $notification.css({
-            'margin-top' : (-notificationHeight)
+            'margin-top' : -notificationHeight
         });
 
         // Remove entirely
