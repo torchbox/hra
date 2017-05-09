@@ -2226,8 +2226,6 @@ var jquery = createCommonjsModule(function (module) {
   });
 });
 
-// We have to manually make jQuery a global variable.
-// By default it will be in a closure and renamed to lowercase.
 window.jQuery = jquery;
 
 function glossaryTab() {
@@ -2422,10 +2420,58 @@ function sidebarMenu() {
     bindEvents();
 }
 
+function notification() {
+
+    var $notification = jquery('.notification'),
+        $closeButton = jquery('.notification__close'),
+        notificationHeight = $notification.outerHeight(),
+        notificationDarken = 'notification--darken',
+        notificationHide = 'notification--hide',
+        notificationClose = 'notification--close';
+
+    function darken() {
+        $notification.addClass(notificationDarken);
+    }
+
+    function lighten() {
+        $notification.removeClass(notificationDarken);
+    }
+
+    function close() {
+
+        // Reduce opacity
+        $notification.addClass(notificationHide);
+
+        // Move out of viewport
+        $notification.css({
+            'margin-top': -notificationHeight
+        });
+
+        // Remove entirely
+        setTimeout(function () {
+            $notification.addClass(notificationClose);
+        }, 500);
+    }
+
+    function bindEvents() {
+
+        // Visual feedback when hovering on close button
+        $closeButton.mouseenter(darken).mouseleave(lighten);
+
+        // Close notification entirely
+        $closeButton.on('click', function () {
+            return close();
+        });
+    }
+
+    bindEvents();
+}
+
 glossaryTab();
 resultsBorder();
 disableTransition();
 sidebarMenu();
+notification();
 
 })));
 //# sourceMappingURL=main.js.map
