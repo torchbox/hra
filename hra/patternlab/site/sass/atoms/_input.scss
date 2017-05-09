@@ -2,6 +2,13 @@
     $DEFAULT INPUT
 \*------------------------------------*/
 
+input,
+textarea {
+    &:focus {
+        outline: 0;
+    }
+}
+
 .default-form {
     label {
         @include font-size(milli);
@@ -27,9 +34,14 @@
         color: #fff;
         background-color: transparent;
         border: 2px solid rgba(255, 255, 255, 0.45);
+        transition: background-color $default-transition-speed ease;
 
         @include media-query(laptop) {
             max-width: 100%;
+        }
+
+        &:focus {
+            background-color: darken($color--primary, 8%);
         }
     }
 
@@ -42,7 +54,15 @@
         padding: 10px 20px;
         font-family: $font--primary;
         color: $color--primary;
+        cursor: pointer;
         background-color: #fff;
         border: 0;
+        transition: background-color $default-transition-speed ease, color $default-transition-speed ease;
+
+        &:hover,
+        &:focus {
+            color: #fff;
+            background-color: darken($color--primary, 8%);
+        }
     }
 }
