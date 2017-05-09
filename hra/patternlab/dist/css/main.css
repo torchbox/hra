@@ -2841,7 +2841,24 @@ textarea:focus {
 }
 
 .hero__breadcrumbs {
+  font-size: 14px;
+  font-size: 0.875rem;
   color: #fff;
+}
+
+.hero__breadcrumbs ul li {
+  display: inline-block;
+}
+
+.hero__breadcrumbs ul li a,
+.hero__breadcrumbs ul li span {
+  color: #fff;
+}
+
+@media only screen and (max-width: 800px) {
+  .hero__breadcrumbs {
+    display: none;
+  }
 }
 
 .hero__heading {
