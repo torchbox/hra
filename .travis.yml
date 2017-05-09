@@ -37,7 +37,7 @@ install:
 # Run the tests
 script:
   # Run python code style checks
-  - flake8 hra --ignore=E501,F405 --exclude=*/migrations/*
+  - flake8 hra --ignore=E501,F405 --exclude=*/migrations/*,*/node_modules/*
 
   # Run system checks
   - python manage.py check
