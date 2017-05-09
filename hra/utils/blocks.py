@@ -25,15 +25,26 @@ class QuoteBlock(blocks.StructBlock):
         template = "blocks/quote_block.html"
 
 
-# Main streamfield block to be inherited by Pages
+class CallToActionWithText(blocks.StructBlock):
+    call_to_action = SnippetChooserBlock(CallToActionSnippet)
+    side_text = blocks.RichTextBlock()
+
+    class Meta:
+        icon = "redirect"
+        template = "blocks/call_to_action_with_text.html"
+
 
 class StoryBlock(blocks.StreamBlock):
-    heading = blocks.CharBlock(classname="full title")
+    """
+    Main streamfield block to be inherited by Pages
+    """
+
+    heading = blocks.CharBlock(classname="full title", icon='title')
     paragraph = blocks.RichTextBlock()
     image = ImageBlock()
     quote = QuoteBlock()
     embed = EmbedBlock()
-    call_to_action = SnippetChooserBlock(CallToActionSnippet, template="includes/call_to_action.html")
+    call_to_action = CallToActionWithText()
 
     class Meta:
         template = "blocks/stream_block.html"
