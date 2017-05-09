@@ -1,0 +1,66 @@
+/*------------------------------------*\
+    $CONTACT
+\*------------------------------------*/
+
+.contact {
+    &__left,
+    &__right {
+        display: inline-block;
+        min-height: calc(100vh - 103px);
+        vertical-align: top;
+
+        @include media-query(laptop) {
+            min-height: 0;
+        }
+    }
+
+    &__left {
+        width: 60%;
+        padding: 100px 100px 100px 150px;
+        background-color: $color--primary;
+
+        @include media-query(laptop) {
+            width: 100%;
+            padding: 100px 20px 50px;
+        }
+    }
+
+    &__right {
+        width: 40%;
+        padding: 100px;
+        overflow: scroll;
+
+        @include media-query(laptop) {
+            width: 100%;
+            padding: 50px 20px;
+        }
+    }
+
+    &__heading {
+        @include rem-font-size(40px);
+        margin-bottom: 15px;
+        color: #fff;
+    }
+
+    &__content {
+        > p {
+            @include font-size(zeta);
+        }
+    }
+
+    &__address {
+        margin-top: 80px;
+
+        @include media-query(laptop) {
+            margin-top: 30px;
+        }
+
+        div {
+            @include font-size(zeta);
+
+            &:first-of-type {
+                font-family: $font--secondary;
+            }
+        }
+    }
+}
