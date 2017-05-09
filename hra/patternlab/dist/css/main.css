@@ -2501,6 +2501,10 @@ textarea:focus {
   margin-top: 60px;
 }
 
+.site-body--restricted {
+  padding-right: 20%;
+}
+
 /*------------------------------------*    $SITE FOOTER
 \*------------------------------------*/
 .site-footer {
