@@ -3933,14 +3933,27 @@ input:focus {
 .notification {
   position: relative;
   width: 100%;
-  height: 100px;
-  padding: 20px 5%;
+  padding: 30px 5%;
   background-color: #32424c;
-  transition: border-color 300ms ease, background-color 300ms ease;
+  transition: border-color 300ms ease, background-color 300ms ease, opacity 300ms ease, margin-top 300ms ease;
 }
 
 .notification--darken {
   background-color: #28353d;
+}
+
+.notification--hide {
+  opacity: 0;
+}
+
+.notification--close {
+  display: none;
+}
+
+@media only screen and (max-width: 1100px) {
+  .notification {
+    padding: 20px;
+  }
 }
 
 .notification--default {
@@ -3965,6 +3978,7 @@ input:focus {
 .notification__content {
   font-size: 14px;
   font-size: 0.875rem;
+  padding-right: 30px;
   margin: 5px 0 0;
   color: #c7c7c7;
 }
@@ -3981,6 +3995,12 @@ input:focus {
   cursor: pointer;
   background-color: transparent;
   border: 0;
+}
+
+@media only screen and (max-width: 1100px) {
+  .notification__close {
+    right: 20px;
+  }
 }
 
 .notification__close::before, .notification__close::after {
