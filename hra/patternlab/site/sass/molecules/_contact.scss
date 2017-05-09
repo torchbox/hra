@@ -50,6 +50,11 @@
 
     &__address {
         margin-top: 80px;
+
+        @include media-query(laptop) {
+            margin-top: 30px;
+        }
+
         div {
             @include font-size(zeta);
 
