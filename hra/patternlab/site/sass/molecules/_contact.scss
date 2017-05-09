@@ -41,4 +41,21 @@
         margin-bottom: 15px;
         color: #fff;
     }
+
+    &__content {
+        > p {
+            @include font-size(zeta);
+        }
+    }
+
+    &__address {
+        margin-top: 80px;
+        div {
+            @include font-size(zeta);
+
+            &:first-of-type {
+                font-family: $font--secondary;
+            }
+        }
+    }
 }
