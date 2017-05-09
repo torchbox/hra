@@ -1,0 +1,6 @@
+{% load wagtailcore_tags %}
+
+{# TODO: Needs styles #}
+{{ value.side_text|richtext }}
+
+{% include 'includes/call_to_action.html' with call_to_action=value.call_to_action %}

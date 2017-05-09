@@ -25,13 +25,13 @@ class QuoteBlock(blocks.StructBlock):
         template = "blocks/quote_block.html"
 
 
-class CallToActionWithText(blocks.StructBlock):
+class CallToActionWithTextBlock(blocks.StructBlock):
     call_to_action = SnippetChooserBlock(CallToActionSnippet)
     side_text = blocks.RichTextBlock()
 
     class Meta:
         icon = "redirect"
-        template = "blocks/call_to_action_with_text.html"
+        template = "blocks/call_to_action_with_text_block.html"
 
 
 class StoryBlock(blocks.StreamBlock):
@@ -44,7 +44,7 @@ class StoryBlock(blocks.StreamBlock):
     image = ImageBlock()
     quote = QuoteBlock()
     embed = EmbedBlock()
-    call_to_action = CallToActionWithText()
+    call_to_action = CallToActionWithTextBlock()
 
     class Meta:
         template = "blocks/stream_block.html"

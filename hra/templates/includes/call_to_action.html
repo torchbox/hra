@@ -1,13 +1,21 @@
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load wagtailimages_tags %}
 
-<div class="call-to-action">
+{% comment %}
 
-    {{ page.call_to_action.title }}
+This template can me used in different places. In streamfield block
+or directly in a page template. To use this template pass `call_to_action` into context.
 
-    {{ page.call_to_action.summary|richtext }}
+Example:
+    {% include "includes/call_to_action.html" with call_to_action=page.call_to_action %}
 
-    {% image page.call_to_action.image fill-450x300 %}
+{% endcomment %}
 
-    <a href="{{ page.call_to_action.get_link_url }}">{{ page.call_to_action.get_link_text }}</a>
-
-</div>
+<a class="call-to-action" href="{{ call_to_action.get_link_url }}">
+    <h5 class="call-to-action__heading">
+        {{ call_to_action.title }}
+    </h5>
+    <p class="call-to-action__description">
+        {{ call_to_action.summary }}
+        <span>{{ call_to_action.get_link_text|default:"Read more" }}</span>
+    </p>
+</a>
