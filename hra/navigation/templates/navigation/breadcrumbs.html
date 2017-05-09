@@ -2,7 +2,7 @@
 
 {% if page.get_ancestors|length > 2 %}
     <nav role="navigation" aria-label="breadcrumb">
-        <ul class="breadcrumb">
+        <ul>
             {% for ancestor_page in page.get_ancestors %}
                 {% if not ancestor_page.is_root %}
                     {% if ancestor_page.depth > 2 %}
@@ -12,7 +12,6 @@
                     {% endif %}
                 {% endif %}
             {% endfor %}
-            <li>{{ page.title }}</li>
         </ul>
     </nav>
 {% endif %}

@@ -34,7 +34,23 @@
     }
 
     &__breadcrumbs {
+        @include font-size(milli);
         color: #fff;
+
+        ul {
+            li {
+                display: inline-block;
+
+                a,
+                span {
+                    color: #fff;
+                }
+            }
+        }
+
+        @include media-query(tablet) {
+            display: none;
+        }
     }
 
     &__heading {
