@@ -10,7 +10,7 @@
             </div>
             {# TODO: Is this title? #}
             <h1 class="hero__heading">{{ page.title }}</h1>
-            <div class="hero__date">Last updated on <span>01/01/01</span></div>
+            <div class="hero__date">Last updated on <span>{{ page.latest_revision_created_at|date }}</span></div>
         </div>
     </div>
 
