@@ -6,7 +6,6 @@ from wagtail.wagtailadmin.edit_handlers import (
     MultiFieldPanel,
     PageChooserPanel
 )
-from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailcore.models import Orderable, Page
 from wagtail.wagtaildocs.edit_handlers import DocumentChooserPanel
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
