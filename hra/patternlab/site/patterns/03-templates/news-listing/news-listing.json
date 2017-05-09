@@ -1,0 +1,30 @@
+{
+    "title" : "News listing page",
+    "sidebarMenu" : [
+        {
+            "label" : "Overview"
+        },
+        {
+            "label" : "What we do"
+        },
+        {
+            "label" : "Who we are"
+        },
+        {
+            "label" : "Committees & Services"
+        },
+        {
+            "label" : "Latest consultations"
+        },
+        {
+            "label" : "Partnerships"
+        },
+        {
+            "label" : "News and updates",
+            "activeState" : "site-sidebar__menu-item--active"
+        },
+        {
+            "label" : "Vacancies"
+        }
+    ]
+}
