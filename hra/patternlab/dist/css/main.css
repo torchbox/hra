@@ -3928,6 +3928,94 @@ input:focus {
   transform: rotate(-90deg);
 }
 
+/*------------------------------------*    $NOTIFICATION
+\*------------------------------------*/
+.notification {
+  position: relative;
+  width: 100%;
+  height: 100px;
+  padding: 20px 5%;
+  background-color: #32424c;
+  transition: border-color 300ms ease, background-color 300ms ease;
+}
+
+.notification--darken {
+  background-color: #28353d;
+}
+
+.notification--default {
+  border-top: 5px solid #2c8eed;
+}
+
+.notification--error {
+  border-top: 5px solid #fc0d1b;
+}
+
+.notification--success {
+  border-top: 5px solid #1dbf26;
+}
+
+.notification__heading {
+  font-size: 16px;
+  font-size: 1rem;
+  font-family: "FrutigerLTW01-55Roman", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  color: #fff;
+}
+
+.notification__content {
+  font-size: 14px;
+  font-size: 0.875rem;
+  margin: 5px 0 0;
+  color: #c7c7c7;
+}
+
+.notification__close {
+  position: absolute;
+  top: 0;
+  right: 5%;
+  bottom: 0;
+  width: 20px;
+  height: 20px;
+  margin: auto 0;
+  color: #fff;
+  cursor: pointer;
+  background-color: transparent;
+  border: 0;
+}
+
+.notification__close::before, .notification__close::after {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  margin: auto;
+  background-color: #fff;
+  content: '';
+  transition: transform 300ms ease, opacity 300ms ease;
+}
+
+.notification__close::before {
+  transform: rotate(-45deg);
+}
+
+.notification__close::after {
+  transform: rotate(45deg);
+}
+
+.notification__close:hover::before {
+  transform: rotate(0deg);
+}
+
+.notification__close:hover::after {
+  opacity: 0;
+}
+
+.notification__close:focus {
+  outline: 0;
+}
+
 /*------------------------------------*    $ORGANISMS
 \*------------------------------------*/
 /*------------------------------------*    $STANDARD INDEX BODY

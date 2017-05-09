@@ -1,0 +1,89 @@
+/*------------------------------------*\
+    $NOTIFICATION
+\*------------------------------------*/
+
+.notification {
+    $root: &;
+    position: relative;
+    width: 100%;
+    height: 100px;
+    padding: 20px 5%;
+    background-color: #32424c;
+    transition: border-color $default-transition-speed ease, background-color $default-transition-speed ease;
+
+    &--darken {
+        background-color: darken(#32424c, 5%);
+    }
+
+    // Notification types
+    @each $i, $j in $notification-colours {
+        &--#{$i} {
+            border-top: 5px solid (map-get($j, 'color'));
+        }
+    }
+
+    &__heading {
+        @include font-size(zeta);
+        font-family: $font--secondary;
+        color: #fff;
+    }
+
+    &__content {
+        @include font-size(milli);
+        margin: 5px 0 0;
+        color: #c7c7c7;
+    }
+
+    &__close {
+        position: absolute;
+        top: 0;
+        right: 5%;
+        bottom: 0;
+        width: 20px;
+        height: 20px;
+        margin: auto 0;
+        color: #fff;
+        cursor: pointer;
+        background-color: transparent;
+        border: 0;
+
+        // Close icon
+        &::before,
+        &::after {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            margin: auto;
+            background-color: #fff;
+            content: '';
+            transition: transform $default-transition-speed ease, opacity $default-transition-speed ease;
+        }
+
+        &::before {
+            transform: rotate(-45deg);
+        }
+
+        &::after {
+            transform: rotate(45deg);
+        }
+
+        // Animate icon on hover
+        &:hover {
+            &::before {
+                transform: rotate(0deg);
+            }
+
+            &::after {
+                opacity: 0;
+            }
+        }
+
+        // Focus state
+        &:focus {
+            outline: 0;
+        }
+    }
+}

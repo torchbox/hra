@@ -48,6 +48,13 @@ $button-colours: (
     septenary:  (bg: $color--septenary, color: #000)
 );
 
+// Notification colours
+$notification-colours: (
+    default:    (color: #2c8eed),
+    error:      (color: #fc0d1b),
+    success:    (color: #1dbf26)
+);
+
 
 /* ============================================
    Typography
