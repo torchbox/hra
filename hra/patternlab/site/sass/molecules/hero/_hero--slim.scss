@@ -1,16 +1,16 @@
 /*------------------------------------*\
-    $HERO INNER
+    $HERO SLIM
 \*------------------------------------*/
 
 .hero {
-    &--inner {
-        height: 520px;
+    &--slim {
+        height: 400px;
         padding: 0 20px;
         overflow: auto;
         background: {
             color: $color--primary;
             size: 69px 85px;
-            image: url('../images/svg/hero-patterns/pattern-1.svg');
+            image: url('../images/svg/hero-patterns/pattern-2.svg');
         }
 
         @include media-query(laptop) {
@@ -34,23 +34,7 @@
     }
 
     &__breadcrumbs {
-        @include font-size(milli);
         color: #fff;
-
-        ul {
-            li {
-                display: inline-block;
-
-                a,
-                span {
-                    color: #fff;
-                }
-            }
-        }
-
-        @include media-query(tablet) {
-            display: none;
-        }
     }
 
     &__heading {
