@@ -26,9 +26,7 @@
 
                                 {% for sibling in siblings %}
                                     <li class="site-sidebar__menu-item {% if page.pk == sibling.pk %}site-sidebar__menu-item--active{% endif %}">
-                                        <svg>
-                                            <use xlink:href="#default-arrow"></use>
-                                        </svg>
+                                        {% include "includes/svg/default-arrow.html" %}
                                         <a href="{% pageurl sibling %}">{{ sibling.title }}</a>
                                     </li>
                                 {% endfor %}
