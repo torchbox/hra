@@ -2164,6 +2164,35 @@ textarea:focus {
   fill: none;
 }
 
+/*------------------------------------*    $TABLE
+\*------------------------------------*/
+.table {
+  font-size: 14px;
+  font-size: 0.875rem;
+  width: 100%;
+  margin: 30px 0;
+  text-align: left;
+  border-spacing: 0;
+}
+
+.table thead {
+  color: #fff;
+  background-color: #0d61b5;
+}
+
+.table thead td {
+  border: 0;
+}
+
+.table th,
+.table td {
+  padding: 15px;
+}
+
+.table td {
+  border: 1px solid #f2f2f2;
+}
+
 /*------------------------------------*    $MOLECULES
 \*------------------------------------*/
 /*------------------------------------*    $SITE HEADER
