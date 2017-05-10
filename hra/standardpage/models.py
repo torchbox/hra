@@ -1,6 +1,4 @@
 from django.db import models
-from django.conf import settings
-from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 
 from modelcluster.fields import ParentalKey
 from wagtail.wagtailadmin.edit_handlers import (
@@ -14,12 +12,7 @@ from wagtail.wagtailsearch import index
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 
 from hra.utils.blocks import StoryBlock
-from hra.utils.models import (
-    ListingFields,
-    SocialFields,
-    RelatedDocument,
-    RelatedPage,
-    CallToActionSnippet)
+from hra.utils.models import ListingFields, SocialFields, RelatedPage, CallToActionSnippet
 
 
 class StandardPageRelatedPage(RelatedPage):
