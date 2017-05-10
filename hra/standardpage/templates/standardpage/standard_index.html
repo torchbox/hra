@@ -3,8 +3,15 @@
 
 {% block content %}
 
-    <h1>{{ page.title }}</h1>
-    <p>{{ page.intro }}</p>
+    <div class="hero hero--with-caption">
+        <div class="hero__caption">
+            <div class="hero__caption-breadcrumbs">
+                {% include 'navigation/breadcrumbs.html' %}
+            </div>
+            <h1 class="hero__caption-title">{{ page.title }}</h1>
+            <h2 class="hero__caption-subtitle">{{ page.introduction }}</h2>
+        </div>
+    </div>
 
     <section class="listing">
         {% if subpages.paginator.count %}
