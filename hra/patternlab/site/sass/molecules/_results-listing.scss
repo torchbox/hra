@@ -63,6 +63,10 @@
         width: 100px;
         height: 4px;
         background-color: #eee;
+
+        @include media-query(mobile) {
+            opacity: 0;
+        }
     }
 
     &__item-heading {
@@ -70,6 +74,10 @@
         display: inline-block;
         font-family: $font--secondary;
         font-weight: 600;
+
+        @include media-query(mobile) {
+            padding-right: 40px;
+        }
     }
 
     &__item-meta {

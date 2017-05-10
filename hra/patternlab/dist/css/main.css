@@ -2927,7 +2927,7 @@ textarea:focus {
 }
 
 .hero__content {
-  max-width: 800px;
+  max-width: 400px;
   margin: 180px auto 0;
   color: #fff;
 }
@@ -3508,12 +3508,24 @@ textarea:focus {
   background-color: #eee;
 }
 
+@media only screen and (max-width: 650px) {
+  .results-listing__item-border {
+    opacity: 0;
+  }
+}
+
 .results-listing__item-heading {
   font-size: 22px;
   font-size: 1.375rem;
   display: inline-block;
   font-family: "FrutigerLTW01-55Roman", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   font-weight: 600;
+}
+
+@media only screen and (max-width: 650px) {
+  .results-listing__item-heading {
+    padding-right: 40px;
+  }
 }
 
 .results-listing__item-meta {
@@ -4091,7 +4103,7 @@ textarea:focus {
   }
 }
 
-.pagination__item:last-of-type {
+.pagination__item:nth-last-child(2) {
   margin-right: 0;
 }
 
