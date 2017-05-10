@@ -14,11 +14,12 @@
         }
 
         @include media-query(laptop) {
-            height: auto;
+            height: 450px;
             padding: 40px 20px;
         }
 
         @include media-query(tablet) {
+            height: auto;
             padding: 100px 20px 40px;
         }
     }
