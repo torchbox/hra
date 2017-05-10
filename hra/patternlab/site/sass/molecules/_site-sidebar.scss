@@ -23,6 +23,10 @@
         background: #f4f4f4;
     }
 
+    &--no-transparency {
+        background: #fff;
+    }
+
     &__inner {
         float: right;
         max-width: 300px;

@@ -2346,6 +2346,10 @@ textarea:focus {
   }
 }
 
+.site-sidebar--no-transparency {
+  background: #fff;
+}
+
 .site-sidebar__inner {
   float: right;
   max-width: 300px;
