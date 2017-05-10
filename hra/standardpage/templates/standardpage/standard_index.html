@@ -24,11 +24,12 @@
                             <button class="site-sidebar__label"></button>
                             <ul class="site-sidebar__menu">
 
-                                {# TODO: Add actual links #}
-                                {% for menuItem in sidebarMenu %}
-                                    <li class="site-sidebar__menu-item {{ menuItem.activeState }}">
-                                        <svg><use xlink:href="#default-arrow"></use></svg>
-                                        <a href="#">{{ menuItem.label }}</a>
+                                {% for sibling in siblings %}
+                                    <li class="site-sidebar__menu-item {% if page.pk == sibling.pk %}site-sidebar__menu-item--active{% endif %}">
+                                        <svg>
+                                            <use xlink:href="#default-arrow"></use>
+                                        </svg>
+                                        <a href="{% pageurl sibling %}">{{ sibling.title }}</a>
                                     </li>
                                 {% endfor %}
 
