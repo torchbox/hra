@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load wagtailcore_tags wagtailimages_tags static %}
+{% load wagtailcore_tags %}
 
 {% block content %}
 
@@ -18,22 +18,7 @@
             <div class="grid grid--full">
                 <div class="grid__item three-tenths tablet--one-whole">
 
-                    <aside class="site-sidebar">
-                        <div class="site-sidebar__inner">
-                            <h2 class="site-sidebar__heading">Within this section</h2>
-                            <button class="site-sidebar__label"></button>
-                            <ul class="site-sidebar__menu">
-
-                                {% for sibling in siblings %}
-                                    <li class="site-sidebar__menu-item {% if page.pk == sibling.pk %}site-sidebar__menu-item--active{% endif %}">
-                                        {% include 'includes/svg/default-arrow.html' %}
-                                        <a href="{% pageurl sibling %}">{{ sibling.title }}</a>
-                                    </li>
-                                {% endfor %}
-
-                            </ul>
-                        </div>
-                    </aside>
+                    {% include 'includes/teasers/site_sidebar.html' with page=page siblings=siblings %}
 
                 </div>
                 <div class="grid__item seven-tenths tablet--one-whole">
@@ -50,46 +35,8 @@
                             {% spaceless %}
                                 <div class="site-body__grid">
                                     <div class="grid grid--wide">
-                                        <div class="grid__item three-fifths desktop--one-whole">
-                                            <div class="grid grid--wide">
 
-                                                {% static 'dist/images/teaser.png' as default_listing_image %}
-                                                {% for teaser in page.section_pages.all %}
-                                                    {% with teaser_page=teaser.page.specific %}
-                                                        {% if teaser_page.live %}
-
-                                                            {% if teaser_page.listing_image %}
-                                                                {% image teaser_page.listing_image width-600 as listing_image %}
-                                                            {% endif %}
-
-                                                            <div class="grid__item one-half mobile--one-whole">
-
-                                                                <a class="teaser" href="{% pageurl teaser_page %}">
-                                                                    <div class="teaser__image"
-                                                                         style="background-image:url('{{ listing_image.url|default:default_listing_image }}')">
-                                                                        <div class="teaser__meta">
-                                                                            <div class="teaser__title">
-                                                                                {{ teaser_page.listing_title|default:teaser_page.title }}</div>
-                                                                        </div>
-                                                                    </div>
-                                                                    {% if teaser_page.listing_summary %}
-                                                                        <div class="teaser__description">
-                                                                            <p>
-                                                                                {{ teaser_page.listing_summary }}
-                                                                            </p>
-                                                                            {% include 'includes/svg/default-arrow.html' %}
-                                                                        </div>
-                                                                    {% endif %}
-                                                                </a>
-
-                                                            </div>
-
-                                                        {% endif %}
-                                                    {% endwith %}
-                                                {% endfor %}
-
-                                            </div>
-                                        </div>
+                                        {% include 'includes/teasers/section_content.html' %}
 
                                         {% if page.call_to_action %}
 
