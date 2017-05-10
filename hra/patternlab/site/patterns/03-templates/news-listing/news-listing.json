@@ -26,5 +26,17 @@
         {
             "label" : "Vacancies"
         }
+    ],
+    "newsTeasers" : [
+        {
+            "title" : "Best practice",
+            "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+            "image" : "../../../images/teaser.png"
+        },
+        {
+            "title" : "Best practice",
+            "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+            "image" : "../../../images/teaser.png"
+        }
     ]
 }

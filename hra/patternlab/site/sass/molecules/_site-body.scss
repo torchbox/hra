@@ -22,5 +22,10 @@
 
     &--restricted {
         padding-right: 20%;
+        padding-left: 100px;
+
+        @include media-query(desktop) {
+            padding: 40px 20px;
+        }
     }
 }
