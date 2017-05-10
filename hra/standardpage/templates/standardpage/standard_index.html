@@ -13,42 +13,72 @@
         </div>
     </div>
 
-    <section class="listing">
-        {% if subpages.paginator.count %}
-            {% if subpages.object_list.exists %}
-                <ul role="list">
-                    {% for subpage in subpages.object_list.specific %}
-                        <li>
-                            <a href="{% pageurl subpage %}">
-                                {% if subpage.listing_image %}
-                                    {% image subpage.listing_image fill-450x300 %}
-                                {% endif %}
-                                <div>
-                                    <h2 role="listitem">
-                                        {% if subpage.listing_title %}
-                                            {{ subpage.listing_title }}
-                                        {% else %}
-                                            {{ subpage.title }}
-                                        {% endif %}
-                                    </h2>
-                                    {% if subpage.listing_summary %}
-                                        <p>{{ subpage.listing_summary }}</p>
-                                    {% endif %}
+    <div class="default-body">
+        {% spaceless %}
+            <div class="grid grid--full">
+                <div class="grid__item three-tenths tablet--one-whole">
+
+                    <aside class="site-sidebar">
+                        <div class="site-sidebar__inner">
+                            <h2 class="site-sidebar__heading">Within this section</h2>
+                            <button class="site-sidebar__label"></button>
+                            <ul class="site-sidebar__menu">
+
+                                {# TODO: Add actual links #}
+                                {% for menuItem in sidebarMenu %}
+                                    <li class="site-sidebar__menu-item {{ menuItem.activeState }}">
+                                        <svg><use xlink:href="#default-arrow"></use></svg>
+                                        <a href="#">{{ menuItem.label }}</a>
+                                    </li>
+                                {% endfor %}
+
+                            </ul>
+                        </div>
+                    </aside>
+
+                </div>
+                <div class="grid__item seven-tenths tablet--one-whole">
+
+                    <div class="site-body">
+                        <div class="site-body__inner">
+                            <article class="article">
+                                <h2>{{ page.title }}</h2>
+                                <p>
+                                    {{ page.introduction }}
+                                </p>
+                            </article>
+
+                            {% spaceless %}
+                                <div class="site-body__grid">
+                                    <div class="grid grid--wide">
+                                        <div class="grid__item three-fifths desktop--one-whole">
+                                            <div class="grid grid--wide">
+
+                                                {# TODO: Add actual teasers #}
+                                                {% for teaser in teasers %}
+                                                    <div class="grid__item one-half mobile--one-whole">
+                                                        {# {% include "molecules-teaser-default" %}#}
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                        <div class="grid__item two-fifths desktop--one-whole">
+                                            <div class="grid grid--wide">
+                                                <div class="grid__item one-whole desktop--one-half mobile--one-whole">
+                                                    {# TODO: Add actual call to action #}
+                                                    {# {% include "molecules-teaser-related" %}#}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </a>
-                        </li>
-                    {% endfor %}
-                </ul>
-            {% else %}
-                {# no items on this page #}
-            {% endif %}
+                            {% endspaceless %}
+                        </div>
+                    </div>
 
-            {% include "includes/pagination.html" %}
-
-        {% else %}
-            {# no items on any page #}
-        {% endif %}
-
-    </section>
+                </div>
+            </div>
+        {% endspaceless %}
+    </div>
 
 {% endblock %}
