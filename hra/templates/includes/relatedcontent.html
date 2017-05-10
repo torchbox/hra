@@ -4,6 +4,8 @@
 
     {% spaceless %}
         <div class="grid grid--wide">
+
+            {% static 'dist/images/teaser.png' as default_listing_image %}
             {% for related_page in page.related_pages.all %}
 
                 {# a related_page object links to the original page (related_page.source_page) and a related one (related_page.page) #}
@@ -11,7 +13,6 @@
 
                     <div class="grid__item one-third laptop--one-whole">
                         <a class="related" href="{% pageurl specific_related_page %}">
-                            {% static 'dist/images/teaser.png' as default_listing_image %}
                             {% if specific_related_page.listing_image %}
                                 {% image specific_related_page.listing_image height-180 as listing_image %}
                             {% endif %}
