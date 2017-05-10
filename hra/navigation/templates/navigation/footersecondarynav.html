@@ -1,0 +1,19 @@
+{% load wagtailcore_tags %}
+
+
+{% spaceless %}
+
+    <ul>
+        {% for block in footersecondarynav %}
+
+            {% if block.block_type == 'item' %}
+
+                <li>
+                    <a href="{% pageurl block.value.page %}">{{ block.value.title|default:block.value.page.title }}</a>
+                </li>
+
+            {% endif %}
+
+        {% endfor %}
+    </ul>
+{% endspaceless %}

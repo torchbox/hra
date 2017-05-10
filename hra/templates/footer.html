@@ -1,38 +1,13 @@
+{% load navigation_tags %}
+
 <footer class="site-footer">
+
     {% spaceless %}
         <div class="grid grid--wide">
-            <div class="grid__item one-fifth desktop--one-third tablet--one-half mobile--one-whole">
-                <h4 class="site-footer__heading">HRA</h4>
-                <ul class="site-footer__list">
-                    <li><a href="#">Member area</a></li>
-                    <li><a href="#">Intranet</a></li>
-                    <li><a href="#">News</a></li>
-                </ul>
-            </div>
-            <div class="grid__item one-fifth desktop--one-third tablet--one-half mobile--one-whole">
-                <h4 class="site-footer__heading">Support</h4>
-                <ul class="site-footer__list">
-                    <li><a href="#">FAQs</a></li>
-                    <li><a href="#">Glossary</a></li>
-                    <li><a href="#">Contact us</a></li>
-                </ul>
-            </div>
-            <div class="grid__item one-fifth desktop--one-third tablet--one-half mobile--one-whole">
-                <h4 class="site-footer__heading">Learning</h4>
-                <ul class="site-footer__list">
-                    <li><a href="#">eLearning</a></li>
-                    <li><a href="#">Training and events</a></li>
-                    <li><a href="#">Webinars</a></li>
-                </ul>
-            </div>
-            <div class="grid__item one-fifth desktop--one-third mobile--one-whole">
-                <h4 class="site-footer__heading">Researchers</h4>
-                <ul class="site-footer__list">
-                    <li><a href="#">IRAS</a></li>
-                    <li><a href="#">HARP</a></li>
-                    <li><a href="#">Find a REC</a></li>
-                </ul>
-            </div>
+
+            {% footernav %}
+
+            {# TODO: Use SocialMediaSettings here #}
             <div class="grid__item one-fifth desktop--one-third tablet--one-whole">
                 <h4 class="site-footer__heading">Follow us</h4>
                 <ul class="site-footer__social">
@@ -45,9 +20,12 @@
                     </p>
                 </ul>
             </div>
+
         </div>
     {% endspaceless %}
+
 </footer>
+
 <div class="site-footer__credits">
     {% spaceless %}
         <div class="grid">
@@ -55,11 +33,9 @@
                 <span>&copy; Copyright HRA 2017</span>
             </div>
             <div class="grid__item two-quarters mobile--one-whole">
-                <ul>
-                    <li><a href="#">Accessibility</a></li>
-                    <li><a href="#">Cookies</a></li>
-                    <li><a href="#">Terms and conditions</a></li>
-                </ul>
+
+                {% footersecondarynav %}
+
             </div>
             <div class="grid__item one-quarter tablet--one-half mobile--one-whole">
                 <a class="site-footer__credits-last-link" href="https://torchbox.com">Site by Torchbox</a>
