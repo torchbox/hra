@@ -2755,12 +2755,12 @@ textarea:focus {
   color: #fff;
 }
 
-.hero__caption-breadcrumbs > ul li {
+.hero__caption-breadcrumbs ul li {
   display: inline-block;
 }
 
-.hero__caption-breadcrumbs > ul li a,
-.hero__caption-breadcrumbs > ul li span {
+.hero__caption-breadcrumbs ul li a,
+.hero__caption-breadcrumbs ul li span {
   color: #fff;
 }
 
