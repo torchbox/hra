@@ -58,11 +58,15 @@
                                                     {% with teaser_page=teaser.page.specific %}
                                                         {% if teaser_page.live %}
 
+                                                            {% if teaser_page.listing_image %}
+                                                                {% image teaser_page.listing_image width-600 as listing_image %}
+                                                            {% endif %}
+
                                                             <div class="grid__item one-half mobile--one-whole">
 
                                                                 <a class="teaser" href="{% pageurl teaser_page %}">
                                                                     <div class="teaser__image"
-                                                                         style="background-image:url('{{ teaser_page.listing_image|default:default_listing_image }}')">
+                                                                         style="background-image:url('{{ listing_image.url|default:default_listing_image }}')">
                                                                         <div class="teaser__meta">
                                                                             <div class="teaser__title">
                                                                                 {{ teaser_page.listing_title|default:teaser_page.title }}</div>

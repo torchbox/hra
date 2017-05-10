@@ -14,7 +14,7 @@
                     <div class="grid__item one-third laptop--one-whole">
                         <a class="related" href="{% pageurl specific_related_page %}">
                             {% if specific_related_page.listing_image %}
-                                {% image specific_related_page.listing_image height-180 as listing_image %}
+                                {% image specific_related_page.listing_image width-600 as listing_image %}
                             {% endif %}
 
                             <div class="related__image"
