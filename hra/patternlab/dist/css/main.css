@@ -3462,6 +3462,22 @@ textarea:focus {
   }
 }
 
+/*------------------------------------*    $EMBED
+\*------------------------------------*/
+.responsive-object {
+  position: relative;
+}
+
+.responsive-object iframe,
+.responsive-object object,
+.responsive-object embed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
 /*------------------------------------*    $RESULTS CONTAINER
 \*------------------------------------*/
 .results-container {
