@@ -3,7 +3,7 @@
 
 {% block content %}
 
-    <div class="hero hero--slim">
+    <div class="hero hero--slim hero--purple">
         <div class="hero__content">
             <div class="hero__breadcrumbs">
                 {% include 'navigation/breadcrumbs.html' %}
@@ -11,6 +11,7 @@
             <h1 class="hero__heading">{{ page.title }}</h1>
         </div>
     </div>
+
 
     <div class="default-body">
         {% spaceless %}
@@ -24,9 +25,9 @@
                     <div class="site-body site-body--restricted">
                         <div class="site-body__inner site-body__inner">
 
-                            <p>
+                            <h5>
                                 {{ page.introduction }}
-                            </p>
+                            </h5>
 
                             {% if people %}
                                 <ul class="results-listing">
@@ -59,6 +60,12 @@
                                     {% endfor %}
 
                                 </ul>
+
+                                {% with parent_page=page.get_parent %}
+                                    <a href="{% pageurl parent_page %}" class="results-listing__back">
+                                        Back to {{ parent_page.title|lower }}
+                                    </a>
+                                {% endwith %}
 
                                 {% include "includes/pagination.html" with subpages=people %}
                             {% else %}
