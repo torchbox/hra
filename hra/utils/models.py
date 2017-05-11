@@ -171,12 +171,25 @@ class SocialMediaSettings(BaseSetting):
     twitter_handle = models.CharField(
         max_length=255,
         blank=True,
+        default='hra_latest',
         help_text='Your Twitter username without the @, e.g. katyperry',
     )
     facebook_app_id = models.CharField(
         max_length=255,
         blank=True,
         help_text='Your Facebook app ID.',
+    )
+    linkedin_company_id = models.CharField(
+        max_length=255,
+        blank=True,
+        default='health-research-authority',
+        help_text='The bit after http://linkedin.com/company/ in your LinkedIn page URL',
+    )
+    youtube_channel_id = models.CharField(
+        max_length=255,
+        blank=True,
+        default='UCdRaMooWKtc3YM5gkpB2FaA',
+        help_text='The bit after https://www.youtube.com/channel/ in your YouTube channel URL',
     )
     default_sharing_text = models.CharField(
         max_length=255,
