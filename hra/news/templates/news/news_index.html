@@ -3,17 +3,42 @@
 
 {% block content %}
 
-    <h1>{{ page.title }}</h1>
+    <div class="hero hero--slim">
+        <div class="hero__content">
+            <div class="hero__breadcrumbs">
+                {% include 'navigation/breadcrumbs.html' %}
+            </div>
+            <h1 class="hero__heading">{{ page.title }}</h1>
+            <div class="hero__date">
+                {# Display date of the most recent NewsPage #}
+                Last updated on <span>{{ news.0.display_date|date }}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="default-body">
+        {% spaceless %}
+            <div class="grid grid--full">
+                <div class="grid__item three-tenths tablet--one-whole">
+                    {% include 'includes/teasers/site_sidebar.html' with no_transparency=True page=page siblings=siblings %}
+
+                </div>
+                <div class="grid__item seven-tenths tablet--one-whole">
+                    <div class="site-body site-body--restricted">
+                        <div class="site-body__inner site-body__inner">
+
+                            {% include 'includes/teasers/section_content.html' with section_pages=page.featured_pages.all %}
+                            {# TODO:  #}
+                            {#{% include "molecules-results-listing" %}#}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endspaceless %}
+    </div>
+
 
     <section class="listing">
-        <form method="GET">
-            <select name="category">
-                <option value="">All</option>
-                {% for category in categories %}
-                    <option value="{{ category.0 }}" {% if request.GET.category == category.0|slugify %}selected="selected"{% endif %}>{{ category.1 }}</option>
-                {% endfor %}
-            </select>
-        </form>
 
         {% if news %}
             <ul role="list">

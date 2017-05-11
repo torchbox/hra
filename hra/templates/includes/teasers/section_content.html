@@ -1,10 +1,17 @@
 {% load wagtailcore_tags wagtailimages_tags static %}
 
-<div class="grid__item three-fifths desktop--one-whole">
+{% comment %}
+Template to display default teasers. Takes:
+
+    * section_pages - a PageQuerySet object
+
+{% endcomment %}
+
+{% spaceless %}
     <div class="grid grid--wide">
 
         {% static 'dist/images/teaser.png' as default_listing_image %}
-        {% for teaser in page.section_pages.all %}
+        {% for teaser in section_pages %}
             {% with teaser_page=teaser.page.specific %}
                 {% if teaser_page.live %}
 
@@ -19,7 +26,8 @@
                                  style="background-image:url('{{ listing_image.url|default:default_listing_image }}')">
                                 <div class="teaser__meta">
                                     <div class="teaser__title">
-                                        {{ teaser_page.listing_title|default:teaser_page.title }}</div>
+                                        {{ teaser_page.listing_title|default:teaser_page.title }}
+                                    </div>
                                 </div>
                             </div>
                             {% if teaser_page.listing_summary %}
@@ -39,4 +47,4 @@
         {% endfor %}
 
     </div>
-</div>
+{% endspaceless %}
