@@ -1,10 +1,9 @@
 from modelcluster.models import ClusterableModel
 from wagtail.contrib.settings.models import BaseSetting, register_setting
-from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel
+from wagtail.wagtailadmin.edit_handlers import StreamFieldPanel
 from wagtail.wagtailcore.blocks import (ListBlock, PageChooserBlock,
                                         StructBlock, TextBlock)
 from wagtail.wagtailcore.fields import StreamField
-from wagtail.wagtailcore.models import Orderable
 
 from hra.esi import purge_esi
 
@@ -12,9 +11,6 @@ from hra.esi import purge_esi
 class OverrideablePageChooserBlock(StructBlock):
     page = PageChooserBlock()
     title = TextBlock(help_text="Leave blank to use the page's own title", required=False)
-
-    # def get_link_text(self):
-    #     return self.title or self.page.listings_title or self.page.title
 
 
 @register_setting(icon='list-ul')

@@ -25,6 +25,7 @@ def footernav(context):
         'request': context['request'],
     }
 
+
 @esi_inclusion_tag('navigation/footersecondarynav.html')
 def footersecondarynav(context):
     return {
