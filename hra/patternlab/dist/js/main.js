@@ -2226,8 +2226,6 @@ var jquery = createCommonjsModule(function (module) {
   });
 });
 
-// We have to manually make jQuery a global variable.
-// By default it will be in a closure and renamed to lowercase.
 window.jQuery = jquery;
 
 function glossaryTab() {
@@ -2316,15 +2314,25 @@ function resultsBorder() {
 
     var $resultsResult = jquery('.js-border-result'),
         $resultsHeading = jquery('.js-border-result__heading'),
+        $resultsImage = jquery('.js-border-result__image'),
         $resultsBorder = jquery('.js-border-result__border');
 
     function setResultBorder() {
         $resultsResult.each(function () {
-            var headingWidth = jquery(this).closest('li').find($resultsHeading).width();
+            var $closestBorder = jquery(this).closest('li').find($resultsBorder),
+                headingWidth = jquery(this).closest('li').find($resultsHeading).width(),
+                imageAndHeadingWidth = headingWidth + 105;
 
-            jquery(this).closest('li').find($resultsBorder).css({
-                width: headingWidth
-            });
+            // Set larger border width if image is present
+            if ($resultsImage.length) {
+                $closestBorder.css({
+                    width: imageAndHeadingWidth
+                });
+            } else {
+                $closestBorder.css({
+                    width: headingWidth
+                });
+            }
         });
     }
 
