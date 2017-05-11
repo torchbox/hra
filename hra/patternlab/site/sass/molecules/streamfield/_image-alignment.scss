@@ -1,0 +1,19 @@
+/*------------------------------------*\
+    $IMAGE ALIGNMENT
+\*------------------------------------*/
+
+$alignment-values: (
+    left:       (float: left, margin: 'right'),
+    right:      (float: right, margin: 'left'),
+    full-width: (float: none, margin: 'top')
+);
+
+.richtext-image {
+    @each $i, $j in $alignment-values {
+        &.#{$i} {
+            float: (map-get($j, 'float'));
+            margin-bottom: 30px;
+            margin-#{(map-get($j, 'margin'))}: 30px;
+        }
+    }
+}
