@@ -44,8 +44,9 @@
 
                                                     <li class="date">{{ news_item.display_date|date }}</li>
 
-                                                    {# TODO: Decide what to do with author #}
-                                                    <li class="author">Author: <span>John Smith</span></li>
+                                                    {% if news_item.author %}
+                                                        <li class="author">Author: <span>{{ news_item.author }}</span></li>
+                                                    {% endif %}
 
                                                     {% with categories=news_item.categories.all %}
                                                         {% if categories %}

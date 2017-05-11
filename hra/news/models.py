@@ -36,13 +36,6 @@ class NewsPageCategory(models.Model):
     ]
 
 
-class NewsPageRelatedDocument(RelatedDocument):
-    page = ParentalKey(
-        'news.NewsPage',
-        related_name='related_documents'
-    )
-
-
 class NewsPageRelatedPage(RelatedPage):
     source_page = ParentalKey(
         'news.NewsPage',
@@ -57,6 +50,7 @@ class NewsPage(Page, SocialFields, ListingFields):
         help_text="Use this field to override the date that the "
         "news item appears to have been published."
     )
+    author = models.CharField(blank=True, max_length=128)
     introduction = models.TextField(blank=True)
     body = StreamField(StoryBlock())
 
@@ -67,11 +61,10 @@ class NewsPage(Page, SocialFields, ListingFields):
 
     content_panels = Page.content_panels + [
         FieldPanel('publication_date'),
+        FieldPanel('author'),
         FieldPanel('introduction'),
         StreamFieldPanel('body'),
         InlinePanel('categories', label="Categories"),
-        # TODO: Cleanup if we decide that we don't need related docs here
-        # InlinePanel('related_documents', label="Related documents"),
         InlinePanel('related_pages', label="Related pages"),
     ]
 
