@@ -3668,10 +3668,12 @@ textarea:focus {
 .results-listing__item-image {
   display: inline-block;
   width: 85px;
-  height: 85px;
   margin-right: 20px;
   vertical-align: top;
-  background: #eee;
+}
+
+.results-listing__item-image img {
+  width: 100%;
 }
 
 .results-listing__item-right {
