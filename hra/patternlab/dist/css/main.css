@@ -1574,6 +1574,10 @@ small, .milli {
   height: auto;
 }
 
+.sg-pattern-example .faq-answers {
+  display: none;
+}
+
 #atoms-custom-select--blue .custom-select--blue {
   border-color: #034384;
 }

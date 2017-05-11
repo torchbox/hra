@@ -92,8 +92,10 @@ function faqs() {
         $answerClose.on('click', () => hideAnswers());
     }
 
-    positionAnswer();
-    bindEvents();
+    if ($('.faq-questions__item').length) {
+        positionAnswer();
+        bindEvents();
+    }
 
 }
     
