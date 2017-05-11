@@ -71,9 +71,7 @@
 
                                 </ul>
 
-                                {# TODO:  #}
-                                {#{% include "molecules-pagination" %}#}
-                                {% include "includes/pagination.html" %}
+                                {% include "includes/pagination.html" with subpages=news %}
                             {% else %}
                                 {# no items #}
                             {% endif %}

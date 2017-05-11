@@ -55,6 +55,7 @@
     &__forward {
         display: inline-block;
 
+        > span,
         > a {
             position: relative;
             padding: 0 40px;
@@ -81,18 +82,31 @@
                 @include hidden;
             }
         }
+
+        > span::before,
+        > a::before {
+            background-image: url('../images/svg/grey-arrow.svg');
+        }
+
+
+        &--active {
+            > span::before,
+            > a::before {
+                background-image: url('../images/svg/purple-arrow.svg');
+            }
+        }
     }
 
     &__back {
+        > span::before,
         > a::before {
-            background-image: url('../images/svg/grey-arrow.svg');
             transform: rotate(90deg);
         }
     }
 
     &__forward {
+        > span::before,
         > a::before {
-            background-image: url('../images/svg/purple-arrow.svg');
             transform: rotate(-90deg);
         }
     }

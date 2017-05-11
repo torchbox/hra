@@ -1,16 +1,39 @@
+{% if subpages.has_previous or subpages.has_next %}
 
-<nav role="navigation" aria-label="Pagination">
-    <ul class="pagination">
-        {% if subpages.has_previous %}
-            <li><a href="?page={{ subpages.previous_page_number }}{% if search_query %}&amp;query={{ search_query|urlencode }}{% endif %}{% if extra_url_params %}&amp;{{ extra_url_params }}{% endif %}" class="previous">previous</a></li>
-        {% endif %}
+    <nav role="navigation" aria-label="Pagination">
+        <ul class="pagination">
 
-        <li class="current">
-            {{ subpages.number }}/{{ subpages.paginator.num_pages }}
-        </li>
+            <li class="pagination__back {% if subpages.has_previous %}pagination__back--active{% endif %}">
+                {% if subpages.has_previous %}
+                    <a href="?page=
+                            {{ subpages.previous_page_number }}{% if search_query %}&amp;query={{ search_query|urlencode }}{% endif %}{% if extra_url_params %}&amp;{{ extra_url_params }}{% endif %}"><span>Back</span></a>
+                {% else %}
+                    {# Dispaly array, but it should be disabled #}
+                    <span></span>
+                {% endif %}
+            </li>
 
-        {% if subpages.has_next %}
-            <li><a href="?page={{ subpages.next_page_number }}{% if search_query %}&amp;query={{ search_query|urlencode }}{% endif %}{% if extra_url_params %}&amp;{{ extra_url_params }}{% endif %}" class="next">next</a></li>
-        {% endif %}
-    </ul>
-</nav>
+
+            {% for page_number in subpages.paginator.page_range %}
+                <li class="pagination__item {% if subpages.number == page_number %}pagination__item--active{% endif %}">
+                    <a href="?page={{ page_number }}{% if search_query %}&amp;query={{ search_query|urlencode }}{% endif %}{% if extra_url_params %}&amp;{{ extra_url_params }}{% endif %}">
+                        {{ page_number }}
+                    </a>
+                </li>
+            {% endfor %}
+
+
+            <li class="pagination__forward {% if subpages.has_next %}pagination__forward--active{% endif %}">
+                {% if subpages.has_next %}
+                    <a href="?page={{ subpages.next_page_number }}{% if search_query %}&amp;query={{ search_query|urlencode }}{% endif %}{% if extra_url_params %}&amp;{{ extra_url_params }}{% endif %}"><span>Forward</span></a>
+                {% else %}
+                    {# Dispaly array, but it should be disabled #}
+                    <span></span>
+                {% endif %}
+            </li>
+
+        </ul>
+
+    </nav>
+
+{% endif %}
