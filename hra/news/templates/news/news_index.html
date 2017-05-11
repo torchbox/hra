@@ -27,7 +27,8 @@
                     <div class="site-body site-body--restricted">
                         <div class="site-body__inner site-body__inner">
 
-                            {% include 'includes/teasers/section_content.html' with section_pages=page.featured_pages.all %}
+                            {% include 'includes/teasers/teaser_default.html' with section_pages=page.featured_pages.all %}
+
                             {# TODO:  #}
                             {#{% include "molecules-results-listing" %}#}
                         </div>
