@@ -13,10 +13,7 @@ from wagtail.wagtailadmin.edit_handlers import (
     PageChooserPanel)
 from wagtail.wagtailsearch import index
 
-from hra.utils.models import (
-    ListingFields, SocialFields, RelatedPage,
-    RelatedDocument
-)
+from hra.utils.models import ListingFields, SocialFields, RelatedPage
 from hra.utils.blocks import StoryBlock
 
 
