@@ -2888,6 +2888,36 @@ textarea:focus {
   color: #fff;
 }
 
+.hero__breadcrumbs ul li a {
+  position: relative;
+  padding-right: 14px;
+}
+
+.hero__breadcrumbs ul li a::after {
+  position: absolute;
+  top: 0;
+  right: 2px;
+  font-size: 19px;
+  line-height: 16px;
+  content: '\203A';
+}
+
+.hero__breadcrumbs ul li a::before {
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: calc(100% - 14px);
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.7);
+  content: '';
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+
+.hero__breadcrumbs ul li a:hover::before {
+  opacity: 1;
+}
+
 @media only screen and (max-width: 800px) {
   .hero__breadcrumbs {
     display: none;
