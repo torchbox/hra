@@ -2479,141 +2479,99 @@ function notification() {
 
 function faqs() {
 
-    var faqMatch = function faqMatch() {
+    var $question = jquery('.faq-questions__item'),
+        $answer = jquery('.faq-answers__item'),
+        $answerList = jquery('.faq-panel--answers'),
+        $questionList = jquery('.faq-panel--questions'),
+        $answerClose = jquery('.faq-answers__close-answer'),
+        answersDisplay = 'faq-panel--answers-display',
+        questionsHide = 'faq-panel--questions-hide',
+        questionSelected = 'faq-questions__item--selected',
+        answerSelected = 'faq-answers__item--selected',
+        answerDisplay = 'faq-answers__item--display',
+        timeout = 100,
+        mobileBreakpoint = 800;
 
-        var $question = jquery('.faq-questions__item'),
-            $answer = jquery('.faq-answers__item'),
-            $answerList = jquery('.faq-panel--answers'),
-            $questionList = jquery('.faq-panel--questions'),
-            $answerClose = jquery('.faq-answers__close-answer'),
-            answersDisplay = 'faq-panel--answers-display',
-            questionsHide = 'faq-panel--questions-hide',
-            questionSelected = 'faq-questions__item--selected',
-            answerSelected = 'faq-answers__item--selected',
-            answerDisplay = 'faq-answers__item--display';
+    function deselectQuestions() {
+        $question.removeClass(questionSelected);
+    }
 
-        function deselectQuestions() {
-            $question.removeClass(questionSelected);
-        }
+    function deselectAnswers() {
+        $answer.removeClass(answerSelected);
+        $answer.removeClass(answerDisplay);
+    }
 
-        function deselectAnswers() {
-            $answer.removeClass(answerSelected);
-            $answer.removeClass(answerDisplay);
-        }
+    function selectQuestion($selectedQuestion) {
+        $selectedQuestion.addClass(questionSelected);
+    }
 
-        function selectQuestion($selectedQuestion) {
-            $selectedQuestion.addClass(questionSelected);
-        }
+    function showAnswers() {
+        setTimeout(function () {
+            $answerList.addClass(answersDisplay);
+            $questionList.addClass(questionsHide);
+        }, timeout);
+    }
 
-        function showAnswers() {
-            setTimeout(function () {
-                $answerList.addClass(answersDisplay);
-                $questionList.addClass(questionsHide);
-            }, 100);
-        }
+    function hideAnswers() {
+        $answerList.removeClass(answersDisplay);
+        $questionList.removeClass(questionsHide);
+    }
 
-        function hideAnswers() {
-            $answerList.removeClass(answersDisplay);
-            $questionList.removeClass(questionsHide);
-        }
+    function selectAnswer(questionData) {
+        var $answer = $answerList.find('[data-faq-answer="' + questionData + '"]');
 
-        function selectAnswer(questionData) {
+        $answer.addClass(answerSelected);
 
-            var $answer = $answerList.find('[data-faq-answer="' + questionData + '"]');
+        setTimeout(function () {
+            $answer.addClass(answerDisplay);
+        }, timeout);
+    }
 
-            $answer.addClass(answerSelected);
+    function positionAnswer() {
+        if (jquery(window).width() >= mobileBreakpoint) {
+            var $windowHeight = jquery(window).outerHeight(),
+                $itemHeight = $answerList.outerHeight(),
+                topValue = ($windowHeight - $itemHeight) / 2;
 
-            setTimeout(function () {
-                $answer.addClass(answerDisplay);
-            }, 100);
-        }
-
-        function positionAnswer() {
-
-            if (jquery(window).width() >= 700) {
-
-                var $windowHeight = jquery(window).outerHeight(),
-                    $itemHeight = $answerList.outerHeight(),
-                    topValue = ($windowHeight - $itemHeight) / 2;
-
-                console.log($windowHeight);
-
-                $answerList.css({
-                    'top': topValue
-                });
-            }
-        }
-
-        function bindEvents() {
-            $question.on('click', function (e) {
-                e.preventDefault();
-
-                var $selectedQuestion = jquery(this),
-                    questionData = jquery(this).attr('data-faq-question');
-
-                // Make all questions 'inactive'
-                deselectQuestions();
-
-                // Hide answers
-                deselectAnswers();
-
-                // Make selected question 'active'
-                selectQuestion($selectedQuestion);
-
-                // Get correct answer
-                selectAnswer(questionData);
-
-                // TODO: only on desktop
-                showAnswers();
-
-                // Centre answer
-                // positionAnswer();
+            $answerList.css({
+                'top': topValue + 50
             });
 
-            // Close answer with icon
-            $answerClose.on('click', function () {
-                hideAnswers();
-            });
-
-            // Close answer with swipe
-            // if ( $question.length ) {
-            //     $answerList.swipe( {
-            //         swipe: function(event, direction) {
-            //             if ( direction === 'right' ) {
-            //                 hideAnswers();
-            //             }
-            //         }
-            //     });
-            // }
+            showAnswers();
         }
+    }
 
-        // positionAnswer();
-        bindEvents();
-    };
+    function bindEvents() {
+        $question.on('click', function (e) {
+            e.preventDefault();
 
-    faqMatch();
+            var $selectedQuestion = jquery(this),
+                questionData = jquery(this).attr('data-faq-question');
 
-    var faqStick = function faqStick() {
+            // Make all questions 'inactive'
+            deselectQuestions();
 
-        if (jquery('.faq-panel--answers').length) {
+            // Hide answers
+            deselectAnswers();
 
-            var $header = jquery('.site-header'),
-                $faqAnswers = jquery('.faq-panel--answers'),
-                headerTop = $header.offset().top,
-                headerHeight = $header.outerHeight(),
-                faqAnswersFixed = 'faq-panel--fixed';
+            // Make selected question 'active'
+            selectQuestion($selectedQuestion);
 
-            jquery(window).scroll(function () {
-                if (jquery(window).scrollTop() > headerTop + headerHeight) {
-                    $faqAnswers.addClass(faqAnswersFixed);
-                } else {
-                    $faqAnswers.removeClass(faqAnswersFixed);
-                }
-            });
-        }
-    };
+            // Get correct answer
+            selectAnswer(questionData);
 
-    faqStick();
+            // Centre answer
+            positionAnswer();
+        });
+
+        // Close answer with icon
+        $answerClose.on('click', function () {
+            return hideAnswers();
+        });
+    }
+
+    positionAnswer();
+    bindEvents();
 }
 
 glossaryTab();
