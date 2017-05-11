@@ -1,0 +1,47 @@
+<div class="faq-page">
+  {% spaceless %}
+  <div class="faq-panel faq-panel--questions">
+    <h1 class="faq-panel__heading">FAQ</h1>
+    <ul class="faq-questions">
+
+      {# Question begin #}
+      <li class="faq-questions__item faq-questions__item--selected" data-faq-question="0">
+        <a href="">Question title</a>
+      </li>
+      {# Question end #}
+
+      {# Question begin #}
+      <li class="faq-questions__item" data-faq-question="1">
+        <a href="">Second question title</a>
+      </li>
+      {# Question end #}
+
+    </ul>
+  </div>
+  <div class="faq-panel faq-panel--answers faq-panel--fixed">
+    <ul class="faq-answers">
+
+      {# Answer begin #}
+      <li class="faq-answers__item faq-answers__item--selected faq-answers__item--display" data-faq-answer="0">
+        <button class="button button--bare faq-answers__close-answer">Close</button>
+        <h3>Answer heading</h3>
+        <div class="rich-text">
+          <p>Answer content</p>
+        </div>
+      </li>
+      {# Answer end #}
+
+      {# Answer begin #}
+      <li class="faq-answers__item" data-faq-answer="1">
+        <button class="button button--bare faq-answers__close-answer">Close</button>
+        <h3>Second answer heading</h3>
+        <div class="rich-text">
+          <p>Second answer content</p>
+        </div>
+      </li>
+      {# Answer end #}
+
+    </ul>
+  </div>
+  {% endspaceless %}
+</div>
