@@ -1,7 +1,7 @@
 <div class="faq-page">
   {% spaceless %}
   <div class="faq-panel faq-panel--questions">
-    <h1 class="faq-panel__heading">FAQ</h1>
+    <h1 class="faq-panel__heading">FAQs</h1>
     <ul class="faq-questions">
 
       {# Question begin #}
@@ -13,6 +13,12 @@
       {# Question begin #}
       <li class="faq-questions__item" data-faq-question="1">
         <a href="">Second question title</a>
+      </li>
+      {# Question end #}
+
+      {# Question begin #}
+      <li class="faq-questions__item" data-faq-question="2">
+        <a href="">Third question title</a>
       </li>
       {# Question end #}
 
@@ -37,6 +43,16 @@
         <h3>Second answer heading</h3>
         <div class="rich-text">
           <p>Second answer content</p>
+        </div>
+      </li>
+      {# Answer end #}
+
+      {# Answer begin #}
+      <li class="faq-answers__item" data-faq-answer="2">
+        <button class="button button--bare faq-answers__close-answer">Close</button>
+        <h3>Third answer heading</h3>
+        <div class="rich-text">
+          <p>Third answer content</p>
         </div>
       </li>
       {# Answer end #}
