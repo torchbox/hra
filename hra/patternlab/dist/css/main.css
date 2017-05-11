@@ -4265,18 +4265,24 @@ textarea:focus {
   display: inline-block;
 }
 
-.pagination__back > a, .pagination__forward > a {
+.pagination__back > span,
+.pagination__back > a, .pagination__forward > span,
+.pagination__forward > a {
   position: relative;
   padding: 0 40px;
 }
 
 @media only screen and (max-width: 800px) {
-  .pagination__back > a, .pagination__forward > a {
+  .pagination__back > span,
+  .pagination__back > a, .pagination__forward > span,
+  .pagination__forward > a {
     padding: 0 20px;
   }
 }
 
-.pagination__back > a::before, .pagination__forward > a::before {
+.pagination__back > span::before,
+.pagination__back > a::before, .pagination__forward > span::before,
+.pagination__forward > a::before {
   position: absolute;
   top: 0;
   right: 0;
@@ -4288,7 +4294,9 @@ textarea:focus {
   content: '';
 }
 
-.pagination__back > a span, .pagination__forward > a span {
+.pagination__back > span span,
+.pagination__back > a span, .pagination__forward > span span,
+.pagination__forward > a span {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -4296,13 +4304,25 @@ textarea:focus {
   clip: rect(1px, 1px, 1px, 1px);
 }
 
-.pagination__back > a::before {
+.pagination__back > span::before,
+.pagination__back > a::before, .pagination__forward > span::before,
+.pagination__forward > a::before {
   background-image: url("../images/svg/grey-arrow.svg");
+}
+
+.pagination__back--active > span::before,
+.pagination__back--active > a::before, .pagination__forward--active > span::before,
+.pagination__forward--active > a::before {
+  background-image: url("../images/svg/purple-arrow.svg");
+}
+
+.pagination__back > span::before,
+.pagination__back > a::before {
   transform: rotate(90deg);
 }
 
+.pagination__forward > span::before,
 .pagination__forward > a::before {
-  background-image: url("../images/svg/purple-arrow.svg");
   transform: rotate(-90deg);
 }
 
