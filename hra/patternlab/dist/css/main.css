@@ -2961,6 +2961,25 @@ textarea:focus {
   max-width: 400px;
 }
 
+/*------------------------------------*    $HERO COLOURS
+\*------------------------------------*/
+.hero--purple {
+  position: relative;
+  background-size: cover;
+  background-image: linear-gradient(to right, #da4da1 0%, #8f4085 50%);
+}
+
+.hero--purple::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: 69px 85px;
+  background-image: url("../images/svg/hero-patterns/pattern-1.svg");
+  content: '';
+}
+
 /*------------------------------------*    $DEFAULT TEASER
 \*------------------------------------*/
 .teaser {
@@ -3583,6 +3602,10 @@ textarea:focus {
   margin-top: 20px;
 }
 
+.results-listing--pushed {
+  margin-top: 50px;
+}
+
 .results-listing__item {
   position: relative;
 }
@@ -3642,6 +3665,21 @@ textarea:focus {
   }
 }
 
+.results-listing__item-image {
+  display: inline-block;
+  width: 85px;
+  height: 85px;
+  margin-right: 20px;
+  vertical-align: top;
+  background: #eee;
+}
+
+.results-listing__item-right {
+  display: inline-block;
+  width: calc(100% - 105px);
+  vertical-align: top;
+}
+
 .results-listing__item-heading {
   font-size: 22px;
   font-size: 1.375rem;
@@ -3679,6 +3717,33 @@ textarea:focus {
 
 .results-listing__item-content {
   font-size: 16px;
+}
+
+.results-listing__back {
+  position: relative;
+  padding-left: 35px;
+  margin: 40px 0 0 10px;
+  font-family: "FrutigerLTW01-55Roman", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  color: #000;
+}
+
+.results-listing__back::before {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 20px;
+  height: 23px;
+  margin: auto 0;
+  background-size: cover;
+  background-image: url("../images/svg/blue-arrow.svg");
+  content: '';
+  transform: rotate(90deg);
+  transition: transform 300ms ease;
+}
+
+.results-listing__back:hover::before {
+  transform: rotate(90deg) translate3d(0, 5px, 0);
 }
 
 /*------------------------------------*    $GLOSSARY
