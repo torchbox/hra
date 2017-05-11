@@ -18,6 +18,7 @@ from wagtail.wagtailsnippets.models import register_snippet
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 
 from hra.utils.blocks import StoryBlock
+from hra.utils.models import ListingFields, SocialFields
 
 
 class SocialMediaProfile(models.Model):
@@ -79,6 +80,12 @@ class PersonPagePersonCategory(models.Model):
 
 
 class PersonIndexPage(Page):
+    introduction = models.TextField(blank=True)
+
+    content_panels = Page.content_panels + [
+        FieldPanel('introduction'),
+    ]
+
     subpage_types = ['PersonPage']
 
     @cached_property
@@ -96,12 +103,15 @@ class PersonIndexPage(Page):
             people = paginator.page(paginator.num_pages)
 
         context = super().get_context(request, *args, **kwargs)
-        context.update(people=people)
+        context.update(
+            people=people,
+            siblings=self.get_siblings().live().public(),
+        )
 
         return context
 
 
-class PersonPage(Page):
+class PersonPage(Page, SocialFields, ListingFields):
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
     photo = models.ForeignKey(
@@ -118,13 +128,6 @@ class PersonPage(Page):
     email = models.EmailField(blank=True)
     mobile_phone = models.CharField(max_length=255, blank=True)
     landline_phone = models.CharField(max_length=255, blank=True)
-
-    @cached_property
-    def categories(self):
-        categories = [
-            n.category for n in self.category_relationships.all()
-        ]
-        return categories
 
     content_panels = Page.content_panels + [
         MultiFieldPanel([
@@ -145,4 +148,14 @@ class PersonPage(Page):
         StreamFieldPanel('biography')
     ]
 
+    promote_panels = Page.promote_panels + SocialFields.promote_panels + \
+        ListingFields.promote_panels
+
     parent_page_types = ['PersonIndexPage']
+
+    @cached_property
+    def categories(self):
+        categories = [
+            n.category for n in self.category_relationships.all()
+        ]
+        return categories
