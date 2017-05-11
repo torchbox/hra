@@ -2927,28 +2927,8 @@ textarea:focus {
   }
 }
 
-.hero__content {
+.hero--slim .hero__content {
   max-width: 400px;
-  margin: 180px auto 0;
-  color: #fff;
-}
-
-@media only screen and (max-width: 800px) {
-  .hero__content {
-    margin-top: 0;
-  }
-}
-
-.hero__breadcrumbs {
-  color: #fff;
-}
-
-.hero__heading {
-  color: #fff;
-}
-
-.hero__date {
-  color: #fff;
 }
 
 /*------------------------------------*    $DEFAULT TEASER
