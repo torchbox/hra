@@ -27,3 +27,8 @@ def widget_type(bound_field):
 @register.filter(name='field_type')
 def field_type(bound_field):
     return camelcase_to_underscore(bound_field.field.__class__.__name__)
+
+
+@register.assignment_tag()
+def to_list(*args):
+    return args
