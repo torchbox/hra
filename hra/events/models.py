@@ -35,10 +35,6 @@ class EventType(models.Model):
         return self.title
 
 
-class EventPageRelatedDocument(RelatedDocument):
-    page = ParentalKey('events.EventPage', related_name='related_documents')
-
-
 class EventPageRelatedPage(RelatedPage):
     source_page = ParentalKey('events.EventPage', related_name='related_pages')
 
@@ -68,6 +64,7 @@ class EventPage(Page, SocialFields, ListingFields):
     region = models.CharField(_('State or county'), blank=True, max_length=255)
     postcode = models.CharField(_('Zip or postal code'), blank=True, max_length=255)
     country = models.CharField(_('Country'), blank=True, max_length=255)
+    phone = models.CharField(_('Phone'), blank=True, max_length=255)
 
     introduction = models.TextField(blank=True)
     body = StreamField(StoryBlock())
@@ -101,13 +98,12 @@ class EventPage(Page, SocialFields, ListingFields):
             FieldPanel('region'),
             FieldPanel('postcode'),
             FieldPanel('country'),
+            FieldPanel('phone'),
         ], _('Location')),
 
         FieldPanel('introduction'),
         StreamFieldPanel('body'),
 
-        # TODO: Cleanup if we decide that we don't need related docs here
-        # InlinePanel('related_documents', label="Related documents"),
         InlinePanel('related_pages', label="Related pages"),
     ]
 
@@ -135,6 +131,14 @@ class EventPage(Page, SocialFields, ListingFields):
 
         if errors:
             raise ValidationError(errors)
+
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+
+        # Access siblings like this to get the same order as on the index page
+        context['siblings'] = self.get_parent().specific.upcoming_events
+
+        return context
 
 
 class EventIndexPageFeaturedPage(RelatedPage):
