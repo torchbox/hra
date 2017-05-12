@@ -16,25 +16,31 @@
 
                         {% if social_media_settings.twitter_handle %}
                             <li class="">
-                                <a href="https://twitter.com/{{ social_media_settings.twitter_handle }}">Twitter</a>
+                                <a href="https://twitter.com/{{ social_media_settings.twitter_handle }}">
+                                <svg width="22px" height="22px">
+                                    <use xlink:href="#twitter-icon"></use>
+                                </svg>
+                                <span>Twitter</span></a>
                             </li>
                         {% endif %}
 
                         {% if social_media_settings.youtube_channel_id %}
                             <li class="">
-                                <a href="https://www.youtube.com/channel/{{ social_media_settings.youtube_channel_id }}">YouTube</a>
+                                <a href="https://www.youtube.com/channel/{{ social_media_settings.youtube_channel_id }}">
+                                <svg width="22px" height="22px">
+                                    <use xlink:href="#youtube-icon"></use>
+                                </svg>
+                                <span>YouTube</span></a>
                             </li>
                         {% endif %}
 
                         {% if social_media_settings.linkedin_company_id %}
                             <li class="">
-                                <a href="https://linkedin.com/company/{{ social_media_settings.linkedin_company_id }}">LinkedIn</a>
-                            </li>
-                        {% endif %}
-
-                        {% if social_media_settings.facebook_app_id %}
-                            <li class="">
-                                <a href="https://facebook.com/{{ social_media_settings.facebook_app_id }}">Facebook</a>
+                                <a href="https://linkedin.com/company/{{ social_media_settings.linkedin_company_id }}">
+                                <svg width="22px" height="22px">
+                                    <use xlink:href="#linkedin-icon"></use>
+                                </svg>
+                                <span>LinkedIn</span></a>
                             </li>
                         {% endif %}
 

@@ -2633,6 +2633,7 @@ textarea:focus {
 .site-footer__social li {
   display: inline-block;
   margin-right: 25px;
+  vertical-align: top;
 }
 
 .site-footer__social li:last-of-type {
@@ -2640,14 +2641,11 @@ textarea:focus {
 }
 
 .site-footer__social li a {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip: rect(1px, 1px, 1px, 1px);
   display: block;
   width: 50px;
   height: 50px;
+  padding-top: 14px;
+  text-align: center;
   background-color: #fff;
   border-radius: 50%;
   transition: background-color 300ms ease;
@@ -2655,6 +2653,18 @@ textarea:focus {
 
 .site-footer__social li a:hover {
   background-color: rgba(255, 255, 255, 0.7);
+}
+
+.site-footer__social li a span {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
+.site-footer__social li a svg {
+  fill: #435663;
 }
 
 .site-footer__social-info {
