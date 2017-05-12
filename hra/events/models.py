@@ -141,31 +141,6 @@ class EventPage(Page, SocialFields, ListingFields):
 
 class EventIndexPage(Page):
 
-    @classmethod
-    def check(cls, **kwargs):
-        is_mysql = any(['mysql' in db['ENGINE'].lower()
-                        for db in settings.DATABASES.values()])
-        errors = super(EventIndexPage, cls).check(**kwargs)
-        if is_mysql:
-            errors.append(
-                checks.Error(
-                    "Event Page uses Coalesce function; not tested on MySQL",
-                    hint="The query for returning past and future events uses "
-                    "django.db.models.functions.Coalesce, which on MySQL "
-                    "requires explicit casting to the correct database type, "
-                    "see https://docs.djangoproject.com/en/1.9/ref/models/database-functions/#coalesce. "
-                    "The Django documentation specifically mentions datetime "
-                    "types, but this codebase has been written using "
-                    "PostgreSQL, so no such casting or testing has been done. "
-                    "If your project uses Django 1.10+, then you can easily "
-                    "address this using django.db.models.functions.Cast, and "
-                    "on Django 1.9 this could easily be backported from 1.10.",
-                    obj=cls,
-                    id='events.E001',
-                )
-            )
-        return errors
-
     def _annotated_descendant_events(self):
         return (
             EventPage.objects
@@ -181,27 +156,12 @@ class EventIndexPage(Page):
             .order_by('start_date')
         )
 
-    @cached_property
-    def past_events(self):
-        return (
-            self._annotated_descendant_events()
-            .filter(latest_date__lt=timezone.now().date())
-            .order_by('-start_date')
-        )
-
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        past_events = self.past_events
-        upcoming_events = self.upcoming_events
 
-        past = request.GET.get('past', False)
-        if past:
-            events = past_events
-        else:
-            events = upcoming_events
-        per_page = settings.DEFAULT_PER_PAGE
+        events = self.upcoming_events
         page_number = request.GET.get('page')
-        paginator = Paginator(events, per_page)
+        paginator = Paginator(events, settings.DEFAULT_PER_PAGE)
 
         try:
             events = paginator.page(page_number)
@@ -211,13 +171,8 @@ class EventIndexPage(Page):
             events = paginator.page(paginator.num_pages)
 
         context.update({
-            'show_past': past,
             'events': events,
-            'past_events': past_events,
-            'upcoming_events': upcoming_events,
+            'siblings': self.get_siblings().live().public(),
         })
-
-        if past:
-            context['extra_url_params'] = urlencode({'past': True})
 
         return context
