@@ -1,13 +1,11 @@
 from collections import defaultdict
 
 from django.conf import settings
-from django.core import checks
 from django.core.exceptions import ValidationError
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db import models
 from django.db.models.functions import Coalesce
 from django.utils import timezone
-from django.utils.http import urlencode
 from django.utils.translation import ugettext_lazy as _
 from django.utils.functional import cached_property
 
