@@ -1,5 +1,6 @@
 {
     "title" : "Event listing page",
+    "heroTitle" : "Event listing",
     "sidebarMenu" : [
         {
             "label" : "Overview"
