@@ -1,35 +1,92 @@
 {% extends "base.html" %}
-{% load wagtailcore_tags wagtailimages_tags static %}
+{% load wagtailcore_tags wagtailimages_tags static util_tags %}
 
 {% block content %}
-
-    <div class="intro">
-        <div class="container">
-            <h1>{{ page.title }}</h1>
-            <p>{{ page.introduction }}</p>
+    <div class="hero hero--slim hero--purple">
+        <div class="hero__content">
+            <div class="hero__breadcrumbs">
+                {% include 'navigation/breadcrumbs.html' %}
+            </div>
+            <h1 class="hero__heading">{{ page.title }}</h1>
         </div>
     </div>
 
-    <section class="main-body">
-        <div class="container">
-            {{ page.start_date }}
-            {{ page.start_time }}
-            {{ page.end_date }}
-            {{ page.end_time }}
-            {{ page.event_types.all|join:", " }}
-            {{ page.street_address_1 }}
-            {{ page.street_address_1 }}
-            {{ page.city }}
-            {{ page.region }}
-            {{ page.postcode }}
-            {{ page.country }}
-        </div>
+    <div class="default-body event-page-body">
+        {% spaceless %}
+            <div class="grid grid--full">
+                <div class="grid__item three-tenths tablet--one-whole">
 
-        <div class="container">
-            {{ page.body }}
-        </div>
-    </section>
+                    {% include 'includes/teasers/site_sidebar.html' with no_transparency=True page=page siblings=siblings %}
 
-    {% include "includes/teasers/related_content.html" %}
+                </div>
+                <div class="grid__item seven-tenths tablet--one-whole">
+                    <div class="site-body site-body--restricted">
+                        <div class="site-body__inner site-body__inner">
+                            <article class="article">
+
+                                {% if page.introduction %}
+                                    <p>{{ page.introduction }}</p>
+                                {% endif %}
+
+                                {% include_block page.body %}
+
+                            </article>
+
+                            <div class="event-page-body__details">
+                                <h6>Event details</h6>
+                                <ul>
+                                    <li>
+                                        {% if page.end_date and not page.end_date == page.start_date %}
+                                            {{ page.start_time|default:"" }} {{ page.start_date }} to
+                                            {{ page.end_time|default:"" }} {{ page.end_date }}
+                                        {% elif page.end_time %}
+                                            {{ page.start_date }} {{ page.start_time }}&ndash;{{ page.end_time }}
+                                        {% else %}
+                                            {{ page.start_date }} {{ page.start_time|default:"" }}
+                                        {% endif %}
+                                    </li>
+
+                                    {% if page.street_address_1 %}
+                                        <li>{{ page.street_address_1 }}</li>
+                                    {% endif %}
+
+                                    {% if page.street_address_2 %}
+                                        <li>{{ page.street_address_2 }}</li>
+                                    {% endif %}
+
+                                    {% if page.city or page.region or page.postcode or page.country %}
+                                        <li>
+                                            {% to_list page.city page.region page.postcode as address_list %}
+                                            {% for address_part in address_list %}
+                                                {% if not forloop.last and address_part %}
+                                                    {{ address_part }}{{ ", " }}
+                                                {% else %}
+                                                    {{ address_part }}
+                                                {% endif %}
+                                            {% endfor %}
+                                        </li>
+                                    {% endif %}
+
+                                    {% if page.country %}
+                                        <li>{{ page.country }}</li>
+                                    {% endif %}
+                                </ul>
+
+                                {% if page.phone %}
+                                    <div class="event-page-body__phone">
+                                        <span>Phone:</span> {{ page.phone }}
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endspaceless %}
+    </div>
+
+
+
 
 {% endblock %}

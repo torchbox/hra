@@ -79,7 +79,7 @@
                                                 {% if event.street_address_1 or event.street_address_2 or event.city or event.region or event.postcode or event.country %}
                                                     <ul class="results-listing__item-meta">
                                                         <li class="date">
-                                                            {% to_list event.street_address_1 event.street_address_2 vent.city event.region event.postcode event.country as address_list %}
+                                                            {% to_list event.street_address_1 event.street_address_2 event.city event.region event.postcode event.country as address_list %}
                                                             {% for address_part in address_list %}
                                                                 {% if not forloop.last and address_part %}
                                                                     {{ address_part }}{{ ", " }}
