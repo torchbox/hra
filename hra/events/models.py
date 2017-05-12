@@ -67,6 +67,9 @@ class EventPage(Page, SocialFields, ListingFields):
     introduction = models.TextField(blank=True)
     body = StreamField(StoryBlock())
 
+    subpage_types = []
+    parent_page_types = ['events.EventIndexPage']
+
     search_fields = Page.search_fields + [
         index.SearchField('introduction'),
         index.SearchField('body'),
@@ -148,6 +151,8 @@ class EventIndexPageFeaturedPage(RelatedPage):
 
 
 class EventIndexPage(Page):
+    subpage_types = ['events.EventPage']
+
     content_panels = Page.content_panels + [
         InlinePanel('featured_pages', label='Featured pages'),
     ]
