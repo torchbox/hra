@@ -11,8 +11,8 @@ from django.utils.functional import cached_property
 
 from modelcluster.fields import ParentalKey
 from wagtail.wagtailadmin.edit_handlers import (
-    FieldPanel, FieldRowPanel, InlinePanel, MultiFieldPanel, StreamFieldPanel
-)
+    FieldPanel, FieldRowPanel, InlinePanel, MultiFieldPanel, StreamFieldPanel,
+    PageChooserPanel)
 from wagtail.wagtailcore.fields import RichTextField, StreamField
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailsearch import index
@@ -137,7 +137,18 @@ class EventPage(Page, SocialFields, ListingFields):
             raise ValidationError(errors)
 
 
+class EventIndexPageFeaturedPage(RelatedPage):
+    source_page = ParentalKey('events.EventIndexPage', related_name='featured_pages')
+
+    panels = [
+        PageChooserPanel('page', page_type='events.EventPage'),
+    ]
+
+
 class EventIndexPage(Page):
+    content_panels = Page.content_panels + [
+        InlinePanel('featured_pages', label='Featured pages'),
+    ]
 
     def _annotated_descendant_events(self):
         return (
