@@ -60,7 +60,20 @@
                                                         </li>
                                                     {% endif %}
 
-                                                    <li class="type">Event type</li>
+
+                                                    {% with event_types=event.event_types.all %}
+                                                        {% if event_types %}
+                                                            <li class="type">
+                                                                {% for event_type_through in event_types %}
+                                                                    {% if not forloop.last %}
+                                                                        {{ event_type_through.event_type.title }}{{ ", " }}
+                                                                    {% else %}
+                                                                        {{ event_type_through.event_type.title }}
+                                                                    {% endif %}
+                                                                {% endfor %}
+                                                            </li>
+                                                        {% endif %}
+                                                    {% endwith %}
 
                                                 </ul>
 
@@ -69,7 +82,11 @@
                                                         <li class="date">
                                                             {% to_list event.street_address_1 event.street_address_2 vent.city event.region event.postcode event.country as address_list %}
                                                             {% for address_part in address_list %}
-                                                                {{ address_part }}{% if not forloop.last and address_part %},{% endif %}
+                                                                {% if not forloop.last and address_part %}
+                                                                    {{ address_part }}{{ ", " }}
+                                                                {% else %}
+                                                                    {{ address_part }}
+                                                                {% endif %}
                                                             {% endfor %}
                                                         </li>
                                                     </ul>
