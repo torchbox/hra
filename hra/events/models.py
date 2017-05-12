@@ -20,9 +20,7 @@ from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
 
 from hra.utils.blocks import StoryBlock
-from hra.utils.models import (
-    ListingFields, RelatedDocument, RelatedPage, SocialFields
-)
+from hra.utils.models import ListingFields, RelatedPage, SocialFields
 
 
 @register_snippet
