@@ -3,62 +3,93 @@
 
 {% block content %}
 
-    <h1>{{ page.title }}</h1>
-    <p>{{ page.intro }}</p>
+    <div class="hero hero--slim">
+        <div class="hero__content">
+            <div class="hero__breadcrumbs">
+                {% include 'navigation/breadcrumbs.html' %}
+            </div>
+            <h1 class="hero__heading">{{ page.title }}</h1>
+        </div>
+    </div>
 
-    {% include "includes/call_to_action.html" with call_to_action=page.call_to_action %}
+    <div class="default-body">
+        {% spaceless %}
+            <div class="grid grid--full">
+                <div class="grid__item three-tenths tablet--one-whole">
 
-    <section class="listing">
-        {% if events.paginator.count %}
-            {% if events.object_list.exists %}
-                <ul role="list">
-                    {% for event in events.object_list.specific %}
-                        <li>
-                            {% if event.listing_image %}
-                                <a href="{% pageurl event %}">
-                                {% image event.listing_image fill-450x300 %}
-                                </a>
+                    {% include 'includes/teasers/site_sidebar.html' with no_transparency=True page=page siblings=siblings %}
+
+                </div>
+                <div class="grid__item seven-tenths tablet--one-whole">
+                    <div class="site-body site-body--restricted">
+                        <div class="site-body__inner site-body__inner">
+
+                            {# TODO: Implement on event listing page #}
+                            {% include 'includes/teasers/teaser_default.html' with section_pages=page.featured_pages.all %}
+
+                            {% if events %}
+                                <ul class="results-listing">
+
+                                    {% for event in events %}
+
+                                        <li class="results-listing__item js-border-result">
+                                            <a href="{% pageurl event %}">
+                                                <div class="results-listing__item-border js-border-result__border"></div>
+                                                <div class="results-listing__item-heading js-border-result__heading">
+                                                    {{ event.listing_title|default:event.title }}
+                                                </div>
+                                                <ul class="results-listing__item-meta">
+
+                                                    <li class="date">
+                                                        <span>{{ event.start_date }}</span>
+                                                        {% if event.end_date and not event.end_date == event.start_date %}
+                                                            &ndash; <span>{{ event.end_date }}</span>
+                                                        {% endif %}
+                                                    </li>
+
+                                                    {% if event.start_time or event.end_time %}
+                                                        <li class="time">
+
+                                                            {% if event.start_time %}
+                                                                <span>{{ event.start_time }}</span>
+                                                            {% endif %}
+                                                            {% if event.end_time %}
+                                                                &ndash; <span>{{ event.end_time|default:"" }}</span>
+                                                            {% endif %}
+
+                                                        </li>
+                                                    {% endif %}
+
+                                                    <li class="type">Event type</li>
+
+                                                </ul>
+
+                                                <ul class="results-listing__item-meta">
+                                                    <li class="date">Address line one, line two, county, postcode</li>
+                                                </ul>
+
+                                                {% if event.listing_summary %}
+                                                    <div class="results-listing__item-content">
+                                                        {{ event.listing_summary }}
+                                                    </div>
+                                                {% endif %}
+                                            </a>
+                                        </li>
+
+                                    {% endfor %}
+
+                                </ul>
+
+                                {% include "includes/pagination.html" with subpages=events %}
+                            {% else %}
+                                {# no items #}
                             {% endif %}
-                            <div>
-                                <h2 role="listitem">
-                                    <a href="{% pageurl event %}">
-                                        {% if event.listing_title %}
-                                            {{ event.listing_title }}
-                                        {% else %}
-                                            {{ event.title }}
-                                        {% endif %}
-                                    </a>
-                                </h2>
-                                {% if event.end_date and not event.end_date == event.start_date %}
-                                    {{ event.start_time|default:"" }} {{ event.start_date }} to {{ event.end_time|default:"" }} {{ event.end_date }}
-                                {% elif event.end_time %}
-                                    {{ event.start_date }} {{ event.start_time }}&ndash;{{ event.end_time }}
-                                {% else %}
-                                    {{ event.start_date }} {{ event.start_time|default:"" }}
-                                {% endif %}
-                                {% if event.listing_summary %}
-                                    <p>{{ event.listing_summary }}</p>
-                                {% endif %}
-                            </div>
-                        </li>
-                    {% endfor %}
-                </ul>
-            {% else %}
-                {# no items on this page #}
-            {% endif %}
 
-            {% include "includes/pagination.html" with subpages=events %}
-
-        {% else %}
-            {# no items on any page #}
-        {% endif %}
-
-        {% if show_past and upcoming_events.exists %}
-            <a href="{% pageurl page %}">View upcoming events</a>
-        {% elif past_events.exists %}
-            <a href="{% pageurl page %}?past=True">View past events</a>
-        {% endif %}
-
-    </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endspaceless %}
+    </div>
 
 {% endblock %}
