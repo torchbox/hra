@@ -37,17 +37,22 @@
                                         <li class="results-listing__item js-border-result">
                                             <a href="{% pageurl person_page %}">
                                                 <div class="results-listing__item-border js-border-result__border"></div>
-                                                {% with person_image=person_page.listing_image|default:person_page.photo %}
-                                                    {% if person_image %}
-                                                        <div class="results-listing__item-image js-border-result__image">
+                                                <div class="results-listing__item-image js-border-result__image">
+                                                    {% with person_image=person_page.listing_image|default:person_page.photo %}
+                                                        {% if person_image %}
 
                                                             {% image person_image fill-100x100-c75 as person_image_thumbnail %}
                                                             <img src="{{ person_image_thumbnail.url }}"
                                                                  alt="{{ person_image.alt }}">
 
-                                                        </div>
-                                                    {% endif %}
-                                                {% endwith %}
+                                                        {% else %}
+
+                                                            <img src="{% static 'dist/images/person_placeholder.png' %}"
+                                                                 alt="">
+
+                                                        {% endif %}
+                                                    {% endwith %}
+                                                </div>
                                                 <div class="results-listing__item-right">
                                                     <div class="results-listing__item-heading js-border-result__heading">
                                                         {{ person_page.listing_title|default:person_page.title }}
