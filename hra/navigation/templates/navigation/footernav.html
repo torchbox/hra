@@ -9,11 +9,13 @@
             <ul class="site-footer__list">
 
                 {% for subitem in block.value.subitems %}
-                    <li>
-                        <a href="{% pageurl subitem.page %}">
-                            {{ subitem.title|default:subitem.page.title }}
-                        </a>
-                    </li>
+                    {% if subitem.page.live %}
+                        <li>
+                            <a href="{% pageurl subitem.page %}">
+                                {{ subitem.title|default:subitem.page.title }}
+                            </a>
+                        </li>
+                    {% endif %}
                 {% endfor %}
 
             </ul>
