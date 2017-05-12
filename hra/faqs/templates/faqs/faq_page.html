@@ -2,22 +2,52 @@
 {% load wagtailcore_tags wagtailimages_tags static %}
 
 {% block content %}
-    <h1>{{ page.title }}</h1>
 
-    <section class="listing">
-        {% with page.get_faqs as faqs %}
-            {% if faqs %}
-                <ul role="list">
-                    {% for faq in faqs %}
-                        <li>
-                            <h2>{{ faq.title }}</h2>
-                            {{ faq.body|richtext }}
-                        </li>
-                    {% endfor %}
-                </ul>
-            {% else %}
-                {# no items #}
-            {% endif %}
-        {% endwith %}
-    </section>
+    <div class="faqs-page-body">
+        <div class="faq-page">
+            {% with faqs=page.get_faqs %}
+                {% if faqs %}
+                    {% spaceless %}
+                        <div class="faq-panel faq-panel--questions">
+                            <h1 class="faq-panel__heading">{{ page.title }}</h1>
+                            <ul class="faq-questions">
+
+                                {% for faq in faqs %}
+                                    <li class="faq-questions__item {% if forloop.first %}faq-questions__item--selected{% endif %}"
+                                        data-faq-question="{{ faq.pk }}">
+                                        <a href="">{{ faq.title }}</a>
+                                    </li>
+                                {% endfor %}
+
+                            </ul>
+                        </div>
+                        <div class="faq-panel faq-panel--answers faq-panel--fixed">
+                            <ul class="faq-answers">
+
+                                {% for faq in faqs %}
+                                    <li class="faq-answers__item {% if forloop.first %}faq-answers__item--selected faq-answers__item--display{% endif %}"
+                                        data-faq-answer="{{ faq.pk }}">
+                                        <button class="button button--bare faq-answers__close-answer">Close</button>
+
+                                        <h3>{{ faq.title }}</h3>
+                                        {{ faq.body|richtext }}
+
+                                    </li>
+                                {% endfor %}
+
+                            </ul>
+                        </div>
+
+                    {% endspaceless %}
+                {% else %}
+                    no items
+                {% endif %}
+            {% endwith %}
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block footer %}
+    {# Hide footer for this page type #}
 {% endblock %}
