@@ -1,53 +1,49 @@
 {% extends "base.html" %}
-
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load wagtailcore_tags wagtailimages_tags static %}
 
 {% block content %}
+    <div class="hero hero--inner">
+        <div class="hero__content">
+            <div class="hero__breadcrumbs">
+                {% include "navigation/breadcrumbs.html" %}
+            </div>
+            <h1 class="hero__heading">{{ page.title }}</h1>
 
-    <div class="intro">
-        <div class="container">
-            <h1>{{ page.first_name }} {{ page.last_name }}</h1>
-            {% if page.introduction %}
-                <p>{{ page.introduction }}</p>
-            {% endif %}
-            {% if page.photo %}
-                {% image page.photo original %}
-            {% endif %}
             {% if page.job_title %}
-                <p>{{ page.job_title }}</p>
+                <div class="hero__date">{{ page.job_title }}</div>
             {% endif %}
-            {% if page.website %}
-                <p>{{ page.website }}</p>
-            {% endif %}
-            {% if page.email %}
-                <p>{{ page.email }}</p>
-            {% endif %}
-            {% if page.mobile_phone %}
-                <p>{{ page.mobile_phone }}</p>
-            {% endif %}
-            {% if page.landline_phone %}
-                <p>{{ page.landline_phone }}</p>
-            {% endif %}
+
         </div>
     </div>
 
-    <section class="main-body">
-        <div class="container">
-            {{ page.biography }}
-        </div>
+    <div class="standard-page-body">
+        <div class="standard-page-body__wrapper">
+            <div class="standard-page-body__content">
+                <article class="article">
 
-        <div class="container">
-            <h2>Categories</h2>
-            {% for category in page.categories %}
-                <p>{{ category }}</p>
-            {% endfor %}
+                    {# TODO: Needs styling #}
+                    {% if page.photo %}
+                        {% image page.photo fill-200x200-c75 style="float: left; margin: 5px 10px 0 0" %}
+                    {% endif %}
 
-            <h2>Social Media Links</h2>
-            {% for item in page.social_media_profile.all %}
-                <h3>{{ item.get_service_display }}</h3>
-                <p>{{ item.profile_url }}</p>
-            {% endfor %}
+                    {% if page.introduction %}
+                        <p>{{ page.introduction }}</p>
+                    {% endif %}
+
+                    {% include_block page.biography %}
+
+                </article>
+
+
+                {% with parent_page=page.get_parent %}
+                    <a href="{% pageurl parent_page %}" class="results-listing__back">
+                        Back to {{ parent_page.title|lower }}
+                    </a>
+                {% endwith %}
+
+            </div>
         </div>
-    </section>
+    </div>
+
 
 {% endblock %}
