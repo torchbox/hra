@@ -4744,6 +4744,11 @@ textarea:focus {
   }
 }
 
+.standard-page-body__wrapper--flat {
+  background: none;
+  transform: none;
+}
+
 .standard-page-body__content {
   max-width: 800px;
   padding: 60px 0 40px;

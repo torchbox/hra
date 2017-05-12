@@ -18,6 +18,11 @@
             background: #fff;
             transform: none;
         }
+
+        &--flat {
+            background: none;
+            transform: none;
+        }
     }
 
     &__content {

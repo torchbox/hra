@@ -1,0 +1,26 @@
+<div class="standard-page-body">
+  <div class="standard-page-body__wrapper standard-page-body__wrapper--flat">
+    <div class="standard-page-body__content">
+      <article class="article">
+        <h1>{{ title }}</h1>
+        <p>{{ introduction }}</p>
+        <p>{{ introduction }}</p>
+        {% include "molecules-call-to-action" %}
+        {% include "molecules-blockquote" %}
+        {% include "molecules-image-block" %}
+        {% include "molecules-highlight" %}
+      </article>
+    </div>
+    <div class="related-container">
+      {% spaceless %}
+      <div class="grid grid--wide">
+        {% for relatedItem in related %}
+          <div class="grid__item one-third laptop--one-whole">
+            {% include "molecules-related" %}
+          </div>
+        {% endfor %}
+      </div>
+      {% endspaceless %}
+    </div>
+  </div>
+</div>
