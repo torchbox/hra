@@ -4745,6 +4745,7 @@ textarea:focus {
 }
 
 .standard-page-body__wrapper--flat {
+  padding-bottom: 50px;
   background: none;
   transform: none;
 }
@@ -4753,6 +4754,21 @@ textarea:focus {
   max-width: 800px;
   padding: 60px 0 40px;
   margin: 0 auto;
+}
+
+/*------------------------------------*    $PERSON PAGE BODY
+\*------------------------------------*/
+.article .person-page__bio p {
+  font-size: 20px;
+}
+
+.article .person-page__bio p:first-of-type {
+  margin-top: 0;
+}
+
+.person-page__back {
+  display: inline-block;
+  margin-top: 40px;
 }
 
 /*------------------------------------*    $TEMPLATES

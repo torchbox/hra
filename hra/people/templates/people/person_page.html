@@ -2,7 +2,7 @@
 {% load wagtailcore_tags wagtailimages_tags static %}
 
 {% block content %}
-    <div class="hero hero--inner">
+    <div class="hero hero--slim hero--purple">
         <div class="hero__content">
             <div class="hero__breadcrumbs">
                 {% include "navigation/breadcrumbs.html" %}
@@ -16,18 +16,32 @@
         </div>
     </div>
 
-    <div class="standard-page-body">
-        <div class="standard-page-body__wrapper">
+    <div class="standard-page-body person-page">
+        <div class="standard-page-body__wrapper standard-page-body__wrapper--flat">
             <div class="standard-page-body__content">
                 <article class="article">
-
-                    {# TODO: Needs styling #}
+                    
                     {% if page.photo %}
-                        {% image page.photo fill-200x200-c75 style="float: left; margin: 5px 10px 0 0" %}
-                    {% endif %}
-
-                    {% if page.introduction %}
-                        <p>{{ page.introduction }}</p>
+                        {% spaceless %}
+                        <div class="grid">
+                            <div class="grid__item one-quarter tablet--one-whole">
+                                <div class="person-page__image">
+                                    {% image page.photo fill-170x170-c75 style="margin-bottom: 20px" %}
+                                </div>
+                            </div>
+                            {% if page.introduction %}
+                                <div class="grid__item three-quarters tablet--one-whole">
+                                    <div class="person-page__bio">
+                                        <p>{{ page.introduction }}</p>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </div>
+                        {% endspaceless %}
+                    {% else %}
+                        {% if page.introduction %}
+                            <p>{{ page.introduction }}</p>
+                        {% endif %}
                     {% endif %}
 
                     {% include_block page.biography %}
@@ -36,7 +50,7 @@
 
 
                 {% with parent_page=page.get_parent %}
-                    <a href="{% pageurl parent_page %}" class="results-listing__back">
+                    <a href="{% pageurl parent_page %}" class="results-listing__back person-page__back">
                         Back to {{ parent_page.title|lower }}
                     </a>
                 {% endwith %}
