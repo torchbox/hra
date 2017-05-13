@@ -1,0 +1,10 @@
+{
+  "short_name": "HRA",
+  "name": "HRA",
+  "description" : "Health Research Authority - Protecting and promoting the interests of patients and the public in health research",
+  "display": "standalone",
+  "orientation": "portrait",
+  "start_url": "/",
+  "theme_color": "#ffffff",
+  "background_color": "#0d61b5"
+}
