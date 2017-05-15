@@ -79,21 +79,7 @@
                             {{ page.introduction }}
                         </p>
 
-                        {# TODO: Add body field #}
-                        <div class="contact__address">
-                            <div>Health Research Authority</div>
-                            <div>Skipton House</div>
-                            <div>80 London Road</div>
-                            <div>London</div>
-                            <div>SE1 6LH</div>
-                        </div>
-                        <div class="contact__address">
-                            <div>Health Research Authority</div>
-                            <div>Skipton House</div>
-                            <div>80 London Road</div>
-                            <div>London</div>
-                            <div>SE1 6LH</div>
-                        </div>
+                        {{ page.body|richtext }}
                     </div>
                 </div>
             {% endspaceless %}
