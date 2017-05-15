@@ -1,0 +1,88 @@
+/*------------------------------------*\
+    $NEWSLETTER SIGNUP
+\*------------------------------------*/
+
+.newsletter-signup {
+    padding: 55px 20px 35px;
+    background-color: #31434f;
+
+    @include media-query(mobile) {
+        padding: 30px 20px 10px;
+    }
+
+    &__inner {
+        max-width: $standard-body-width;
+        margin: 0 auto;
+    }
+
+    &__heading {
+        @include font-size(gamma);
+        line-height: 1.3;
+        color: #fff;
+
+        @include media-query(mobile) {
+            @include font-size(delta);
+        }
+    }
+
+    &__subheading {
+        @include font-size(epsilon);
+        margin-top: 15px;
+        color: #fff;
+
+        @include media-query(mobile) {
+            @include font-size(zeta);
+        }
+    }
+
+    &__form {
+        display: flex;
+        margin-top: 10px;
+
+        @include media-query(mobile) {
+            display: block;
+        }
+    }
+
+    &__input {
+        @include placeholder-text {
+            color: #a9b3b9;
+        }
+        display: inline-block;
+        width: calc(50% - 50px);
+        padding: 10px 15px;
+        color: #fff;
+        vertical-align: top;
+        background-color: transparent;
+        border-top: 2px solid #8a9398;
+        border-right: 0;
+        border-bottom: 2px solid #8a9398;
+        border-left: 2px solid #8a9398;
+        transition: background-color $default-transition-speed ease;
+
+        &:focus {
+            background-color: #24343e;
+        }
+
+        @include media-query(mobile) {
+            width: 100%;
+            margin-bottom: 15px;
+            border: 2px solid #8a9398;
+        }
+    }
+
+    &__submit {
+        width: 100px;
+        color: #31434f;
+        cursor: pointer;
+        background-color: #fff;
+        border: 2px solid #fff;
+        transition: background-color $default-transition-speed ease, border-color $default-transition-speed ease;
+
+        &:hover,
+        &:focus {
+            background-color: #d2d2d2;
+            border-color: #d2d2d2;
+        }
+    }
+}

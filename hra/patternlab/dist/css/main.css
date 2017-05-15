@@ -4453,6 +4453,123 @@ textarea:focus {
   transform: rotate(-90deg);
 }
 
+/*------------------------------------*    $NEWSLETTER SIGNUP
+\*------------------------------------*/
+.newsletter-signup {
+  padding: 55px 20px 35px;
+  background-color: #31434f;
+}
+
+@media only screen and (max-width: 650px) {
+  .newsletter-signup {
+    padding: 30px 20px 10px;
+  }
+}
+
+.newsletter-signup__inner {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.newsletter-signup__heading {
+  font-size: 28px;
+  font-size: 1.75rem;
+  line-height: 1.3;
+  color: #fff;
+}
+
+@media only screen and (max-width: 650px) {
+  .newsletter-signup__heading {
+    font-size: 22px;
+    font-size: 1.375rem;
+  }
+}
+
+.newsletter-signup__subheading {
+  font-size: 20px;
+  font-size: 1.25rem;
+  margin-top: 15px;
+  color: #fff;
+}
+
+@media only screen and (max-width: 650px) {
+  .newsletter-signup__subheading {
+    font-size: 16px;
+    font-size: 1rem;
+  }
+}
+
+.newsletter-signup__form {
+  display: flex;
+  margin-top: 10px;
+}
+
+@media only screen and (max-width: 650px) {
+  .newsletter-signup__form {
+    display: block;
+  }
+}
+
+.newsletter-signup__input {
+  display: inline-block;
+  width: calc(50% - 50px);
+  padding: 10px 15px;
+  color: #fff;
+  vertical-align: top;
+  background-color: transparent;
+  border-top: 2px solid #8a9398;
+  border-right: 0;
+  border-bottom: 2px solid #8a9398;
+  border-left: 2px solid #8a9398;
+  transition: background-color 300ms ease;
+}
+
+.newsletter-signup__input.placeholder {
+  color: #a9b3b9;
+}
+
+.newsletter-signup__input:-moz-placeholder {
+  color: #a9b3b9;
+}
+
+.newsletter-signup__input::-moz-placeholder {
+  color: #a9b3b9;
+}
+
+.newsletter-signup__input:-ms-input-placeholder {
+  color: #a9b3b9;
+}
+
+.newsletter-signup__input::-webkit-input-placeholder {
+  color: #a9b3b9;
+}
+
+.newsletter-signup__input:focus {
+  background-color: #24343e;
+}
+
+@media only screen and (max-width: 650px) {
+  .newsletter-signup__input {
+    width: 100%;
+    margin-bottom: 15px;
+    border: 2px solid #8a9398;
+  }
+}
+
+.newsletter-signup__submit {
+  width: 100px;
+  color: #31434f;
+  cursor: pointer;
+  background-color: #fff;
+  border: 2px solid #fff;
+  transition: background-color 300ms ease, border-color 300ms ease;
+}
+
+.newsletter-signup__submit:hover, .newsletter-signup__submit:focus {
+  background-color: #d2d2d2;
+  border-color: #d2d2d2;
+}
+
 /*------------------------------------*    $NOTIFICATION
 \*------------------------------------*/
 .notification {
