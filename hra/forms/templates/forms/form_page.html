@@ -23,20 +23,17 @@
                                 {% endif %}
 
                                 {% for field in form %}
-                                    {{ field.errors }}
+
+                                    {% if field.errors %}
+                                        <div class="errors">
+                                            {# TODO: Needs styling #}
+                                            {{ field.errors }}
+                                        </div>
+                                    {% endif %}
 
                                     {% with widget_type=field|widget_type field_type=field|field_type %}
 
-                                        {% if widget_type == 'checkbox_input' %}
-                                            <label for="{{ field.id_for_label }}"
-                                                   class="{{ field_type }} {{ widget_type }} {% if field.field.required %}required{% endif %}">{{ field.label }}
-                                                {% if field.field.required %}*{% endif %}
-                                            </label>
-                                            <div class="form-help">
-                                                {% if field.help_text %}{{ field.help_text }}{% endif %}\
-                                            </div>
-                                            {{ field }}
-                                        {% elif widget_type == 're_captcha' %}
+                                        {% if widget_type == 're_captcha' %}
                                             {{ field }}
                                         {% else %}
                                             <label for="{{ field.id_for_label }}"
@@ -51,15 +48,10 @@
                                                 {% endif %}
                                             </label>
 
-                                            {% if widget_type == 'date_input' or widget_type == 'date_time_input' %}
-                                                <div class="{{ widget_type }}">
-                                                    {{ field }}
-                                                </div>
-                                            {% else %}
+                                            <div class="{{ widget_type }}">
                                                 {{ field }}
-                                            {% endif %}
+                                            </div>
                                         {% endif %}
-
 
                                     {% endwith %}
                                 {% endfor %}
