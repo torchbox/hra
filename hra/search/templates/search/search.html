@@ -3,46 +3,175 @@
 
 {% block body_class %}template-searchresults{% endblock %}
 
-{% block title %}{% if search_query %}Search results for &ldquo;{{ search_query }}&rdquo;{% else %}Search{% endif %}{% endblock %}
+{% block title %}{% if search_query %}Search results for &ldquo;{{ search_query }}&rdquo;{% else %}Search
+{% endif %}{% endblock %}
 
 {% block content %}
 
-    <h1>{% if search_query %}Search results for &ldquo;{{ search_query }}&rdquo;{% else %}Search{% endif %}</h1>
+    <div class="results-container results-container--blue">
+        {% spaceless %}
+            <div class="results-container__left">
 
-    <form action="{% url 'search' %}" method="get" role="search">
-        <input type="text" placeholder="Search…" name="query"{% if search_query %} value="{{ search_query }}"{% endif %}>
-        <input type="submit" value="Search">
-    </form>
+                <div class="search-filters">
+                    <div class="search-filters__heading">Search results</div>
 
-    {% get_search_promotions search_query as search_picks %}
-    {% if search_picks %}
-         <ul>
-            {% for pick in search_picks %}
-                <li>
-                    {% include "search/includes/search_result.html" with result=pick.page.specific %}
-                </li>
-             {% endfor %}
-         </ul>
-    {% endif %}
+                    <form action="{% url 'search' %}" method="get" role="search">
+                        <input class="search-filters__search" name="query" type="text" placeholder="Search&hellip;"
+                                {% if search_query %}
+                               value="{{ search_query }}"{% endif %}
+                        >
+                    </form>
 
-    {% if search_results %}
 
-        {% with count=search_results.paginator.count %}
-            {{ count }} result{{ count|pluralize }} found.
-        {% endwith %}
+                    <div class="search-filters__filter-main-heading">Filter results</div>
+                    <div class="search-filters__section-heading">Sort by</div>
 
-        <ul>
-            {% for result in search_results %}
-                <li>
-                    {% include "search/includes/search_result.html" with result=result.specific %}
-                </li>
-            {% endfor %}
-        </ul>
+                    <label class="custom-select__label custom-select--blue__label" for="custom-select--blue__select">Find
+                        advice by topic</label>
+                    <div class="custom-select custom-select--blue">
+                        <select id="custom-select custom-select--blue__select">
+                            <option value="option-1">Option 1</option>
+                            <option value="option-2">Option 2</option>
+                            <option value="option-3">Option 3</option>
+                            <option value="option-4">Option 4</option>
+                            <option value="option-5">Option 5</option>
+                            <option value="option-6">Option 6</option>
+                        </select>
+                    </div>
 
-        {% include "includes/pagination.html" with subpages=search_results %}
+                    <div class="search-filters__section-heading">Filter by type</div>
 
-    {% elif search_query and not search_picks %}
-        No results found.
-    {% endif %}
+                    <input class="checkbox" id="checkbox-id-value" type="checkbox">
+                    <label class="checkbox-label" for="checkbox-id-value">This is a checkbox label</label>
+                </div>
+
+            </div>
+            <div class="results-container__right">
+
+                {% if search_results %}
+
+                    {% if search_query %}
+                        {% with count=search_results.paginator.count %}
+                            <div class="results-container__heading">
+                                {{ count }} result{{ count|pluralize }} for <span>{{ search_query }}
+                            </div>
+                        {% endwith %}
+                    {% endif %}
+
+                    {# TODO: implement search picks #}
+                    {% get_search_promotions search_query as search_picks %}
+                    {% if search_picks %}
+                        <ul>
+                            {% for pick in search_picks %}
+                                <li>
+                                    {% include "search/includes/search_result.html" with result=pick.page.specific %}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+
+                    {# TODO: implement search results #}
+                    <ul>
+                        {% for result in search_results %}
+                            <li>
+                                {% include "search/includes/search_result.html" with result=result.specific %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+
+                    <ul class="results-listing">
+
+                        {# Result item #}
+                        <li class="results-listing__item js-border-result">
+                            <a href="">
+                                <div class="results-listing__item-border js-border-result__border"></div>
+                                <div class="results-listing__item-heading js-border-result__heading">Nullam quis risus
+                                    eget
+                                    urna mollis
+                                </div>
+                                <ul class="results-listing__item-meta">
+                                    <li class="date">29 Apr 2017</li>
+                                    <li class="author">Author: <span>John Smith</span></li>
+                                    <li class="category">Best practice</li>
+                                </ul>
+                                <div class="results-listing__item-content">Vivamus sagaittis lacus vel augue laoreet
+                                    rutrum
+                                    faucibus dolor auctor onec
+                                </div>
+                            </a>
+                        </li>
+                        {# Result item end #}
+
+                        {# Result item #}
+                        <li class="results-listing__item js-border-result">
+                            <a href="">
+                                <div class="results-listing__item-border js-border-result__border"></div>
+                                <div class="results-listing__item-heading js-border-result__heading">Short heading</div>
+                                <ul class="results-listing__item-meta">
+                                    <li class="date">29 Apr 2017</li>
+                                    <li class="author">Author: <span>John Smith</span></li>
+                                    <li class="category">Best practice</li>
+                                </ul>
+                                <div class="results-listing__item-content">Vivamus sagaittis lacus vel augue laoreet
+                                    rutrum
+                                    faucibus dolor auctor onec
+                                </div>
+                            </a>
+                        </li>
+                        {# Result item end #}
+
+                        {# Result item #}
+                        <li class="results-listing__item js-border-result">
+                            <a href="">
+                                <div class="results-listing__item-border js-border-result__border"></div>
+                                <div class="results-listing__item-heading js-border-result__heading">Lorem ipsum dolor
+                                    sit
+                                    amet
+                                </div>
+                                <ul class="results-listing__item-meta">
+                                    <li class="date">29 Apr 2017</li>
+                                    <li class="author">Author: <span>John Smith</span></li>
+                                    <li class="category">Best practice</li>
+                                </ul>
+                                <div class="results-listing__item-content">Vivamus sagaittis lacus vel augue laoreet
+                                    rutrum
+                                    faucibus dolor auctor onec
+                                </div>
+                            </a>
+                        </li>
+                        {# Result item end #}
+
+                        {# Result item #}
+                        <li class="results-listing__item js-border-result">
+                            <a href="">
+                                <div class="results-listing__item-border js-border-result__border"></div>
+                                <div class="results-listing__item-heading js-border-result__heading">Nullam quis risus
+                                    eget
+                                    urna mollis
+                                </div>
+                                <ul class="results-listing__item-meta">
+                                    <li class="date">29 Apr 2017</li>
+                                    <li class="author">Author: <span>John Smith</span></li>
+                                    <li class="category">Best practice</li>
+                                </ul>
+                                <div class="results-listing__item-content">Vivamus sagaittis lacus vel augue laoreet
+                                    rutrum
+                                    faucibus dolor auctor onec
+                                </div>
+                            </a>
+                        </li>
+                        {# Result item end #}
+
+                    </ul>
+
+                    {% include "includes/pagination.html" with subpages=search_results %}
+
+                {% elif search_query and not search_picks %}
+                    No results found.
+                {% endif %}
+            </div>
+        {% endspaceless %}
+    </div>
+
 
 {% endblock %}
