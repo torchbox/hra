@@ -2314,15 +2314,25 @@ function resultsBorder() {
 
     var $resultsResult = jquery('.js-border-result'),
         $resultsHeading = jquery('.js-border-result__heading'),
+        $resultsImage = jquery('.js-border-result__image'),
         $resultsBorder = jquery('.js-border-result__border');
 
     function setResultBorder() {
         $resultsResult.each(function () {
-            var headingWidth = jquery(this).closest('li').find($resultsHeading).width();
+            var $closestBorder = jquery(this).closest('li').find($resultsBorder),
+                headingWidth = jquery(this).closest('li').find($resultsHeading).width(),
+                imageAndHeadingWidth = headingWidth + 105;
 
-            jquery(this).closest('li').find($resultsBorder).css({
-                width: headingWidth
-            });
+            // Set larger border width if image is present
+            if ($resultsImage.length) {
+                $closestBorder.css({
+                    width: imageAndHeadingWidth
+                });
+            } else {
+                $closestBorder.css({
+                    width: headingWidth
+                });
+            }
         });
     }
 
@@ -2467,11 +2477,192 @@ function notification() {
     bindEvents();
 }
 
+function faqs() {
+
+    var $question = jquery('.faq-questions__item'),
+        $answer = jquery('.faq-answers__item'),
+        $answerList = jquery('.faq-panel--answers'),
+        $questionList = jquery('.faq-panel--questions'),
+        $answerClose = jquery('.faq-answers__close-answer'),
+        answersDisplay = 'faq-panel--answers-display',
+        questionsHide = 'faq-panel--questions-hide',
+        questionSelected = 'faq-questions__item--selected',
+        answerSelected = 'faq-answers__item--selected',
+        answerDisplay = 'faq-answers__item--display',
+        timeout = 100,
+        mobileBreakpoint = 800;
+
+    function deselectQuestions() {
+        $question.removeClass(questionSelected);
+    }
+
+    function deselectAnswers() {
+        $answer.removeClass(answerSelected);
+        $answer.removeClass(answerDisplay);
+    }
+
+    function selectQuestion($selectedQuestion) {
+        $selectedQuestion.addClass(questionSelected);
+    }
+
+    function showAnswers() {
+        setTimeout(function () {
+            $answerList.addClass(answersDisplay);
+            $questionList.addClass(questionsHide);
+        }, timeout);
+    }
+
+    function hideAnswers() {
+        $answerList.removeClass(answersDisplay);
+        $questionList.removeClass(questionsHide);
+    }
+
+    function selectAnswer(questionData) {
+        var $answer = $answerList.find('[data-faq-answer="' + questionData + '"]');
+
+        $answer.addClass(answerSelected);
+
+        setTimeout(function () {
+            $answer.addClass(answerDisplay);
+        }, timeout);
+    }
+
+    function positionAnswer() {
+        if (jquery(window).width() >= mobileBreakpoint) {
+            var $windowHeight = jquery(window).outerHeight(),
+                $itemHeight = $answerList.outerHeight(),
+                topValue = ($windowHeight - $itemHeight) / 2;
+
+            $answerList.css({
+                'top': topValue + 50
+            });
+
+            showAnswers();
+        }
+    }
+
+    function bindEvents() {
+        $question.on('click', function (e) {
+            e.preventDefault();
+
+            var $selectedQuestion = jquery(this),
+                questionData = jquery(this).attr('data-faq-question');
+
+            // Make all questions 'inactive'
+            deselectQuestions();
+
+            // Hide answers
+            deselectAnswers();
+
+            // Make selected question 'active'
+            selectQuestion($selectedQuestion);
+
+            // Get correct answer
+            selectAnswer(questionData);
+
+            // Centre answer
+            positionAnswer();
+        });
+
+        // Close answer with icon
+        $answerClose.on('click', function () {
+            return hideAnswers();
+        });
+    }
+
+    if (jquery('.faq-questions__item').length) {
+        positionAnswer();
+        bindEvents();
+    }
+}
+
+function tableInteraction() {
+
+    var $tablePinned = jquery('.table--pinned'),
+        $tableBody = jquery('.table--pinned tbody'),
+        $navigateLeft = jquery('.js-table-left'),
+        $navigateRight = jquery('.js-table-right'),
+        clickDistance = '200px',
+        speed = 300,
+        displayBuffer = 10;
+
+    var state = {
+        open: false,
+        busy: false
+    };
+
+    function scrollLeft() {
+
+        // Check if scrolling left is possible
+        if ($tableBody.scrollLeft() > 0) {
+            $tableBody.animate({
+                scrollLeft: '-=' + clickDistance + ''
+            }, speed);
+        }
+    }
+
+    function scrollRight() {
+        var scrollWidth = $tableBody[0].scrollWidth,
+            tableWidth = $tableBody.outerWidth(),
+            scrollPosition = $tableBody.scrollLeft(),
+            offset = scrollWidth - tableWidth - scrollPosition;
+
+        // Check if scrolling right is possible
+        if (offset !== 0) {
+            $tableBody.animate({
+                scrollLeft: '+=' + clickDistance + ''
+            }, speed);
+        }
+    }
+
+    function scroll(direction) {
+
+        // Scroll right
+        if (direction === 'right') {
+            if (!state.busy) {
+                state.busy = true;
+                setTimeout(function () {
+                    scrollRight();
+                    state.open = false;
+                    state.busy = false;
+                }, displayBuffer);
+            }
+        }
+
+        // Scroll left
+        else {
+                if (!state.busy) {
+                    state.busy = true;
+                    setTimeout(function () {
+                        scrollLeft();
+                        state.open = false;
+                        state.busy = false;
+                    }, displayBuffer);
+                }
+            }
+    }
+
+    function bindEvents() {
+        if ($tablePinned.length) {
+            $navigateLeft.on('click', function () {
+                return scroll('left');
+            });
+            $navigateRight.on('click', function () {
+                return scroll('right');
+            });
+        }
+    }
+
+    bindEvents();
+}
+
 glossaryTab();
 resultsBorder();
 disableTransition();
 sidebarMenu();
 notification();
+faqs();
+tableInteraction();
 
 })));
 //# sourceMappingURL=main.js.map
