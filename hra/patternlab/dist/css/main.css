@@ -2088,6 +2088,22 @@ textarea:focus {
   outline: 0;
 }
 
+.default-form__form-error {
+  max-width: 500px;
+  padding: 20px;
+  margin-bottom: 30px;
+  color: #fff;
+  background-color: #0c4e90;
+}
+
+.default-form__individual-error {
+  max-width: 500px;
+  padding: 10px 20px;
+  margin-bottom: 10px;
+  color: #fff;
+  background-color: #0c4e90;
+}
+
 .default-form label {
   font-size: 14px;
   font-size: 0.875rem;

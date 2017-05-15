@@ -19,13 +19,15 @@
 
                                 {# TODO: Needs styling #}
                                 {% if form.errors %}
-                                    There were some errors with your form. Please amend the fields highlighted below.
+                                    <div class="default-form__form-error">
+                                        There were some errors with your form. Please amend the fields highlighted below.
+                                    </div>
                                 {% endif %}
 
                                 {% for field in form %}
 
                                     {% if field.errors %}
-                                        <div class="errors">
+                                        <div class="default-form__individual-error">
                                             {# TODO: Needs styling #}
                                             {{ field.errors }}
                                         </div>
