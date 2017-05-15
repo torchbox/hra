@@ -83,6 +83,10 @@
 .table-navigation {
     margin: 50px 0 15px;
 
+    @include media-query(mobile) {
+        margin: 30px 0 -15px;
+    }
+
     &__heading {
         @include font-size(delta);
         color: $color--primary;
@@ -97,6 +101,10 @@
         background-color: transparent;
         border: 2px solid $color--quinary;
         border-radius: 50%;
+
+        @include media-query(mobile) {
+            display: none;
+        }
 
         &::before {
             position: absolute;
