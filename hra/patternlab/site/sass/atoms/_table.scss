@@ -35,25 +35,25 @@
     white-space: nowrap;
     vertical-align: top;
     background: radial-gradient(ellipse at left, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0) 75%) 0 center, radial-gradient(ellipse at right, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0) 75%) 100% center;
-    background-attachment: scroll, scroll;
+    background-attachment: scroll;
     background-repeat: no-repeat;
-    background-size: 10px 100%, 10px 100%;
+    background-size: 10px 100%;
     border-collapse: collapse;
     border-spacing: 0;
 
     // sass-lint:disable no-misspelled-properties, no-vendor-prefixes
     -webkit-overflow-scrolling: touch;
 
-    thead {
-        display: flex;
-        flex-shrink: 0;
-        min-width: min-content;
-    }
-
     tbody {
         display: flex;
         overflow-x: auto;
         overflow-y: hidden;
+    }
+
+    thead {
+        display: flex;
+        flex-shrink: 0;
+        min-width: min-content;
     }
 
     tr {
@@ -72,19 +72,6 @@
         // sass-lint:disable no-important
         background-image: none !important;
         border-left: 0;
-
-        &:first-child {
-            background-image: linear-gradient(to right, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0) 100%);
-            background-repeat: no-repeat;
-            background-size: 20px 100%;
-        }
-
-        &:last-child {
-            background-image: linear-gradient(to left, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0) 100%);
-            background-position: 100% 0;
-            background-repeat: no-repeat;
-            background-size: 20px 100%;
-        }
     }
 
     th:not(:last-child),
@@ -92,4 +79,3 @@
         border-bottom: 0;
     }
 }
-
