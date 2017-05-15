@@ -31,6 +31,7 @@
 /*------------------------------------*\
     $CONFIG
 \*------------------------------------*/
+@import 'config/fonts';
 @import 'config/variables';
 
 
@@ -79,6 +80,8 @@
 @import 'molecules/hero/hero';
 @import 'molecules/hero/hero--caption';
 @import 'molecules/hero/hero--inner';
+@import 'molecules/hero/hero--slim';
+@import 'molecules/hero/hero--colours';
 
 @import 'molecules/teaser-default';
 @import 'molecules/teaser-search';
@@ -88,6 +91,9 @@
 @import 'molecules/streamfield/highlight';
 @import 'molecules/streamfield/call-to-action';
 @import 'molecules/streamfield/related';
+@import 'molecules/streamfield/image-block';
+@import 'molecules/streamfield/image-alignment';
+@import 'molecules/streamfield/embed';
 
 @import 'molecules/results-container';
 @import 'molecules/results-listing';
@@ -102,6 +108,7 @@
 @import 'molecules/search-filters';
 @import 'molecules/pagination';
 @import 'molecules/notification';
+@import 'molecules/faqs';
 
 
 /*------------------------------------*\
@@ -109,6 +116,8 @@
 \*------------------------------------*/
 @import 'organisms/standard-index-body';
 @import 'organisms/standard-page-body';
+@import 'organisms/person-page-body';
+@import 'organisms/event-page-body';
 
 
 /*------------------------------------*\

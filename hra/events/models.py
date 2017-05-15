@@ -1,20 +1,18 @@
 from collections import defaultdict
 
 from django.conf import settings
-from django.core import checks
 from django.core.exceptions import ValidationError
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db import models
 from django.db.models.functions import Coalesce
 from django.utils import timezone
-from django.utils.http import urlencode
 from django.utils.translation import ugettext_lazy as _
 from django.utils.functional import cached_property
 
 from modelcluster.fields import ParentalKey
 from wagtail.wagtailadmin.edit_handlers import (
-    FieldPanel, FieldRowPanel, InlinePanel, MultiFieldPanel, StreamFieldPanel
-)
+    FieldPanel, FieldRowPanel, InlinePanel, MultiFieldPanel, StreamFieldPanel,
+    PageChooserPanel)
 from wagtail.wagtailcore.fields import RichTextField, StreamField
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailsearch import index
@@ -22,9 +20,7 @@ from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
 
 from hra.utils.blocks import StoryBlock
-from hra.utils.models import (
-    ListingFields, RelatedDocument, RelatedPage, SocialFields
-)
+from hra.utils.models import ListingFields, RelatedPage, SocialFields
 
 
 @register_snippet
@@ -35,10 +31,6 @@ class EventType(models.Model):
 
     def __str__(self):
         return self.title
-
-
-class EventPageRelatedDocument(RelatedDocument):
-    page = ParentalKey('events.EventPage', related_name='related_documents')
 
 
 class EventPageRelatedPage(RelatedPage):
@@ -70,9 +62,13 @@ class EventPage(Page, SocialFields, ListingFields):
     region = models.CharField(_('State or county'), blank=True, max_length=255)
     postcode = models.CharField(_('Zip or postal code'), blank=True, max_length=255)
     country = models.CharField(_('Country'), blank=True, max_length=255)
+    phone = models.CharField(_('Phone'), blank=True, max_length=255)
 
     introduction = models.TextField(blank=True)
     body = StreamField(StoryBlock())
+
+    subpage_types = []
+    parent_page_types = ['events.EventIndexPage']
 
     search_fields = Page.search_fields + [
         index.SearchField('introduction'),
@@ -103,13 +99,12 @@ class EventPage(Page, SocialFields, ListingFields):
             FieldPanel('region'),
             FieldPanel('postcode'),
             FieldPanel('country'),
+            FieldPanel('phone'),
         ], _('Location')),
 
         FieldPanel('introduction'),
         StreamFieldPanel('body'),
 
-        # TODO: Cleanup if we decide that we don't need related docs here
-        # InlinePanel('related_documents', label="Related documents"),
         InlinePanel('related_pages', label="Related pages"),
     ]
 
@@ -138,33 +133,29 @@ class EventPage(Page, SocialFields, ListingFields):
         if errors:
             raise ValidationError(errors)
 
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+
+        # Access siblings like this to get the same order as on the index page
+        context['siblings'] = self.get_parent().specific.upcoming_events
+
+        return context
+
+
+class EventIndexPageFeaturedPage(RelatedPage):
+    source_page = ParentalKey('events.EventIndexPage', related_name='featured_pages')
+
+    panels = [
+        PageChooserPanel('page', page_type='events.EventPage'),
+    ]
+
 
 class EventIndexPage(Page):
+    subpage_types = ['events.EventPage']
 
-    @classmethod
-    def check(cls, **kwargs):
-        is_mysql = any(['mysql' in db['ENGINE'].lower()
-                        for db in settings.DATABASES.values()])
-        errors = super(EventIndexPage, cls).check(**kwargs)
-        if is_mysql:
-            errors.append(
-                checks.Error(
-                    "Event Page uses Coalesce function; not tested on MySQL",
-                    hint="The query for returning past and future events uses "
-                    "django.db.models.functions.Coalesce, which on MySQL "
-                    "requires explicit casting to the correct database type, "
-                    "see https://docs.djangoproject.com/en/1.9/ref/models/database-functions/#coalesce. "
-                    "The Django documentation specifically mentions datetime "
-                    "types, but this codebase has been written using "
-                    "PostgreSQL, so no such casting or testing has been done. "
-                    "If your project uses Django 1.10+, then you can easily "
-                    "address this using django.db.models.functions.Cast, and "
-                    "on Django 1.9 this could easily be backported from 1.10.",
-                    obj=cls,
-                    id='events.E001',
-                )
-            )
-        return errors
+    content_panels = Page.content_panels + [
+        InlinePanel('featured_pages', label='Featured pages'),
+    ]
 
     def _annotated_descendant_events(self):
         return (
@@ -181,27 +172,12 @@ class EventIndexPage(Page):
             .order_by('start_date')
         )
 
-    @cached_property
-    def past_events(self):
-        return (
-            self._annotated_descendant_events()
-            .filter(latest_date__lt=timezone.now().date())
-            .order_by('-start_date')
-        )
-
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        past_events = self.past_events
-        upcoming_events = self.upcoming_events
 
-        past = request.GET.get('past', False)
-        if past:
-            events = past_events
-        else:
-            events = upcoming_events
-        per_page = settings.DEFAULT_PER_PAGE
+        events = self.upcoming_events
         page_number = request.GET.get('page')
-        paginator = Paginator(events, per_page)
+        paginator = Paginator(events, settings.DEFAULT_PER_PAGE)
 
         try:
             events = paginator.page(page_number)
@@ -211,13 +187,8 @@ class EventIndexPage(Page):
             events = paginator.page(paginator.num_pages)
 
         context.update({
-            'show_past': past,
             'events': events,
-            'past_events': past_events,
-            'upcoming_events': upcoming_events,
+            'siblings': self.get_siblings().live().public(),
         })
-
-        if past:
-            context['extra_url_params'] = urlencode({'past': True})
 
         return context

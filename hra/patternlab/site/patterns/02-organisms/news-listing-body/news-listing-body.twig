@@ -1,0 +1,25 @@
+<div class="default-body">
+  {% spaceless %}
+    <div class="grid grid--full">
+      <div class="grid__item three-tenths tablet--one-whole">
+        {% include "molecules-site-sidebar--no-transparency" %}
+      </div>
+      <div class="grid__item seven-tenths tablet--one-whole">
+        <div class="site-body site-body--restricted">
+          <div class="site-body__inner site-body__inner">
+            {% spaceless %}
+            <div class="grid grid--wide">
+              {% for teaser in newsTeasers %}
+                <div class="grid__item one-half mobile--one-whole">
+                  {% include "molecules-teaser-default" %}
+                </div>
+              {% endfor %}
+            </div>
+            {% endspaceless %}
+            {% include "molecules-results-listing" %}
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endspaceless %}
+</div>

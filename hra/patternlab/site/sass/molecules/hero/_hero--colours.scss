@@ -1,0 +1,24 @@
+/*------------------------------------*\
+    $HERO COLOURS
+\*------------------------------------*/
+
+.hero--purple {
+    position: relative;
+    background: {
+        size: cover;
+        image: linear-gradient(to right, #da4da1 0%, #8f4085 50%);
+    }
+
+    &::before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: {
+            size: 69px 85px;
+            image: url('../images/svg/hero-patterns/pattern-1.svg');
+        }
+        content: '';
+    }
+}

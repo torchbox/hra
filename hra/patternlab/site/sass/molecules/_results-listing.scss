@@ -5,6 +5,10 @@
 .results-listing {
     margin-top: 20px;
 
+    &--pushed {
+        margin-top: 50px;
+    }
+
     &__item {
         position: relative;
 
@@ -63,6 +67,27 @@
         width: 100px;
         height: 4px;
         background-color: #eee;
+
+        @include media-query(mobile) {
+            opacity: 0;
+        }
+    }
+
+    &__item-image {
+        display: inline-block;
+        width: 85px;
+        margin-right: 20px;
+        vertical-align: top;
+
+        img {
+            width: 100%;
+        }
+    }
+
+    &__item-right {
+        display: inline-block;
+        width: calc(100% - 105px);
+        vertical-align: top;
     }
 
     &__item-heading {
@@ -70,6 +95,10 @@
         display: inline-block;
         font-family: $font--secondary;
         font-weight: 600;
+
+        @include media-query(mobile) {
+            padding-right: 40px;
+        }
     }
 
     &__item-meta {
@@ -94,5 +123,36 @@
 
     &__item-content {
         font-size: 16px;
+    }
+
+    &__back {
+        position: relative;
+        padding-left: 35px;
+        margin: 40px 0 0 10px;
+        font-family: $font--secondary;
+        color: #000;
+
+        &::before {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            width: 20px;
+            height: 23px;
+            margin: auto 0;
+            background: {
+                size: cover;
+                image: url('../images/svg/blue-arrow.svg');
+            }
+            content: '';
+            transform: rotate(90deg);
+            transition: transform $default-transition-speed ease;
+        }
+
+        &:hover {
+            &::before {
+                transform: rotate(90deg) translate3d(0, 5px, 0);
+            }
+        }
     }
 }

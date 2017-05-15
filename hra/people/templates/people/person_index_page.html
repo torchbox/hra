@@ -1,30 +1,97 @@
 {% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags static %}
 
 {% block content %}
 
-    <div class="intro">
-        <div class="container">
-            <h1>{{ page.title }}</h1>
+    <div class="hero hero--slim hero--purple">
+        <div class="hero__content">
+            <div class="hero__breadcrumbs">
+                {% include 'navigation/breadcrumbs.html' %}
+            </div>
+            <h1 class="hero__heading">{{ page.title }}</h1>
         </div>
     </div>
 
-    <section class="main-body">
-        <div class="container">
-            {% if people.paginator.count %}
-                {% for person in people %}
-                    <article class="person">
-                        <h2><a href="{{ person.url }}">{{ person.first_name }} {{ person.last_name }}</a></h2>
-                        <p>{{ person.introduction }}</p>
-                    </article>
-                {% endfor %}
 
-                {% if people.paginator.count > 1 %}
-                    {% include "includes/pagination.html" with subpages=people %}
-                {% endif %}
-            {% else %}
-                {# no results #}
-            {% endif %}
-        </div>
-    </section>
+    <div class="default-body">
+        {% spaceless %}
+            <div class="grid grid--full">
+                <div class="grid__item three-tenths tablet--one-whole">
+
+                    {% include 'includes/teasers/site_sidebar.html' with no_transparency=True page=page siblings=siblings %}
+
+                </div>
+                <div class="grid__item seven-tenths tablet--one-whole">
+                    <div class="site-body site-body--restricted">
+                        <div class="site-body__inner site-body__inner">
+
+                            <h5>
+                                {{ page.introduction }}
+                            </h5>
+
+                            {% if people %}
+                                <ul class="results-listing results-listing--pushed">
+
+                                    {% for person_page in people %}
+
+                                        <li class="results-listing__item js-border-result">
+                                            <a href="{% pageurl person_page %}">
+                                                <div class="results-listing__item-border js-border-result__border"></div>
+                                                <div class="results-listing__item-image js-border-result__image">
+                                                    {% with person_image=person_page.listing_image|default:person_page.photo %}
+                                                        {% if person_image %}
+
+                                                            {% image person_image fill-100x100-c75 as person_image_thumbnail %}
+                                                            <img src="{{ person_image_thumbnail.url }}"
+                                                                 alt="{{ person_image.alt }}">
+
+                                                        {% else %}
+
+                                                            <img src="{% static 'dist/images/person_placeholder.png' %}"
+                                                                 alt="">
+
+                                                        {% endif %}
+                                                    {% endwith %}
+                                                </div>
+                                                <div class="results-listing__item-right">
+                                                    <div class="results-listing__item-heading js-border-result__heading">
+                                                        {{ person_page.listing_title|default:person_page.title }}
+                                                    </div>
+                                                    <ul class="results-listing__item-meta">
+                                                        <li>
+                                                            {{ person_page.job_title }}
+                                                        </li>
+                                                    </ul>
+
+                                                    {% if person_page.listing_summary %}
+                                                        <div class="results-listing__item-content">
+                                                            {{ person_page.listing_summary }}
+                                                        </div>
+                                                    {% endif %}
+                                                </div>
+                                            </a>
+                                        </li>
+
+                                    {% endfor %}
+
+                                </ul>
+
+                                {% with parent_page=page.get_parent %}
+                                    <a href="{% pageurl parent_page %}" class="results-listing__back">
+                                        Back to {{ parent_page.title|lower }}
+                                    </a>
+                                {% endwith %}
+
+                                {% include "includes/pagination.html" with subpages=people %}
+                            {% else %}
+                                {# no items #}
+                            {% endif %}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endspaceless %}
+    </div>
 
 {% endblock %}

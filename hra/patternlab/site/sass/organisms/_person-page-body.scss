@@ -1,0 +1,23 @@
+/*------------------------------------*\
+    $PERSON PAGE BODY
+\*------------------------------------*/
+
+.person-page {
+    &__bio {
+        .article & {
+            p {
+                font-size: 20px;
+
+                &:first-of-type {
+                    margin-top: 0;
+                }
+            }
+        }
+    }
+
+    &__back {
+        display: inline-block;
+        margin-top: 40px;
+    }
+}
+

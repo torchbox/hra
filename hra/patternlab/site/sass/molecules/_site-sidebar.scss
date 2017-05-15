@@ -23,6 +23,24 @@
         background: #f4f4f4;
     }
 
+    &--no-transparency {
+        padding: 100px 60px 60px;
+        margin-top: -70px;
+        background: #fff;
+
+        @include media-query(desktop) {
+            padding: 25px;
+        }
+
+        @include media-query(tablet) {
+            width: calc(100% - 20px);
+            padding-bottom: 0;
+            padding-left: 60px;
+            margin-top: 50px;
+            background: #f4f4f4;
+        }
+    }
+
     &__inner {
         float: right;
         max-width: 300px;

@@ -1,0 +1,43 @@
+{
+    "title" : "Event listing page",
+    "heroTitle" : "Event listing",
+    "sidebarMenu" : [
+        {
+            "label" : "Overview"
+        },
+        {
+            "label" : "What we do"
+        },
+        {
+            "label" : "Who we are"
+        },
+        {
+            "label" : "Committees & Services"
+        },
+        {
+            "label" : "Latest consultations"
+        },
+        {
+            "label" : "Partnerships"
+        },
+        {
+            "label" : "News and updates",
+            "activeState" : "site-sidebar__menu-item--active"
+        },
+        {
+            "label" : "Vacancies"
+        }
+    ],
+    "eventTeasers" : [
+        {
+            "title" : "Featured event",
+            "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+            "image" : "../../../images/teaser.png"
+        },
+        {
+            "title" : "Featured event",
+            "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+            "image" : "../../../images/teaser.png"
+        }
+    ]
+}

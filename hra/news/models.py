@@ -9,14 +9,11 @@ from wagtail.wagtailcore.models import Page
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from wagtail.wagtailcore.fields import StreamField
 from wagtail.wagtailadmin.edit_handlers import (
-    StreamFieldPanel, FieldPanel, InlinePanel
-)
+    StreamFieldPanel, FieldPanel, InlinePanel,
+    PageChooserPanel)
 from wagtail.wagtailsearch import index
 
-from hra.utils.models import (
-    ListingFields, SocialFields, RelatedPage,
-    RelatedDocument
-)
+from hra.utils.models import ListingFields, SocialFields, RelatedPage
 from hra.utils.blocks import StoryBlock
 
 
@@ -36,13 +33,6 @@ class NewsPageCategory(models.Model):
     ]
 
 
-class NewsPageRelatedDocument(RelatedDocument):
-    page = ParentalKey(
-        'news.NewsPage',
-        related_name='related_documents'
-    )
-
-
 class NewsPageRelatedPage(RelatedPage):
     source_page = ParentalKey(
         'news.NewsPage',
@@ -57,6 +47,7 @@ class NewsPage(Page, SocialFields, ListingFields):
         help_text="Use this field to override the date that the "
         "news item appears to have been published."
     )
+    author = models.CharField(blank=True, max_length=128)
     introduction = models.TextField(blank=True)
     body = StreamField(StoryBlock())
 
@@ -67,11 +58,10 @@ class NewsPage(Page, SocialFields, ListingFields):
 
     content_panels = Page.content_panels + [
         FieldPanel('publication_date'),
+        FieldPanel('author'),
         FieldPanel('introduction'),
         StreamFieldPanel('body'),
         InlinePanel('categories', label="Categories"),
-        # TODO: Cleanup if we decide that we don't need related docs here
-        # InlinePanel('related_documents', label="Related documents"),
         InlinePanel('related_pages', label="Related pages"),
     ]
 
@@ -89,14 +79,19 @@ class NewsPage(Page, SocialFields, ListingFields):
             return self.first_published_at
 
 
+class NewsIndexFeaturedPage(RelatedPage):
+    source_page = ParentalKey('news.NewsIndex', related_name='featured_pages')
+
+    panels = [
+        PageChooserPanel('page', page_type='news.NewsPage'),
+    ]
+
+
 class NewsIndex(Page, SocialFields):
     def get_context(self, request, *args, **kwargs):
         news = NewsPage.objects.live().public().descendant_of(self).annotate(
             date=Coalesce('publication_date', 'first_published_at')
         ).order_by('-date')
-
-        if request.GET.get('category'):
-            news = news.filter(categories=request.GET.get('category'))
 
         # Pagination
         page = request.GET.get('page', 1)
@@ -111,12 +106,11 @@ class NewsIndex(Page, SocialFields):
         context = super().get_context(request, *args, **kwargs)
         context.update(
             news=news,
-            # Only show categories that have been used
-            categories=NewsPageCategory.objects.all().values_list(
-                'category__pk', 'category__name'
-            ).distinct()
+            siblings=self.get_siblings().live().public(),
         )
         return context
 
     subpage_types = ['NewsPage']
-    parent_page_types = ['home.HomePage']
+    content_panels = Page.content_panels + [
+        InlinePanel('featured_pages', label='Featured pages'),
+    ]

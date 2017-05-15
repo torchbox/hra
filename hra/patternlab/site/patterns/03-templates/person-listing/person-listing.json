@@ -1,0 +1,31 @@
+{
+    "title" : "Person listing page",
+    "heroTitle" : "Board members",
+    "sidebarMenu" : [
+        {
+            "label" : "Overview"
+        },
+        {
+            "label" : "What we do"
+        },
+        {
+            "label" : "Who we are",
+            "activeState" : "site-sidebar__menu-item--active"
+        },
+        {
+            "label" : "Committees & Services"
+        },
+        {
+            "label" : "Latest consultations"
+        },
+        {
+            "label" : "Partnerships"
+        },
+        {
+            "label" : "News and updates"
+        },
+        {
+            "label" : "Vacancies"
+        }
+    ]
+}

@@ -1,47 +1,68 @@
 {% extends "base.html" %}
-{% load wagtailcore_tags wagtailimages_tags static %}
+{% load wagtailcore_tags %}
 
 {% block content %}
 
-    <h1>{{ page.title }}</h1>
-    <p>{{ page.intro }}</p>
+    <div class="hero hero--with-caption">
+        <div class="hero__caption">
+            <div class="hero__caption-breadcrumbs">
+                {% include 'navigation/breadcrumbs.html' %}
+            </div>
+            <h1 class="hero__caption-title">{{ page.title }}</h1>
+            <h2 class="hero__caption-subtitle">{{ page.hero_introduction }}</h2>
+        </div>
+    </div>
 
-    <section class="listing">
-        {% if subpages.paginator.count %}
-            {% if subpages.object_list.exists %}
-                <ul role="list">
-                    {% for subpage in subpages.object_list.specific %}
-                        <li>
-                            <a href="{% pageurl subpage %}">
-                                {% if subpage.listing_image %}
-                                    {% image subpage.listing_image fill-450x300 %}
-                                {% endif %}
-                                <div>
-                                    <h2 role="listitem">
-                                        {% if subpage.listing_title %}
-                                            {{ subpage.listing_title }}
-                                        {% else %}
-                                            {{ subpage.title }}
+    <div class="default-body">
+        {% spaceless %}
+            <div class="grid grid--full">
+                <div class="grid__item three-tenths tablet--one-whole">
+
+                    {% include 'includes/teasers/site_sidebar.html' with page=page siblings=siblings %}
+
+                </div>
+                <div class="grid__item seven-tenths tablet--one-whole">
+
+                    <div class="site-body">
+                        <div class="site-body__inner">
+                            <article class="article">
+                                <h2>{{ page.title }}</h2>
+                                <p>
+                                    {{ page.introduction }}
+                                </p>
+                            </article>
+
+                            {% spaceless %}
+                                <div class="site-body__grid">
+                                    <div class="grid grid--wide">
+
+                                        <div class="grid__item three-fifths desktop--one-whole">
+                                            {% include 'includes/teasers/teaser_default.html' with section_pages=page.section_pages.all %}
+                                        </div>
+
+                                        {% if page.call_to_action %}
+
+                                            <div class="grid__item two-fifths desktop--one-whole">
+                                                <div class="grid grid--wide">
+                                                    <div class="grid__item one-whole desktop--one-half mobile--one-whole">
+
+                                                        {% include 'includes/call_to_action.html' with call_to_action=page.call_to_action %}
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                         {% endif %}
-                                    </h2>
-                                    {% if subpage.listing_summary %}
-                                        <p>{{ subpage.listing_summary }}</p>
-                                    {% endif %}
+
+                                    </div>
                                 </div>
-                            </a>
-                        </li>
-                    {% endfor %}
-                </ul>
-            {% else %}
-                {# no items on this page #}
-            {% endif %}
+                            {% endspaceless %}
+                        </div>
+                    </div>
 
-            {% include "includes/pagination.html" %}
-
-        {% else %}
-            {# no items on any page #}
-        {% endif %}
-
-    </section>
+                </div>
+            </div>
+        {% endspaceless %}
+    </div>
 
 {% endblock %}

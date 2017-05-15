@@ -12,7 +12,7 @@
     &::before {
         position: absolute;
         top: 40px;
-        right: 18px;
+        right: 40px;
         width: 40px;
         height: 46px;
         background: {
@@ -26,7 +26,7 @@
     &__heading {
         &,
         .article & {
-            padding: 0 60px 0 0;
+            padding: 0 70px 0 0;
             margin-bottom: 10px;
             line-height: 1.2;
             color: #fff;
@@ -39,6 +39,46 @@
             @include font-size(milli);
             margin: 0;
             color: #fff;
+        }
+    }
+}
+
+.cta-structure {
+    position: relative;
+    min-height: 150px;
+    margin: 30px 0;
+
+    @include media-query(desktop) {
+        margin: 0;
+    }
+
+    &__left,
+    &__right {
+        display: inline-block;
+        vertical-align: top;
+    }
+
+    &__left {
+        width: 60%;
+
+        @include media-query(desktop) {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+    }
+
+    &__right {
+        position: absolute;
+        top: 20px;
+        right: -19%;
+        width: 50%;
+
+        @include media-query(desktop) {
+            position: static;
+        }
+
+        @include media-query(tablet) {
+            width: 100%;
         }
     }
 }

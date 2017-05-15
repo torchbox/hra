@@ -1,0 +1,31 @@
+/*------------------------------------*\
+    $IMAGE BLOCK
+\*------------------------------------*/
+
+.image-block {
+    &,
+    .article & {
+        position: relative;
+        margin: 30px 0;
+
+        img {
+            width: 100%;
+            height: auto;
+        }
+
+        &__caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            padding: 15px 20px;
+            margin: 0;
+            font-family: $font--secondary;
+            background-color: #fff;
+
+            @include media-query(tablet) {
+                @include font-size(milli);
+                padding: 10px;
+            }
+        }
+    }
+}

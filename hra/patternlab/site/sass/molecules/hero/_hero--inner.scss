@@ -10,7 +10,7 @@
         background: {
             color: $color--primary;
             size: 69px 85px;
-            image: url('../images/svg/hero-pattern-1.svg');
+            image: url('../images/svg/hero-patterns/pattern-1.svg');
         }
 
         @include media-query(laptop) {
@@ -44,6 +44,40 @@
                 a,
                 span {
                     color: #fff;
+                }
+
+                a {
+                    position: relative;
+                    padding-right: 14px;
+
+                    // Chevron
+                    &::after {
+                        position: absolute;
+                        top: 0;
+                        right: 2px;
+                        font-size: 19px;
+                        line-height: 16px;
+                        content: '\203A';
+                    }
+
+                    // Underline
+                    &::before {
+                        position: absolute;
+                        bottom: -3px;
+                        left: 0;
+                        width: calc(100% - 14px);
+                        height: 1px;
+                        background-color: rgba(255, 255, 255, 0.7);
+                        content: '';
+                        opacity: 0;
+                        transition: opacity $default-transition-speed ease;
+                    }
+
+                    &:hover {
+                        &::before {
+                            opacity: 1;
+                        }
+                    }
                 }
             }
         }

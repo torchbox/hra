@@ -18,6 +18,12 @@
             background: #fff;
             transform: none;
         }
+
+        &--flat {
+            padding-bottom: 50px;
+            background: none;
+            transform: none;
+        }
     }
 
     &__content {

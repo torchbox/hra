@@ -1,0 +1,50 @@
+{% load wagtailcore_tags wagtailimages_tags static %}
+
+{% comment %}
+Template to display default teasers. Takes:
+
+    * section_pages - a PageQuerySet object
+
+{% endcomment %}
+
+{% spaceless %}
+    <div class="grid grid--wide">
+
+        {% static 'dist/images/teaser.png' as default_listing_image %}
+        {% for teaser in section_pages %}
+            {% with teaser_page=teaser.page.specific %}
+                {% if teaser_page.live %}
+
+                    {% if teaser_page.listing_image %}
+                        {% image teaser_page.listing_image width-600 as listing_image %}
+                    {% endif %}
+
+                    <div class="grid__item one-half mobile--one-whole">
+
+                        <a class="teaser" href="{% pageurl teaser_page %}">
+                            <div class="teaser__image"
+                                 style="background-image:url('{{ listing_image.url|default:default_listing_image }}')">
+                                <div class="teaser__meta">
+                                    <div class="teaser__title">
+                                        {{ teaser_page.listing_title|default:teaser_page.title }}
+                                    </div>
+                                </div>
+                            </div>
+                            {% if teaser_page.listing_summary %}
+                                <div class="teaser__description">
+                                    <p>
+                                        {{ teaser_page.listing_summary }}
+                                    </p>
+                                    {% include 'includes/svg/default-arrow.html' %}
+                                </div>
+                            {% endif %}
+                        </a>
+
+                    </div>
+
+                {% endif %}
+            {% endwith %}
+        {% endfor %}
+
+    </div>
+{% endspaceless %}

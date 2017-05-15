@@ -1,6 +1,12 @@
 {% load wagtailcore_tags %}
 
-{# TODO: Needs styles #}
-{{ value.side_text|richtext }}
-
-{% include 'includes/call_to_action.html' with call_to_action=value.call_to_action %}
+{% spaceless %}
+<div class="cta-structure">
+  <div class="cta-structure__left">
+    {{ value.side_text|richtext }}
+  </div>
+  <div class="cta-structure__right">
+    {% include 'includes/call_to_action.html' with call_to_action=value.call_to_action %}    
+  </div>
+</div>
+{% endspaceless %}

@@ -1,4 +1,4 @@
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags navigation_tags %}
 
 <header class="site-header">
     {% spaceless %}
@@ -13,14 +13,9 @@
             </div>
             <div class="grid__item eight-tenths mobile--two-thirds">
                 <div class="site-header__right js-mobile-menu">
-                    {% spaceless %}
-                        {# TODO: Must be replaced with editable menu #}
-                        <ul class="main-menu">
-                            <li class="main-menu__item"><a href="#">Improving research</a></li>
-                            <li class="main-menu__item"><a href="#">Approvals &amp; amendments</a></li>
-                            <li class="main-menu__item"><a href="#">About us</a></li>
-                        </ul>
-                    {% endspaceless %}
+
+                    {% headernav %}
+
                     <label class="site-header__search-label" for="site-search">Search HRA</label>
                     <input type="text" class="site-header__search" id="site-search" placeholder="Search&hellip;">
                 </div>
