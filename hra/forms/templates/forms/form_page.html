@@ -1,50 +1,85 @@
 {% extends "base.html" %}
-{% load wagtailcore_tags wagtailimages_tags util_tags static %}
+{% load wagtailcore_tags wagtailimages_tags static util_tags %}
 
 {% block content %}
 
-    <div class="intro">
-        <div class="container">
-            <h1>{{ page.title }}</h1>
-            <p>{{ page.introduction }}</p>
-        </div>
-    </div>
+    <div class="contact-page-body">
 
-    <section class="main-body">
-        <div class="container">
-            {% if page.form_fields %}
-                <form action="{% pageurl page %}" method="post">
-                    <div>
-                        {% csrf_token %}
+        <div class="contact">
+            {% spaceless %}
+                <div class="contact__left">
+                    <h1 class="contact__heading">
+                        {{ page.title }}
+                    </h1>
 
-                        {% if form.errors %}
-                            There were some errors with your form. Please amend the fields highlighted below.
+                    {% if page.form_fields %}
+                        <form action="{% pageurl page %}" method="post" class="default-form" novalidate>
+                            <div>
+                                {% csrf_token %}
+
+                                {# TODO: Needs styling #}
+                                {% if form.errors %}
+                                    There were some errors with your form. Please amend the fields highlighted below.
+                                {% endif %}
+
+                                {% for field in form %}
+
+                                    {% if field.errors %}
+                                        <div class="errors">
+                                            {# TODO: Needs styling #}
+                                            {{ field.errors }}
+                                        </div>
+                                    {% endif %}
+
+                                    {% with widget_type=field|widget_type field_type=field|field_type %}
+
+                                        {% if widget_type == 're_captcha' %}
+                                            {{ field }}
+                                        {% else %}
+                                            <label for="{{ field.id_for_label }}"
+                                                   class="{{ field_type }} {{ widget_type }} {% if field.field.required %}required{% endif %}">
+                                                {{ field.label }}
+
+                                                {% if field.help_text or field.field.required %}
+                                                    <span>
+                                                        &ndash; {% if field.field.required %}Required.{% endif %}
+                                                        {% if field.help_text %}{{ field.help_text }}{% endif %}
+                                                    </span>
+                                                {% endif %}
+                                            </label>
+
+                                            <div class="{{ widget_type }}">
+                                                {{ field }}
+                                            </div>
+                                        {% endif %}
+
+                                    {% endwith %}
+                                {% endfor %}
+
+                                <input type="submit"
+                                       {% if page.action_text %}value="{{ page.action_text|safe }}"
+                                       {% else %}value="Submit"{% endif %}
+                                       class="default-submit">
+                            </div>
+                        </form>
+                    {% endif %}
+
+                </div>
+                <div class="contact__right">
+                    <div class="contact__content">
+
+                        {% if page.introduction %}
+                            <p>
+                                {{ page.introduction }}
+                            </p>
                         {% endif %}
 
-                        {% for field in form %}
-                            {{ field.errors }}
-
-                            {% with widget_type=field|widget_type field_type=field|field_type %}
-
-                                {% if widget_type == 'checkbox_input' %}
-                                    <label for="{{ field.id_for_label }}" class="{{ field_type }} {{ widget_type }} {% if field.field.required %}required{% endif %}">{{ field.label }} {% if field.field.required %}*{% endif %}</label>
-                                    <div class="form-help">{% if field.help_text %}{{ field.help_text }}{% endif %}</div>
-                                    {{ field }}
-                                {% else %}
-                                    <label for="{{ field.id_for_label }}" class="{{ field_type }} {{ widget_type}} {% if field.field.required %}required{% endif %}">{{ field.label }} {% if field.field.required %}*{% endif %}</label>
-                                    <div class="form-help">{% if field.help_text %}{{ field.help_text }}{% endif %}</div>
-
-                                    {% if widget_type == 'date_input' or widget_type == 'date_time_input' %}<div class="{{ widget_type }}">{% endif %}
-                                    {{ field }}
-                                    {% if widget_type == 'date_input' or widget_type == 'date_time_input' %}</div>{% endif %}
-                                {% endif %}
-                            {% endwith %}
-                        {% endfor %}
-                        <input type="submit" value="{% if page.action_text %}{{ page.action_text|safe }}{% else %}Submit{% endif %}" />
+                        {{ page.body|richtext }}
                     </div>
-                </form>
-            {% endif %}
+                </div>
+            {% endspaceless %}
         </div>
-    </section>
+
+    </div>
 
 {% endblock %}

@@ -1,12 +1,25 @@
 {% extends "base.html" %}
-{% load wagtailcore_tags wagtailimages_tags static %}
+{% load wagtailcore_tags %}
 
 {% block content %}
 
-    <div class="intro">
-        <div class="container">
-            <h1>Thank you</h1>
-            <div>{{ page.thank_you_text|richtext }}</div>
+    <div class="hero hero--inner">
+        <div class="hero__content">
+            <div class="hero__breadcrumbs">
+                {% include "navigation/breadcrumbs.html" %}
+            </div>
+            <h1 class="hero__heading">{{ page.title }}</h1>
+        </div>
+    </div>
+
+    <div class="standard-page-body">
+        <div class="standard-page-body__wrapper">
+            <div class="standard-page-body__content">
+                <article class="article">
+                    <h1>{{ page.title }}</h1>
+                    {{ page.thank_you_text|richtext }}
+                </article>
+            </div>
         </div>
     </div>
 
