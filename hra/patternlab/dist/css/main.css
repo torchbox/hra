@@ -2170,7 +2170,7 @@ textarea:focus {
   font-size: 14px;
   font-size: 0.875rem;
   width: 100%;
-  margin: 30px 0;
+  margin: 10px 0;
   text-align: left;
   border-spacing: 0;
 }
@@ -2240,6 +2240,66 @@ textarea:focus {
 .table--pinned th:not(:last-child),
 .table--pinned td:not(:last-child) {
   border-bottom: 0;
+}
+
+.table-navigation {
+  margin: 50px 0 15px;
+}
+
+.table-navigation__heading {
+  font-size: 22px;
+  font-size: 1.375rem;
+  color: #0d61b5;
+  text-align: center;
+}
+
+.table-navigation__button {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  background-color: transparent;
+  border: 2px solid #ac2a73;
+  border-radius: 50%;
+}
+
+.table-navigation__button::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 14px;
+  height: 16px;
+  margin: auto;
+  background-size: cover;
+  background-image: url("../images/svg/purple-arrow.svg");
+  content: '';
+  transition: transform 300ms ease;
+}
+
+.table-navigation__button:focus {
+  outline: 0;
+}
+
+.table-navigation__button--left::before {
+  transform: rotate(90deg);
+}
+
+.table-navigation__button--left:hover::before {
+  transform: rotate(90deg) translate3d(0, 3px, 0);
+}
+
+.table-navigation__button--right {
+  float: right;
+}
+
+.table-navigation__button--right::before {
+  transform: rotate(-90deg);
+}
+
+.table-navigation__button--right:hover::before {
+  transform: rotate(-90deg) translate3d(0, 3px, 0);
 }
 
 /*------------------------------------*    $MOLECULES

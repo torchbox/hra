@@ -5,7 +5,7 @@
 .table {
     @include font-size(milli);
     width: 100%;
-    margin: 30px 0;
+    margin: 10px 0;
     text-align: left;
     border-spacing: 0;
 
@@ -77,5 +77,72 @@
     th:not(:last-child),
     td:not(:last-child) {
         border-bottom: 0;
+    }
+}
+
+.table-navigation {
+    margin: 50px 0 15px;
+
+    &__heading {
+        @include font-size(delta);
+        color: $color--primary;
+        text-align: center;
+    }
+
+    &__button {
+        position: relative;
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+        background-color: transparent;
+        border: 2px solid $color--quinary;
+        border-radius: 50%;
+
+        &::before {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            width: 14px;
+            height: 16px;
+            margin: auto;
+            background: {
+                size: cover;
+                image: url('../images/svg/purple-arrow.svg');
+            }
+            content: '';
+            transition: transform $default-transition-speed ease;
+        }
+
+        &:focus {
+            outline: 0;
+        }
+
+        &--left {
+            &::before {
+                transform: rotate(90deg);
+            }
+
+            &:hover {
+                &::before {
+                    transform: rotate(90deg) translate3d(0, 3px, 0);
+                }
+            }
+        }
+
+        &--right {
+            float: right;
+
+            &::before {
+                transform: rotate(-90deg);
+            }
+
+            &:hover {
+                &::before {
+                    transform: rotate(-90deg) translate3d(0, 3px, 0);
+                }
+            }
+        }
     }
 }
