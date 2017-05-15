@@ -67,9 +67,12 @@
                 </div>
                 <div class="contact__right">
                     <div class="contact__content">
-                        <p>
-                            {{ page.introduction }}
-                        </p>
+
+                        {% if page.introduction %}
+                            <p>
+                                {{ page.introduction }}
+                            </p>
+                        {% endif %}
 
                         {{ page.body|richtext }}
                     </div>
