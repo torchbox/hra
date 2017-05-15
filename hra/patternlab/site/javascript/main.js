@@ -4,6 +4,7 @@ import disableTransition from './components/disable-transition';
 import sidebarMenu from './components/sidebar-menu';
 import notification from './components/notification';
 import faqs from './components/faqs';
+import tableInteraction from './components/table-interaction';
 
 glossaryTab();
 resultsBorder();
@@ -11,3 +12,4 @@ disableTransition();
 sidebarMenu();
 notification();
 faqs();
+tableInteraction();
