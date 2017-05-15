@@ -2200,24 +2200,24 @@ textarea:focus {
   white-space: nowrap;
   vertical-align: top;
   background: radial-gradient(ellipse at left, rgba(0, 0, 0, 0.2) 0%, transparent 75%) 0 center, radial-gradient(ellipse at right, rgba(0, 0, 0, 0.2) 0%, transparent 75%) 100% center;
-  background-attachment: scroll, scroll;
+  background-attachment: scroll;
   background-repeat: no-repeat;
-  background-size: 10px 100%, 10px 100%;
+  background-size: 10px 100%;
   border-collapse: collapse;
   border-spacing: 0;
   -webkit-overflow-scrolling: touch;
-}
-
-.table--pinned thead {
-  display: flex;
-  flex-shrink: 0;
-  min-width: min-content;
 }
 
 .table--pinned tbody {
   display: flex;
   overflow-x: auto;
   overflow-y: hidden;
+}
+
+.table--pinned thead {
+  display: flex;
+  flex-shrink: 0;
+  min-width: min-content;
 }
 
 .table--pinned tr {
@@ -2235,19 +2235,6 @@ textarea:focus {
 .table--pinned td {
   background-image: none !important;
   border-left: 0;
-}
-
-.table--pinned td:first-child {
-  background-image: linear-gradient(to right, white 50%, rgba(255, 255, 255, 0) 100%);
-  background-repeat: no-repeat;
-  background-size: 20px 100%;
-}
-
-.table--pinned td:last-child {
-  background-image: linear-gradient(to left, white 50%, rgba(255, 255, 255, 0) 100%);
-  background-position: 100% 0;
-  background-repeat: no-repeat;
-  background-size: 20px 100%;
 }
 
 .table--pinned th:not(:last-child),
