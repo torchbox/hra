@@ -2,6 +2,7 @@ from django.db import models
 from django.db.models.functions import Coalesce
 from django.conf import settings
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from django.utils.functional import cached_property
 
 from modelcluster.fields import ParentalKey
 
@@ -20,7 +21,7 @@ from hra.utils.blocks import StoryBlock
 class NewsPageCategory(models.Model):
     page = ParentalKey(
         'news.NewsPage',
-        related_name='categories'
+        related_name='category_relationships'
     )
     category = models.ForeignKey(
         'categories.Category',
@@ -61,7 +62,7 @@ class NewsPage(Page, SocialFields, ListingFields):
         FieldPanel('author'),
         FieldPanel('introduction'),
         StreamFieldPanel('body'),
-        InlinePanel('categories', label="Categories"),
+        InlinePanel('category_relationships', label="Categories"),
         InlinePanel('related_pages', label="Related pages"),
     ]
 
@@ -77,6 +78,13 @@ class NewsPage(Page, SocialFields, ListingFields):
             return self.publication_date
         else:
             return self.first_published_at
+
+    @cached_property
+    def categories(self):
+        categories = [
+            n.category for n in self.category_relationships.all()
+        ]
+        return categories
 
 
 class NewsIndexFeaturedPage(RelatedPage):

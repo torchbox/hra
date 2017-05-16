@@ -3,46 +3,84 @@
 
 {% block body_class %}template-searchresults{% endblock %}
 
-{% block title %}{% if search_query %}Search results for &ldquo;{{ search_query }}&rdquo;{% else %}Search{% endif %}{% endblock %}
+{% block title %}{% if search_query %}Search results for &ldquo;{{ search_query }}&rdquo;{% else %}Search
+{% endif %}{% endblock %}
 
 {% block content %}
 
-    <h1>{% if search_query %}Search results for &ldquo;{{ search_query }}&rdquo;{% else %}Search{% endif %}</h1>
+    <div class="results-container results-container--blue">
+        {% spaceless %}
+            <div class="results-container__left">
 
-    <form action="{% url 'search' %}" method="get" role="search">
-        <input type="text" placeholder="Search…" name="query"{% if search_query %} value="{{ search_query }}"{% endif %}>
-        <input type="submit" value="Search">
-    </form>
+                <div class="search-filters">
+                    <div class="search-filters__heading">Search results</div>
 
-    {% get_search_promotions search_query as search_picks %}
-    {% if search_picks %}
-         <ul>
-            {% for pick in search_picks %}
-                <li>
-                    {% include "search/includes/search_result.html" with result=pick.page.specific %}
-                </li>
-             {% endfor %}
-         </ul>
-    {% endif %}
+                    <form action="{% url 'search' %}" method="get" role="search" class="js-main-search-form">
+                        <input class="search-filters__search" name="query" type="text" placeholder="Search&hellip;"
+                                {% if search_query %}
+                               value="{{ search_query }}"{% endif %}
+                        >
 
-    {% if search_results %}
 
-        {% with count=search_results.paginator.count %}
-            {{ count }} result{{ count|pluralize }} found.
-        {% endwith %}
+                        <div class="search-filters__filter-main-heading">Filter by type</div>
+                        {#<div class="search-filters__section-heading">Filter by type</div>#}
 
-        <ul>
-            {% for result in search_results %}
-                <li>
-                    {% include "search/includes/search_result.html" with result=result.specific %}
-                </li>
-            {% endfor %}
-        </ul>
+                        {% for page_type in page_types %}
+                            <input class="checkbox" type="checkbox" name="type"
+                                   id="page_type-{{ page_type.pk }}"
+                                   value="{{ page_type.pk }}"
+                                   {% if page_type.pk in selected_page_type_pks %}checked{% endif %}
+                            >
+                            <label class="checkbox-label"
+                                   for="page_type-{{ page_type.pk }}"
+                            >
+                                {{ page_type.name }}
+                            </label>
+                        {% endfor %}
 
-        {% include "includes/pagination.html" with subpages=search_results %}
+                    </form>
+                </div>
 
-    {% elif search_query and not search_picks %}
-        No results found.
-    {% endif %}
+            </div>
+            <div class="results-container__right">
+                {% get_search_promotions search_query as search_picks %}
+
+                {% if search_results or search_picks %}
+
+                    {% if search_query %}
+                        {% with count=search_results.paginator.count|add:search_picks.count %}
+                            <div class="results-container__heading">
+                                {{ count }} result{{ count|pluralize }} for <span>{{ search_query }}</span>
+                            </div>
+                        {% endwith %}
+                    {% endif %}
+
+                    <ul class="results-listing">
+
+                        {% for pick in search_picks %}
+                            <li>
+                                {% include "search/includes/search_result.html" with result=pick.page.specific %}
+                            </li>
+                        {% endfor %}
+
+                        {% for result in search_results %}
+                            <li>
+                                {% include "search/includes/search_result.html" with result=result.specific %}
+                            </li>
+                        {% endfor %}
+
+                    </ul>
+
+                    {% include "includes/pagination.html" with subpages=search_results %}
+
+                {% else %}
+                    <div class="results-container__heading">
+                        No results found.
+                    </div>
+                {% endif %}
+            </div>
+        {% endspaceless %}
+    </div>
+
 
 {% endblock %}

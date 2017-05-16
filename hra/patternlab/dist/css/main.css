@@ -1855,6 +1855,10 @@ a:focus {
 /*------------------------------------*    $CUSTOM CHECKBOX
 \*------------------------------------*/
 .checkbox {
+  margin-bottom: 35px;
+}
+
+.checkbox input {
   padding: 0;
   opacity: 0;
 }
@@ -1866,6 +1870,7 @@ a:focus {
   display: block;
   padding: 3px 0 0 35px;
   margin-top: -8px;
+  margin-bottom: 35px;
   color: #fff;
   cursor: pointer;
 }
@@ -1894,7 +1899,7 @@ a:focus {
   transform: rotate(45deg);
 }
 
-.checkbox:checked + .checkbox-label::after {
+.checkbox input:checked + .checkbox-label::after {
   content: '';
 }
 
@@ -1966,6 +1971,8 @@ a:focus {
   position: relative;
   display: inline-block;
   width: 100%;
+  max-width: 500px;
+  margin-bottom: 35px;
   background-color: #fff;
 }
 
@@ -2088,6 +2095,22 @@ textarea:focus {
   outline: 0;
 }
 
+.default-form__form-error {
+  max-width: 500px;
+  padding: 20px;
+  margin-bottom: 30px;
+  color: #fff;
+  background-color: #0c4e90;
+}
+
+.default-form__individual-error {
+  max-width: 500px;
+  padding: 10px 20px;
+  margin-bottom: 10px;
+  color: #fff;
+  background-color: #0c4e90;
+}
+
 .default-form label {
   font-size: 14px;
   font-size: 0.875rem;
@@ -2103,11 +2126,13 @@ textarea:focus {
 
 .default-form input[type='text'],
 .default-form input[type='email'],
+.default-form input[type='url'],
+.default-form input[type='number'],
 .default-form textarea {
   display: block;
   width: 100%;
   max-width: 500px;
-  padding: 15px 20px;
+  padding: 15px 20px 16px;
   margin-bottom: 35px;
   font-family: "FrutigerLight", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   color: #fff;
@@ -2119,6 +2144,8 @@ textarea:focus {
 @media only screen and (max-width: 900px) {
   .default-form input[type='text'],
   .default-form input[type='email'],
+  .default-form input[type='url'],
+  .default-form input[type='number'],
   .default-form textarea {
     max-width: 100%;
   }
@@ -2126,6 +2153,8 @@ textarea:focus {
 
 .default-form input[type='text']:focus,
 .default-form input[type='email']:focus,
+.default-form input[type='url']:focus,
+.default-form input[type='number']:focus,
 .default-form textarea:focus {
   background-color: #0a4d8f;
 }

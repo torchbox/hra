@@ -46,19 +46,19 @@
                                                     <li class="date">{{ news_item.display_date|date }}</li>
 
                                                     {% if news_item.author %}
-                                                        <li class="author">Author: <span>{{ news_item.author }}</span></li>
+                                                        <li class="author">
+                                                            Author: <span>{{ news_item.author }}</span>
+                                                        </li>
                                                     {% endif %}
 
-                                                    {% with categories=news_item.categories.all %}
-                                                        {% if categories %}
-                                                            <li class="category">
-                                                                {% for category_through in categories %}
-                                                                    {{ category_through.category.name }}
-                                                                    {% if not forloop.last %}, {% endif %}
-                                                                {% endfor %}
-                                                            </li>
-                                                        {% endif %}
-                                                    {% endwith %}
+                                                    {% if news_item.categories %}
+                                                        <li class="category">
+                                                            {% for category in news_item.categories %}
+                                                                {{ category.name }}
+                                                                {% if not forloop.last %}, {% endif %}
+                                                            {% endfor %}
+                                                        </li>
+                                                    {% endif %}
 
                                                 </ul>
                                                 {% if news_item.listing_summary %}

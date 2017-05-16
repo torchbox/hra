@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.functional import cached_property
 
 from modelcluster.fields import ParentalKey
 from wagtail.wagtailadmin.edit_handlers import (
@@ -13,6 +14,22 @@ from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 
 from hra.utils.blocks import StoryBlock
 from hra.utils.models import ListingFields, SocialFields, RelatedPage, CallToActionSnippet
+
+
+class StandardPagePageType(models.Model):
+    page = ParentalKey(
+        'standardpage.StandardPage',
+        related_name='page_type_relationships'
+    )
+    page_type = models.ForeignKey(
+        'categories.PageType',
+        related_name='+',
+        on_delete=models.CASCADE
+    )
+
+    panels = [
+        SnippetChooserPanel('page_type')
+    ]
 
 
 class StandardPageRelatedPage(RelatedPage):
@@ -34,7 +51,16 @@ class StandardPage(Page, SocialFields, ListingFields):
         InlinePanel('related_pages', label="Related pages"),
     ]
 
-    promote_panels = Page.promote_panels + SocialFields.promote_panels + ListingFields.promote_panels
+    promote_panels = Page.promote_panels + SocialFields.promote_panels + ListingFields.promote_panels + [
+        InlinePanel('page_type_relationships', label='Page types')
+    ]
+
+    @cached_property
+    def page_types(self):
+        page_types = [
+            n.page_type for n in self.page_type_relationships.all()
+        ]
+        return page_types
 
 
 class StandardIndexSectionPage(RelatedPage):

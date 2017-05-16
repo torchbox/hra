@@ -10,6 +10,22 @@ textarea {
 }
 
 .default-form {
+    &__form-error {
+        max-width: 500px;
+        padding: 20px;
+        margin-bottom: 30px;
+        color: #fff;
+        background-color: #0c4e90;
+    }
+
+    &__individual-error {
+        max-width: 500px;
+        padding: 10px 20px;
+        margin-bottom: 10px;
+        color: #fff;
+        background-color: #0c4e90;
+    }
+
     label {
         @include font-size(milli);
         display: block;
@@ -24,11 +40,13 @@ textarea {
 
     input[type='text'],
     input[type='email'],
+    input[type='url'],
+    input[type='number'],
     textarea {
         display: block;
         width: 100%;
         max-width: 500px;
-        padding: 15px 20px;
+        padding: 15px 20px 16px;
         margin-bottom: 35px;
         font-family: $font--primary;
         color: #fff;

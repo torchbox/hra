@@ -16,8 +16,14 @@
 
                     {% headernav %}
 
-                    <label class="site-header__search-label" for="site-search">Search HRA</label>
-                    <input type="text" class="site-header__search" id="site-search" placeholder="Search&hellip;">
+                    <form action="{% url 'search' %}" method="get" role="search">
+                        <label class="site-header__search-label" for="site-search">Search HRA</label>
+                        <input name="query" type="text" class="site-header__search" id="site-search"
+                               placeholder="Search&hellip;"
+                                {% if search_query %}
+                               value="{{ search_query }}"{% endif %}>
+                    </form>
+
                 </div>
             </div>
         </div>

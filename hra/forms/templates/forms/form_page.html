@@ -19,14 +19,15 @@
 
                                 {# TODO: Needs styling #}
                                 {% if form.errors %}
-                                    There were some errors with your form. Please amend the fields highlighted below.
+                                    <div class="default-form__form-error">
+                                        There were some errors with your form. Please amend the fields highlighted below.
+                                    </div>
                                 {% endif %}
 
                                 {% for field in form %}
 
                                     {% if field.errors %}
-                                        <div class="errors">
-                                            {# TODO: Needs styling #}
+                                        <div class="default-form__individual-error">
                                             {{ field.errors }}
                                         </div>
                                     {% endif %}
@@ -35,6 +36,20 @@
 
                                         {% if widget_type == 're_captcha' %}
                                             {{ field }}
+
+                                        {% elif widget_type == 'select' %}
+                                            <div class="custom-select custom-select--blue">
+                                                {{ field }}
+                                            </div>
+
+                                        {% elif widget_type == 'checkbox_input' %}
+                                            <div class="checkbox">
+                                                {{ field }}
+                                                <label class="checkbox-label" for="{{ field.id_for_label }}">
+                                                    {{ field.label }}
+                                                </label>
+                                            </div>
+
                                         {% else %}
                                             <label for="{{ field.id_for_label }}"
                                                    class="{{ field_type }} {{ widget_type }} {% if field.field.required %}required{% endif %}">

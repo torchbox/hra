@@ -1,23 +1,30 @@
 from django.conf import settings
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.shortcuts import render
-from wagtail.wagtailcore.models import Page
 from wagtail.wagtailsearch.models import Query
+
+from hra.categories.models import PageType
+from hra.search.utils import get_search_queryset
 
 
 def search(request):
     search_query = request.GET.get('query', None)
     page = request.GET.get('page', 1)
 
+    # Allow to filter search results using a page types, if specified
+    page_type_pks = request.GET.getlist('type', None)
+    page_types = PageType.objects.filter(pk__in=page_type_pks) if page_type_pks else []
+
+    search_results = get_search_queryset(request, page_types)
+
     # Search
     if search_query:
-        search_results = Page.objects.live().search(search_query, operator='and')
+        search_results = search_results.search(search_query, operator='and')
+
         query = Query.get(search_query)
 
         # Record hit
         query.add_hit()
-    else:
-        search_results = Page.objects.none()
 
     # Pagination
     paginator = Paginator(search_results, settings.DEFAULT_PER_PAGE)
@@ -31,4 +38,6 @@ def search(request):
     return render(request, 'search/search.html', {
         'search_query': search_query,
         'search_results': search_results,
+        'page_types': PageType.objects.all(),
+        'selected_page_type_pks': [page_type.pk for page_type in page_types],
     })
