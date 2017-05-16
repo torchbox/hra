@@ -1,8 +1,5 @@
-from django.shortcuts import get_object_or_404
 from wagtail.wagtailcore.models import PageViewRestriction, Page
 
-from hra.categories.models import PageType
-from hra.home.models import HomePage
 from hra.standardpage.models import StandardPage
 
 
