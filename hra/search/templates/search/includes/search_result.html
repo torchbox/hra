@@ -7,13 +7,11 @@
             {{ result.listing_title|default:result.title }}
         </div>
 
-        {% if result.display_date or result.author or result.categories %}
+        {% with display_date=result.display_date|default:result.latest_revision_created_at %}
 
             <ul class="results-listing__item-meta">
 
-                {% if result.display_date %}
-                    <li class="date">{{ result.display_date|date }}</li>
-                {% endif %}
+                <li class="date">{{ display_date|date }}</li>
 
                 {% if result.author %}
                     <li class="author">Author: <span>{{ result.author }}</span></li>
@@ -27,9 +25,18 @@
                         {% endfor %}
                     </li>
                 {% endif %}
+
+                {% if result.page_types %}
+                    <li class="category">
+                        {% for page_type in result.page_types %}
+                            {{ page_type.name }}
+                            {% if not forloop.last %}, {% endif %}
+                        {% endfor %}
+                    </li>
+                {% endif %}
             </ul>
 
-        {% endif %}
+        {% endwith %}
 
         {% if pick.description or result.search_description or result.listing_summary %}
             <div class="results-listing__item-content">

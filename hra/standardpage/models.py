@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.functional import cached_property
 
 from modelcluster.fields import ParentalKey
 from wagtail.wagtailadmin.edit_handlers import (
@@ -53,6 +54,13 @@ class StandardPage(Page, SocialFields, ListingFields):
     promote_panels = Page.promote_panels + SocialFields.promote_panels + ListingFields.promote_panels + [
         InlinePanel('page_type_relationships', label='Page types')
     ]
+
+    @cached_property
+    def page_types(self):
+        page_types = [
+            n.page_type for n in self.page_type_relationships.all()
+        ]
+        return page_types
 
 
 class StandardIndexSectionPage(RelatedPage):

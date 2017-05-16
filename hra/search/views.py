@@ -4,7 +4,7 @@ from django.shortcuts import render
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailsearch.models import Query
 
-from hra.search.utils import exclude_invisible_pages
+from hra.search.utils import get_search_queryset
 
 
 def search(request):
@@ -13,7 +13,7 @@ def search(request):
 
     # Search
     if search_query:
-        search_results = exclude_invisible_pages(request, Page.objects.live())
+        search_results = get_search_queryset(request)
         search_results = search_results.search(search_query, operator='and')
 
         query = Query.get(search_query)
