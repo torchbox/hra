@@ -4,6 +4,7 @@ from django.shortcuts import render
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailsearch.models import Query
 
+from hra.categories.models import PageType
 from hra.search.utils import get_search_queryset
 
 
@@ -35,4 +36,5 @@ def search(request):
     return render(request, 'search/search.html', {
         'search_query': search_query,
         'search_results': search_results,
+        'page_types': PageType.objects.all(),
     })

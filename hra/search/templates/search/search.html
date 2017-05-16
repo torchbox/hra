@@ -26,8 +26,10 @@
                     <div class="search-filters__filter-main-heading">Filter by type</div>
                     {#<div class="search-filters__section-heading">Filter by type</div>#}
 
-                    <input class="checkbox" id="checkbox-id-value" type="checkbox">
-                    <label class="checkbox-label" for="checkbox-id-value">This is a checkbox label</label>
+                    {% for page_type in page_types %}
+                        <input class="checkbox" id="page_type-{{ page_type.pk }}" type="checkbox">
+                        <label class="checkbox-label" for="page_type-{{ page_type.pk }}">{{ page_type.name }}</label>
+                    {% endfor %}
 
                 </div>
 
