@@ -77,8 +77,10 @@
 
                     {% include "includes/pagination.html" with subpages=search_results %}
 
-                {% elif search_query %}
-                    No results found.
+                {% else %}
+                    <div class="results-container__heading">
+                        No results found.
+                    </div>
                 {% endif %}
             </div>
         {% endspaceless %}
