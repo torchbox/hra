@@ -14,7 +14,7 @@ def search(request):
 
     # Search
     if search_query:
-        search_results = get_search_queryset(request)
+        search_results, page_types = get_search_queryset(request)
         search_results = search_results.search(search_query, operator='and')
 
         query = Query.get(search_query)
@@ -23,6 +23,7 @@ def search(request):
         query.add_hit()
     else:
         search_results = Page.objects.none()
+        page_types = []
 
     # Pagination
     paginator = Paginator(search_results, settings.DEFAULT_PER_PAGE)
@@ -37,4 +38,5 @@ def search(request):
         'search_query': search_query,
         'search_results': search_results,
         'page_types': PageType.objects.all(),
+        'selected_page_type_pks': [page_type.pk for page_type in page_types],
     })

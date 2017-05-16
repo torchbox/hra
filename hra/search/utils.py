@@ -32,9 +32,9 @@ def get_search_queryset(request):
     # Exclude pages that the user doesn't have permission to see
     queryset = exclude_invisible_pages(request, queryset)
 
-    # Allow to filter search results using a page type, if specified
-    page_type_pk = request.GET.get('type', None)
-    page_type = get_object_or_404(PageType.objects.all(), pk=page_type_pk) if page_type_pk else None
+    # Allow to filter search results using a page types, if specified
+    page_type_pks = request.GET.getlist('type', None)
+    page_types = PageType.objects.filter(pk__in=page_type_pks) if page_type_pks else []
 
     # We need to search among pages with specified page type.
     #
@@ -42,9 +42,9 @@ def get_search_queryset(request):
     # to filter search results in ElasticSearch using queryset API,
     # so we need to get PKs of linked pages from category page
     # and pass them into queryset for further search.
-    if page_type:
-        standard_pages = StandardPage.objects.filter(page_type_relationships__page_type=page_type)
+    if page_types:
+        standard_pages = StandardPage.objects.filter(page_type_relationships__page_type__in=page_types)
 
         queryset = queryset.filter(pk__in=standard_pages.values_list('pk', flat=True))
 
-    return queryset
+    return queryset, page_types

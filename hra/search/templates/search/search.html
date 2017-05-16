@@ -20,17 +20,25 @@
                                 {% if search_query %}
                                value="{{ search_query }}"{% endif %}
                         >
+
+
+                        <div class="search-filters__filter-main-heading">Filter by type</div>
+                        {#<div class="search-filters__section-heading">Filter by type</div>#}
+
+                        {% for page_type in page_types %}
+                            <input class="checkbox" type="checkbox" name="type"
+                                   id="page_type-{{ page_type.pk }}"
+                                   value="{{ page_type.pk }}"
+                                   {% if page_type.pk in selected_page_type_pks %}checked{% endif %}
+                            >
+                            <label class="checkbox-label"
+                                   for="page_type-{{ page_type.pk }}"
+                            >
+                                {{ page_type.name }}
+                            </label>
+                        {% endfor %}
+
                     </form>
-
-
-                    <div class="search-filters__filter-main-heading">Filter by type</div>
-                    {#<div class="search-filters__section-heading">Filter by type</div>#}
-
-                    {% for page_type in page_types %}
-                        <input class="checkbox" id="page_type-{{ page_type.pk }}" type="checkbox">
-                        <label class="checkbox-label" for="page_type-{{ page_type.pk }}">{{ page_type.name }}</label>
-                    {% endfor %}
-
                 </div>
 
             </div>
