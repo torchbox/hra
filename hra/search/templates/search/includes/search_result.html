@@ -12,7 +12,7 @@
             <ul class="results-listing__item-meta">
 
                 {% if result.display_date %}
-                    <li class="date">{{ result.display_date }}</li>
+                    <li class="date">{{ result.display_date|date }}</li>
                 {% endif %}
 
                 {% if result.author %}
