@@ -2,6 +2,7 @@ from django.shortcuts import get_object_or_404
 from wagtail.wagtailcore.models import PageViewRestriction, Page
 
 from hra.categories.models import PageType
+from hra.home.models import HomePage
 from hra.standardpage.models import StandardPage
 
 
@@ -20,21 +21,17 @@ def exclude_invisible_pages(request, pages):
     return pages
 
 
-def get_search_queryset(request):
+def get_search_queryset(request, page_types=None):
     """
     Returns a QuerySet for further search.
     We need to keep in mind, that we must not perform any
     ORM operations that Wagtail's QuerySet search API doesn't support.
     """
     # Allow to search only among live pages
-    queryset = Page.objects.live()
+    queryset = Page.objects.live().descendant_of(request.site.root_page)
 
     # Exclude pages that the user doesn't have permission to see
     queryset = exclude_invisible_pages(request, queryset)
-
-    # Allow to filter search results using a page types, if specified
-    page_type_pks = request.GET.getlist('type', None)
-    page_types = PageType.objects.filter(pk__in=page_type_pks) if page_type_pks else []
 
     # We need to search among pages with specified page type.
     #
@@ -47,4 +44,4 @@ def get_search_queryset(request):
 
         queryset = queryset.filter(pk__in=standard_pages.values_list('pk', flat=True))
 
-    return queryset, page_types
+    return queryset

@@ -12,18 +12,20 @@ def search(request):
     search_query = request.GET.get('query', None)
     page = request.GET.get('page', 1)
 
+    # Allow to filter search results using a page types, if specified
+    page_type_pks = request.GET.getlist('type', None)
+    page_types = PageType.objects.filter(pk__in=page_type_pks) if page_type_pks else []
+
+    search_results = get_search_queryset(request, page_types)
+
     # Search
     if search_query:
-        search_results, page_types = get_search_queryset(request)
         search_results = search_results.search(search_query, operator='and')
 
         query = Query.get(search_query)
 
         # Record hit
         query.add_hit()
-    else:
-        search_results = Page.objects.none()
-        page_types = []
 
     # Pagination
     paginator = Paginator(search_results, settings.DEFAULT_PER_PAGE)
