@@ -2119,6 +2119,7 @@ textarea:focus {
 
 .default-form input[type='text'],
 .default-form input[type='email'],
+.default-form input[type='url'],
 .default-form textarea {
   display: block;
   width: 100%;
@@ -2135,6 +2136,7 @@ textarea:focus {
 @media only screen and (max-width: 900px) {
   .default-form input[type='text'],
   .default-form input[type='email'],
+  .default-form input[type='url'],
   .default-form textarea {
     max-width: 100%;
   }
@@ -2142,6 +2144,7 @@ textarea:focus {
 
 .default-form input[type='text']:focus,
 .default-form input[type='email']:focus,
+.default-form input[type='url']:focus,
 .default-form textarea:focus {
   background-color: #0a4d8f;
 }
