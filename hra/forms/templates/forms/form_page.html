@@ -43,6 +43,14 @@
                                                 {{ field }}
                                             </div>
 
+                                        {% elif widget_type == 'checkbox_input' %}
+                                            <div class="checkbox">
+                                                {{ field }}
+                                                <label class="checkbox-label" for="{{ field.id_for_label }}">
+                                                    {{ field.label }}
+                                                </label>
+                                            </div>
+
                                         {% else %}
                                             <label for="{{ field.id_for_label }}"
                                                    class="{{ field_type }} {{ widget_type }} {% if field.field.required %}required{% endif %}">

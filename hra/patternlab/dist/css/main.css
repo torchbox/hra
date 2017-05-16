@@ -1855,6 +1855,10 @@ a:focus {
 /*------------------------------------*    $CUSTOM CHECKBOX
 \*------------------------------------*/
 .checkbox {
+  margin-bottom: 35px;
+}
+
+.checkbox input {
   padding: 0;
   opacity: 0;
 }
@@ -1866,6 +1870,7 @@ a:focus {
   display: block;
   padding: 3px 0 0 35px;
   margin-top: -8px;
+  margin-bottom: 35px;
   color: #fff;
   cursor: pointer;
 }
@@ -1894,7 +1899,7 @@ a:focus {
   transform: rotate(45deg);
 }
 
-.checkbox:checked + .checkbox-label::after {
+.checkbox input:checked + .checkbox-label::after {
   content: '';
 }
 
