@@ -1966,6 +1966,8 @@ a:focus {
   position: relative;
   display: inline-block;
   width: 100%;
+  max-width: 500px;
+  margin-bottom: 35px;
   background-color: #fff;
 }
 
@@ -2124,7 +2126,7 @@ textarea:focus {
   display: block;
   width: 100%;
   max-width: 500px;
-  padding: 15px 20px;
+  padding: 15px 20px 16px;
   margin-bottom: 35px;
   font-family: "FrutigerLight", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   color: #fff;
