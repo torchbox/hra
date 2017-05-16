@@ -5,6 +5,7 @@ import sidebarMenu from './components/sidebar-menu';
 import notification from './components/notification';
 import faqs from './components/faqs';
 import tableInteraction from './components/table-interaction';
+import searchFilter from './components/search-form';
 
 glossaryTab();
 resultsBorder();
@@ -13,3 +14,4 @@ sidebarMenu();
 notification();
 faqs();
 tableInteraction();
+searchFilter();
