@@ -1,41 +1,40 @@
-{% load static wagtailcore_tags wagtailsearchpromotions_tags wagtailimages_tags %}
+{% load wagtailcore_tags %}
 
-{# breadcrumbs #}
-{% if result.get_ancestors|length > 2 %}
-    {% for ancestor in result.get_ancestors %}
-        {% if not ancestor.is_root %}
-            {% if ancestor.depth > 2 %}
-                {{ ancestor.title }}
-                {% if ancestor.depth|add:1 < result.depth %}
-                    &nbsp;/&nbsp;
+<li class="results-listing__item js-border-result">
+    <a href="{% pageurl result %}">
+        <div class="results-listing__item-border js-border-result__border"></div>
+        <div class="results-listing__item-heading js-border-result__heading">
+            {{ result.listing_title|default:result.title }}
+        </div>
+
+        {% if result.display_date or result.author or result.categories %}
+
+            <ul class="results-listing__item-meta">
+
+                {% if result.display_date %}
+                    <li class="date">{{ result.display_date }}</li>
                 {% endif %}
-            {% else %}/{% endif %} {# the first one #}
+
+                {% if result.author %}
+                    <li class="author">Author: <span>{{ result.author }}</span></li>
+                {% endif %}
+
+                {% if result.categories %}
+                    <li class="category">
+                        {% for category in result.categories %}
+                            {{ category.name }}
+                            {% if not forloop.last %}, {% endif %}
+                        {% endfor %}
+                    </li>
+                {% endif %}
+            </ul>
+
         {% endif %}
-    {% endfor %}
-{% endif %}
 
-{% if result.listing_image %}
-    <a href="{% pageurl result %}">
-        {% image result.listing_image fill-450x300 %}
-    </a>
-{% endif %}
-
-<h4>
-    <a href="{% pageurl result %}">
-        {% if result.listing_title %}
-            {{ result.listing_title }}
-        {% else %}
-            {{ result.title }}
+        {% if pick.description or result.search_description or result.listing_summary %}
+            <div class="results-listing__item-content">
+                {{ pick.description|default:result.search_description|default:result.listing_summary }}
+            </div>
         {% endif %}
     </a>
-</h4>
-
-{% if pick.description %}
-    {{ pick.description }}
-{% elif result.search_description %}
-    {{ result.search_description }}
-{% endif %}
-
-{% if result.listing_summary %}
-    <p>{{ result.listing_summary }}</p>
-{% endif %}
+</li>

@@ -47,126 +47,37 @@
 
             </div>
             <div class="results-container__right">
+                {% get_search_promotions search_query as search_picks %}
 
-                {% if search_results %}
+                {% if search_results or search_picks %}
 
                     {% if search_query %}
-                        {% with count=search_results.paginator.count %}
+                        {% with count=search_results.paginator.count|add:search_picks.count %}
                             <div class="results-container__heading">
-                                {{ count }} result{{ count|pluralize }} for <span>{{ search_query }}
+                                {{ count }} result{{ count|pluralize }} for <span>{{ search_query }}</span>
                             </div>
                         {% endwith %}
                     {% endif %}
 
-                    {# TODO: implement search picks #}
-                    {% get_search_promotions search_query as search_picks %}
-                    {% if search_picks %}
-                        <ul>
-                            {% for pick in search_picks %}
-                                <li>
-                                    {% include "search/includes/search_result.html" with result=pick.page.specific %}
-                                </li>
-                            {% endfor %}
-                        </ul>
-                    {% endif %}
+                    <ul class="results-listing">
 
-                    {# TODO: implement search results #}
-                    <ul>
+                        {% for pick in search_picks %}
+                            <li>
+                                {% include "search/includes/search_result.html" with result=pick.page.specific %}
+                            </li>
+                        {% endfor %}
+
                         {% for result in search_results %}
                             <li>
                                 {% include "search/includes/search_result.html" with result=result.specific %}
                             </li>
                         {% endfor %}
-                    </ul>
-
-                    <ul class="results-listing">
-
-                        {# Result item #}
-                        <li class="results-listing__item js-border-result">
-                            <a href="">
-                                <div class="results-listing__item-border js-border-result__border"></div>
-                                <div class="results-listing__item-heading js-border-result__heading">Nullam quis risus
-                                    eget
-                                    urna mollis
-                                </div>
-                                <ul class="results-listing__item-meta">
-                                    <li class="date">29 Apr 2017</li>
-                                    <li class="author">Author: <span>John Smith</span></li>
-                                    <li class="category">Best practice</li>
-                                </ul>
-                                <div class="results-listing__item-content">Vivamus sagaittis lacus vel augue laoreet
-                                    rutrum
-                                    faucibus dolor auctor onec
-                                </div>
-                            </a>
-                        </li>
-                        {# Result item end #}
-
-                        {# Result item #}
-                        <li class="results-listing__item js-border-result">
-                            <a href="">
-                                <div class="results-listing__item-border js-border-result__border"></div>
-                                <div class="results-listing__item-heading js-border-result__heading">Short heading</div>
-                                <ul class="results-listing__item-meta">
-                                    <li class="date">29 Apr 2017</li>
-                                    <li class="author">Author: <span>John Smith</span></li>
-                                    <li class="category">Best practice</li>
-                                </ul>
-                                <div class="results-listing__item-content">Vivamus sagaittis lacus vel augue laoreet
-                                    rutrum
-                                    faucibus dolor auctor onec
-                                </div>
-                            </a>
-                        </li>
-                        {# Result item end #}
-
-                        {# Result item #}
-                        <li class="results-listing__item js-border-result">
-                            <a href="">
-                                <div class="results-listing__item-border js-border-result__border"></div>
-                                <div class="results-listing__item-heading js-border-result__heading">Lorem ipsum dolor
-                                    sit
-                                    amet
-                                </div>
-                                <ul class="results-listing__item-meta">
-                                    <li class="date">29 Apr 2017</li>
-                                    <li class="author">Author: <span>John Smith</span></li>
-                                    <li class="category">Best practice</li>
-                                </ul>
-                                <div class="results-listing__item-content">Vivamus sagaittis lacus vel augue laoreet
-                                    rutrum
-                                    faucibus dolor auctor onec
-                                </div>
-                            </a>
-                        </li>
-                        {# Result item end #}
-
-                        {# Result item #}
-                        <li class="results-listing__item js-border-result">
-                            <a href="">
-                                <div class="results-listing__item-border js-border-result__border"></div>
-                                <div class="results-listing__item-heading js-border-result__heading">Nullam quis risus
-                                    eget
-                                    urna mollis
-                                </div>
-                                <ul class="results-listing__item-meta">
-                                    <li class="date">29 Apr 2017</li>
-                                    <li class="author">Author: <span>John Smith</span></li>
-                                    <li class="category">Best practice</li>
-                                </ul>
-                                <div class="results-listing__item-content">Vivamus sagaittis lacus vel augue laoreet
-                                    rutrum
-                                    faucibus dolor auctor onec
-                                </div>
-                            </a>
-                        </li>
-                        {# Result item end #}
 
                     </ul>
 
                     {% include "includes/pagination.html" with subpages=search_results %}
 
-                {% elif search_query and not search_picks %}
+                {% elif search_query %}
                     No results found.
                 {% endif %}
             </div>
