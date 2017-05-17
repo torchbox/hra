@@ -47,7 +47,7 @@ def pull_production_data():
         env_name='production',
         remote_db_name='hra',
         local_db_name='hra',
-        remote_dump_path='/usr/local/django/hra/tmp/',
+        remote_dump_path='/var/www/hra/tmp/',
         local_dump_path='/tmp/',
     )
 
@@ -59,7 +59,7 @@ def pull_staging_data():
         env_name='staging',
         remote_db_name='hra',
         local_db_name='hra',
-        remote_dump_path='/usr/local/django/hra/tmp/',
+        remote_dump_path='/var/www/hra/tmp/',
         local_dump_path='/tmp/',
     )
 
