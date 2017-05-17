@@ -1,0 +1,24 @@
+{% if newsletter_url %}
+    <div class="newsletter-signup">
+        <div class="newsletter-signup__inner">
+            <div class="newsletter-signup__heading">
+                Stay up to date with latest news, updates to regulations and upcoming learning events
+            </div>
+            <div class="newsletter-signup__subheading">
+                Sign up to our newsletter
+            </div>
+            <form class="newsletter-signup__form"
+                  method="post"
+                  action="{{ newsletter_url }}">
+
+                {% spaceless %}
+                    <input class="newsletter-signup__input" type="text" name="MERGE1" placeholder="First Name">
+                    <input class="newsletter-signup__input" type="text" name="MERGE2" placeholder="Last Name">
+                    <input class="newsletter-signup__input" type="text" name="MERGE0" placeholder="Email Address">
+                    <input class="newsletter-signup__submit" type="submit" value="Sign up">
+                {% endspaceless %}
+
+            </form>
+        </div>
+    </div>
+{% endif %}

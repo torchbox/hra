@@ -1,4 +1,5 @@
 from django import template
+from django.conf import settings
 
 from wagtail.wagtailcore.utils import camelcase_to_underscore
 
@@ -32,3 +33,10 @@ def field_type(bound_field):
 @register.assignment_tag()
 def to_list(*args):
     return args
+
+
+@register.inclusion_tag('utils/newsletter_signup.html')
+def newsletter_signup_form():
+    return {
+        'newsletter_url': getattr(settings, 'NEWSLETTER_URL', None),
+    }
