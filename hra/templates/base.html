@@ -1,4 +1,4 @@
-{% load static wagtailuserbar wagtailcore_tags wagtailimages_tags navigation_tags util_tags %}<!doctype html>
+{% load static wagtailuserbar wagtailcore_tags wagtailimages_tags navigation_tags util_tags notification_tags %}<!doctype html>
 <html class="no-js" lang="">
     <head>
         <meta charset="utf-8" />
@@ -63,6 +63,7 @@
 
         {% wagtailuserbar %}
 
+        {% notification_bar %}
         {% include 'header.html' %}
 
         <main>

@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'hra.images',
     'hra.navigation',
     'hra.news',
+    'hra.notifications',
     'hra.people',
     'hra.search',
     'hra.standardpage',
