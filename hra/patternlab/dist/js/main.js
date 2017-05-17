@@ -2226,6 +2226,8 @@ var jquery = createCommonjsModule(function (module) {
   });
 });
 
+// We have to manually make jQuery a global variable.
+// By default it will be in a closure and renamed to lowercase.
 window.jQuery = jquery;
 
 function glossaryTab() {
@@ -2656,6 +2658,19 @@ function tableInteraction() {
     bindEvents();
 }
 
+function searchFilter() {
+
+    var $searchForm = jquery('.js-main-search-form');
+
+    function bindEvents() {
+        $searchForm.find('input[type="checkbox"]').on('click', function () {
+            $searchForm.submit();
+        });
+    }
+
+    bindEvents();
+}
+
 glossaryTab();
 resultsBorder();
 disableTransition();
@@ -2663,6 +2678,7 @@ sidebarMenu();
 notification();
 faqs();
 tableInteraction();
+searchFilter();
 
 })));
 //# sourceMappingURL=main.js.map
