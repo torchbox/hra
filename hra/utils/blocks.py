@@ -1,3 +1,4 @@
+from wagtail.contrib.table_block.blocks import TableBlock
 from wagtail.wagtailcore import blocks
 from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.wagtailembeds.blocks import EmbedBlock
@@ -56,6 +57,7 @@ class StoryBlock(blocks.StreamBlock):
     embed = EmbedBlock()
     call_to_action = CallToActionWithTextBlock()
     highlight = HighlightBlock()
+    table = TableBlock(template='blocks/table_block.html')
 
     class Meta:
         template = "blocks/stream_block.html"
