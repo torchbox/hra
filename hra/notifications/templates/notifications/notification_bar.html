@@ -3,6 +3,10 @@
 {% with type=notification_settings.type %}
     {% if type %}
 
+        {% comment %}
+        Notification should be closed by default (should contain the `notification--close` class).
+        Otherwise the notification bar will flash to the users who have decided to close the notification.
+        {% endcomment %}
         <div class="notification notification--close {% if type == 'error' %}notification--error{% elif type == 'success' %}notification--success{% else %}notification--default{% endif %}"
              data-updated-at="{{ notification_settings.updated_at|date:"U" }}">
             <div class="notification__heading">{{ notification_settings.title }}</div>
