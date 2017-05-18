@@ -2226,8 +2226,6 @@ var jquery = createCommonjsModule(function (module) {
   });
 });
 
-// We have to manually make jQuery a global variable.
-// By default it will be in a closure and renamed to lowercase.
 window.jQuery = jquery;
 
 function glossaryTab() {
@@ -2437,6 +2435,8 @@ function notification() {
     var $notification = jquery('.notification'),
         $closeButton = jquery('.notification__close'),
         notificationHeight = $notification.outerHeight(),
+        notificationTime = $notification.data('updatedAt'),
+        notificationStorageKey = 'notification-bar',
         notificationDarken = 'notification--darken',
         notificationHide = 'notification--hide',
         notificationClose = 'notification--close';
@@ -2450,6 +2450,16 @@ function notification() {
     }
 
     function close() {
+        $notification.addClass(notificationClose);
+    }
+
+    function open() {
+        $notification.removeClass(notificationClose);
+    }
+
+    function closeWithAnimation() {
+
+        localStorage.setItem(notificationStorageKey, notificationTime);
 
         // Reduce opacity
         $notification.addClass(notificationHide);
@@ -2461,8 +2471,20 @@ function notification() {
 
         // Remove entirely
         setTimeout(function () {
-            $notification.addClass(notificationClose);
+            close();
         }, 500);
+    }
+
+    function init() {
+        var latestNotificationTime = localStorage.getItem(notificationStorageKey);
+
+        if (!latestNotificationTime || notificationTime > latestNotificationTime) {
+            localStorage.removeItem(notificationStorageKey);
+            open();
+        } else {
+            // Should be closed by default
+            close();
+        }
     }
 
     function bindEvents() {
@@ -2472,10 +2494,11 @@ function notification() {
 
         // Close notification entirely
         $closeButton.on('click', function () {
-            return close();
+            return closeWithAnimation();
         });
     }
 
+    init();
     bindEvents();
 }
 
