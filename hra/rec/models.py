@@ -1,6 +1,7 @@
 from django.db import models
 from modelcluster.fields import ParentalKey
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, InlinePanel
+from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailcore.models import Page, Orderable
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
@@ -110,10 +111,10 @@ class CommitteePage(Page):
 
 class CommitteeIndexPage(Page):
 
-    introduction = models.TextField(blank=True)
+    introduction = RichTextField(blank=True)
 
     content_panels = Page.content_panels + [
-        FieldPanel('introduction'),
+        FieldPanel('introduction', classname='full'),
     ]
 
     subpage_types = ['rec.CommitteePage']
