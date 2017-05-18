@@ -90,7 +90,7 @@ class CommitteePage(Page):
     usual_meeting_time = models.CharField(max_length=255, blank=True)
 
     content_panels = Page.content_panels + [
-        InlinePanel('previous_names'),
+        InlinePanel('previous_names', label="Previous name of REC"),
         FieldPanel('chair'),
         FieldPanel('rec_manager'),
         FieldPanel('rec_assistant'),
@@ -100,9 +100,9 @@ class CommitteePage(Page):
         FieldPanel('region'),
         FieldPanel('usual_meeting_venue'),
         FieldPanel('usual_meeting_time'),
-        InlinePanel('meeting_dates'),
-        InlinePanel('committee_types'),
-        InlinePanel('committee_flags'),
+        InlinePanel('meeting_dates', label="Meeting dates"),
+        InlinePanel('committee_types', label="Committee Types"),
+        InlinePanel('committee_flags', label="Committee Flags"),
     ]
 
     parent_page_types = ['rec.CommitteeIndexPage']
