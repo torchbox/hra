@@ -3,8 +3,8 @@
 {% with type=notification_settings.type %}
     {% if type %}
 
-        <div class="notification {% if type == 'error' %}notification--error{% elif type == 'success' %}notification--success{% else %}notification--default{% endif %}"
-             data-updated-at="{{ notification_settings.updated_at }}"> {# TODO: use JS-friendly format #}
+        <div class="notification notification--close {% if type == 'error' %}notification--error{% elif type == 'success' %}notification--success{% else %}notification--default{% endif %}"
+             data-updated-at="{{ notification_settings.updated_at|date:"U" }}">
             <div class="notification__heading">{{ notification_settings.title }}</div>
             <div class="notification__content">
                 {{ notification_settings.text|richtext }}
@@ -13,5 +13,4 @@
         </div>
 
     {% endif %}
-
 {% endwith %}

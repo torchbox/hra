@@ -5,6 +5,8 @@ function notification() {
     const $notification         = $('.notification'),
         $closeButton            = $('.notification__close'),
         notificationHeight      = $notification.outerHeight(),
+        notificationTime        = $notification.data('updatedAt'),
+        notificationStorageKey  = 'notification-bar',
         notificationDarken      = 'notification--darken',
         notificationHide        = 'notification--hide',
         notificationClose       = 'notification--close';
@@ -18,6 +20,16 @@ function notification() {
     }
 
     function close(){
+        $notification.addClass(notificationClose);
+    }
+
+    function open() {
+        $notification.removeClass(notificationClose);
+    }
+
+    function closeWithAnimation(){
+
+        localStorage.setItem(notificationStorageKey, notificationTime);
 
         // Reduce opacity
         $notification.addClass(notificationHide);
@@ -29,8 +41,20 @@ function notification() {
 
         // Remove entirely
         setTimeout(() => {
-            $notification.addClass(notificationClose);
+            close();
         }, 500);
+    }
+
+    function init() {
+        const latestNotificationTime = localStorage.getItem(notificationStorageKey);
+
+        if (!latestNotificationTime || notificationTime > latestNotificationTime) {
+            localStorage.removeItem(notificationStorageKey);
+            open();
+        } else {
+            // Should be closed by default
+            close();
+        }
     }
 
     function bindEvents(){
@@ -39,9 +63,10 @@ function notification() {
         $closeButton.mouseenter(darken).mouseleave(lighten);
 
         // Close notification entirely
-        $closeButton.on('click', () => close());
+        $closeButton.on('click', () => closeWithAnimation());
     }
 
+    init();
     bindEvents();
 }
 
