@@ -118,4 +118,3 @@ class CommitteeIndexPage(Page):
     ]
 
     subpage_types = ['rec.CommitteePage']
-
