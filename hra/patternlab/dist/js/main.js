@@ -2457,6 +2457,25 @@ function notification() {
         $notification.removeClass(notificationClose);
     }
 
+    function openWithAnimation() {
+
+        $notification.css({
+            'margin-top': -notificationHeight
+        });
+
+        setTimeout(function () {
+            open();
+
+            setTimeout(function () {
+                $notification.removeClass(notificationHide);
+
+                $notification.css({
+                    'margin-top': 0
+                });
+            }, 300);
+        }, 300);
+    }
+
     function closeWithAnimation() {
 
         localStorage.setItem(notificationStorageKey, notificationTime);
@@ -2480,9 +2499,10 @@ function notification() {
 
         if (!latestNotificationTime || notificationTime > latestNotificationTime) {
             localStorage.removeItem(notificationStorageKey);
-            open();
+            openWithAnimation();
         } else {
-            // Should be closed by default
+            // Notification should be closed by default (should contain the `notification--close` class).
+            // Otherwise the notification bar will flash to the users who have decided to close the notification.
             close();
         }
     }
