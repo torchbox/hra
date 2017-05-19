@@ -46,9 +46,12 @@ class CommitteePageEmail(Orderable):
     email = models.EmailField(max_length=255)
 
 
-class CommitteePageMeetingDate(Orderable):
+class CommitteePageMeetingDate(models.Model):
     source_page = ParentalKey('rec.CommitteePage', related_name='meeting_dates')
     date = models.DateField()
+
+    class Meta:
+        ordering = ['date']
 
 
 class CommitteePageType(Orderable):

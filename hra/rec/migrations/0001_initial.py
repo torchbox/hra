@@ -73,12 +73,11 @@ class Migration(migrations.Migration):
             name='CommitteePageMeetingDate',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('sort_order', models.IntegerField(blank=True, editable=False, null=True)),
                 ('date', models.DateField()),
                 ('source_page', modelcluster.fields.ParentalKey(on_delete=django.db.models.deletion.CASCADE, related_name='meeting_dates', to='rec.CommitteePage')),
             ],
             options={
-                'ordering': ['sort_order'],
+                'ordering': ['date'],
                 'abstract': False,
             },
         ),
