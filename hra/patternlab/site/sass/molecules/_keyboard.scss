@@ -2,6 +2,11 @@
     $KEYBOARD
 \*------------------------------------*/
 
+// Construct a responsive circle with text
+$keyboard-letter-width: 10%;
+$keyboard-border-width: 2px;
+$keyboard-padding: ($keyboard-letter-width / 2);
+
 .keyboard {
     $root: &;
     margin: 15px -11px;
@@ -9,14 +14,14 @@
     &__letter {
         position: relative;
         display: inline-block;
-        width: calc(10% + 4px);
+        width: calc(#{$keyboard-letter-width} + #{$keyboard-border-width * 2});
         height: 0;
-        padding: 5% 0;
-        margin: 10px;
+        padding: $keyboard-padding 0;
+        margin: 1.5%;
         color: #fff;
-        background-color: transparent;
         cursor: pointer;
-        border: 2px solid rgba(255, 255, 255, 0.45);
+        background-color: transparent;
+        border: $keyboard-border-width solid rgba(255, 255, 255, 0.45);
         border-radius: 50%;
         transition: background-color $default-transition-speed ease, border-color $default-transition-speed ease, color $default-transition-speed ease;
 
@@ -34,16 +39,17 @@
         &--disabled {
             color: #457fb5;
             border-color: #457fb5;
+
+            &:hover {
+                color: #457fb5;
+                border-color: #457fb5;
+            }
         }
     }
 
     &__letter--active {
-        background-color: #fff;
         color: $color--primary;
-        
-        #{$root}__letter-content {
-
-        }
+        background-color: #fff;
     }
 
     &__letter-content {

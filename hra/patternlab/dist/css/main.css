@@ -4465,10 +4465,10 @@ textarea:focus {
   width: calc(10% + 4px);
   height: 0;
   padding: 5% 0;
-  margin: 10px;
+  margin: 1.5%;
   color: #fff;
-  background-color: transparent;
   cursor: pointer;
+  background-color: transparent;
   border: 2px solid rgba(255, 255, 255, 0.45);
   border-radius: 50%;
   transition: background-color 300ms ease, border-color 300ms ease, color 300ms ease;
@@ -4489,9 +4489,14 @@ textarea:focus {
   border-color: #457fb5;
 }
 
+.keyboard__letter--disabled:hover {
+  color: #457fb5;
+  border-color: #457fb5;
+}
+
 .keyboard__letter--active {
-  background-color: #fff;
   color: #0d61b5;
+  background-color: #fff;
 }
 
 .keyboard__letter-content {
