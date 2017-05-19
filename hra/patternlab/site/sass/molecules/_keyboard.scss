@@ -1,0 +1,70 @@
+/*------------------------------------*\
+    $KEYBOARD
+\*------------------------------------*/
+
+.keyboard {
+    $root: &;
+    margin: 15px -11px;
+
+    &__letter {
+        position: relative;
+        display: inline-block;
+        width: calc(10% + 4px);
+        height: 0;
+        padding: 5% 0;
+        margin: 10px;
+        color: #fff;
+        background-color: transparent;
+        cursor: pointer;
+        border: 2px solid rgba(255, 255, 255, 0.45);
+        border-radius: 50%;
+        transition: background-color $default-transition-speed ease, border-color $default-transition-speed ease, color $default-transition-speed ease;
+
+        &--active,
+        &:hover {
+            color: $color--primary;
+            background-color: #e3ecf5;
+            border-color: #e3ecf5;
+        }
+
+        &:focus {
+            outline: 0;
+        }
+
+        &--disabled {
+            color: #457fb5;
+            border-color: #457fb5;
+        }
+    }
+
+    &__letter--active {
+        background-color: #fff;
+        color: $color--primary;
+        
+        #{$root}__letter-content {
+
+        }
+    }
+
+    &__letter-content {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+
+        &::before {
+            display: inline-block;
+            width: 0;
+            height: 100%;
+            vertical-align: middle;
+            content: '';
+        }
+
+        span {
+            display: inline-block;
+            vertical-align: middle;
+        }
+    }
+}

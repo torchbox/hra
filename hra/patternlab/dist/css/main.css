@@ -3964,7 +3964,7 @@ textarea:focus {
 }
 
 .glossary__left {
-  padding: 100px 100px 100px 150px;
+  padding: 80px;
   background-color: #0d61b5;
 }
 
@@ -3982,8 +3982,8 @@ textarea:focus {
   padding: 16px 30px;
   color: #fff;
   background-color: transparent;
-  border: 1px solid #74a3cf;
-  border-radius: 30px;
+  border: 2px solid rgba(255, 255, 255, 0.45);
+  border-radius: 40px;
 }
 
 .glossary__search.placeholder {
@@ -4026,43 +4026,17 @@ textarea:focus {
   opacity: 1;
 }
 
+@media only screen and (max-width: 900px) {
+  .glossary__search {
+    padding: 10px 20px;
+  }
+}
+
 .glossary__browse {
   font-size: 28px;
   font-size: 1.75rem;
   margin-top: 50px;
   color: #fff;
-}
-
-.glossary__keyboard {
-  display: flex;
-  flex-wrap: wrap;
-  margin: 15px -11px;
-}
-
-.glossary__keyboard-letter {
-  display: inline-block;
-  flex-grow: 1;
-  width: 9%;
-  height: 47px;
-  max-width: 47px;
-  margin: 0 11px 22px;
-  color: #fff;
-  cursor: pointer;
-  background-color: transparent;
-  border: 2px solid #75a0ca;
-  border-radius: 50%;
-  transition: background-color 300ms ease, border-color 300ms ease, color 300ms ease;
-}
-
-.glossary__keyboard-letter--active, .glossary__keyboard-letter:hover {
-  color: #0d61b5;
-  background-color: #e3ecf5;
-  border-color: #e3ecf5;
-}
-
-.glossary__keyboard-letter--disabled {
-  color: #457fb5;
-  border-color: #457fb5;
 }
 
 .glossary__right {
@@ -4477,6 +4451,69 @@ textarea:focus {
   .search-filters__section-heading {
     margin-top: 20px;
   }
+}
+
+/*------------------------------------*    $KEYBOARD
+\*------------------------------------*/
+.keyboard {
+  margin: 15px -11px;
+}
+
+.keyboard__letter {
+  position: relative;
+  display: inline-block;
+  width: calc(10% + 4px);
+  height: 0;
+  padding: 5% 0;
+  margin: 10px;
+  color: #fff;
+  background-color: transparent;
+  cursor: pointer;
+  border: 2px solid rgba(255, 255, 255, 0.45);
+  border-radius: 50%;
+  transition: background-color 300ms ease, border-color 300ms ease, color 300ms ease;
+}
+
+.keyboard__letter--active, .keyboard__letter:hover {
+  color: #0d61b5;
+  background-color: #e3ecf5;
+  border-color: #e3ecf5;
+}
+
+.keyboard__letter:focus {
+  outline: 0;
+}
+
+.keyboard__letter--disabled {
+  color: #457fb5;
+  border-color: #457fb5;
+}
+
+.keyboard__letter--active {
+  background-color: #fff;
+  color: #0d61b5;
+}
+
+.keyboard__letter-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+.keyboard__letter-content::before {
+  display: inline-block;
+  width: 0;
+  height: 100%;
+  vertical-align: middle;
+  content: '';
+}
+
+.keyboard__letter-content span {
+  display: inline-block;
+  vertical-align: middle;
 }
 
 /*------------------------------------*    $PAGINATION

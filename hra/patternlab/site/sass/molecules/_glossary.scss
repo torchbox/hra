@@ -14,7 +14,7 @@
     }
 
     &__left {
-        padding: 100px 100px 100px 150px;
+        padding: 80px;
         background-color: $color--primary;
     }
 
@@ -25,58 +25,29 @@
     }
 
     &__search {
+        @include font-size(epsilon);
         @include placeholder-text {
             @include rem-font-size(18px);
             font-family: $font--primary;
             color: #fff;
             opacity: 1;
         }
-        @include font-size(epsilon);
         width: 100%;
         padding: 16px 30px;
         color: #fff;
         background-color: transparent;
-        border: 1px solid #74a3cf;
-        border-radius: 30px;
+        border: 2px solid rgba(255, 255, 255, 0.45);
+        border-radius: 40px;
+
+        @include media-query(laptop) {
+            padding: 10px 20px;
+        }
     }
 
     &__browse {
         @include font-size(gamma);
         margin-top: 50px;
         color: #fff;
-    }
-
-    &__keyboard {
-        display: flex;
-        flex-wrap: wrap;
-        margin: 15px -11px;
-    }
-
-    &__keyboard-letter {
-        display: inline-block;
-        flex-grow: 1;
-        width: 9%;
-        height: 47px;
-        max-width: 47px;
-        margin: 0 11px 22px;
-        color: #fff;
-        cursor: pointer;
-        background-color: transparent;
-        border: 2px solid #75a0ca;
-        border-radius: 50%;
-        transition: background-color $default-transition-speed ease, border-color $default-transition-speed ease, color $default-transition-speed ease;
-
-        &--active,
-        &:hover {
-            color: $color--primary;
-            background-color: #e3ecf5;
-            border-color: #e3ecf5;
-        }
-
-        &--disabled {
-            color: #457fb5;
-            border-color: #457fb5;
-        }
     }
 
     &__right {
