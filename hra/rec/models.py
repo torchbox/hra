@@ -1,4 +1,6 @@
 from django.db import models
+from django.utils import timezone
+from django.utils.datetime_safe import date
 from modelcluster.fields import ParentalKey
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, InlinePanel
 from wagtail.wagtailcore.fields import RichTextField
@@ -129,3 +131,54 @@ class CommitteeIndexPage(Page):
     ]
 
     subpage_types = ['rec.CommitteePage']
+
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+
+        committee_pages = CommitteePage.objects.live().public().descendant_of(self)
+        min_and_max_dates = committee_pages.filter(
+            meeting_dates__date__gte=timezone.now().date()
+        ).aggregate(
+            min_date=models.Min('meeting_dates__date'),
+            max_date=models.Max('meeting_dates__date'),
+        )
+
+        dates_range = list(range_month(min_and_max_dates['min_date'], min_and_max_dates['max_date']))
+
+        meetings_by_committee_by_month = {}
+        for committee in committee_pages:
+            meetings_by_committee_by_month[committee] = {}
+
+            for meeting_month in dates_range:
+                meeting_dates = committee.meeting_dates.filter(
+                    date__year=meeting_month.year,
+                    date__month=meeting_month.month,
+                ).values_list('date', flat=True)
+
+                meetings_by_committee_by_month[committee][meeting_month] = meeting_dates
+
+        context.update({
+            'committee_pages': committee_pages,
+            'meetings_by_committee_by_month': meetings_by_committee_by_month,
+        })
+
+        from pprint import pprint
+        pprint(meetings_by_committee_by_month)
+
+        return context
+
+
+def range_month(start_date, end_date):
+    current_year = start_date.year
+    current_month = start_date.month
+
+    yield date(current_year, current_month, 1)
+
+    while current_year != end_date.year or current_month != end_date.month:
+        if current_month % 12 == 0:
+            current_year += 1
+            current_month = 1
+        else:
+            current_month += 1
+
+        yield date(current_year, current_month, 1)
