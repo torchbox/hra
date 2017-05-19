@@ -4923,6 +4923,12 @@ textarea:focus {
   color: #fff;
 }
 
+@media only screen and (max-width: 800px) {
+  .faq-panel__heading {
+    padding: 0 20px;
+  }
+}
+
 .faq-questions {
   margin-top: 0;
 }
@@ -4941,6 +4947,12 @@ textarea:focus {
   font-weight: bold;
   line-height: 1.4;
   color: #fff;
+}
+
+@media only screen and (max-width: 800px) {
+  .faq-questions__item > a {
+    padding: 20px;
+  }
 }
 
 .faq-questions__item > a:focus {

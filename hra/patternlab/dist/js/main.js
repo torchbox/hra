@@ -2551,6 +2551,7 @@ function faqs() {
     }
 
     function showAnswers() {
+        console.log('showing answers');
         setTimeout(function () {
             $answerList.addClass(answersDisplay);
             $questionList.addClass(questionsHide);
@@ -2582,8 +2583,6 @@ function faqs() {
                 'top': topValue + 50
             });
         }
-
-        showAnswers();
     }
 
     function bindEvents() {
@@ -2607,6 +2606,9 @@ function faqs() {
 
             // Centre answer
             positionAnswer();
+
+            // Show answers
+            showAnswers();
         });
 
         // Close answer with icon
