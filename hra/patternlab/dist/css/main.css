@@ -2208,6 +2208,10 @@ textarea:focus {
   border: 1px solid #0f549a;
 }
 
+.table thead td a {
+  color: #ffffff;
+}
+
 .table th,
 .table td {
   padding: 15px 25px;
@@ -2215,6 +2219,15 @@ textarea:focus {
 
 .table td {
   border: 1px solid #f2f2f2;
+}
+
+.table td a {
+  color: #000;
+  text-decoration: underline;
+}
+
+.table td a:hover {
+  text-decoration: none;
 }
 
 .table--pinned {
