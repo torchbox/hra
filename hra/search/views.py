@@ -12,10 +12,13 @@ def search(request):
     page = request.GET.get('page', 1)
 
     # Allow to filter search results using a page types, if specified
-    page_type_pks = request.GET.getlist('type', None)
-    page_types = PageType.objects.filter(pk__in=page_type_pks) if page_type_pks else []
+    page_types = PageType.objects.all()
+    selected_page_type_pks = request.GET.getlist('type', None)
+    selected_page_types = page_types.filter(pk__in=selected_page_type_pks) if selected_page_type_pks else []
+    # User really existing pks
+    selected_page_type_pks = [page_type.pk for page_type in selected_page_types]
 
-    search_results = get_search_queryset(request, page_types)
+    search_results = get_search_queryset(request, selected_page_types)
 
     # Search
     if search_query:
@@ -38,6 +41,6 @@ def search(request):
     return render(request, 'search/search.html', {
         'search_query': search_query,
         'search_results': search_results,
-        'page_types': PageType.objects.all(),
-        'selected_page_type_pks': [page_type.pk for page_type in page_types],
+        'page_types': page_types,
+        'selected_page_type_pks': selected_page_type_pks,
     })
