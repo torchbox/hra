@@ -5,6 +5,10 @@
 .results-listing {
     margin-top: 20px;
 
+    &--flush {
+        margin-top: 0;
+    }
+
     &--pushed {
         margin-top: 50px;
     }

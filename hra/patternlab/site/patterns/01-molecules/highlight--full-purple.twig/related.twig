@@ -1,0 +1,13 @@
+<a class="related" href="#">
+  <div class="related__image" style="background-image:url('{{ relatedItem.image|default('../../../images/teaser.png') }}')">
+    <div class="related__meta">
+      <div class="related__title">{{ relatedItem.title|default('Best practice') }}</div>
+    </div>
+  </div>
+  <div class="related__description">
+    <p>
+      {{ relatedItem.description|default('Lorem ipsum dolor sit amet, consectetur adipiscing elit') }}
+    </p>
+    {% include "atoms-default-arrow" %}
+  </div>
+</a>

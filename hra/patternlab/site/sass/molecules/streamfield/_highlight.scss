@@ -5,12 +5,31 @@
 $highlight-min-height: 300px;
 
 .highlight {
+    $root: &;
     display: flex;
     margin: 60px -150px;
 
     @include media-query(desktop) {
         display: block;
         margin: 60px 0;
+    }
+
+    &--full {
+        margin: 40px 0;
+    }
+
+    &--purple {
+        #{$root}__left {
+            color: #fff;
+            background: linear-gradient(to bottom, #913a87, #ad2378);
+
+            &::before {
+                background: {
+                    size: cover;
+                    image: url('../images/svg/plain-arrow.svg');
+                }
+            }
+        }
     }
 
     &__left,
