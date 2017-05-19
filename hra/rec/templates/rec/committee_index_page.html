@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags %}
+
+{% block content %}
+    <div class="results-container results-container--blue">
+        {% spaceless %}
+            <div class="results-container__left">
+
+                <div class="search-filters">
+                    <div class="search-filters__heading">Search results</div>
+                    <input class="search-filters__search" type="text" placeholder="Search&hellip;">
+                    <div class="search-filters__filter-main-heading">Filter results</div>
+
+                    <div class="search-filters__section-heading">Region</div>
+                    <label class="custom-select__label custom-select--blue__label" for="custom-select--blue__select">
+                        Region
+                    </label>
+                    <div class="custom-select custom-select--blue">
+                        <select id="custom-select custom-select--blue__select">
+                            <option value="option-1">Option 1</option>
+                            <option value="option-2">Option 2</option>
+                            <option value="option-3">Option 3</option>
+                            <option value="option-4">Option 4</option>
+                            <option value="option-5">Option 5</option>
+                            <option value="option-6">Option 6</option>
+                        </select>
+                    </div>
+
+                    <div class="search-filters__section-heading">Committee Type</div>
+                    <label class="custom-select__label custom-select--blue__label" for="custom-select--blue__select">
+                        Committee Type
+                    </label>
+                    <div class="custom-select custom-select--blue">
+                        <select id="custom-select custom-select--blue__select">
+                            <option value="option-1">Option 1</option>
+                            <option value="option-2">Option 2</option>
+                            <option value="option-3">Option 3</option>
+                            <option value="option-4">Option 4</option>
+                            <option value="option-5">Option 5</option>
+                            <option value="option-6">Option 6</option>
+                        </select>
+                    </div>
+
+                    <div class="search-filters__section-heading">Committee Flag</div>
+                    <div class="checkbox">
+                        <input id="checkbox-id-value" type="checkbox">
+                        <label class="checkbox-label" for="checkbox-id-value">This is a checkbox label</label>
+                    </div>
+                    <div class="checkbox">
+                        <input id="checkbox-id-value" type="checkbox">
+                        <label class="checkbox-label" for="checkbox-id-value">This is a checkbox label</label>
+                    </div>
+                </div>
+
+            </div>
+            <div class="results-container__right">
+                <article class="article">
+                    <p>Please ensure you are aware of the latest guidance about applying for approvals before you plan
+                        and book your REC review.</p>
+                    <p>Please note some of our RECs have merged, closed or changed name. To book a REC meeting please
+                        contact the Central Booking Service.</p>
+                </article>
+
+                <div class="table-navigation">
+                    {% spaceless %}
+                        <div class="grid">
+                            <div class="grid__item one-quarter mobile--one-whole">
+                                <button class="table-navigation__button table-navigation__button--left js-table-left"></button>
+                            </div>
+                            <div class="grid__item two-quarters mobile--one-whole">
+                                <div class="table-navigation__heading">Meeting Dates</div>
+                            </div>
+                            <div class="grid__item one-quarter mobile--one-whole">
+                                <button class="table-navigation__button table-navigation__button--right js-table-right"></button>
+                            </div>
+                        </div>
+                    {% endspaceless %}
+                </div>
+
+                {% if committee_pages %}
+
+                    <table class="table table--pinned">
+                        <thead>
+                        <tr>
+                            <th>Committee</th>
+                            {% for committee_page in committee_pages %}
+                                <td>
+                                    <a href="{% pageurl committee_page %}">
+                                        {{ committee_page.title }}
+                                    </a>
+                                </td>
+                            {% endfor %}
+                        </tr>
+                        </thead>
+
+                        <tbody>
+
+                        {% for meeting_month, all_meetings in calendar_matrix %}
+                            <tr>
+                                <td>{{ meeting_month|date:"M y" }}</td>
+
+                                {% for committee_meetings in all_meetings %}
+                                    <td>
+                                        {% for committee_meeting in committee_meetings %}
+                                            {{ committee_meeting|date:"jS" }}{% if not forloop.last %},{% endif %}
+                                        {% empty %}
+                                            No meeting
+                                        {% endfor %}
+                                    </td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                {% endif %}
+
+            </div>
+        {% endspaceless %}x§
+    </div>
+{% endblock %}

@@ -8,6 +8,8 @@ from wagtail.wagtailcore.models import Page, Orderable
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
 
+from hra.utils.datetime import range_month
+
 
 @register_snippet
 class CommitteeType(models.Model):
@@ -145,40 +147,25 @@ class CommitteeIndexPage(Page):
 
         dates_range = list(range_month(min_and_max_dates['min_date'], min_and_max_dates['max_date']))
 
-        meetings_by_committee_by_month = {}
-        for committee in committee_pages:
-            meetings_by_committee_by_month[committee] = {}
+        calendar_matrix = []
+        for meeting_month in dates_range:
+            all_meetings = []
 
-            for meeting_month in dates_range:
-                meeting_dates = committee.meeting_dates.filter(
+            for committee in committee_pages:
+                committee_meetings = committee.meeting_dates.filter(
                     date__year=meeting_month.year,
                     date__month=meeting_month.month,
                 ).values_list('date', flat=True)
 
-                meetings_by_committee_by_month[committee][meeting_month] = meeting_dates
+                all_meetings.append(committee_meetings)
+
+            calendar_matrix.append(
+                (meeting_month, all_meetings)
+            )
 
         context.update({
             'committee_pages': committee_pages,
-            'meetings_by_committee_by_month': meetings_by_committee_by_month,
+            'calendar_matrix': calendar_matrix,
         })
 
-        from pprint import pprint
-        pprint(meetings_by_committee_by_month)
-
         return context
-
-
-def range_month(start_date, end_date):
-    current_year = start_date.year
-    current_month = start_date.month
-
-    yield date(current_year, current_month, 1)
-
-    while current_year != end_date.year or current_month != end_date.month:
-        if current_month % 12 == 0:
-            current_year += 1
-            current_month = 1
-        else:
-            current_month += 1
-
-        yield date(current_year, current_month, 1)
