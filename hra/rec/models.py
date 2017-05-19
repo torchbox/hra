@@ -135,37 +135,53 @@ class CommitteeIndexPage(Page):
     subpage_types = ['rec.CommitteePage']
 
     def get_context(self, request, *args, **kwargs):
-        context = super().get_context(request, *args, **kwargs)
+        selected_committee_flag_pks = request.GET.getlist('committee_flag', None)
 
         committee_pages = CommitteePage.objects.live().public().descendant_of(self)
-        min_and_max_dates = committee_pages.filter(
+        committee_flags = CommitteeFlag.objects.all()
+
+        # Allow to filter by committee flags
+        selected_committee_flags = committee_flags.filter(pk__in=selected_committee_flag_pks)
+        selected_committee_flag_pks = [flag.pk for flag in selected_committee_flags]
+        if selected_committee_flag_pks:
+            committee_pages = committee_pages.filter(committee_flags__pk__in=selected_committee_flag_pks)
+
+        # Exclude duplicates
+        committee_pages = committee_pages.distinct()
+
+        start_and_end_dates = committee_pages.filter(
             meeting_dates__date__gte=timezone.now().date()
         ).aggregate(
-            min_date=models.Min('meeting_dates__date'),
-            max_date=models.Max('meeting_dates__date'),
+            start_date=models.Min('meeting_dates__date'),
+            end_date=models.Max('meeting_dates__date'),
         )
 
-        dates_range = list(range_month(min_and_max_dates['min_date'], min_and_max_dates['max_date']))
-
         calendar_matrix = []
-        for meeting_month in dates_range:
-            all_meetings = []
 
-            for committee in committee_pages:
-                committee_meetings = committee.meeting_dates.filter(
-                    date__year=meeting_month.year,
-                    date__month=meeting_month.month,
-                ).values_list('date', flat=True)
+        dates_range = range_month(start_and_end_dates['start_date'], start_and_end_dates['end_date'])
 
-                all_meetings.append(committee_meetings)
+        if dates_range and committee_pages:
+            for meeting_month in dates_range:
+                all_meetings = []
 
-            calendar_matrix.append(
-                (meeting_month, all_meetings)
-            )
+                for committee in committee_pages:
+                    committee_meetings = committee.meeting_dates.filter(
+                        date__year=meeting_month.year,
+                        date__month=meeting_month.month,
+                    ).values_list('date', flat=True)
 
+                    all_meetings.append(committee_meetings)
+
+                calendar_matrix.append(
+                    (meeting_month, all_meetings)
+                )
+
+        context = super().get_context(request, *args, **kwargs)
         context.update({
             'committee_pages': committee_pages,
             'calendar_matrix': calendar_matrix,
+            'committee_flags': committee_flags,
+            'selected_committee_flag_pks': selected_committee_flag_pks,
         })
 
         return context
