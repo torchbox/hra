@@ -36,6 +36,16 @@ class CommitteePagePreviousName(Orderable):
     name = models.CharField(max_length=255)
 
 
+class CommitteePagePhone(Orderable):
+    source_page = ParentalKey('rec.CommitteePage', related_name='phone_numbers')
+    phone = models.CharField(max_length=255)
+
+
+class CommitteePageEmail(Orderable):
+    source_page = ParentalKey('rec.CommitteePage', related_name='email_addresses')
+    email = models.EmailField(max_length=255)
+
+
 class CommitteePageMeetingDate(Orderable):
     source_page = ParentalKey('rec.CommitteePage', related_name='meeting_dates')
     date = models.DateField()
@@ -82,20 +92,18 @@ class CommitteePage(Page):
     chair = models.CharField(max_length=255, blank=True)
     rec_manager = models.CharField("REC Manager", max_length=255, blank=True)
     rec_assistant = models.CharField("REC Assistant", max_length=255, blank=True)
-    phone = models.CharField(max_length=255, blank=True)
-    email = models.EmailField(max_length=255, blank=True)
     hra_office_name = models.CharField("HRA Office name", max_length=255, blank=True)
     region = models.CharField("Region/Nation", max_length=64, choices=REGION_CHOICES)
     usual_meeting_venue = models.CharField(max_length=255, blank=True)
-    usual_meeting_time = models.CharField(max_length=255, blank=True)
+    usual_meeting_time = models.TimeField(blank=True, null=True)
 
     content_panels = Page.content_panels + [
         InlinePanel('previous_names', label="Previous name of REC"),
         FieldPanel('chair'),
         FieldPanel('rec_manager'),
         FieldPanel('rec_assistant'),
-        FieldPanel('phone'),
-        FieldPanel('email'),
+        InlinePanel('phone_numbers', label="Phone numbers"),
+        InlinePanel('email_addresses', label="Email addresses"),
         FieldPanel('hra_office_name'),
         FieldPanel('region'),
         FieldPanel('usual_meeting_venue'),

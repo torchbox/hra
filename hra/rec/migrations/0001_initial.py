@@ -46,12 +46,10 @@ class Migration(migrations.Migration):
                 ('chair', models.CharField(blank=True, max_length=255)),
                 ('rec_manager', models.CharField(blank=True, max_length=255, verbose_name='REC Manager')),
                 ('rec_assistant', models.CharField(blank=True, max_length=255, verbose_name='REC Assistant')),
-                ('phone', models.CharField(blank=True, max_length=255)),
-                ('email', models.EmailField(blank=True, max_length=255)),
                 ('hra_office_name', models.CharField(blank=True, max_length=255, verbose_name='HRA Office name')),
                 ('region', models.CharField(choices=[('east_midlands', 'East Midlands'), ('east_of_england', 'East of England'), ('england', 'England'), ('london', 'London'), ('north_east', 'North East'), ('north_west', 'North West'), ('northern_ireland', 'Northern Ireland'), ('scotland', 'Scotland'), ('social_care_institute_for_excellence', 'Social Care Institute for Excellence'), ('south_central', 'South Central'), ('south_east_coast', 'South East Coast'), ('south_west', 'South West'), ('wales', 'Wales'), ('west_midlands', 'West Midlands'), ('yorkshire_and_the_humber', 'Yorkshire & the Humber')], max_length=64, verbose_name='Region/Nation')),
                 ('usual_meeting_venue', models.CharField(blank=True, max_length=255)),
-                ('usual_meeting_time', models.CharField(blank=True, max_length=255)),
+                ('usual_meeting_time', models.TimeField(blank=True, null=True)),
             ],
             options={
                 'abstract': False,
@@ -82,6 +80,32 @@ class Migration(migrations.Migration):
             options={
                 'ordering': ['sort_order'],
                 'abstract': False,
+            },
+        ),
+        migrations.CreateModel(
+            name='CommitteePageEmail',
+            fields=[
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('sort_order', models.IntegerField(blank=True, editable=False, null=True)),
+                ('email', models.EmailField(max_length=255)),
+                ('source_page', modelcluster.fields.ParentalKey(on_delete=django.db.models.deletion.CASCADE, related_name='email_addresses', to='rec.CommitteePage')),
+            ],
+            options={
+                'abstract': False,
+                'ordering': ['sort_order'],
+            },
+        ),
+        migrations.CreateModel(
+            name='CommitteePagePhone',
+            fields=[
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('sort_order', models.IntegerField(blank=True, editable=False, null=True)),
+                ('phone', models.CharField(max_length=255)),
+                ('source_page', modelcluster.fields.ParentalKey(on_delete=django.db.models.deletion.CASCADE, related_name='phone_numbers', to='rec.CommitteePage')),
+            ],
+            options={
+                'abstract': False,
+                'ordering': ['sort_order'],
             },
         ),
         migrations.CreateModel(
