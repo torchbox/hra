@@ -3963,9 +3963,28 @@ textarea:focus {
   vertical-align: top;
 }
 
+@media only screen and (max-width: 800px) {
+  .glossary__left, .glossary__right {
+    width: 100%;
+    height: auto;
+  }
+}
+
 .glossary__left {
   padding: 80px;
   background-color: #0d61b5;
+}
+
+@media only screen and (max-width: 900px) {
+  .glossary__left {
+    padding: 90px 30px 50px;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .glossary__left {
+    padding: 90px 20px 20px;
+  }
 }
 
 .glossary__search-heading {
@@ -4042,6 +4061,12 @@ textarea:focus {
 .glossary__right {
   padding: 100px;
   overflow: scroll;
+}
+
+@media only screen and (max-width: 800px) {
+  .glossary__right {
+    padding: 20px;
+  }
 }
 
 .glossary__results-heading {
@@ -4474,6 +4499,15 @@ textarea:focus {
   transition: background-color 300ms ease, border-color 300ms ease, color 300ms ease;
 }
 
+@media only screen and (max-width: 900px) {
+  .keyboard__letter {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    margin: 6px;
+  }
+}
+
 .keyboard__letter--active, .keyboard__letter:hover {
   color: #0d61b5;
   background-color: #e3ecf5;
@@ -4519,6 +4553,12 @@ textarea:focus {
 .keyboard__letter-content span {
   display: inline-block;
   vertical-align: middle;
+}
+
+@media only screen and (max-width: 900px) {
+  .keyboard__letter-content {
+    position: static;
+  }
 }
 
 /*------------------------------------*    $PAGINATION

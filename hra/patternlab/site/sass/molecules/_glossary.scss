@@ -11,11 +11,24 @@
         width: 50%;
         height: calc(100vh - 103px);
         vertical-align: top;
+
+        @include media-query(tablet) {
+            width: 100%;
+            height: auto;
+        }
     }
 
     &__left {
         padding: 80px;
         background-color: $color--primary;
+
+        @include media-query(laptop) {
+            padding: 90px 30px 50px;
+        }
+
+        @include media-query(tablet) {
+            padding: 90px 20px 20px;
+        }
     }
 
     &__search-heading {
@@ -53,6 +66,10 @@
     &__right {
         padding: 100px;
         overflow: scroll;
+
+        @include media-query(tablet) {
+            padding: 20px;
+        }
     }
 
     &__results-heading {

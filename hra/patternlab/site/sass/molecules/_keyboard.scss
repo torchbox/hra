@@ -25,6 +25,13 @@ $keyboard-padding: ($keyboard-letter-width / 2);
         border-radius: 50%;
         transition: background-color $default-transition-speed ease, border-color $default-transition-speed ease, color $default-transition-speed ease;
 
+        @include media-query(laptop) {
+            width: 40px;
+            height: 40px;
+            padding: 0;
+            margin: 6px;
+        }
+
         &--active,
         &:hover {
             color: $color--primary;
@@ -71,6 +78,10 @@ $keyboard-padding: ($keyboard-letter-width / 2);
         span {
             display: inline-block;
             vertical-align: middle;
+        }
+
+        @include media-query(laptop) {
+            position: static;
         }
     }
 }
