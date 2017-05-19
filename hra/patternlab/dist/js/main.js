@@ -2581,9 +2581,9 @@ function faqs() {
             $answerList.css({
                 'top': topValue + 50
             });
-
-            showAnswers();
         }
+
+        showAnswers();
     }
 
     function bindEvents() {

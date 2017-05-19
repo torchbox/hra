@@ -4865,6 +4865,12 @@ textarea:focus {
   transition: transform 300ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
 }
 
+@media only screen and (max-width: 900px) {
+  .faq-panel--questions {
+    margin-top: 20px;
+  }
+}
+
 @media only screen and (max-width: 800px) {
   .faq-panel--questions {
     width: 100%;
@@ -4931,7 +4937,8 @@ textarea:focus {
   font-size: 1.125rem;
   display: block;
   padding: 20px 70px;
-  font-weight: 100;
+  font-family: "FrutigerRoman", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  font-weight: bold;
   line-height: 1.4;
   color: #fff;
 }
@@ -4959,6 +4966,13 @@ textarea:focus {
   opacity: 0;
   transform: translate3d(0, 5px, 0);
   transition: transform 800ms ease, opacity 800ms ease;
+}
+
+.faq-answers__item > h3 {
+  font-size: 25px;
+  font-size: 1.5625rem;
+  margin-top: 10px;
+  font-family: "FrutigerRoman", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 }
 
 .faq-answers__item > p {
@@ -4990,18 +5004,43 @@ textarea:focus {
 
 @media only screen and (max-width: 800px) {
   .faq-answers__close-answer {
+    position: relative;
     display: block;
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    margin: auto 0;
+    cursor: pointer;
+    background-color: transparent;
+    border: 0;
   }
-}
-
-.faq-answers__close-answer svg {
-  width: 20px;
-  height: 20px;
-  transform: rotate(180deg);
-}
-
-.faq-answers h3 {
-  margin-top: 10px;
+  .faq-answers__close-answer::before, .faq-answers__close-answer::after {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    margin: auto;
+    background-color: #000;
+    content: '';
+    transition: transform 300ms ease, opacity 300ms ease;
+  }
+  .faq-answers__close-answer::before {
+    transform: rotate(-45deg);
+  }
+  .faq-answers__close-answer::after {
+    transform: rotate(45deg);
+  }
+  .faq-answers__close-answer:hover::before {
+    transform: rotate(0deg);
+  }
+  .faq-answers__close-answer:hover::after {
+    opacity: 0;
+  }
+  .faq-answers__close-answer:focus {
+    outline: 0;
+  }
 }
 
 /*------------------------------------*    $ORGANISMS

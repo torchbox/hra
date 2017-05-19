@@ -27,7 +27,7 @@
                                 {% for faq in faqs %}
                                     <li class="faq-answers__item {% if forloop.first %}faq-answers__item--selected faq-answers__item--display{% endif %}"
                                         data-faq-answer="{{ faq.pk }}">
-                                        <button class="button button--bare faq-answers__close-answer">Close</button>
+                                        <button class="button button--bare faq-answers__close-answer"></button>
 
                                         <h3>{{ faq.title }}</h3>
                                         {{ faq.body|richtext }}
