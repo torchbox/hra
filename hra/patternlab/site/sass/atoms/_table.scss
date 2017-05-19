@@ -15,6 +15,10 @@
 
         td {
             border: 1px solid #0f549a;
+
+            a {
+                color: #ffffff;
+            }
         }
     }
 
@@ -25,6 +29,15 @@
 
     td {
         border: 1px solid #f2f2f2;
+
+        a {
+            color: $color--link;
+            text-decoration: underline;
+
+            &:hover {
+                text-decoration: none;
+            }
+        }
     }
 }
 
