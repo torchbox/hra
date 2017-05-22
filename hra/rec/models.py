@@ -135,15 +135,25 @@ class CommitteeIndexPage(Page):
 
     def get_context(self, request, *args, **kwargs):
         selected_committee_flag_pks = request.GET.getlist('committee_flag', None)
+        selected_committee_type_pk = request.GET.get('committee_type', None)
 
         committee_pages = CommitteePage.objects.live().public().descendant_of(self)
         committee_flags = CommitteeFlag.objects.all()
+        committee_types = CommitteeType.objects.all()
 
         # Allow to filter by committee flags
         selected_committee_flags = committee_flags.filter(pk__in=selected_committee_flag_pks)
         selected_committee_flag_pks = [flag.pk for flag in selected_committee_flags]
         if selected_committee_flag_pks:
             committee_pages = committee_pages.filter(committee_flags__pk__in=selected_committee_flag_pks)
+
+        # Allow to filter by committee types
+        try:
+            selected_committee_type = committee_types.get(pk=selected_committee_type_pk)
+            committee_pages = committee_pages.filter(committee_types__pk__in=selected_committee_type_pk)
+            selected_committee_type_pk = selected_committee_type.pk
+        except CommitteeType.DoesNotExist:
+            selected_committee_type_pk = None
 
         # Exclude duplicates
         committee_pages = committee_pages.distinct()
@@ -157,6 +167,8 @@ class CommitteeIndexPage(Page):
         )
 
         calendar_matrix = []
+
+        # TODO: Check if start_and_end_dates has values
 
         dates_range = range_month(start_and_end_dates['start_date'], start_and_end_dates['end_date'])
         if dates_range and committee_pages:
@@ -181,6 +193,8 @@ class CommitteeIndexPage(Page):
             'calendar_matrix': calendar_matrix,
             'committee_flags': committee_flags,
             'selected_committee_flag_pks': selected_committee_flag_pks,
+            'committee_types': committee_types,
+            'selected_committee_type_pk': selected_committee_type_pk,
         })
 
         return context
