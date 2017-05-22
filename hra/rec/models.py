@@ -136,6 +136,7 @@ class CommitteeIndexPage(Page):
     def get_context(self, request, *args, **kwargs):
         selected_committee_flag_pks = request.GET.getlist('committee_flag', None)
         selected_committee_type_pk = request.GET.get('committee_type', None)
+        selected_committee_region = request.GET.get('committee_region', None)
 
         committee_pages = CommitteePage.objects.live().public().descendant_of(self)
         committee_flags = CommitteeFlag.objects.all()
@@ -155,7 +156,11 @@ class CommitteeIndexPage(Page):
         except CommitteeType.DoesNotExist:
             selected_committee_type_pk = None
 
-        # Exclude duplicates
+        # Allow to filter by committee region
+        if selected_committee_region:
+            committee_pages = committee_pages.filter(region=selected_committee_region)
+
+        # Exclude duplicates after filtering
         committee_pages = committee_pages.distinct()
 
         start_and_end_dates = committee_pages.filter(
@@ -193,6 +198,8 @@ class CommitteeIndexPage(Page):
             'selected_committee_flag_pks': selected_committee_flag_pks,
             'committee_types': committee_types,
             'selected_committee_type_pk': selected_committee_type_pk,
+            'committee_region_choices': CommitteePage.REGION_CHOICES,
+            'selected_committee_region': selected_committee_region,
         })
 
         return context
