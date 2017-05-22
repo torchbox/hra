@@ -29,7 +29,6 @@ function faqs() {
     }
 
     function showAnswers() {
-        console.log('showing answers');
         setTimeout(function() {
             $answerList.addClass(answersDisplay);
             $questionList.addClass(questionsHide);
