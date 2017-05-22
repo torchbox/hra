@@ -53,6 +53,18 @@
         display: inline-block;
         margin: 0 0 0 70px;
         vertical-align: -16px;
+
+        @include media-query(desktop) {
+            margin-left: 30px;
+        }
+
+        @include media-query(laptop) {
+            margin-left: 0;
+        }
+
+        @include media-query(mobile) {
+            vertical-align: top;
+        }
     }
 
     &__search {
@@ -70,18 +82,9 @@
         border: 0;
         border-radius: 35px;
 
-        @include media-query(desktop) {
-            margin-left: 30px;
-        }
-
-        @include media-query(laptop) {
-            margin-left: 0;
-        }
-
         @include media-query(mobile) {
             width: 100%;
             padding: 20px;
-            vertical-align: top;
             border-radius: 0;
         }
     }
