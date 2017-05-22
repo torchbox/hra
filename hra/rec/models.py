@@ -1,6 +1,5 @@
 from django.db import models
 from django.utils import timezone
-from django.utils.datetime_safe import date
 from modelcluster.fields import ParentalKey
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, InlinePanel
 from wagtail.wagtailcore.fields import RichTextField
@@ -150,6 +149,7 @@ class CommitteeIndexPage(Page):
         committee_pages = committee_pages.distinct()
 
         start_and_end_dates = committee_pages.filter(
+            # Do not display past meetings
             meeting_dates__date__gte=timezone.now().date()
         ).aggregate(
             start_date=models.Min('meeting_dates__date'),
@@ -159,7 +159,6 @@ class CommitteeIndexPage(Page):
         calendar_matrix = []
 
         dates_range = range_month(start_and_end_dates['start_date'], start_and_end_dates['end_date'])
-
         if dates_range and committee_pages:
             for meeting_month in dates_range:
                 all_meetings = []
