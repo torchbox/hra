@@ -70,6 +70,7 @@
         left: 10px;
         width: 100px;
         height: 4px;
+        max-width: 550px;
         background-color: #eee;
 
         @include media-query(mobile) {
@@ -97,8 +98,12 @@
     &__item-heading {
         @include font-size(delta);
         display: inline-block;
+        max-width: 550px;
+        padding-right: 50px;
+        margin-bottom: 10px;
         font-family: $font--secondary;
         font-weight: 600;
+        line-height: 1.3;
 
         @include media-query(mobile) {
             padding-right: 40px;
