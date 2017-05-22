@@ -1,3 +1,4 @@
+import glossary from './components/glossary';
 import glossaryTab from './components/glossary-tab';
 import resultsBorder from './components/results-border';
 import disableTransition from './components/disable-transition';
@@ -7,6 +8,7 @@ import faqs from './components/faqs';
 import tableInteraction from './components/table-interaction';
 import searchFilter from './components/search-form';
 
+glossary();
 glossaryTab();
 resultsBorder();
 disableTransition();

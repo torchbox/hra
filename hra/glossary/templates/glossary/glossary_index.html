@@ -3,24 +3,106 @@
 
 {% block content %}
 
-    <h1>{{ page.title }}</h1>
+    <div class="glossary-page-body">
 
-{% endblock %}
+        {% spaceless %}
+            <div class="glossary js-glossary" data-api-url="{% url 'wagtailapi:glossary_terms:listing' %}">
+                <div class="glossary__left">
+                    <div class="glossary__search-heading">Search glossary</div>
+                    <input class="glossary__search" type="text" placeholder="Lookup&hellip;">
+                    <div class="glossary__browse">Browse by letter</div>
+                    <div class="keyboard">
+                        <button class="keyboard__letter keyboard__letter--active">
+                            <div class="keyboard__letter-content"><span>A</span></div>
+                        </button>
+                        <button class="keyboard__letter">
+                            <div class="keyboard__letter-content"><span>B</span></div>
+                        </button>
+                        <button class="keyboard__letter">
+                            <div class="keyboard__letter-content"><span>C</span></div>
+                        </button>
+                        <button class="keyboard__letter">
+                            <div class="keyboard__letter-content"><span>D</span></div>
+                        </button>
+                        <button class="keyboard__letter">
+                            <div class="keyboard__letter-content"><span>E</span></div>
+                        </button>
+                        <button class="keyboard__letter">
+                            <div class="keyboard__letter-content"><span>F</span></div>
+                        </button>
+                        <button class="keyboard__letter">
+                            <div class="keyboard__letter-content"><span>G</span></div>
+                        </button>
+                        <button class="keyboard__letter">
+                            <div class="keyboard__letter-content"><span>H</span></div>
+                        </button>
+                        <button class="keyboard__letter">
+                            <div class="keyboard__letter-content"><span>I</span></div>
+                        </button>
+                        <button class="keyboard__letter">
+                            <div class="keyboard__letter-content"><span>J</span></div>
+                        </button>
+                        <button class="keyboard__letter">
+                            <div class="keyboard__letter-content"><span>K</span></div>
+                        </button>
+                        <button class="keyboard__letter">
+                            <div class="keyboard__letter-content"><span>L</span></div>
+                        </button>
+                        <button class="keyboard__letter">
+                            <div class="keyboard__letter-content"><span>M</span></div>
+                        </button>
+                        <button class="keyboard__letter">
+                            <div class="keyboard__letter-content"><span>N</span></div>
+                        </button>
+                        <button class="keyboard__letter">
+                            <div class="keyboard__letter-content"><span>O</span></div>
+                        </button>
+                        <button class="keyboard__letter">
+                            <div class="keyboard__letter-content"><span>P</span></div>
+                        </button>
+                        <button class="keyboard__letter">
+                            <div class="keyboard__letter-content"><span>Q</span></div>
+                        </button>
+                        <button class="keyboard__letter">
+                            <div class="keyboard__letter-content"><span>R</span></div>
+                        </button>
+                        <button class="keyboard__letter">
+                            <div class="keyboard__letter-content"><span>S</span></div>
+                        </button>
+                        <button class="keyboard__letter">
+                            <div class="keyboard__letter-content"><span>T</span></div>
+                        </button>
+                        <button class="keyboard__letter">
+                            <div class="keyboard__letter-content"><span>U</span></div>
+                        </button>
+                        <button class="keyboard__letter">
+                            <div class="keyboard__letter-content"><span>V</span></div>
+                        </button>
+                        <button class="keyboard__letter">
+                            <div class="keyboard__letter-content"><span>W</span></div>
+                        </button>
+                        <button class="keyboard__letter">
+                            <div class="keyboard__letter-content"><span>X</span></div>
+                        </button>
+                        <button class="keyboard__letter">
+                            <div class="keyboard__letter-content"><span>Y</span></div>
+                        </button>
+                        <button class="keyboard__letter">
+                            <div class="keyboard__letter-content"><span>Z</span></div>
+                        </button>
+                    </div>
+                </div>
+                <div class="glossary__right">
+                    <div class="glossary__results-heading">
+                        <!-- Result title (something like "Found 6 results") -->
+                    </div>
+                    <ul class="glossary__results">
+                        <!-- Result items -->
+                    </ul>
+                </div>
+            </div>
+        {% endspaceless %}
 
+    </div>
 
-{% block extra_js %}
-    <script src="{% static 'rest_framework/js/coreapi-0.1.0.js' %}"></script>
-    <script src="{% url 'api-docs:schema-js' %}"></script>
-    <script>
-        var coreapi = window.coreapi;
-        var schema = window.schema;
-        var client = new coreapi.Client();
-
-        var action = ['glossary_terms', 'list'];
-        var params = {} // Can be something like {term_startswith: 'a'}
-        client.action(schema, action, params).then(function(result) {
-            console.log(result);
-        });
-
-    </script>
 {% endblock %}
