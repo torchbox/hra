@@ -2,5 +2,141 @@
 {% load wagtailcore_tags wagtailimages_tags static %}
 
 {% block content %}
+    <div class="committee-page-body">
+        {% spaceless %}
+            <div class="committee-page-body__content">
 
+                <div class="committee-list">
+                    <h1 class="committee-list__heading">{{ page.title }}</h1>
+                    <ul>
+                        {% with previous_names=page.previous_names.all %}
+                            {% if previous_names %}
+
+                                <li class="committee-list__item">
+                                    <h4>Previous name(s)</h4>
+                                    <p>
+                                        {{ previous_names|join:", " }}
+                                    </p>
+                                </li>
+
+                            {% endif %}
+                        {% endwith %}
+
+                        {% if page.chair %}
+                            <li class="committee-list__item">
+                                <h4>Chair</h4>
+                                <p>{{ page.chair }}</p>
+                            </li>
+                        {% endif %}
+
+                        {% if page.rec_manager %}
+                            <li class="committee-list__item">
+                                <h4>REC Manager</h4>
+                                <p>{{ page.rec_manager }}</p>
+                            </li>
+                        {% endif %}
+
+                        {% if page.rec_assistant %}
+                            <li class="committee-list__item">
+                                <h4>REC Assistant</h4>
+                                <p>{{ page.rec_assistant }}</p>
+                            </li>
+                        {% endif %}
+
+                        {% if page.hra_office_name %}
+                            <li class="committee-list__item">
+                                <h4>HRA Office name</h4>
+                                <p>{{ page.hra_office_name }}</p>
+                            </li>
+                        {% endif %}
+
+                        {% with phone_numbers=page.phone_numbers.all %}
+                            {% if phone_numbers %}
+                                <li class="committee-list__item">
+                                    <h4>Phone number{{ phone_numbers|length|pluralize }}</h4>
+                                    <p>
+                                        {% for phone_number in phone_numbers %}
+                                            <a href="tel:{{ phone_number|cut:" " }}">
+                                                {{ phone_number }}</a>{% if not forloop.last %}, {% endif %}
+                                        {% endfor %}
+                                    </p>
+                                </li>
+                            {% endif %}
+                        {% endwith %}
+
+                        {% with email_addresses=page.email_addresses.all %}
+                            {% if email_addresses %}
+                                <li class="committee-list__item">
+                                    <h4>Phone number{{ email_addresses|length|pluralize }}</h4>
+                                    <p>
+                                        {% for email_address in email_addresses %}
+                                            <a href="mailto:{{ email_address }}">
+                                                {{ email_address }}</a>{% if not forloop.last %}, {% endif %}
+                                        {% endfor %}
+                                    </p>
+                                </li>
+                            {% endif %}
+                        {% endwith %}
+
+                        {% if page.hra_office_name %}
+                            <li class="committee-list__item">
+                                <h4>HRA Office name</h4>
+                                <p>{{ page.hra_office_name }}</p>
+                            </li>
+                        {% endif %}
+
+                        {% if page.region %}
+                            <li class="committee-list__item">
+                                <h4>Region/Nation</h4>
+                                <p>{{ page.get_region_display }}</p>
+                            </li>
+                        {% endif %}
+
+                        {% if page.usual_meeting_venue %}
+                            <li class="committee-list__item">
+                                <h4>Usual meeting venue</h4>
+                                <p>{{ page.usual_meeting_venue }}</p>
+                            </li>
+                        {% endif %}
+
+                        {% if page.usual_meeting_time %}
+                            <li class="committee-list__item">
+                                <h4>Usual meeting time</h4>
+                                <p>{{ page.usual_meeting_time }}</p>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+
+            </div>
+            <div class="committee-page-body__table-wrapper">
+
+                {% if upcoming_meeting_dates %}
+
+                    <div class="committee-table">
+                        <h2>Meeting Dates</h2>
+
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <td>Day</td>
+                                <td>Month</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for meeting_date in upcoming_meeting_dates %}
+                                <tr>
+                                    <td>{{ meeting_date.date|date:"jS" }}</td>
+                                    <td>{{ meeting_date.date|date:"M y" }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                {% endif %}
+
+            </div>
+        {% endspaceless %}
+    </div>
 {% endblock %}

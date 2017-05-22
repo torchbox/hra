@@ -39,15 +39,24 @@ class CommitteePagePreviousName(Orderable):
     source_page = ParentalKey('rec.CommitteePage', related_name='previous_names')
     name = models.CharField(max_length=255)
 
+    def __str__(self):
+        return self.name
+
 
 class CommitteePagePhone(Orderable):
     source_page = ParentalKey('rec.CommitteePage', related_name='phone_numbers')
     phone = models.CharField(max_length=255)
 
+    def __str__(self):
+        return self.phone
+
 
 class CommitteePageEmail(Orderable):
     source_page = ParentalKey('rec.CommitteePage', related_name='email_addresses')
     email = models.EmailField(max_length=255)
+
+    def __str__(self):
+        return self.email
 
 
 class CommitteePageMeetingDate(models.Model):
@@ -131,6 +140,14 @@ class CommitteePage(Page):
 
     parent_page_types = ['rec.CommitteeIndexPage']
     subpage_types = []
+
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        context.update({
+            'upcoming_meeting_dates': self.meeting_dates.filter(date__gte=timezone.now().date())
+        })
+
+        return context
 
 
 class CommitteeIndexPage(Page):
