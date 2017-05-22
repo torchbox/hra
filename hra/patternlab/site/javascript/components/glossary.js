@@ -6,25 +6,33 @@ function glossary() {
     const $glossary = $('.js-glossary'),
         $glossaryResultsHeading = $glossary.find('.glossary__results-heading'),
         $glossaryResultsContainer = $glossary.find('.glossary__results'),
+        $glossarySearchInput = $glossary.find('.glossary__search'),
         glossaryApiURL = $glossary.data('apiUrl');
 
-    function loadData(startswith = null) {
-        let data = {};
+    let previousSearchQuery = null;
+
+    function loadListing(startswith = null) {
+        let qs = '';
         if (startswith) {
-            data['term_startswith'] = startswith;
+            qs = `?term_startswith=${startswith}`;
         }
 
-        return fetch(glossaryApiURL)
+        return fetch(glossaryApiURL + qs)
             .then(response => response.json());
     }
 
-    function renderData(startswith = null) {
-        const request = loadData(startswith);
+    function loadSearchListing(searchQuery) {
+        let qs = `?search=${searchQuery}`;
 
-        request.then(json => json.items)
+        return fetch(glossaryApiURL + qs)
+            .then(response => response.json());
+    }
+
+    function renderListingResponse(response) {
+        response.then(json => json.items)
             .then(renderResultItems);
 
-        request.then(json => json.meta.total_count)
+        response.then(json => json.meta.total_count)
             .then(renderResultHeader);
     }
 
@@ -49,8 +57,31 @@ function glossary() {
         $glossaryResultsHeading.text(`Found ${totalCount} ${pluralize('result', totalCount)}`);
     }
 
+    function renderAllListing() {
+        renderListingResponse(
+            loadListing()
+        );
+    }
+
     function bindEvents() {
-        $(document).ready(() => renderData('a'));
+        $(document).ready(() => renderAllListing());
+
+        $glossarySearchInput.on('keyup', () => {
+            const searchQuery = $glossarySearchInput.val().trim();
+
+            if (searchQuery.length >= 1) {
+                if (searchQuery !== previousSearchQuery) {
+                    renderListingResponse(
+                        loadSearchListing(searchQuery)
+                    );
+
+                    previousSearchQuery = searchQuery;
+                }
+            } else {
+                renderAllListing();
+            }
+
+        });
     }
 
     bindEvents();
