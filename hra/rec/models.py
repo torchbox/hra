@@ -168,10 +168,8 @@ class CommitteeIndexPage(Page):
 
         calendar_matrix = []
 
-        # TODO: Check if start_and_end_dates has values
-
-        dates_range = range_month(start_and_end_dates['start_date'], start_and_end_dates['end_date'])
-        if dates_range and committee_pages:
+        if committee_pages and start_and_end_dates['start_date'] and start_and_end_dates['end_date']:
+            dates_range = range_month(start_and_end_dates['start_date'], start_and_end_dates['end_date'])
             for meeting_month in dates_range:
                 all_meetings = []
 
