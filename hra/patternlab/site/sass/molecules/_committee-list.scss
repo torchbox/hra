@@ -1,0 +1,37 @@
+/*------------------------------------*\
+    $COMMITTEE LISTING
+\*------------------------------------*/
+
+.committee-list {
+    padding: 0 40px 0 0;
+
+    @include media-query(tablet) {
+        padding: 0;
+    }
+
+    &__heading {
+        @include font-size(alpha);
+        margin-bottom: 40px;
+
+        @include media-query(tablet) {
+            @include font-size(gamma);
+        }
+    }
+
+
+    &__item {
+        max-width: 700px;
+        padding: 17px 0 25px;
+        border-top: 1px solid $color--border;
+
+        h4 {
+            @include font-size(zeta);
+            font-family: $font--tertiary;
+        }
+
+        p {
+            @include font-size(milli);
+            margin: 3px 0 0;
+        }
+    }
+}

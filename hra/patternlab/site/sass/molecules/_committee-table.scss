@@ -1,0 +1,16 @@
+/*------------------------------------*\
+    $COMMITTEE TABLE
+\*------------------------------------*/
+
+.committee-table {
+    h2 {
+        @include font-size(gamma);
+        margin: 10px 0 25px;
+        font-family: $font--secondary;
+
+        @include media-query(tablet) {
+            @include font-size(delta);
+            margin-top: 50px;
+        }
+    }
+}

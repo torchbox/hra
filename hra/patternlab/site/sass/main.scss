@@ -104,6 +104,9 @@
 @import 'molecules/contact';
 @import 'molecules/contact-form';
 
+@import 'molecules/committee-list';
+@import 'molecules/committee-table';
+
 @import 'molecules/main-menu';
 @import 'molecules/search-filters';
 @import 'molecules/keyboard';
@@ -120,6 +123,7 @@
 @import 'organisms/standard-page-body';
 @import 'organisms/person-page-body';
 @import 'organisms/event-page-body';
+@import 'organisms/committee-page-body';
 
 
 /*------------------------------------*\
