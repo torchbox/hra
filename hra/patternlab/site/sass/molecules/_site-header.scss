@@ -49,6 +49,12 @@
         }
     }
 
+    &__form {
+        display: inline-block;
+        margin: 0 0 0 70px;
+        vertical-align: -16px;
+    }
+
     &__search {
         @include placeholder-text {
             @include font-size(zeta);
@@ -59,9 +65,7 @@
 
         display: inline-block;
         padding: 11px 20px;
-        margin: 0 0 0 70px;
         color: #fff;
-        vertical-align: -16px;
         background-color: $color--blue;
         border: 0;
         border-radius: 35px;

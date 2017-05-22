@@ -2403,12 +2403,16 @@ textarea:focus {
   }
 }
 
+.site-header__form {
+  display: inline-block;
+  margin: 0 0 0 70px;
+  vertical-align: -16px;
+}
+
 .site-header__search {
   display: inline-block;
   padding: 11px 20px;
-  margin: 0 0 0 70px;
   color: #fff;
-  vertical-align: -16px;
   background-color: #0d61b5;
   border: 0;
   border-radius: 35px;
