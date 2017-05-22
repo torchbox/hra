@@ -3982,6 +3982,7 @@ textarea:focus {
   display: inline-block;
   width: 50%;
   height: calc(100vh - 103px);
+  min-height: 800px;
   vertical-align: top;
 }
 
