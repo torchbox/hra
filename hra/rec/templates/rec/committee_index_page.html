@@ -11,7 +11,9 @@
                     <form action="" method="get" role="search" class="js-main-search-form">
 
                         <div class="search-filters__heading">Search results</div>
-                        <input class="search-filters__search" type="text" placeholder="Search&hellip;">
+                        <input name="query" class="search-filters__search" type="text" placeholder="Search&hellip;"
+                               {% if search_query %}value="{{ search_query }}"{% endif %}
+                        >
                         <div class="search-filters__filter-main-heading">Filter results</div>
 
                         {% if committee_region_choices %}

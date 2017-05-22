@@ -4,6 +4,7 @@ from modelcluster.fields import ParentalKey
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, InlinePanel
 from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailcore.models import Page, Orderable
+from wagtail.wagtailsearch import index
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
 
@@ -103,6 +104,15 @@ class CommitteePage(Page):
     usual_meeting_venue = models.CharField(max_length=255, blank=True)
     usual_meeting_time = models.TimeField(blank=True, null=True)
 
+    search_fields = Page.search_fields + [
+        index.SearchField('chair'),
+        index.SearchField('rec_manager'),
+        index.SearchField('rec_assistant'),
+        index.SearchField('hra_office_name'),
+        index.FilterField('region'),
+        index.SearchField('usual_meeting_venue'),
+    ]
+
     content_panels = Page.content_panels + [
         InlinePanel('previous_names', label="Previous name of REC"),
         FieldPanel('chair'),
@@ -134,46 +144,66 @@ class CommitteeIndexPage(Page):
     subpage_types = ['rec.CommitteePage']
 
     def get_context(self, request, *args, **kwargs):
+        # Get all filtering values from a request
         selected_committee_flag_pks = request.GET.getlist('committee_flag', None)
         selected_committee_type_pk = request.GET.get('committee_type', None)
         selected_committee_region = request.GET.get('committee_region', None)
+        search_query = request.GET.get('query', None)
 
+        # Get all initial objects values
         committee_pages = CommitteePage.objects.live().public().descendant_of(self)
         committee_flags = CommitteeFlag.objects.all()
         committee_types = CommitteeType.objects.all()
+        committee_region_choices = CommitteePage.REGION_CHOICES
 
-        # Allow to filter by committee flags
+        # Perform full text search, if a search query is present in the request
+        if search_query:
+            search_results = committee_pages.search(search_query, operator='and')
+
+            # At the moment, we use the ElasticSearch search backend,
+            # so the `search` method returns an ElasticsearchSearchResults object
+            # We can't do the further processing (filtering, start and end dates) on this object,
+            # so we should convert it back into QuerySet.
+            # Note: we don't care about search ordering here.
+            committee_pages = committee_pages.filter(pk__in=[page.pk for page in search_results])
+
+        # Filter by committee flags, if present in the request
         selected_committee_flags = committee_flags.filter(pk__in=selected_committee_flag_pks)
         selected_committee_flag_pks = [flag.pk for flag in selected_committee_flags]
         if selected_committee_flag_pks:
-            committee_pages = committee_pages.filter(committee_flags__pk__in=selected_committee_flag_pks)
+            committee_pages = committee_pages.filter(
+                committee_flags__committee_flag__pk__in=selected_committee_flag_pks
+            )
 
-        # Allow to filter by committee types
+        # Filter by committee types, if present in the request
         if selected_committee_type_pk:
             try:
                 selected_committee_type = committee_types.get(pk=selected_committee_type_pk)
-                committee_pages = committee_pages.filter(committee_types__pk__in=selected_committee_type_pk)
+                committee_pages = committee_pages.filter(
+                    committee_types__committee_type__pk__in=selected_committee_type_pk
+                )
                 selected_committee_type_pk = selected_committee_type.pk
             except CommitteeType.DoesNotExist:
                 selected_committee_type_pk = None
 
-        # Allow to filter by committee region
+        # Filter by committee region, if present in the request
         if selected_committee_region:
             committee_pages = committee_pages.filter(region=selected_committee_region)
+
+        # Do not display past meetings
+        committee_pages = committee_pages.filter(meeting_dates__date__gte=timezone.now().date())
 
         # Exclude duplicates after filtering
         committee_pages = committee_pages.distinct()
 
-        start_and_end_dates = committee_pages.filter(
-            # Do not display past meetings
-            meeting_dates__date__gte=timezone.now().date()
-        ).aggregate(
+        # Get the first and the last meeting dates from the resulting set
+        start_and_end_dates = committee_pages.aggregate(
             start_date=models.Min('meeting_dates__date'),
             end_date=models.Max('meeting_dates__date'),
         )
 
+        # Build a matrix for front-end
         calendar_matrix = []
-
         if committee_pages and start_and_end_dates['start_date'] and start_and_end_dates['end_date']:
             dates_range = range_month(start_and_end_dates['start_date'], start_and_end_dates['end_date'])
             for meeting_month in dates_range:
@@ -199,8 +229,9 @@ class CommitteeIndexPage(Page):
             'selected_committee_flag_pks': selected_committee_flag_pks,
             'committee_types': committee_types,
             'selected_committee_type_pk': selected_committee_type_pk,
-            'committee_region_choices': CommitteePage.REGION_CHOICES,
+            'committee_region_choices': committee_region_choices,
             'selected_committee_region': selected_committee_region,
+            'search_query': search_query,
         })
 
         return context
