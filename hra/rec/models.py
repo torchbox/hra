@@ -149,12 +149,13 @@ class CommitteeIndexPage(Page):
             committee_pages = committee_pages.filter(committee_flags__pk__in=selected_committee_flag_pks)
 
         # Allow to filter by committee types
-        try:
-            selected_committee_type = committee_types.get(pk=selected_committee_type_pk)
-            committee_pages = committee_pages.filter(committee_types__pk__in=selected_committee_type_pk)
-            selected_committee_type_pk = selected_committee_type.pk
-        except CommitteeType.DoesNotExist:
-            selected_committee_type_pk = None
+        if selected_committee_type_pk:
+            try:
+                selected_committee_type = committee_types.get(pk=selected_committee_type_pk)
+                committee_pages = committee_pages.filter(committee_types__pk__in=selected_committee_type_pk)
+                selected_committee_type_pk = selected_committee_type.pk
+            except CommitteeType.DoesNotExist:
+                selected_committee_type_pk = None
 
         # Allow to filter by committee region
         if selected_committee_region:

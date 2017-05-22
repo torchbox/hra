@@ -21,12 +21,11 @@
                                 Region
                             </label>
                             <div class="custom-select custom-select--blue">
-                                <select id="custom-select custom-select--blue__select">
-                                    <option>All Regions</option>
+                                <select name="committee_region" id="custom-select custom-select--blue__select">
+                                    <option value="">All Regions</option>
 
                                     {% for region_key, region_display_name in committee_region_choices %}
-                                        <option name=""
-                                                value="{{ region_key }}"\
+                                        <option value="{{ region_key }}"
                                                 {% if region_key == selected_committee_region %}selected{% endif %}
                                         >
                                             {{ region_display_name }}
@@ -45,12 +44,11 @@
                             </label>
                             <div class="custom-select custom-select--blue">
 
-                                <select id="custom-select custom-select--blue__select">
-                                    <option>All Committee Types</option>
+                                <select name="committee_type" id="custom-select custom-select--blue__select">
+                                    <option value="">All Committee Types</option>
 
                                     {% for committee_typee in committee_types %}
-                                        <option name="committee_type"
-                                                value="{{ committee_typee.pk }}"
+                                        <option value="{{ committee_typee.pk }}"
                                                 {% if committee_typee.pk == selected_committee_type_pk %}selected{% endif %}
                                         >
                                             {{ committee_typee.name }}
