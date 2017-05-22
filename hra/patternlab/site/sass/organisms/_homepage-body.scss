@@ -4,4 +4,10 @@
 
 .homepage-body {
     padding: 50px 0;
+
+    &__heading {
+        @include rem-font-size(25px);
+        margin: 20px 0;
+        font-family: $font--tertiary;
+    }
 }
