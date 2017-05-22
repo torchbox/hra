@@ -2226,6 +2226,8 @@ var jquery = createCommonjsModule(function (module) {
   });
 });
 
+// We have to manually make jQuery a global variable.
+// By default it will be in a closure and renamed to lowercase.
 window.jQuery = jquery;
 
 function glossaryTab() {
@@ -2551,7 +2553,6 @@ function faqs() {
     }
 
     function showAnswers() {
-        console.log('showing answers');
         setTimeout(function () {
             $answerList.addClass(answersDisplay);
             $questionList.addClass(questionsHide);
