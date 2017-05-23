@@ -10,7 +10,6 @@ django-template-debug==0.3.5
 stellar==0.4.3
 wagtail-django-recaptcha==0.1
 uwsgidecorators==1.1.0
-coreapi==2.3.0
 
 # Production dependencies
 dj-database-url==0.4.1
