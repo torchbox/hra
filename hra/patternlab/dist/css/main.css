@@ -4047,6 +4047,7 @@ textarea:focus {
   .glossary__left, .glossary__right {
     width: 100%;
     height: auto;
+    min-height: 0;
   }
 }
 
@@ -4660,11 +4661,13 @@ textarea:focus {
 
 .keyboard__letter--disabled {
   color: #457fb5;
+  cursor: initial;
   border-color: #457fb5;
 }
 
 .keyboard__letter--disabled:hover {
   color: #457fb5;
+  background-color: transparent;
   border-color: #457fb5;
 }
 
@@ -5332,11 +5335,13 @@ textarea:focus {
 
 .keyboard__letter--disabled {
   color: #457fb5;
+  cursor: initial;
   border-color: #457fb5;
 }
 
 .keyboard__letter--disabled:hover {
   color: #457fb5;
+  background-color: transparent;
   border-color: #457fb5;
 }
 
