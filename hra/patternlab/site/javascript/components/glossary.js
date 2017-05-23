@@ -1,12 +1,14 @@
+// Note that the '../globals' module imports fetch polyfill
 import {jQuery as $, pluralize} from '../globals';
 
-// TODO: polyfill for fetch
 function glossary() {
 
     const $glossary = $('.js-glossary'),
         $glossaryResultsHeading = $glossary.find('.glossary__results-heading'),
         $glossaryResultsContainer = $glossary.find('.glossary__results'),
         $glossarySearchInput = $glossary.find('.glossary__search'),
+        $glossaryKeyboardLetters = $glossary.find('.keyboard__letter'),
+        glossaryKeyboardLettersActiveClass = 'keyboard__letter--active',
         glossaryApiURL = $glossary.data('apiUrl');
 
     let previousSearchQuery = null;
@@ -64,8 +66,10 @@ function glossary() {
     }
 
     function bindEvents() {
+        // Initial screen
         $(document).ready(() => renderAllListing());
 
+        // Search functionality
         $glossarySearchInput.on('keyup', () => {
             const searchQuery = $glossarySearchInput.val().trim();
 
@@ -81,6 +85,24 @@ function glossary() {
                 renderAllListing();
             }
 
+        });
+
+        // Browse by letter functionality
+        $glossaryKeyboardLetters.on('click', (e) => {
+            const $element = $(e.currentTarget);
+            const letter = $element.data('keyboardLetter');
+
+            // Request and render a listing for the given letter
+            renderListingResponse(
+                loadListing(letter)
+            );
+
+            // Deactivate other buttons and activate current button
+            $glossaryKeyboardLetters.removeClass(glossaryKeyboardLettersActiveClass);
+            $element.addClass(glossaryKeyboardLettersActiveClass);
+
+            // Cleanup the search field
+            $glossarySearchInput.val('')
         });
     }
 
