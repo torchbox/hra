@@ -3,13 +3,13 @@ import {jQuery as $, pluralize} from '../globals';
 
 function glossary() {
 
-    const $glossary = $('.js-glossary'),
-        $glossaryResultsHeading = $glossary.find('.glossary__results-heading'),
-        $glossaryResultsContainer = $glossary.find('.glossary__results'),
-        $glossarySearchInput = $glossary.find('.glossary__search'),
-        $glossaryKeyboardLetters = $glossary.find('.keyboard__letter'),
-        glossaryKeyboardLettersActiveClass = 'keyboard__letter--active',
-        glossaryApiURL = $glossary.data('apiUrl');
+    const $container = $('.js-glossary'),
+        $resultsHeading = $container.find('.glossary__results-heading'),
+        $resultsContainer = $container.find('.glossary__results'),
+        $searchInput = $container.find('.glossary__search'),
+        $keyboardLetters = $container.find('.keyboard__letter'),
+        keyboardLettersActiveClass = 'keyboard__letter--active',
+        apiURL = $container.data('apiUrl');
 
     let previousSearchQuery = null;
 
@@ -19,14 +19,14 @@ function glossary() {
             qs = `?term_startswith=${startswith}`;
         }
 
-        return fetch(glossaryApiURL + qs)
+        return fetch(apiURL + qs)
             .then(response => response.json());
     }
 
     function loadSearchListing(searchQuery) {
         let qs = `?search=${searchQuery}`;
 
-        return fetch(glossaryApiURL + qs)
+        return fetch(apiURL + qs)
             .then(response => response.json());
     }
 
@@ -52,11 +52,11 @@ function glossary() {
             </li>`;
         });
 
-        $glossaryResultsContainer.html(resultList);
+        $resultsContainer.html(resultList);
     }
 
     function renderResultHeader(totalCount) {
-        $glossaryResultsHeading.text(`Found ${totalCount} ${pluralize('result', totalCount)}`);
+        $resultsHeading.text(`Found ${totalCount} ${pluralize('result', totalCount)}`);
     }
 
     function renderAllListing() {
@@ -70,8 +70,8 @@ function glossary() {
         $(document).ready(() => renderAllListing());
 
         // Search functionality
-        $glossarySearchInput.on('keyup', () => {
-            const searchQuery = $glossarySearchInput.val().trim();
+        $searchInput.on('keyup', () => {
+            const searchQuery = $searchInput.val().trim();
 
             if (searchQuery.length >= 1) {
                 if (searchQuery !== previousSearchQuery) {
@@ -88,7 +88,7 @@ function glossary() {
         });
 
         // Browse by letter functionality
-        $glossaryKeyboardLetters.on('click', (e) => {
+        $keyboardLetters.on('click', (e) => {
             const $element = $(e.currentTarget);
             const letter = $element.data('keyboardLetter');
 
@@ -98,11 +98,11 @@ function glossary() {
             );
 
             // Deactivate other buttons and activate current button
-            $glossaryKeyboardLetters.removeClass(glossaryKeyboardLettersActiveClass);
-            $element.addClass(glossaryKeyboardLettersActiveClass);
+            $keyboardLetters.removeClass(keyboardLettersActiveClass);
+            $element.addClass(keyboardLettersActiveClass);
 
             // Cleanup the search field
-            $glossarySearchInput.val('')
+            $searchInput.val('');
         });
     }
 
