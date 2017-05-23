@@ -9,6 +9,7 @@ function glossary() {
         $searchInput = $container.find('.glossary__search'),
         $keyboardLetters = $container.find('.keyboard__letter'),
         keyboardLettersActiveClass = 'keyboard__letter--active',
+        keyboardLettersDisabledClass = 'keyboard__letter--disabled',
         apiURL = $container.data('apiUrl');
 
     let previousSearchQuery = null;
@@ -59,15 +60,37 @@ function glossary() {
         $resultsHeading.text(`Found ${totalCount} ${pluralize('result', totalCount)}`);
     }
 
-    function renderAllListing() {
-        renderListingResponse(
-            loadListing()
-        );
+    function renderDefaultListing() {
+        const response = loadListing();
+
+        renderListingResponse(response);
+
+        response.then(json => json.meta.count_per_letter)
+            .then((count_per_letter) => {
+                if (!count_per_letter) {
+                    return;
+                }
+
+                $keyboardLetters.addClass(keyboardLettersDisabledClass);
+
+                for (const letter in count_per_letter) {
+                    if (!count_per_letter.hasOwnProperty(letter)) {
+                        continue;
+                    }
+
+                    const letter_count = count_per_letter[letter];
+                    if (letter_count >= 0) {
+                        const lookup = `[data-keyboard-letter="${letter}"]`;
+
+                        $keyboardLetters.closest(lookup).removeClass(keyboardLettersDisabledClass);
+                    }
+                }
+            });
     }
 
     function bindEvents() {
         // Initial screen
-        $(document).ready(() => renderAllListing());
+        $(document).ready(() => renderDefaultListing());
 
         // Search functionality
         $searchInput.on('keyup', () => {
@@ -82,7 +105,7 @@ function glossary() {
                     previousSearchQuery = searchQuery;
                 }
             } else {
-                renderAllListing();
+                renderDefaultListing();
             }
 
             // Deactivate letter buttons
