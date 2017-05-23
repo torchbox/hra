@@ -3321,7 +3321,7 @@ function glossary() {
             }
 
             // Deactivate letter buttons
-            $keyboardLetters.removeClass(keyboardLettersDisabledClass);
+            $keyboardLetters.removeClass(keyboardLettersActiveClass);
 
             // Trigger border refresh
             jquery$1(window).trigger('refresh-results-border');
@@ -3471,7 +3471,7 @@ function resultsBorder() {
         jquery$1(window).on('load refresh-results-border', function () {
             setTimeout(function () {
                 setResultBorder();
-            }, 100);
+            }, 150);
         });
     }
 

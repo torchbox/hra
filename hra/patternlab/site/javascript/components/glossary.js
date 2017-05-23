@@ -109,7 +109,7 @@ function glossary() {
             }
 
             // Deactivate letter buttons
-            $keyboardLetters.removeClass(keyboardLettersDisabledClass);
+            $keyboardLetters.removeClass(keyboardLettersActiveClass);
 
             // Trigger border refresh
             $(window).trigger('refresh-results-border');
