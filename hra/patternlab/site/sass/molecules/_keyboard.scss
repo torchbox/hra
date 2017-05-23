@@ -45,10 +45,12 @@ $keyboard-padding: ($keyboard-letter-width / 2);
 
         &--disabled {
             color: #457fb5;
+            cursor: initial;
             border-color: #457fb5;
 
             &:hover {
                 color: #457fb5;
+                background-color: transparent;
                 border-color: #457fb5;
             }
         }
