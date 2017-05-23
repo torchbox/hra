@@ -109,7 +109,10 @@ function glossary() {
             }
 
             // Deactivate letter buttons
-            $keyboardLetters.removeClass(keyboardLettersActiveClass);
+            $keyboardLetters.removeClass(keyboardLettersDisabledClass);
+
+            // Trigger border refresh
+            $(window).trigger('refresh-results-border');
         });
 
         // Browse by letter functionality
@@ -117,17 +120,24 @@ function glossary() {
             const $element = $(e.currentTarget);
             const letter = $element.data('keyboardLetter');
 
-            // Request and render a listing for the given letter
-            renderListingResponse(
-                loadListing(letter)
-            );
+            // Only run if letter will return results
+            if (!$element.hasClass('keyboard__letter--disabled')) {
 
-            // Deactivate other buttons and activate current button
-            $keyboardLetters.removeClass(keyboardLettersActiveClass);
-            $element.addClass(keyboardLettersActiveClass);
+                // Request and render a listing for the given letter
+                renderListingResponse(
+                    loadListing(letter)
+                );
 
-            // Cleanup the search field
-            $searchInput.val('');
+                // Deactivate other buttons and activate current button
+                $keyboardLetters.removeClass(keyboardLettersActiveClass);
+                $element.addClass(keyboardLettersActiveClass);
+
+                // Cleanup the search field
+                $searchInput.val('');
+
+                // Trigger border refresh
+                $(window).trigger('refresh-results-border');
+            }
         });
     }
 

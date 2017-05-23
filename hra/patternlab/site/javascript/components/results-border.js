@@ -2,35 +2,40 @@ import $ from '../globals';
 
 function resultsBorder() {
 
-    const $resultsResult    = $('.js-border-result'),
-        $resultsHeading     = $('.js-border-result__heading'),
-        $resultsImage       = $('.js-border-result__image'),
-        $resultsBorder      = $('.js-border-result__border');
-
     function setResultBorder(){
+
+        const $resultsResult    = $('.js-border-result'),
+            $resultsHeading     = $('.js-border-result__heading'),
+            $resultsImage       = $('.js-border-result__image'),
+            $resultsBorder      = $('.js-border-result__border'),
+            animationSpeed      = 250;
+
         $resultsResult.each(function() {
-            const $closestBorder = $(this).closest('li').find($resultsBorder),
+
+            let $closestBorder = $(this).closest('li').find($resultsBorder),
                 headingWidth = $(this).closest('li').find($resultsHeading).width(),
                 imageAndHeadingWidth = headingWidth + 105;
 
             // Set larger border width if image is present
             if ($resultsImage.length) {
-                $closestBorder.css({
-                    width : imageAndHeadingWidth
-                });
+                $closestBorder.animate({
+                    width : imageAndHeadingWidth,
+                    opacity: 1
+                }, animationSpeed);
             } else {
-                $closestBorder.css({
-                    width : headingWidth
-                });
+                $closestBorder.animate({
+                    width : headingWidth,
+                    opacity: 1
+                }, animationSpeed);
             }
         });
     }
 
     function bindEvents(){
-        $(window).on('load', function(){
-            if ($('.js-border-result').length) {
+        $(window).on('load refresh-results-border', function(){
+            setTimeout(function() {
                 setResultBorder();
-            }
+            }, 100);
         });
     }
 

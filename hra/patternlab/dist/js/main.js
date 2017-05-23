@@ -3204,8 +3204,6 @@ var promise = createCommonjsModule(function (module) {
   self.fetch.polyfill = true;
 })(typeof self !== 'undefined' ? self : undefined);
 
-// We have to manually make jQuery a global variable.
-// By default it will be in a closure and renamed to lowercase.
 window.jQuery = jquery$1;
 
 // Promise polyfill for older browsers
@@ -3323,7 +3321,10 @@ function glossary() {
             }
 
             // Deactivate letter buttons
-            $keyboardLetters.removeClass(keyboardLettersActiveClass);
+            $keyboardLetters.removeClass(keyboardLettersDisabledClass);
+
+            // Trigger border refresh
+            jquery$1(window).trigger('refresh-results-border');
         });
 
         // Browse by letter functionality
@@ -3331,15 +3332,22 @@ function glossary() {
             var $element = jquery$1(e.currentTarget);
             var letter = $element.data('keyboardLetter');
 
-            // Request and render a listing for the given letter
-            renderListingResponse(loadListing(letter));
+            // Only run if letter will return results
+            if (!$element.hasClass('keyboard__letter--disabled')) {
 
-            // Deactivate other buttons and activate current button
-            $keyboardLetters.removeClass(keyboardLettersActiveClass);
-            $element.addClass(keyboardLettersActiveClass);
+                // Request and render a listing for the given letter
+                renderListingResponse(loadListing(letter));
 
-            // Cleanup the search field
-            $searchInput.val('');
+                // Deactivate other buttons and activate current button
+                $keyboardLetters.removeClass(keyboardLettersActiveClass);
+                $element.addClass(keyboardLettersActiveClass);
+
+                // Cleanup the search field
+                $searchInput.val('');
+
+                // Trigger border refresh
+                jquery$1(window).trigger('refresh-results-border');
+            }
         });
     }
 
@@ -3430,35 +3438,40 @@ function glossaryTab() {
 
 function resultsBorder() {
 
-    var $resultsResult = jquery$1('.js-border-result'),
-        $resultsHeading = jquery$1('.js-border-result__heading'),
-        $resultsImage = jquery$1('.js-border-result__image'),
-        $resultsBorder = jquery$1('.js-border-result__border');
-
     function setResultBorder() {
+
+        var $resultsResult = jquery$1('.js-border-result'),
+            $resultsHeading = jquery$1('.js-border-result__heading'),
+            $resultsImage = jquery$1('.js-border-result__image'),
+            $resultsBorder = jquery$1('.js-border-result__border'),
+            animationSpeed = 250;
+
         $resultsResult.each(function () {
+
             var $closestBorder = jquery$1(this).closest('li').find($resultsBorder),
                 headingWidth = jquery$1(this).closest('li').find($resultsHeading).width(),
                 imageAndHeadingWidth = headingWidth + 105;
 
             // Set larger border width if image is present
             if ($resultsImage.length) {
-                $closestBorder.css({
-                    width: imageAndHeadingWidth
-                });
+                $closestBorder.animate({
+                    width: imageAndHeadingWidth,
+                    opacity: 1
+                }, animationSpeed);
             } else {
-                $closestBorder.css({
-                    width: headingWidth
-                });
+                $closestBorder.animate({
+                    width: headingWidth,
+                    opacity: 1
+                }, animationSpeed);
             }
         });
     }
 
     function bindEvents() {
-        jquery$1(window).on('load', function () {
-            if (jquery$1('.js-border-result').length) {
+        jquery$1(window).on('load refresh-results-border', function () {
+            setTimeout(function () {
                 setResultBorder();
-            }
+            }, 100);
         });
     }
 
