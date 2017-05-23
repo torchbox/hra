@@ -35,7 +35,7 @@ function resultsBorder() {
         $(window).on('load refresh-results-border', function(){
             setTimeout(function() {
                 setResultBorder();
-            }, 100);
+            }, 150);
         });
     }
 
