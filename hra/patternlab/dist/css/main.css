@@ -4169,6 +4169,7 @@ textarea:focus {
   top: 0;
   left: 0;
   height: 4px;
+  max-width: 100%;
   background-color: #eee;
   opacity: 0;
 }
