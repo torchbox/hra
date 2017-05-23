@@ -5064,6 +5064,18 @@ textarea:focus {
   content: '';
 }
 
+@media only screen and (max-width: 800px) {
+  .faq-page {
+    margin-top: 65px;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .faq-page {
+    margin-top: 80px;
+  }
+}
+
 .faq-panel {
   display: inline-block;
   overflow: scroll;
@@ -5089,7 +5101,7 @@ textarea:focus {
 
 @media only screen and (max-width: 900px) {
   .faq-panel--questions {
-    margin-top: 20px;
+    margin-top: 55px;
   }
 }
 
@@ -5097,6 +5109,7 @@ textarea:focus {
   .faq-panel--questions {
     width: 100%;
     padding: 20px 0;
+    margin-top: 0;
   }
 }
 
