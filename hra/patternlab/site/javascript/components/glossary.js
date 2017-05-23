@@ -85,6 +85,8 @@ function glossary() {
                 renderAllListing();
             }
 
+            // Deactivate letter buttons
+            $keyboardLetters.removeClass(keyboardLettersActiveClass);
         });
 
         // Browse by letter functionality
