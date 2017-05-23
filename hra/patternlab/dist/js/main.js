@@ -6,7 +6,9 @@
 
 var commonjsGlobal = typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
-
+function commonjsRequire () {
+	throw new Error('Dynamic requires are not currently supported by rollup-plugin-commonjs');
+}
 
 
 
@@ -20,7 +22,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
 };
 
-var jquery = createCommonjsModule(function (module) {
+var jquery$1 = createCommonjsModule(function (module) {
   /*! jQuery v2.1.4 | (c) 2005, 2015 jQuery Foundation, Inc. | jquery.org/license */
   !function (a, b) {
     "object" == (typeof module === "undefined" ? "undefined" : _typeof(module)) && "object" == _typeof(module.exports) ? module.exports = a.document ? b(a, !0) : function (a) {
@@ -2226,14 +2228,1126 @@ var jquery = createCommonjsModule(function (module) {
   });
 });
 
-// We have to manually make jQuery a global variable.
-// By default it will be in a closure and renamed to lowercase.
-window.jQuery = jquery;
+var pluralize = createCommonjsModule(function (module, exports) {
+  /* global define */
+
+  (function (root, pluralize) {
+    /* istanbul ignore else */
+    if (typeof commonjsRequire === 'function' && (typeof exports === 'undefined' ? 'undefined' : _typeof(exports)) === 'object' && (typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object') {
+      // Node.
+      module.exports = pluralize();
+    } else if (typeof undefined === 'function' && undefined.amd) {
+      // AMD, registers as an anonymous module.
+      undefined(function () {
+        return pluralize();
+      });
+    } else {
+      // Browser global.
+      root.pluralize = pluralize();
+    }
+  })(commonjsGlobal, function () {
+    // Rule storage - pluralize and singularize need to be run sequentially,
+    // while other rules can be optimized using an object for instant lookups.
+    var pluralRules = [];
+    var singularRules = [];
+    var uncountables = {};
+    var irregularPlurals = {};
+    var irregularSingles = {};
+
+    /**
+     * Title case a string.
+     *
+     * @param  {string} str
+     * @return {string}
+     */
+    function toTitleCase(str) {
+      return str.charAt(0).toUpperCase() + str.substr(1).toLowerCase();
+    }
+
+    /**
+     * Sanitize a pluralization rule to a usable regular expression.
+     *
+     * @param  {(RegExp|string)} rule
+     * @return {RegExp}
+     */
+    function sanitizeRule(rule) {
+      if (typeof rule === 'string') {
+        return new RegExp('^' + rule + '$', 'i');
+      }
+
+      return rule;
+    }
+
+    /**
+     * Pass in a word token to produce a function that can replicate the case on
+     * another word.
+     *
+     * @param  {string}   word
+     * @param  {string}   token
+     * @return {Function}
+     */
+    function restoreCase(word, token) {
+      // Tokens are an exact match.
+      if (word === token) {
+        return token;
+      }
+
+      // Upper cased words. E.g. "HELLO".
+      if (word === word.toUpperCase()) {
+        return token.toUpperCase();
+      }
+
+      // Title cased words. E.g. "Title".
+      if (word[0] === word[0].toUpperCase()) {
+        return toTitleCase(token);
+      }
+
+      // Lower cased words. E.g. "test".
+      return token.toLowerCase();
+    }
+
+    /**
+     * Interpolate a regexp string.
+     *
+     * @param  {string} str
+     * @param  {Array}  args
+     * @return {string}
+     */
+    function interpolate(str, args) {
+      return str.replace(/\$(\d{1,2})/g, function (match, index) {
+        return args[index] || '';
+      });
+    }
+
+    /**
+     * Sanitize a word by passing in the word and sanitization rules.
+     *
+     * @param  {string}   token
+     * @param  {string}   word
+     * @param  {Array}    collection
+     * @return {string}
+     */
+    function sanitizeWord(token, word, collection) {
+      // Empty string or doesn't need fixing.
+      if (!token.length || uncountables.hasOwnProperty(token)) {
+        return word;
+      }
+
+      var len = collection.length;
+
+      // Iterate over the sanitization rules and use the first one to match.
+      while (len--) {
+        var rule = collection[len];
+
+        // If the rule passes, return the replacement.
+        if (rule[0].test(word)) {
+          return word.replace(rule[0], function (match, index, word) {
+            var result = interpolate(rule[1], arguments);
+
+            if (match === '') {
+              return restoreCase(word[index - 1], result);
+            }
+
+            return restoreCase(match, result);
+          });
+        }
+      }
+
+      return word;
+    }
+
+    /**
+     * Replace a word with the updated word.
+     *
+     * @param  {Object}   replaceMap
+     * @param  {Object}   keepMap
+     * @param  {Array}    rules
+     * @return {Function}
+     */
+    function replaceWord(replaceMap, keepMap, rules) {
+      return function (word) {
+        // Get the correct token and case restoration functions.
+        var token = word.toLowerCase();
+
+        // Check against the keep object map.
+        if (keepMap.hasOwnProperty(token)) {
+          return restoreCase(word, token);
+        }
+
+        // Check against the replacement map for a direct word replacement.
+        if (replaceMap.hasOwnProperty(token)) {
+          return restoreCase(word, replaceMap[token]);
+        }
+
+        // Run all the rules against the word.
+        return sanitizeWord(token, word, rules);
+      };
+    }
+
+    /**
+     * Pluralize or singularize a word based on the passed in count.
+     *
+     * @param  {string}  word
+     * @param  {number}  count
+     * @param  {boolean} inclusive
+     * @return {string}
+     */
+    function pluralize(word, count, inclusive) {
+      var pluralized = count === 1 ? pluralize.singular(word) : pluralize.plural(word);
+
+      return (inclusive ? count + ' ' : '') + pluralized;
+    }
+
+    /**
+     * Pluralize a word.
+     *
+     * @type {Function}
+     */
+    pluralize.plural = replaceWord(irregularSingles, irregularPlurals, pluralRules);
+
+    /**
+     * Singularize a word.
+     *
+     * @type {Function}
+     */
+    pluralize.singular = replaceWord(irregularPlurals, irregularSingles, singularRules);
+
+    /**
+     * Add a pluralization rule to the collection.
+     *
+     * @param {(string|RegExp)} rule
+     * @param {string}          replacement
+     */
+    pluralize.addPluralRule = function (rule, replacement) {
+      pluralRules.push([sanitizeRule(rule), replacement]);
+    };
+
+    /**
+     * Add a singularization rule to the collection.
+     *
+     * @param {(string|RegExp)} rule
+     * @param {string}          replacement
+     */
+    pluralize.addSingularRule = function (rule, replacement) {
+      singularRules.push([sanitizeRule(rule), replacement]);
+    };
+
+    /**
+     * Add an uncountable word rule.
+     *
+     * @param {(string|RegExp)} word
+     */
+    pluralize.addUncountableRule = function (word) {
+      if (typeof word === 'string') {
+        uncountables[word.toLowerCase()] = true;
+        return;
+      }
+
+      // Set singular and plural references for the word.
+      pluralize.addPluralRule(word, '$0');
+      pluralize.addSingularRule(word, '$0');
+    };
+
+    /**
+     * Add an irregular word definition.
+     *
+     * @param {string} single
+     * @param {string} plural
+     */
+    pluralize.addIrregularRule = function (single, plural) {
+      plural = plural.toLowerCase();
+      single = single.toLowerCase();
+
+      irregularSingles[single] = plural;
+      irregularPlurals[plural] = single;
+    };
+
+    /**
+     * Irregular rules.
+     */
+    [
+    // Pronouns.
+    ['I', 'we'], ['me', 'us'], ['he', 'they'], ['she', 'they'], ['them', 'them'], ['myself', 'ourselves'], ['yourself', 'yourselves'], ['itself', 'themselves'], ['herself', 'themselves'], ['himself', 'themselves'], ['themself', 'themselves'], ['is', 'are'], ['was', 'were'], ['has', 'have'], ['this', 'these'], ['that', 'those'],
+    // Words ending in with a consonant and `o`.
+    ['echo', 'echoes'], ['dingo', 'dingoes'], ['volcano', 'volcanoes'], ['tornado', 'tornadoes'], ['torpedo', 'torpedoes'],
+    // Ends with `us`.
+    ['genus', 'genera'], ['viscus', 'viscera'],
+    // Ends with `ma`.
+    ['stigma', 'stigmata'], ['stoma', 'stomata'], ['dogma', 'dogmata'], ['lemma', 'lemmata'], ['schema', 'schemata'], ['anathema', 'anathemata'],
+    // Other irregular rules.
+    ['ox', 'oxen'], ['axe', 'axes'], ['die', 'dice'], ['yes', 'yeses'], ['foot', 'feet'], ['eave', 'eaves'], ['goose', 'geese'], ['tooth', 'teeth'], ['quiz', 'quizzes'], ['human', 'humans'], ['proof', 'proofs'], ['carve', 'carves'], ['valve', 'valves'], ['looey', 'looies'], ['thief', 'thieves'], ['groove', 'grooves'], ['pickaxe', 'pickaxes'], ['whiskey', 'whiskies']].forEach(function (rule) {
+      return pluralize.addIrregularRule(rule[0], rule[1]);
+    });
+
+    /**
+     * Pluralization rules.
+     */
+    [[/s?$/i, 's'], [/[^\u0000-\u007F]$/i, '$0'], [/([^aeiou]ese)$/i, '$1'], [/(ax|test)is$/i, '$1es'], [/(alias|[^aou]us|tlas|gas|ris)$/i, '$1es'], [/(e[mn]u)s?$/i, '$1s'], [/([^l]ias|[aeiou]las|[emjzr]as|[iu]am)$/i, '$1'], [/(alumn|syllab|octop|vir|radi|nucle|fung|cact|stimul|termin|bacill|foc|uter|loc|strat)(?:us|i)$/i, '$1i'], [/(alumn|alg|vertebr)(?:a|ae)$/i, '$1ae'], [/(seraph|cherub)(?:im)?$/i, '$1im'], [/(her|at|gr)o$/i, '$1oes'], [/(agend|addend|millenni|dat|extrem|bacteri|desiderat|strat|candelabr|errat|ov|symposi|curricul|automat|quor)(?:a|um)$/i, '$1a'], [/(apheli|hyperbat|periheli|asyndet|noumen|phenomen|criteri|organ|prolegomen|hedr|automat)(?:a|on)$/i, '$1a'], [/sis$/i, 'ses'], [/(?:(kni|wi|li)fe|(ar|l|ea|eo|oa|hoo)f)$/i, '$1$2ves'], [/([^aeiouy]|qu)y$/i, '$1ies'], [/([^ch][ieo][ln])ey$/i, '$1ies'], [/(x|ch|ss|sh|zz)$/i, '$1es'], [/(matr|cod|mur|sil|vert|ind|append)(?:ix|ex)$/i, '$1ices'], [/(m|l)(?:ice|ouse)$/i, '$1ice'], [/(pe)(?:rson|ople)$/i, '$1ople'], [/(child)(?:ren)?$/i, '$1ren'], [/eaux$/i, '$0'], [/m[ae]n$/i, 'men'], ['thou', 'you']].forEach(function (rule) {
+      return pluralize.addPluralRule(rule[0], rule[1]);
+    });
+
+    /**
+     * Singularization rules.
+     */
+    [[/s$/i, ''], [/(ss)$/i, '$1'], [/((a)naly|(b)a|(d)iagno|(p)arenthe|(p)rogno|(s)ynop|(t)he)(?:sis|ses)$/i, '$1sis'], [/(^analy)(?:sis|ses)$/i, '$1sis'], [/(wi|kni|(?:after|half|high|low|mid|non|night|[^\w]|^)li)ves$/i, '$1fe'], [/(ar|(?:wo|[ae])l|[eo][ao])ves$/i, '$1f'], [/ies$/i, 'y'], [/\b([pl]|zomb|(?:neck|cross)?t|coll|faer|food|gen|goon|group|lass|talk|goal|cut)ies$/i, '$1ie'], [/\b(mon|smil)ies$/i, '$1ey'], [/(m|l)ice$/i, '$1ouse'], [/(seraph|cherub)im$/i, '$1'], [/(x|ch|ss|sh|zz|tto|go|cho|alias|[^aou]us|tlas|gas|(?:her|at|gr)o|ris)(?:es)?$/i, '$1'], [/(e[mn]u)s?$/i, '$1'], [/(movie|twelve)s$/i, '$1'], [/(cris|test|diagnos)(?:is|es)$/i, '$1is'], [/(alumn|syllab|octop|vir|radi|nucle|fung|cact|stimul|termin|bacill|foc|uter|loc|strat)(?:us|i)$/i, '$1us'], [/(agend|addend|millenni|dat|extrem|bacteri|desiderat|strat|candelabr|errat|ov|symposi|curricul|quor)a$/i, '$1um'], [/(apheli|hyperbat|periheli|asyndet|noumen|phenomen|criteri|organ|prolegomen|hedr|automat)a$/i, '$1on'], [/(alumn|alg|vertebr)ae$/i, '$1a'], [/(cod|mur|sil|vert|ind)ices$/i, '$1ex'], [/(matr|append)ices$/i, '$1ix'], [/(pe)(rson|ople)$/i, '$1rson'], [/(child)ren$/i, '$1'], [/(eau)x?$/i, '$1'], [/men$/i, 'man']].forEach(function (rule) {
+      return pluralize.addSingularRule(rule[0], rule[1]);
+    });
+
+    /**
+     * Uncountable rules.
+     */
+    [
+    // Singular words with no plurals.
+    'advice', 'adulthood', 'agenda', 'aid', 'alcohol', 'ammo', 'athletics', 'bison', 'blood', 'bream', 'buffalo', 'butter', 'carp', 'cash', 'chassis', 'chess', 'clothing', 'commerce', 'cod', 'cooperation', 'corps', 'digestion', 'debris', 'diabetes', 'energy', 'equipment', 'elk', 'excretion', 'expertise', 'flounder', 'fun', 'gallows', 'garbage', 'graffiti', 'headquarters', 'health', 'herpes', 'highjinks', 'homework', 'housework', 'information', 'jeans', 'justice', 'kudos', 'labour', 'literature', 'machinery', 'mackerel', 'mail', 'media', 'mews', 'moose', 'music', 'news', 'pike', 'plankton', 'pliers', 'pollution', 'premises', 'rain', 'research', 'rice', 'salmon', 'scissors', 'series', 'sewage', 'shambles', 'shrimp', 'species', 'staff', 'swine', 'tennis', 'trout', 'traffic', 'transporation', 'tuna', 'wealth', 'welfare', 'whiting', 'wildebeest', 'wildlife', 'you',
+    // Regexes.
+    /pox$/i, // "chickpox", "smallpox"
+    /ois$/i, /deer$/i, // "deer", "reindeer"
+    /fish$/i, // "fish", "blowfish", "angelfish"
+    /sheep$/i, /measles$/i, /[^aeiou]ese$/i // "chinese", "japanese"
+    ].forEach(pluralize.addUncountableRule);
+
+    return pluralize;
+  });
+});
+
+var promise = createCommonjsModule(function (module) {
+  (function (root) {
+
+    // Store setTimeout reference so promise-polyfill will be unaffected by
+    // other code modifying setTimeout (like sinon.useFakeTimers())
+    var setTimeoutFunc = setTimeout;
+
+    function noop() {}
+
+    // Polyfill for Function.prototype.bind
+    function bind(fn, thisArg) {
+      return function () {
+        fn.apply(thisArg, arguments);
+      };
+    }
+
+    function Promise(fn) {
+      if (_typeof(this) !== 'object') throw new TypeError('Promises must be constructed via new');
+      if (typeof fn !== 'function') throw new TypeError('not a function');
+      this._state = 0;
+      this._handled = false;
+      this._value = undefined;
+      this._deferreds = [];
+
+      doResolve(fn, this);
+    }
+
+    function handle(self, deferred) {
+      while (self._state === 3) {
+        self = self._value;
+      }
+      if (self._state === 0) {
+        self._deferreds.push(deferred);
+        return;
+      }
+      self._handled = true;
+      Promise._immediateFn(function () {
+        var cb = self._state === 1 ? deferred.onFulfilled : deferred.onRejected;
+        if (cb === null) {
+          (self._state === 1 ? resolve : reject)(deferred.promise, self._value);
+          return;
+        }
+        var ret;
+        try {
+          ret = cb(self._value);
+        } catch (e) {
+          reject(deferred.promise, e);
+          return;
+        }
+        resolve(deferred.promise, ret);
+      });
+    }
+
+    function resolve(self, newValue) {
+      try {
+        // Promise Resolution Procedure: https://github.com/promises-aplus/promises-spec#the-promise-resolution-procedure
+        if (newValue === self) throw new TypeError('A promise cannot be resolved with itself.');
+        if (newValue && ((typeof newValue === 'undefined' ? 'undefined' : _typeof(newValue)) === 'object' || typeof newValue === 'function')) {
+          var then = newValue.then;
+          if (newValue instanceof Promise) {
+            self._state = 3;
+            self._value = newValue;
+            finale(self);
+            return;
+          } else if (typeof then === 'function') {
+            doResolve(bind(then, newValue), self);
+            return;
+          }
+        }
+        self._state = 1;
+        self._value = newValue;
+        finale(self);
+      } catch (e) {
+        reject(self, e);
+      }
+    }
+
+    function reject(self, newValue) {
+      self._state = 2;
+      self._value = newValue;
+      finale(self);
+    }
+
+    function finale(self) {
+      if (self._state === 2 && self._deferreds.length === 0) {
+        Promise._immediateFn(function () {
+          if (!self._handled) {
+            Promise._unhandledRejectionFn(self._value);
+          }
+        });
+      }
+
+      for (var i = 0, len = self._deferreds.length; i < len; i++) {
+        handle(self, self._deferreds[i]);
+      }
+      self._deferreds = null;
+    }
+
+    function Handler(onFulfilled, onRejected, promise) {
+      this.onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : null;
+      this.onRejected = typeof onRejected === 'function' ? onRejected : null;
+      this.promise = promise;
+    }
+
+    /**
+     * Take a potentially misbehaving resolver function and make sure
+     * onFulfilled and onRejected are only called once.
+     *
+     * Makes no guarantees about asynchrony.
+     */
+    function doResolve(fn, self) {
+      var done = false;
+      try {
+        fn(function (value) {
+          if (done) return;
+          done = true;
+          resolve(self, value);
+        }, function (reason) {
+          if (done) return;
+          done = true;
+          reject(self, reason);
+        });
+      } catch (ex) {
+        if (done) return;
+        done = true;
+        reject(self, ex);
+      }
+    }
+
+    Promise.prototype['catch'] = function (onRejected) {
+      return this.then(null, onRejected);
+    };
+
+    Promise.prototype.then = function (onFulfilled, onRejected) {
+      var prom = new this.constructor(noop);
+
+      handle(this, new Handler(onFulfilled, onRejected, prom));
+      return prom;
+    };
+
+    Promise.all = function (arr) {
+      var args = Array.prototype.slice.call(arr);
+
+      return new Promise(function (resolve, reject) {
+        if (args.length === 0) return resolve([]);
+        var remaining = args.length;
+
+        function res(i, val) {
+          try {
+            if (val && ((typeof val === 'undefined' ? 'undefined' : _typeof(val)) === 'object' || typeof val === 'function')) {
+              var then = val.then;
+              if (typeof then === 'function') {
+                then.call(val, function (val) {
+                  res(i, val);
+                }, reject);
+                return;
+              }
+            }
+            args[i] = val;
+            if (--remaining === 0) {
+              resolve(args);
+            }
+          } catch (ex) {
+            reject(ex);
+          }
+        }
+
+        for (var i = 0; i < args.length; i++) {
+          res(i, args[i]);
+        }
+      });
+    };
+
+    Promise.resolve = function (value) {
+      if (value && (typeof value === 'undefined' ? 'undefined' : _typeof(value)) === 'object' && value.constructor === Promise) {
+        return value;
+      }
+
+      return new Promise(function (resolve) {
+        resolve(value);
+      });
+    };
+
+    Promise.reject = function (value) {
+      return new Promise(function (resolve, reject) {
+        reject(value);
+      });
+    };
+
+    Promise.race = function (values) {
+      return new Promise(function (resolve, reject) {
+        for (var i = 0, len = values.length; i < len; i++) {
+          values[i].then(resolve, reject);
+        }
+      });
+    };
+
+    // Use polyfill for setImmediate for performance gains
+    Promise._immediateFn = typeof setImmediate === 'function' && function (fn) {
+      setImmediate(fn);
+    } || function (fn) {
+      setTimeoutFunc(fn, 0);
+    };
+
+    Promise._unhandledRejectionFn = function _unhandledRejectionFn(err) {
+      if (typeof console !== 'undefined' && console) {
+        console.warn('Possible Unhandled Promise Rejection:', err); // eslint-disable-line no-console
+      }
+    };
+
+    /**
+     * Set the immediate function to execute callbacks
+     * @param fn {function} Function to execute
+     * @deprecated
+     */
+    Promise._setImmediateFn = function _setImmediateFn(fn) {
+      Promise._immediateFn = fn;
+    };
+
+    /**
+     * Change the function to execute on unhandled rejection
+     * @param {function} fn Function to execute on unhandled rejection
+     * @deprecated
+     */
+    Promise._setUnhandledRejectionFn = function _setUnhandledRejectionFn(fn) {
+      Promise._unhandledRejectionFn = fn;
+    };
+
+    if (typeof module !== 'undefined' && module.exports) {
+      module.exports = Promise;
+    } else if (!root.Promise) {
+      root.Promise = Promise;
+    }
+  })(commonjsGlobal);
+});
+
+(function (self) {
+  'use strict';
+
+  if (self.fetch) {
+    return;
+  }
+
+  var support = {
+    searchParams: 'URLSearchParams' in self,
+    iterable: 'Symbol' in self && 'iterator' in Symbol,
+    blob: 'FileReader' in self && 'Blob' in self && function () {
+      try {
+        new Blob();
+        return true;
+      } catch (e) {
+        return false;
+      }
+    }(),
+    formData: 'FormData' in self,
+    arrayBuffer: 'ArrayBuffer' in self
+  };
+
+  if (support.arrayBuffer) {
+    var viewClasses = ['[object Int8Array]', '[object Uint8Array]', '[object Uint8ClampedArray]', '[object Int16Array]', '[object Uint16Array]', '[object Int32Array]', '[object Uint32Array]', '[object Float32Array]', '[object Float64Array]'];
+
+    var isDataView = function isDataView(obj) {
+      return obj && DataView.prototype.isPrototypeOf(obj);
+    };
+
+    var isArrayBufferView = ArrayBuffer.isView || function (obj) {
+      return obj && viewClasses.indexOf(Object.prototype.toString.call(obj)) > -1;
+    };
+  }
+
+  function normalizeName(name) {
+    if (typeof name !== 'string') {
+      name = String(name);
+    }
+    if (/[^a-z0-9\-#$%&'*+.\^_`|~]/i.test(name)) {
+      throw new TypeError('Invalid character in header field name');
+    }
+    return name.toLowerCase();
+  }
+
+  function normalizeValue(value) {
+    if (typeof value !== 'string') {
+      value = String(value);
+    }
+    return value;
+  }
+
+  // Build a destructive iterator for the value list
+  function iteratorFor(items) {
+    var iterator = {
+      next: function next() {
+        var value = items.shift();
+        return { done: value === undefined, value: value };
+      }
+    };
+
+    if (support.iterable) {
+      iterator[Symbol.iterator] = function () {
+        return iterator;
+      };
+    }
+
+    return iterator;
+  }
+
+  function Headers(headers) {
+    this.map = {};
+
+    if (headers instanceof Headers) {
+      headers.forEach(function (value, name) {
+        this.append(name, value);
+      }, this);
+    } else if (Array.isArray(headers)) {
+      headers.forEach(function (header) {
+        this.append(header[0], header[1]);
+      }, this);
+    } else if (headers) {
+      Object.getOwnPropertyNames(headers).forEach(function (name) {
+        this.append(name, headers[name]);
+      }, this);
+    }
+  }
+
+  Headers.prototype.append = function (name, value) {
+    name = normalizeName(name);
+    value = normalizeValue(value);
+    var oldValue = this.map[name];
+    this.map[name] = oldValue ? oldValue + ',' + value : value;
+  };
+
+  Headers.prototype['delete'] = function (name) {
+    delete this.map[normalizeName(name)];
+  };
+
+  Headers.prototype.get = function (name) {
+    name = normalizeName(name);
+    return this.has(name) ? this.map[name] : null;
+  };
+
+  Headers.prototype.has = function (name) {
+    return this.map.hasOwnProperty(normalizeName(name));
+  };
+
+  Headers.prototype.set = function (name, value) {
+    this.map[normalizeName(name)] = normalizeValue(value);
+  };
+
+  Headers.prototype.forEach = function (callback, thisArg) {
+    for (var name in this.map) {
+      if (this.map.hasOwnProperty(name)) {
+        callback.call(thisArg, this.map[name], name, this);
+      }
+    }
+  };
+
+  Headers.prototype.keys = function () {
+    var items = [];
+    this.forEach(function (value, name) {
+      items.push(name);
+    });
+    return iteratorFor(items);
+  };
+
+  Headers.prototype.values = function () {
+    var items = [];
+    this.forEach(function (value) {
+      items.push(value);
+    });
+    return iteratorFor(items);
+  };
+
+  Headers.prototype.entries = function () {
+    var items = [];
+    this.forEach(function (value, name) {
+      items.push([name, value]);
+    });
+    return iteratorFor(items);
+  };
+
+  if (support.iterable) {
+    Headers.prototype[Symbol.iterator] = Headers.prototype.entries;
+  }
+
+  function consumed(body) {
+    if (body.bodyUsed) {
+      return Promise.reject(new TypeError('Already read'));
+    }
+    body.bodyUsed = true;
+  }
+
+  function fileReaderReady(reader) {
+    return new Promise(function (resolve, reject) {
+      reader.onload = function () {
+        resolve(reader.result);
+      };
+      reader.onerror = function () {
+        reject(reader.error);
+      };
+    });
+  }
+
+  function readBlobAsArrayBuffer(blob) {
+    var reader = new FileReader();
+    var promise = fileReaderReady(reader);
+    reader.readAsArrayBuffer(blob);
+    return promise;
+  }
+
+  function readBlobAsText(blob) {
+    var reader = new FileReader();
+    var promise = fileReaderReady(reader);
+    reader.readAsText(blob);
+    return promise;
+  }
+
+  function readArrayBufferAsText(buf) {
+    var view = new Uint8Array(buf);
+    var chars = new Array(view.length);
+
+    for (var i = 0; i < view.length; i++) {
+      chars[i] = String.fromCharCode(view[i]);
+    }
+    return chars.join('');
+  }
+
+  function bufferClone(buf) {
+    if (buf.slice) {
+      return buf.slice(0);
+    } else {
+      var view = new Uint8Array(buf.byteLength);
+      view.set(new Uint8Array(buf));
+      return view.buffer;
+    }
+  }
+
+  function Body() {
+    this.bodyUsed = false;
+
+    this._initBody = function (body) {
+      this._bodyInit = body;
+      if (!body) {
+        this._bodyText = '';
+      } else if (typeof body === 'string') {
+        this._bodyText = body;
+      } else if (support.blob && Blob.prototype.isPrototypeOf(body)) {
+        this._bodyBlob = body;
+      } else if (support.formData && FormData.prototype.isPrototypeOf(body)) {
+        this._bodyFormData = body;
+      } else if (support.searchParams && URLSearchParams.prototype.isPrototypeOf(body)) {
+        this._bodyText = body.toString();
+      } else if (support.arrayBuffer && support.blob && isDataView(body)) {
+        this._bodyArrayBuffer = bufferClone(body.buffer);
+        // IE 10-11 can't handle a DataView body.
+        this._bodyInit = new Blob([this._bodyArrayBuffer]);
+      } else if (support.arrayBuffer && (ArrayBuffer.prototype.isPrototypeOf(body) || isArrayBufferView(body))) {
+        this._bodyArrayBuffer = bufferClone(body);
+      } else {
+        throw new Error('unsupported BodyInit type');
+      }
+
+      if (!this.headers.get('content-type')) {
+        if (typeof body === 'string') {
+          this.headers.set('content-type', 'text/plain;charset=UTF-8');
+        } else if (this._bodyBlob && this._bodyBlob.type) {
+          this.headers.set('content-type', this._bodyBlob.type);
+        } else if (support.searchParams && URLSearchParams.prototype.isPrototypeOf(body)) {
+          this.headers.set('content-type', 'application/x-www-form-urlencoded;charset=UTF-8');
+        }
+      }
+    };
+
+    if (support.blob) {
+      this.blob = function () {
+        var rejected = consumed(this);
+        if (rejected) {
+          return rejected;
+        }
+
+        if (this._bodyBlob) {
+          return Promise.resolve(this._bodyBlob);
+        } else if (this._bodyArrayBuffer) {
+          return Promise.resolve(new Blob([this._bodyArrayBuffer]));
+        } else if (this._bodyFormData) {
+          throw new Error('could not read FormData body as blob');
+        } else {
+          return Promise.resolve(new Blob([this._bodyText]));
+        }
+      };
+
+      this.arrayBuffer = function () {
+        if (this._bodyArrayBuffer) {
+          return consumed(this) || Promise.resolve(this._bodyArrayBuffer);
+        } else {
+          return this.blob().then(readBlobAsArrayBuffer);
+        }
+      };
+    }
+
+    this.text = function () {
+      var rejected = consumed(this);
+      if (rejected) {
+        return rejected;
+      }
+
+      if (this._bodyBlob) {
+        return readBlobAsText(this._bodyBlob);
+      } else if (this._bodyArrayBuffer) {
+        return Promise.resolve(readArrayBufferAsText(this._bodyArrayBuffer));
+      } else if (this._bodyFormData) {
+        throw new Error('could not read FormData body as text');
+      } else {
+        return Promise.resolve(this._bodyText);
+      }
+    };
+
+    if (support.formData) {
+      this.formData = function () {
+        return this.text().then(decode);
+      };
+    }
+
+    this.json = function () {
+      return this.text().then(JSON.parse);
+    };
+
+    return this;
+  }
+
+  // HTTP methods whose capitalization should be normalized
+  var methods = ['DELETE', 'GET', 'HEAD', 'OPTIONS', 'POST', 'PUT'];
+
+  function normalizeMethod(method) {
+    var upcased = method.toUpperCase();
+    return methods.indexOf(upcased) > -1 ? upcased : method;
+  }
+
+  function Request(input, options) {
+    options = options || {};
+    var body = options.body;
+
+    if (input instanceof Request) {
+      if (input.bodyUsed) {
+        throw new TypeError('Already read');
+      }
+      this.url = input.url;
+      this.credentials = input.credentials;
+      if (!options.headers) {
+        this.headers = new Headers(input.headers);
+      }
+      this.method = input.method;
+      this.mode = input.mode;
+      if (!body && input._bodyInit != null) {
+        body = input._bodyInit;
+        input.bodyUsed = true;
+      }
+    } else {
+      this.url = String(input);
+    }
+
+    this.credentials = options.credentials || this.credentials || 'omit';
+    if (options.headers || !this.headers) {
+      this.headers = new Headers(options.headers);
+    }
+    this.method = normalizeMethod(options.method || this.method || 'GET');
+    this.mode = options.mode || this.mode || null;
+    this.referrer = null;
+
+    if ((this.method === 'GET' || this.method === 'HEAD') && body) {
+      throw new TypeError('Body not allowed for GET or HEAD requests');
+    }
+    this._initBody(body);
+  }
+
+  Request.prototype.clone = function () {
+    return new Request(this, { body: this._bodyInit });
+  };
+
+  function decode(body) {
+    var form = new FormData();
+    body.trim().split('&').forEach(function (bytes) {
+      if (bytes) {
+        var split = bytes.split('=');
+        var name = split.shift().replace(/\+/g, ' ');
+        var value = split.join('=').replace(/\+/g, ' ');
+        form.append(decodeURIComponent(name), decodeURIComponent(value));
+      }
+    });
+    return form;
+  }
+
+  function parseHeaders(rawHeaders) {
+    var headers = new Headers();
+    rawHeaders.split(/\r?\n/).forEach(function (line) {
+      var parts = line.split(':');
+      var key = parts.shift().trim();
+      if (key) {
+        var value = parts.join(':').trim();
+        headers.append(key, value);
+      }
+    });
+    return headers;
+  }
+
+  Body.call(Request.prototype);
+
+  function Response(bodyInit, options) {
+    if (!options) {
+      options = {};
+    }
+
+    this.type = 'default';
+    this.status = 'status' in options ? options.status : 200;
+    this.ok = this.status >= 200 && this.status < 300;
+    this.statusText = 'statusText' in options ? options.statusText : 'OK';
+    this.headers = new Headers(options.headers);
+    this.url = options.url || '';
+    this._initBody(bodyInit);
+  }
+
+  Body.call(Response.prototype);
+
+  Response.prototype.clone = function () {
+    return new Response(this._bodyInit, {
+      status: this.status,
+      statusText: this.statusText,
+      headers: new Headers(this.headers),
+      url: this.url
+    });
+  };
+
+  Response.error = function () {
+    var response = new Response(null, { status: 0, statusText: '' });
+    response.type = 'error';
+    return response;
+  };
+
+  var redirectStatuses = [301, 302, 303, 307, 308];
+
+  Response.redirect = function (url, status) {
+    if (redirectStatuses.indexOf(status) === -1) {
+      throw new RangeError('Invalid status code');
+    }
+
+    return new Response(null, { status: status, headers: { location: url } });
+  };
+
+  self.Headers = Headers;
+  self.Request = Request;
+  self.Response = Response;
+
+  self.fetch = function (input, init) {
+    return new Promise(function (resolve, reject) {
+      var request = new Request(input, init);
+      var xhr = new XMLHttpRequest();
+
+      xhr.onload = function () {
+        var options = {
+          status: xhr.status,
+          statusText: xhr.statusText,
+          headers: parseHeaders(xhr.getAllResponseHeaders() || '')
+        };
+        options.url = 'responseURL' in xhr ? xhr.responseURL : options.headers.get('X-Request-URL');
+        var body = 'response' in xhr ? xhr.response : xhr.responseText;
+        resolve(new Response(body, options));
+      };
+
+      xhr.onerror = function () {
+        reject(new TypeError('Network request failed'));
+      };
+
+      xhr.ontimeout = function () {
+        reject(new TypeError('Network request failed'));
+      };
+
+      xhr.open(request.method, request.url, true);
+
+      if (request.credentials === 'include') {
+        xhr.withCredentials = true;
+      }
+
+      if ('responseType' in xhr && support.blob) {
+        xhr.responseType = 'blob';
+      }
+
+      request.headers.forEach(function (value, name) {
+        xhr.setRequestHeader(name, value);
+      });
+
+      xhr.send(typeof request._bodyInit === 'undefined' ? null : request._bodyInit);
+    });
+  };
+  self.fetch.polyfill = true;
+})(typeof self !== 'undefined' ? self : undefined);
+
+window.jQuery = jquery$1;
+
+// Promise polyfill for older browsers
+if (!window.Promise) {
+    window.Promise = promise;
+}
+
+// fetch polyfill
+
+// Note that the '../globals' module imports fetch polyfill
+function glossary() {
+
+    var $container = jquery$1('.js-glossary'),
+        $resultsHeading = $container.find('.glossary__results-heading'),
+        $resultsContainer = $container.find('.glossary__results'),
+        $searchInput = $container.find('.glossary__search'),
+        $keyboardLetters = $container.find('.keyboard__letter'),
+        keyboardLettersActiveClass = 'keyboard__letter--active',
+        keyboardLettersDisabledClass = 'keyboard__letter--disabled',
+        apiURL = $container.data('apiUrl');
+
+    var previousSearchQuery = null;
+
+    function loadListing() {
+        var startswith = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+        var qs = '';
+        if (startswith) {
+            qs = '?term_startswith=' + startswith;
+        }
+
+        return fetch(apiURL + qs).then(function (response) {
+            return response.json();
+        });
+    }
+
+    function loadSearchListing(searchQuery) {
+        var qs = '?search=' + searchQuery;
+
+        return fetch(apiURL + qs).then(function (response) {
+            return response.json();
+        });
+    }
+
+    function renderListingResponse(response) {
+        response.then(function (json) {
+            return json.items;
+        }).then(renderResultItems);
+
+        response.then(function (json) {
+            return json.meta.total_count;
+        }).then(renderResultHeader);
+    }
+
+    function renderResultItems(items) {
+        var resultList = '';
+        items.forEach(function (item) {
+            resultList += '\n            <li class="glossary__result js-border-result">\n                <div class="glossary__result-border js-border-result__border"></div>\n                <div class="glossary__result-heading js-border-result__heading">\n                    ' + item.name + '\n                    ' + (item.is_noun ? '<span class="glossary__noun">Noun</span>' : '') + '\n                </div>\n                <div class="glossary__result-content">' + item.description + '</div>\n            </li>';
+        });
+
+        $resultsContainer.html(resultList);
+    }
+
+    function renderResultHeader(totalCount) {
+        $resultsHeading.text('Found ' + totalCount + ' ' + pluralize('result', totalCount));
+    }
+
+    function renderDefaultListing() {
+        var response = loadListing();
+
+        renderListingResponse(response);
+
+        response.then(function (json) {
+            return json.meta.count_per_letter;
+        }).then(function (count_per_letter) {
+            if (!count_per_letter) {
+                return;
+            }
+
+            $keyboardLetters.addClass(keyboardLettersDisabledClass);
+
+            for (var letter in count_per_letter) {
+                if (!count_per_letter.hasOwnProperty(letter)) {
+                    continue;
+                }
+
+                var letter_count = count_per_letter[letter];
+                if (letter_count >= 0) {
+                    var lookup = '[data-keyboard-letter="' + letter + '"]';
+
+                    $keyboardLetters.closest(lookup).removeClass(keyboardLettersDisabledClass);
+                }
+            }
+        });
+    }
+
+    function bindEvents() {
+        // Initial screen
+        jquery$1(document).ready(function () {
+            return renderDefaultListing();
+        });
+
+        // Search functionality
+        $searchInput.on('keyup', function () {
+            var searchQuery = $searchInput.val().trim();
+
+            if (searchQuery.length >= 1) {
+                if (searchQuery !== previousSearchQuery) {
+                    renderListingResponse(loadSearchListing(searchQuery));
+
+                    previousSearchQuery = searchQuery;
+                }
+            } else {
+                renderDefaultListing();
+            }
+
+            // Deactivate letter buttons
+            $keyboardLetters.removeClass(keyboardLettersActiveClass);
+        });
+
+        // Browse by letter functionality
+        $keyboardLetters.on('click', function (e) {
+            var $element = jquery$1(e.currentTarget);
+            var letter = $element.data('keyboardLetter');
+
+            // Request and render a listing for the given letter
+            renderListingResponse(loadListing(letter));
+
+            // Deactivate other buttons and activate current button
+            $keyboardLetters.removeClass(keyboardLettersActiveClass);
+            $element.addClass(keyboardLettersActiveClass);
+
+            // Cleanup the search field
+            $searchInput.val('');
+        });
+    }
+
+    bindEvents();
+}
 
 function glossaryTab() {
 
-    var $glossaryTab = jquery('.glossary-tab'),
-        $glossaryLabel = jquery('.glossary-tab__label'),
+    var $glossaryTab = jquery$1('.glossary-tab'),
+        $glossaryLabel = jquery$1('.glossary-tab__label'),
         tabOpen = 'glossary-tab--open',
         tabFixed = 'glossary-tab--fixed',
         stickValue = 600,
@@ -2276,7 +3390,7 @@ function glossaryTab() {
     }
 
     function stick() {
-        if (jquery(document).scrollTop() >= stickValue) {
+        if (jquery$1(document).scrollTop() >= stickValue) {
             $glossaryTab.addClass(tabFixed);
         } else {
             $glossaryTab.removeClass(tabFixed);
@@ -2290,7 +3404,7 @@ function glossaryTab() {
     }
 
     function bindEvents() {
-        if (jquery(window).width() >= 800) {
+        if (jquery$1(window).width() >= 800) {
 
             // Toggle tab on click
             $glossaryLabel.on('click', function () {
@@ -2298,12 +3412,12 @@ function glossaryTab() {
             });
 
             // Stick tab on scroll
-            jquery(document).on('scroll', function () {
+            jquery$1(document).on('scroll', function () {
                 return stick();
             });
 
             // Close tab on click outside
-            jquery(document).on('mouseup', function (e) {
+            jquery$1(document).on('mouseup', function (e) {
                 return outOfBounds(e);
             });
         }
@@ -2314,15 +3428,15 @@ function glossaryTab() {
 
 function resultsBorder() {
 
-    var $resultsResult = jquery('.js-border-result'),
-        $resultsHeading = jquery('.js-border-result__heading'),
-        $resultsImage = jquery('.js-border-result__image'),
-        $resultsBorder = jquery('.js-border-result__border');
+    var $resultsResult = jquery$1('.js-border-result'),
+        $resultsHeading = jquery$1('.js-border-result__heading'),
+        $resultsImage = jquery$1('.js-border-result__image'),
+        $resultsBorder = jquery$1('.js-border-result__border');
 
     function setResultBorder() {
         $resultsResult.each(function () {
-            var $closestBorder = jquery(this).closest('li').find($resultsBorder),
-                headingWidth = jquery(this).closest('li').find($resultsHeading).width(),
+            var $closestBorder = jquery$1(this).closest('li').find($resultsBorder),
+                headingWidth = jquery$1(this).closest('li').find($resultsHeading).width(),
                 imageAndHeadingWidth = headingWidth + 105;
 
             // Set larger border width if image is present
@@ -2339,8 +3453,8 @@ function resultsBorder() {
     }
 
     function bindEvents() {
-        jquery(window).on('load', function () {
-            if (jquery('.js-border-result').length) {
+        jquery$1(window).on('load', function () {
+            if (jquery$1('.js-border-result').length) {
                 setResultBorder();
             }
         });
@@ -2351,7 +3465,7 @@ function resultsBorder() {
 
 function disableTransition() {
 
-    var transitionElements = jquery('.site-header__right'),
+    var transitionElements = jquery$1('.site-header__right'),
         disabledClass = 'disable-transition',
         delaySpeed = 300;
 
@@ -2362,15 +3476,15 @@ function disableTransition() {
     }, delaySpeed);
 }
 
-jquery(window).resize(function () {
+jquery$1(window).resize(function () {
     disableTransition();
 });
 
 function sidebarMenu() {
 
-    var $sidebarMenu = jquery('.site-sidebar__menu'),
-        $sidebarMenuToggle = jquery('.site-sidebar__label'),
-        activeItemLabel = jquery('.site-sidebar__menu-item--active'),
+    var $sidebarMenu = jquery$1('.site-sidebar__menu'),
+        $sidebarMenuToggle = jquery$1('.site-sidebar__label'),
+        activeItemLabel = jquery$1('.site-sidebar__menu-item--active'),
         labelActive = 'site-sidebar__label--active',
         slideSpeed = 300,
         displayBuffer = 10;
@@ -2424,7 +3538,7 @@ function sidebarMenu() {
             return toggle();
         });
 
-        jquery(window).on('load', function () {
+        jquery$1(window).on('load', function () {
             return populateLabel();
         });
     }
@@ -2434,8 +3548,8 @@ function sidebarMenu() {
 
 function notification() {
 
-    var $notification = jquery('.notification'),
-        $closeButton = jquery('.notification__close'),
+    var $notification = jquery$1('.notification'),
+        $closeButton = jquery$1('.notification__close'),
         notificationHeight = $notification.outerHeight(),
         notificationTime = $notification.data('updatedAt'),
         notificationStorageKey = 'notification-bar',
@@ -2526,11 +3640,11 @@ function notification() {
 
 function faqs() {
 
-    var $question = jquery('.faq-questions__item'),
-        $answer = jquery('.faq-answers__item'),
-        $answerList = jquery('.faq-panel--answers'),
-        $questionList = jquery('.faq-panel--questions'),
-        $answerClose = jquery('.faq-answers__close-answer'),
+    var $question = jquery$1('.faq-questions__item'),
+        $answer = jquery$1('.faq-answers__item'),
+        $answerList = jquery$1('.faq-panel--answers'),
+        $questionList = jquery$1('.faq-panel--questions'),
+        $answerClose = jquery$1('.faq-answers__close-answer'),
         answersDisplay = 'faq-panel--answers-display',
         questionsHide = 'faq-panel--questions-hide',
         questionSelected = 'faq-questions__item--selected',
@@ -2575,8 +3689,8 @@ function faqs() {
     }
 
     function positionAnswer() {
-        if (jquery(window).width() >= mobileBreakpoint) {
-            var $windowHeight = jquery(window).outerHeight(),
+        if (jquery$1(window).width() >= mobileBreakpoint) {
+            var $windowHeight = jquery$1(window).outerHeight(),
                 $itemHeight = $answerList.outerHeight(),
                 topValue = ($windowHeight - $itemHeight) / 2;
 
@@ -2590,8 +3704,8 @@ function faqs() {
         $question.on('click', function (e) {
             e.preventDefault();
 
-            var $selectedQuestion = jquery(this),
-                questionData = jquery(this).attr('data-faq-question');
+            var $selectedQuestion = jquery$1(this),
+                questionData = jquery$1(this).attr('data-faq-question');
 
             // Make all questions 'inactive'
             deselectQuestions();
@@ -2618,7 +3732,7 @@ function faqs() {
         });
     }
 
-    if (jquery('.faq-questions__item').length) {
+    if (jquery$1('.faq-questions__item').length) {
         positionAnswer();
         bindEvents();
     }
@@ -2626,10 +3740,10 @@ function faqs() {
 
 function tableInteraction() {
 
-    var $tablePinned = jquery('.table--pinned'),
-        $tableBody = jquery('.table--pinned tbody'),
-        $navigateLeft = jquery('.js-table-left'),
-        $navigateRight = jquery('.js-table-right'),
+    var $tablePinned = jquery$1('.table--pinned'),
+        $tableBody = jquery$1('.table--pinned tbody'),
+        $navigateLeft = jquery$1('.js-table-left'),
+        $navigateRight = jquery$1('.js-table-right'),
         clickDistance = '200px',
         speed = 300,
         displayBuffer = 10;
@@ -2706,7 +3820,7 @@ function tableInteraction() {
 
 function searchFilter() {
 
-    var $searchForm = jquery('.js-main-search-form');
+    var $searchForm = jquery$1('.js-main-search-form');
 
     function bindEvents() {
         $searchForm.find('input[type="checkbox"]').on('change', function () {
@@ -2721,6 +3835,7 @@ function searchFilter() {
     bindEvents();
 }
 
+glossary();
 glossaryTab();
 resultsBorder();
 disableTransition();
