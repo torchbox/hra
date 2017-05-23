@@ -20,7 +20,7 @@ class GlossaryTerm(index.Indexed, models.Model):
 
     search_fields = [
         index.SearchField('name', partial_match=True, boost=10),
-        index.SearchField('description'),
+        index.SearchField('description', partial_match=True),
     ]
 
     def __str__(self):
