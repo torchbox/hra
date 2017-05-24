@@ -50,8 +50,6 @@ if 'PRIMARY_HOST' in env:
 
 if 'SERVER_EMAIL' in env:
     SERVER_EMAIL = env['SERVER_EMAIL']
-
-if 'SERVER_EMAIL' in env:
     DEFAULT_FROM_EMAIL = env['SERVER_EMAIL']
 
 if 'EMAIL_SUBJECT_PREFIX' in env:
