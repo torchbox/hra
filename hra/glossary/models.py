@@ -10,7 +10,7 @@ from wagtail.wagtailsnippets.models import register_snippet
 class GlossaryTerm(index.Indexed, models.Model):
     name = models.CharField(max_length=255)
     description = RichTextField()
-    is_noun = models.BooleanField(default=False)
+    is_noun = models.BooleanField("Noun", default=False)
 
     panels = [
         FieldPanel('name', classname='full title'),
