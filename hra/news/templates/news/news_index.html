@@ -53,10 +53,7 @@
 
                                                     {% if news_item.categories %}
                                                         <li class="category">
-                                                            {% for category in news_item.categories %}
-                                                                {{ category.name }}
-                                                                {% if not forloop.last %}, {% endif %}
-                                                            {% endfor %}
+                                                            {{ news_item.categories|join:", " }}
                                                         </li>
                                                     {% endif %}
 

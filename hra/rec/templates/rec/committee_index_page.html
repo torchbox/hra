@@ -132,7 +132,7 @@
                                 {% for committee_meetings in all_meetings %}
                                     <td>
                                         {% for committee_meeting in committee_meetings %}
-                                            {{ committee_meeting|date:"jS" }}{% if not forloop.last %},{% endif %}
+                                            {{ committee_meeting|date:"jS" }}{% if not forloop.last %}, {% endif %}
                                         {% empty %}
                                             No meeting
                                         {% endfor %}

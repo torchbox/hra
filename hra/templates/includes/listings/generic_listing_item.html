@@ -1,46 +1,40 @@
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags util_tags %}
 
 <li class="results-listing__item js-border-result">
-    <a href="{% pageurl result %}">
+    <a href="{% pageurl item %}">
         <div class="results-listing__item-border js-border-result__border"></div>
         <div class="results-listing__item-heading js-border-result__heading">
-            {{ result.listing_title|default:result.title }}
+            {{ item.listing_title|default:item.title }}
         </div>
 
-        {% with display_date=result.display_date|default:result.latest_revision_created_at %}
 
-            <ul class="results-listing__item-meta">
+        <ul class="results-listing__item-meta">
 
-                <li class="date">{{ display_date|date }}</li>
+            <li class="date">{{ item.display_date|default:item.latest_revision_created_at|date }}</li>
 
-                {% if result.author %}
-                    <li class="author">Author: <span>{{ result.author }}</span></li>
-                {% endif %}
+            {% page_verbose_names item as verbose_name %}
+            {% if verbose_name %}
+                <li class="category">
+                    {{ verbose_name|join:", " }}
+                </li>
+            {% endif %}
 
-                {% if result.categories %}
-                    <li class="category">
-                        {% for category in result.categories %}
-                            {{ category.name }}
-                            {% if not forloop.last %}, {% endif %}
-                        {% endfor %}
-                    </li>
-                {% endif %}
+            {% if item.author %}
+                <li class="author">Author: <span>{{ item.author }}</span></li>
+            {% endif %}
 
-                {% if result.page_types %}
-                    <li class="category">
-                        {% for page_type in result.page_types %}
-                            {{ page_type.name }}
-                            {% if not forloop.last %}, {% endif %}
-                        {% endfor %}
-                    </li>
-                {% endif %}
-            </ul>
+            {% if item.categories %}
+                <li class="category">
+                    {{ item.categories|join:", " }}
+                </li>
+            {% endif %}
 
-        {% endwith %}
+        </ul>
 
-        {% if pick.description or result.search_description or result.listing_summary %}
+
+        {% if pick.description or item.search_description or item.listing_summary %}
             <div class="results-listing__item-content">
-                {{ pick.description|default:result.search_description|default:result.listing_summary }}
+                {{ pick.description|default:item.search_description|default:item.listing_summary }}
             </div>
         {% endif %}
     </a>

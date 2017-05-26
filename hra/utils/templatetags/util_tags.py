@@ -48,7 +48,6 @@ def newsletter_signup_form():
     }
 
 
-# TODO: Use this on all listings (not only on page) for consistency
 @register.assignment_tag(name='page_verbose_names')
 def page_verbose_names(page):
     """

@@ -61,13 +61,13 @@
 
                         {% for pick in search_picks %}
                             <li>
-                                {% include "search/includes/search_result.html" with result=pick.page.specific %}
+                                {% include "includes/listings/generic_listing_item.html" with pick=pick item=pick.page.specific %}
                             </li>
                         {% endfor %}
 
                         {% for result in search_results %}
                             <li>
-                                {% include "search/includes/search_result.html" with result=result.specific %}
+                                {% include "includes/listings/generic_listing_item.html" with item=result.specific %}
                             </li>
                         {% endfor %}
 

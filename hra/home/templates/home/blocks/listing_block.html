@@ -59,44 +59,9 @@
 
                     {% for page in value.pages %}
                         {% if page.live %}
-                            {% with page=page.specific %}
 
-                                {# Result item #}
-                                <li class="results-listing__item js-border-result">
-                                    <a href="{% pageurl page %}">
-                                        <div class="results-listing__item-border js-border-result__border"></div>
+                            {% include 'includes/listings/generic_listing_item.html' with item=page.specific %}
 
-                                        {% if value.display_meta_info %}
-                                            <ul class="results-listing__item-meta">
-
-                                                {% page_verbose_names page as verbose_name %}
-                                                {% if verbose_name %}
-                                                    <li class="category">
-                                                        {{ verbose_name|join:", " }}
-                                                    </li>
-                                                {% endif %}
-
-                                                <li class="date">
-                                                    {{ page.display_date|default:page.latest_revision_created_at|date }}
-                                                </li>
-
-                                            </ul>
-                                        {% endif %}
-
-                                        <div class="results-listing__item-heading js-border-result__heading">
-                                            {{ page.listing_title|default:page.title }}
-                                        </div>
-
-                                        {% if page.listing_summary %}
-                                            <div class="results-listing__item-content">
-                                                {{ page.listing_summary }}
-                                            </div>
-                                        {% endif %}
-                                    </a>
-                                </li>
-                                {# Result item end #}
-
-                            {% endwith %}
                         {% endif %}
                     {% endfor %}
 
