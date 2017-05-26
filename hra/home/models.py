@@ -3,6 +3,7 @@ from django.db import models
 from wagtail.wagtailadmin.edit_handlers import FieldPanel
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailsearch import index
+from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 
 from hra.utils.models import (
     CallToActionSnippet,
@@ -20,7 +21,7 @@ class HomePage(Page, SocialFields):
 
     content_panels = Page.content_panels + [
         FieldPanel('strapline'),
-        FieldPanel('call_to_action'),
+        SnippetChooserPanel('call_to_action'),
     ]
 
     promote_panels = (
