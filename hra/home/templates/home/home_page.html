@@ -1,11 +1,31 @@
 {% extends "base.html" %}
-{% load wagtailcore_tags wagtailimages_tags static %}
+{% load wagtailcore_tags wagtailimages_tags %}
 
 {% block content %}
-    <h1>{{ page.title }}</h1>
+    {% image page.header_image width-1600 as header_image %}
+    <img src="{{ header_image.url }}"
+         alt="{{ header_image.alt }}">
 
-    {{ page.strapline }}
 
-    {% include "includes/call_to_action.html" with call_to_action=page.call_to_action %}
+    <div class="hero hero--with-caption hero--homepage"
+         {% if header_image %}style="background-image: url('{{ header_image.url }}')"{% endif %}
+    >
+        {% if page.call_to_action %}
+            <a href="{{ call_to_action.get_link_url }}">
+                <div class="hero__caption">
+                    <h1 class="hero__caption-title">
+                        {{ page.call_to_action.title }}
+                    </h1>
+                    <h2 class="hero__caption-subtitle">
+                        {{ page.call_to_action.summary }}
+                    </h2>
+                </div>
+            </a>
+        {% endif %}
+    </div>
+
+    <div class="homepage-body">
+        {% include_block page.body %}
+    </div>
 
 {% endblock %}

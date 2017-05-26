@@ -1,0 +1,107 @@
+{% load wagtailcore_tags wagtailimages_tags static util_tags %}
+
+<div class="wrapper">
+    <div class="homepage-body__heading">{{ value.title }}</div>
+    {% spaceless %}
+        <div class="grid grid--wide">
+            <div class="grid__item four-tenths tablet--one-whole">
+
+                {% static 'dist/images/teaser.png' as default_listing_image %}
+                {% for teaser_page in value.featured_pages %}
+                    {% if teaser_page.live %}
+                        {% with teaser_page=teaser_page.specific %}
+
+                            {% if teaser_page.listing_image %}
+                                {% image teaser_page.listing_image width-600 as listing_image %}
+                            {% endif %}
+
+                            <a class="teaser" href="{% pageurl teaser_page %}">
+                                <div class="teaser__image"
+                                     style="background-image:url('{{ listing_image.url|default:default_listing_image }}')">
+                                    <div class="teaser__meta">
+                                        <div class="teaser__title">
+
+                                            {% if value.display_meta_info %}
+                                                {# TODO: Add styling #}
+                                                <div style="font-size: 0.7em;">
+                                                    {{ teaser_page.display_date|default:teaser_page.latest_revision_created_at|date }}
+
+                                                    {% page_verbose_names teaser_page as verbose_name %}
+                                                    {% if verbose_name %}
+                                                        | {{ verbose_name|join:", " }}
+                                                    {% endif %}
+                                                </div>
+                                            {% endif %}
+
+                                            {{ teaser_page.listing_title|default:teaser_page.title }}
+
+                                        </div>
+                                    </div>
+                                </div>
+                                {% if teaser_page.listing_summary %}
+                                    <div class="teaser__description">
+                                        <p>
+                                            {{ teaser_page.listing_summary }}
+                                        </p>
+                                        {% include 'includes/svg/default-arrow.html' %}
+                                    </div>
+                                {% endif %}
+                            </a>
+
+
+                        {% endwith %}
+                    {% endif %}
+                {% endfor %}
+
+            </div>
+            <div class="grid__item six-tenths tablet--one-whole">
+                <ul class="results-listing results-listing--flush">
+
+                    {% for page in value.pages %}
+                        {% if page.live %}
+                            {% with page=page.specific %}
+
+                                {# Result item #}
+                                <li class="results-listing__item js-border-result">
+                                    <a href="{% pageurl page %}">
+                                        <div class="results-listing__item-border js-border-result__border"></div>
+
+                                        {% if value.display_meta_info %}
+                                            <ul class="results-listing__item-meta">
+
+                                                {% page_verbose_names page as verbose_name %}
+                                                {% if verbose_name %}
+                                                    <li class="category">
+                                                        {{ verbose_name|join:", " }}
+                                                    </li>
+                                                {% endif %}
+
+                                                <li class="date">
+                                                    {{ page.display_date|default:page.latest_revision_created_at|date }}
+                                                </li>
+
+                                            </ul>
+                                        {% endif %}
+
+                                        <div class="results-listing__item-heading js-border-result__heading">
+                                            {{ page.listing_title|default:page.title }}
+                                        </div>
+
+                                        {% if page.listing_summary %}
+                                            <div class="results-listing__item-content">
+                                                {{ page.listing_summary }}
+                                            </div>
+                                        {% endif %}
+                                    </a>
+                                </li>
+                                {# Result item end #}
+
+                            {% endwith %}
+                        {% endif %}
+                    {% endfor %}
+
+                </ul>
+            </div>
+        </div>
+    {% endspaceless %}
+</div>

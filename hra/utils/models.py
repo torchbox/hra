@@ -12,8 +12,6 @@ from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
 from wagtail.contrib.settings.models import BaseSetting, register_setting
 
-from hra.images.models import CustomImage
-
 
 class LinkFields(models.Model):
     """
@@ -110,7 +108,7 @@ class RelatedDocument(Orderable, models.Model):
 
 # Generic social fields abstract class to add social image/text to any new content type easily.
 class SocialFields(models.Model):
-    social_image = models.ForeignKey(CustomImage, null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
+    social_image = models.ForeignKey('images.CustomImage', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
     social_text = models.CharField(max_length=255, blank=True)
 
     class Meta:
@@ -127,7 +125,7 @@ class SocialFields(models.Model):
 # Generic listing fields abstract class to add listing image/text to any new content type easily.
 class ListingFields(models.Model):
     listing_image = models.ForeignKey(
-        CustomImage,
+        'images.CustomImage',
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
@@ -153,7 +151,7 @@ class ListingFields(models.Model):
 class CallToActionSnippet(LinkFields):
     title = models.CharField(max_length=255)
     summary = models.TextField(blank=True, max_length=255)
-    image = models.ForeignKey(CustomImage, null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
+    image = models.ForeignKey('images.CustomImage', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
 
     panels = [
         FieldPanel('title'),

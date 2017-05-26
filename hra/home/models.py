@@ -1,10 +1,11 @@
 from django.db import models
 
-from wagtail.wagtailadmin.edit_handlers import FieldPanel
+from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel
+from wagtail.wagtailcore.fields import StreamField
 from wagtail.wagtailcore.models import Page
-from wagtail.wagtailsearch import index
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 
+from hra.home.blocks import HomePageBodyBlock
 from hra.utils.models import (
     CallToActionSnippet,
     SocialFields
@@ -12,16 +13,13 @@ from hra.utils.models import (
 
 
 class HomePage(Page, SocialFields):
-    strapline = models.CharField(blank=True, max_length=255)
     call_to_action = models.ForeignKey(CallToActionSnippet, blank=True, null=True, on_delete=models.SET_NULL, related_name='+')
-
-    search_fields = Page.search_fields + [
-        index.SearchField('strapline'),
-    ]
+    header_image = models.ForeignKey('images.CustomImage', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
+    body = StreamField(HomePageBodyBlock())
 
     content_panels = Page.content_panels + [
-        FieldPanel('strapline'),
         SnippetChooserPanel('call_to_action'),
+        StreamFieldPanel('body'),
     ]
 
     promote_panels = (
