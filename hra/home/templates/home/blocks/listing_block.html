@@ -22,15 +22,16 @@
                                         <div class="teaser__title">
 
                                             {% if value.display_meta_info %}
-                                                {# TODO: Add styling #}
-                                                <div style="font-size: 0.7em;">
-                                                    {{ teaser_page.display_date|default:teaser_page.latest_revision_created_at|date }}
+                                                <ul class="teaser__title__meta">
+                                                    <li>
+                                                        {{ teaser_page.display_date|default:teaser_page.latest_revision_created_at|date }}
+                                                    </li>
 
                                                     {% page_verbose_names teaser_page as verbose_name %}
                                                     {% if verbose_name %}
-                                                        | {{ verbose_name|join:", " }}
+                                                        <li>{{ verbose_name|join:", " }}</li>
                                                     {% endif %}
-                                                </div>
+                                                </ul>
                                             {% endif %}
 
                                             {{ teaser_page.listing_title|default:teaser_page.title }}
