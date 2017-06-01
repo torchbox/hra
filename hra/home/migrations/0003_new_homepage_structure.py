@@ -24,7 +24,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='homepage',
             name='body',
-            field=wagtail.wagtailcore.fields.StreamField((('highlight', wagtail.wagtailcore.blocks.StructBlock((('title', wagtail.wagtailcore.blocks.CharBlock()), ('text', wagtail.wagtailcore.blocks.RichTextBlock()), ('image', wagtail.wagtailimages.blocks.ImageChooserBlock(required=False))))), ('listing', wagtail.wagtailcore.blocks.StructBlock((('title', wagtail.wagtailcore.blocks.CharBlock(max_length=128, required=False)), ('display_meta_info', wagtail.wagtailcore.blocks.BooleanBlock(required=False)), ('featured_pages', wagtail.wagtailcore.blocks.ListBlock(wagtail.wagtailcore.blocks.PageChooserBlock())), ('pages', wagtail.wagtailcore.blocks.ListBlock(wagtail.wagtailcore.blocks.PageChooserBlock())))))), default={}),
+            field=wagtail.wagtailcore.fields.StreamField((('highlight', wagtail.wagtailcore.blocks.StructBlock((('title', wagtail.wagtailcore.blocks.CharBlock()), ('text', wagtail.wagtailcore.blocks.RichTextBlock()), ('image', wagtail.wagtailimages.blocks.ImageChooserBlock(required=False))), template='home/blocks/highlight_block.html')), ('listing', wagtail.wagtailcore.blocks.StructBlock((('title', wagtail.wagtailcore.blocks.CharBlock(max_length=128, required=False)), ('display_meta_info', wagtail.wagtailcore.blocks.BooleanBlock(required=False)), ('featured_pages', wagtail.wagtailcore.blocks.ListBlock(wagtail.wagtailcore.blocks.PageChooserBlock())), ('pages', wagtail.wagtailcore.blocks.ListBlock(wagtail.wagtailcore.blocks.PageChooserBlock())))))), default={}),
             preserve_default=False,
         ),
         migrations.AddField(

@@ -16,7 +16,4 @@ class ListingBlock(blocks.StructBlock):
 
 class HomePageBodyBlock(blocks.StreamBlock):
     listing = ListingBlock()
-    highlight = HighlightBlock()  # TODO: add an option for purple background
-
-    # class Meta:
-    #     template = "blocks/stream_block.html"
+    highlight = HighlightBlock(template='home/blocks/highlight_block.html')
