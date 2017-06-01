@@ -7,29 +7,32 @@
             {{ item.listing_title|default:item.title }}
         </div>
 
+        {% if display_meta_info|default_if_none:True %}
 
-        <ul class="results-listing__item-meta">
+            <ul class="results-listing__item-meta">
 
-            <li class="date">{{ item.display_date|default:item.latest_revision_created_at|date }}</li>
+                <li class="date">{{ item.display_date|default:item.latest_revision_created_at|date }}</li>
 
-            {% page_verbose_names item as verbose_name %}
-            {% if verbose_name %}
-                <li class="category">
-                    {{ verbose_name|join:", " }}
-                </li>
-            {% endif %}
+                {% page_verbose_names item as verbose_name %}
+                {% if verbose_name %}
+                    <li class="category">
+                        {{ verbose_name|join:", " }}
+                    </li>
+                {% endif %}
 
-            {% if item.author %}
-                <li class="author">Author: <span>{{ item.author }}</span></li>
-            {% endif %}
+                {% if item.author %}
+                    <li class="author">Author: <span>{{ item.author }}</span></li>
+                {% endif %}
 
-            {% if item.categories %}
-                <li class="category">
-                    {{ item.categories|join:", " }}
-                </li>
-            {% endif %}
+                {% if item.categories %}
+                    <li class="category">
+                        {{ item.categories|join:", " }}
+                    </li>
+                {% endif %}
 
-        </ul>
+            </ul>
+
+        {% endif %}
 
 
         {% if pick.description or item.search_description or item.listing_summary %}

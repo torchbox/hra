@@ -60,7 +60,7 @@
                     {% for page in value.pages %}
                         {% if page.live %}
 
-                            {% include 'includes/listings/generic_listing_item.html' with item=page.specific %}
+                            {% include 'includes/listings/generic_listing_item.html' with item=page.specific display_meta_info=value.display_meta_info %}
 
                         {% endif %}
                     {% endfor %}
