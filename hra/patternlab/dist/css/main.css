@@ -3287,6 +3287,28 @@ textarea:focus {
   background-color: #fff;
 }
 
+.teaser__title__meta {
+  line-height: 1.2;
+}
+
+.teaser__title__meta > li {
+  font-size: 13px;
+  font-size: 0.8125rem;
+  display: inline-block;
+  padding: 0 4px;
+  color: #000;
+  border-right: 1px solid #d0d0d0;
+}
+
+.teaser__title__meta > li:first-of-type {
+  padding-left: 0;
+}
+
+.teaser__title__meta > li:last-of-type {
+  padding-right: 0;
+  border-right: 0;
+}
+
 .teaser__description {
   position: relative;
   padding: 15px 40px 0 0;
