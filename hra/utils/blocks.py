@@ -23,7 +23,7 @@ class QuoteBlock(blocks.StructBlock):
 
     class Meta:
         icon = "openquote"
-        template = "blocks/listing_block.html"
+        template = "blocks/quote_block.html"
 
 
 class CallToActionWithTextBlock(blocks.StructBlock):
