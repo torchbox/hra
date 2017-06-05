@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.utils.datetime_safe import date
 from modelcluster.fields import ParentalKey
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, InlinePanel
 from wagtail.wagtailcore.fields import RichTextField
@@ -143,8 +144,15 @@ class CommitteePage(Page):
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
+
+        meeting_dates = self.meeting_dates.all()
+        # We have to do that instead of jsut meeting_dates.filter(date__gte=timezone.now().date())
+        # Because it will not work on preview in the Wagtail admin
+        today = date.today()
+        meeting_dates = [meeting_date for meeting_date in meeting_dates if meeting_date.date >= today]
+
         context.update({
-            'upcoming_meeting_dates': self.meeting_dates.filter(date__gte=timezone.now().date())
+            'upcoming_meeting_dates': meeting_dates
         })
 
         return context
