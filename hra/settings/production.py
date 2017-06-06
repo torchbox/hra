@@ -114,11 +114,9 @@ if 'ELASTICSEARCH_URL' in env:
     WAGTAILSEARCH_BACKENDS = {
         'default': {
             'BACKEND': 'wagtail.wagtailsearch.backends.elasticsearch',
-            'OPTIONS': {
-                'URLS': [env['ELASTICSEARCH_URL']],
-                'INDEX': APP_NAME,
-                'ATOMIC_REBUILD': True,
-            },
+            'URLS': [env['ELASTICSEARCH_URL']],
+            'INDEX': APP_NAME,
+            'ATOMIC_REBUILD': True,
         },
     }
 

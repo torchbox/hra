@@ -34,9 +34,7 @@ CACHES = {
 WAGTAILSEARCH_BACKENDS = {
     'default': {
         'BACKEND': 'wagtail.wagtailsearch.backends.elasticsearch',
-        'OPTIONS': {
-            'INDEX': 'hra',
-        },
+        'INDEX': 'hra',
     },
 }
 
