@@ -84,9 +84,7 @@
                     <div class="contact__content">
 
                         {% if page.introduction %}
-                            <p>
-                                {{ page.introduction }}
-                            </p>
+                            {{ page.introduction|richtext }}
                         {% endif %}
 
                         {{ page.body|richtext }}

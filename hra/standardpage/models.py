@@ -7,7 +7,7 @@ from wagtail.wagtailadmin.edit_handlers import (
     InlinePanel
 )
 
-from wagtail.wagtailcore.fields import StreamField
+from wagtail.wagtailcore.fields import StreamField, RichTextField
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailsearch import index
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
@@ -37,7 +37,7 @@ class StandardPageRelatedPage(RelatedPage):
 
 
 class StandardPage(Page, SocialFields, ListingFields):
-    introduction = models.TextField(blank=True)
+    introduction = RichTextField(blank=True)
     body = StreamField(StoryBlock())
 
     search_fields = Page.search_fields + [
@@ -70,7 +70,7 @@ class StandardIndexSectionPage(RelatedPage):
 class StandardIndex(Page, SocialFields):
     hero_introduction = models.CharField(blank=True, max_length=120,
                                          help_text='Short text to appear under page title')
-    introduction = models.TextField(blank=True)
+    introduction = RichTextField(blank=True)
     call_to_action = models.ForeignKey(CallToActionSnippet, blank=True, null=True, on_delete=models.SET_NULL,
                                        related_name='+')
 

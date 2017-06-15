@@ -6,7 +6,7 @@ from django.conf import settings
 from modelcluster.fields import ParentalKey
 
 from wagtail.wagtailcore.models import Page
-from wagtail.wagtailcore.fields import StreamField
+from wagtail.wagtailcore.fields import StreamField, RichTextField
 from wagtail.wagtailadmin.edit_handlers import (
     FieldPanel,
     InlinePanel,
@@ -80,7 +80,7 @@ class PersonPagePersonCategory(models.Model):
 
 
 class PersonIndexPage(Page):
-    introduction = models.TextField(blank=True)
+    introduction = RichTextField(blank=True)
 
     content_panels = Page.content_panels + [
         FieldPanel('introduction'),
@@ -122,7 +122,7 @@ class PersonPage(Page, SocialFields, ListingFields):
         on_delete=models.SET_NULL
     )
     job_title = models.CharField(max_length=255)
-    introduction = models.TextField(blank=True)
+    introduction = RichTextField(blank=True)
     website = models.URLField(blank=True, max_length=255)
     biography = StreamField(StoryBlock(), blank=True)
     email = models.EmailField(blank=True)

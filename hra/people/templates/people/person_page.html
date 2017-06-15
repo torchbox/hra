@@ -32,16 +32,14 @@
                             {% if page.introduction %}
                                 <div class="grid__item three-quarters tablet--one-whole">
                                     <div class="person-page__bio">
-                                        <p>{{ page.introduction }}</p>
+                                        {{ page.introduction|richtext }}
                                     </div>
                                 </div>
                             {% endif %}
                         </div>
                         {% endspaceless %}
-                    {% else %}
-                        {% if page.introduction %}
-                            <p>{{ page.introduction }}</p>
-                        {% endif %}
+                    {% elif page.introduction %}
+                        {{ page.introduction|richtext }}
                     {% endif %}
 
                     {% include_block page.biography %}

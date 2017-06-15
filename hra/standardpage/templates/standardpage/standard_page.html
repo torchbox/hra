@@ -16,9 +16,13 @@
         <div class="standard-page-body__wrapper">
             <div class="standard-page-body__content">
                 <article class="article">
-                    <p>{{ page.introduction }}</p>
+
+                    {% if page.introduction %}
+                        {{ page.introduction|richtext }}
+                    {% endif %}
 
                     {% include_block page.body %}
+
                 </article>
             </div>
             <div class="related-container">

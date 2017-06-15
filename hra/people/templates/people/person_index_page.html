@@ -25,9 +25,9 @@
                     <div class="site-body site-body--restricted">
                         <div class="site-body__inner site-body__inner">
 
-                            <h5>
-                                {{ page.introduction }}
-                            </h5>
+                            {% if page.introduction %}
+                                {{ page.introduction|richtext }}
+                            {% endif %}
 
                             {% if people %}
                                 <ul class="results-listing results-listing--pushed">

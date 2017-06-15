@@ -8,7 +8,7 @@ from modelcluster.fields import ParentalKey
 
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
-from wagtail.wagtailcore.fields import StreamField
+from wagtail.wagtailcore.fields import StreamField, RichTextField
 from wagtail.wagtailadmin.edit_handlers import (
     StreamFieldPanel, FieldPanel, InlinePanel,
     PageChooserPanel)
@@ -49,7 +49,7 @@ class NewsPage(Page, SocialFields, ListingFields):
         "news item appears to have been published."
     )
     author = models.CharField(blank=True, max_length=128)
-    introduction = models.TextField(blank=True)
+    introduction = RichTextField(blank=True)
     body = StreamField(StoryBlock())
 
     search_fields = Page.search_fields + [

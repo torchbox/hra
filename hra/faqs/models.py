@@ -52,14 +52,7 @@ class FAQPageItem(Orderable):
 
 
 class FAQPage(Page, SocialFields):
-    introduction = RichTextField(blank=True)
-
-    search_fields = Page.search_fields + [
-        index.SearchField('introduction')
-    ]
-
     content_panels = Page.content_panels + [
-        FieldPanel('introduction'),
         InlinePanel('faqs', label="FAQs"),
     ]
 

@@ -64,7 +64,7 @@ class EventPage(Page, SocialFields, ListingFields):
     country = models.CharField(_('Country'), blank=True, max_length=255)
     phone = models.CharField(_('Phone'), blank=True, max_length=255)
 
-    introduction = models.TextField(blank=True)
+    introduction = RichTextField(blank=True)
     body = StreamField(StoryBlock())
 
     subpage_types = []

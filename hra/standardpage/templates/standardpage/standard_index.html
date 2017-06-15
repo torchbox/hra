@@ -25,11 +25,11 @@
 
                     <div class="site-body">
                         <div class="site-body__inner">
-                            <article class="article">
-                                <p>
-                                    {{ page.introduction }}
-                                </p>
-                            </article>
+                            {% if page.introduction %}
+                                <article class="article">
+                                    {{ page.introduction|richtext }}
+                                </article>
+                            {% endif %}
 
                             {% spaceless %}
                                 <div class="site-body__grid">
