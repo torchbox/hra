@@ -3,6 +3,7 @@ from django.db import models
 from wagtail.wagtailadmin.edit_handlers import StreamFieldPanel
 from wagtail.wagtailcore.fields import StreamField
 from wagtail.wagtailcore.models import Page
+from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 
 from hra.home.blocks import HomePageBodyBlock
@@ -19,6 +20,7 @@ class HomePage(Page, SocialFields):
 
     content_panels = Page.content_panels + [
         SnippetChooserPanel('call_to_action'),
+        ImageChooserPanel('header_image'),
         StreamFieldPanel('body'),
     ]
 

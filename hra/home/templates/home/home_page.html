@@ -3,9 +3,6 @@
 
 {% block content %}
     {% image page.header_image width-1600 as header_image %}
-    <img src="{{ header_image.url }}"
-         alt="{{ header_image.alt }}">
-
 
     <div class="hero hero--with-caption hero--homepage"
          {% if header_image %}style="background-image: url('{{ header_image.url }}')"{% endif %}
