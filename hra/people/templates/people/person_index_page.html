@@ -26,7 +26,11 @@
                         <div class="site-body__inner site-body__inner">
 
                             {% if page.introduction %}
-                                {{ page.introduction|richtext }}
+                                <article class="article">
+                                    <div class="article__intro">
+                                        {{ page.introduction|richtext }}
+                                    </div>
+                                </article>
                             {% endif %}
 
                             {% if people %}

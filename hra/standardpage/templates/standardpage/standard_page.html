@@ -18,7 +18,9 @@
                 <article class="article">
 
                     {% if page.introduction %}
-                        {{ page.introduction|richtext }}
+                        <div class="article__intro">
+                            {{ page.introduction|richtext }}
+                        </div>
                     {% endif %}
 
                     {% include_block page.body %}

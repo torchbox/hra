@@ -24,6 +24,16 @@
         }
     }
 
+    &__intro {
+        p {
+            @include rem-font-size(22px);
+
+            @include media-query(tablet) {
+                @include rem-font-size(19px);
+            }
+        }
+    }
+
     ul,
     ol {
         @include rem-font-size(18px);
