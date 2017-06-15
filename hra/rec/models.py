@@ -10,6 +10,7 @@ from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
 
 from hra.utils.datetime import range_month
+from hra.utils.models import SocialFields, ListingFields
 
 
 @register_snippet
@@ -86,7 +87,7 @@ class CommitteePageFlag(Orderable):
     ]
 
 
-class CommitteePage(Page):
+class CommitteePage(Page, SocialFields, ListingFields):
     """REC - Research Ethics Committee"""
     REGION_CHOICES = (
         ('east_midlands', 'East Midlands'),
@@ -139,6 +140,12 @@ class CommitteePage(Page):
         InlinePanel('committee_flags', label="Committee Flags"),
     ]
 
+    promote_panels = (
+        Page.promote_panels +
+        SocialFields.promote_panels +
+        ListingFields.promote_panels
+    )
+
     parent_page_types = ['rec.CommitteeIndexPage']
     subpage_types = []
 
@@ -158,13 +165,19 @@ class CommitteePage(Page):
         return context
 
 
-class CommitteeIndexPage(Page):
+class CommitteeIndexPage(Page, SocialFields, ListingFields):
 
     introduction = RichTextField(blank=True)
 
     content_panels = Page.content_panels + [
         FieldPanel('introduction', classname='full'),
     ]
+
+    promote_panels = (
+        Page.promote_panels +
+        SocialFields.promote_panels +
+        ListingFields.promote_panels
+    )
 
     subpage_types = ['rec.CommitteePage']
 

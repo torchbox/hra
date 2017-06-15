@@ -5,6 +5,8 @@ from wagtail.wagtailcore.models import Page
 from wagtail.wagtailsearch import index
 from wagtail.wagtailsnippets.models import register_snippet
 
+from hra.utils.models import ListingFields, SocialFields
+
 
 @register_snippet
 class GlossaryTerm(index.Indexed, models.Model):
@@ -27,5 +29,9 @@ class GlossaryTerm(index.Indexed, models.Model):
         return self.name
 
 
-class GlossaryIndex(Page):
-    pass
+class GlossaryIndex(Page, SocialFields, ListingFields):
+    promote_panels = (
+        Page.promote_panels +
+        SocialFields.promote_panels +
+        ListingFields.promote_panels
+    )

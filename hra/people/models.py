@@ -79,12 +79,18 @@ class PersonPagePersonCategory(models.Model):
     ]
 
 
-class PersonIndexPage(Page):
+class PersonIndexPage(Page, SocialFields, ListingFields):
     introduction = RichTextField(blank=True)
 
     content_panels = Page.content_panels + [
         FieldPanel('introduction'),
     ]
+
+    promote_panels = (
+        Page.promote_panels +
+        SocialFields.promote_panels +
+        ListingFields.promote_panels
+    )
 
     subpage_types = ['PersonPage']
 
@@ -148,8 +154,11 @@ class PersonPage(Page, SocialFields, ListingFields):
         StreamFieldPanel('biography')
     ]
 
-    promote_panels = Page.promote_panels + SocialFields.promote_panels + \
+    promote_panels = (
+        Page.promote_panels +
+        SocialFields.promote_panels +
         ListingFields.promote_panels
+    )
 
     parent_page_types = ['PersonIndexPage']
 

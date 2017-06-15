@@ -51,9 +51,13 @@ class StandardPage(Page, SocialFields, ListingFields):
         InlinePanel('related_pages', label="Related pages"),
     ]
 
-    promote_panels = Page.promote_panels + SocialFields.promote_panels + ListingFields.promote_panels + [
-        InlinePanel('page_type_relationships', label='Page types')
-    ]
+    promote_panels = (
+        Page.promote_panels +
+        SocialFields.promote_panels +
+        ListingFields.promote_panels + [
+            InlinePanel('page_type_relationships', label='Page types')
+        ]
+    )
 
     @cached_property
     def page_types(self):
@@ -67,7 +71,7 @@ class StandardIndexSectionPage(RelatedPage):
     source_page = ParentalKey('standardpage.StandardIndex', related_name='section_pages')
 
 
-class StandardIndex(Page, SocialFields):
+class StandardIndex(Page, SocialFields, ListingFields):
     hero_introduction = models.CharField(blank=True, max_length=120,
                                          help_text='Short text to appear under page title')
     introduction = RichTextField(blank=True)
@@ -85,7 +89,11 @@ class StandardIndex(Page, SocialFields):
         index.SearchField('introduction'),
     ]
 
-    promote_panels = Page.promote_panels + SocialFields.promote_panels
+    promote_panels = (
+        Page.promote_panels +
+        SocialFields.promote_panels +
+        ListingFields.promote_panels
+    )
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)

@@ -48,4 +48,8 @@ class FormPage(WagtailCaptchaEmailForm, SocialFields, ListingFields):
         ], "Email"),
     ]
 
-    promote_panels = Page.promote_panels + SocialFields.promote_panels + ListingFields.promote_panels
+    promote_panels = (
+        Page.promote_panels +
+        SocialFields.promote_panels +
+        ListingFields.promote_panels
+    )

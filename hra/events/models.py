@@ -109,7 +109,7 @@ class EventPage(Page, SocialFields, ListingFields):
     ]
 
     promote_panels = (
-        Page.promote_panels +  # slug, seo_title, show_in_menus, search_description
+        Page.promote_panels +
         SocialFields.promote_panels +
         ListingFields.promote_panels
     )
@@ -150,12 +150,18 @@ class EventIndexPageFeaturedPage(RelatedPage):
     ]
 
 
-class EventIndexPage(Page):
+class EventIndexPage(Page, SocialFields, ListingFields):
     subpage_types = ['events.EventPage']
 
     content_panels = Page.content_panels + [
         InlinePanel('featured_pages', label='Featured pages'),
     ]
+
+    promote_panels = (
+        Page.promote_panels +
+        SocialFields.promote_panels +
+        ListingFields.promote_panels
+    )
 
     def _annotated_descendant_events(self):
         return (

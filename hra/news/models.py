@@ -66,8 +66,11 @@ class NewsPage(Page, SocialFields, ListingFields):
         InlinePanel('related_pages', label="Related pages"),
     ]
 
-    promote_panels = Page.promote_panels + SocialFields.promote_panels + \
+    promote_panels = (
+        Page.promote_panels +
+        SocialFields.promote_panels +
         ListingFields.promote_panels
+    )
 
     subpage_types = []
     parent_page_types = ['NewsIndex']
@@ -95,7 +98,7 @@ class NewsIndexFeaturedPage(RelatedPage):
     ]
 
 
-class NewsIndex(Page, SocialFields):
+class NewsIndex(Page, SocialFields, ListingFields):
     def get_context(self, request, *args, **kwargs):
         news = NewsPage.objects.live().public().descendant_of(self).annotate(
             date=Coalesce('publication_date', 'first_published_at')
@@ -119,6 +122,13 @@ class NewsIndex(Page, SocialFields):
         return context
 
     subpage_types = ['NewsPage']
+
     content_panels = Page.content_panels + [
         InlinePanel('featured_pages', label='Featured pages'),
     ]
+
+    promote_panels = (
+        Page.promote_panels +
+        SocialFields.promote_panels +
+        ListingFields.promote_panels
+    )

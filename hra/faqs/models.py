@@ -9,7 +9,7 @@ from wagtail.wagtailsearch import index
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
 
-from hra.utils.models import SocialFields
+from hra.utils.models import SocialFields, ListingFields
 
 
 @register_snippet
@@ -51,12 +51,16 @@ class FAQPageItem(Orderable):
         return self.page.title + ": " + self.faq.title
 
 
-class FAQPage(Page, SocialFields):
+class FAQPage(Page, SocialFields, ListingFields):
     content_panels = Page.content_panels + [
         InlinePanel('faqs', label="FAQs"),
     ]
 
-    promote_panels = Page.promote_panels + SocialFields.promote_panels
+    promote_panels = (
+        Page.promote_panels +
+        SocialFields.promote_panels +
+        ListingFields.promote_panels
+    )
 
     subpage_types = []
 
