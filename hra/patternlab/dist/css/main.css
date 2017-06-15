@@ -1968,6 +1968,18 @@ a:focus {
   }
 }
 
+.article__intro p {
+  font-size: 22px;
+  font-size: 1.375rem;
+}
+
+@media only screen and (max-width: 800px) {
+  .article__intro p {
+    font-size: 19px;
+    font-size: 1.1875rem;
+  }
+}
+
 .article ul,
 .article ol {
   font-size: 18px;
