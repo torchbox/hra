@@ -19,6 +19,10 @@ $highlight-min-height: 300px;
     }
 
     &--purple {
+        a {
+            color: $color--yellow;
+        }
+
         #{$root}__left {
             color: #fff;
             background: linear-gradient(to bottom, #913a87, #ad2378);
