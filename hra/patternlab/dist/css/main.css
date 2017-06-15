@@ -3482,6 +3482,10 @@ textarea:focus {
   margin: 40px 0;
 }
 
+.highlight--purple a {
+  color: #f9df32;
+}
+
 .highlight--purple .highlight__left {
   color: #fff;
   background: linear-gradient(to bottom, #913a87, #ad2378);
