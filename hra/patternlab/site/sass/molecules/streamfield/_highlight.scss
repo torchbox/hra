@@ -26,13 +26,6 @@ $highlight-min-height: 300px;
         #{$root}__left {
             color: #fff;
             background: linear-gradient(to bottom, #913a87, #ad2378);
-
-            &::before {
-                background: {
-                    size: cover;
-                    image: url('../images/svg/plain-arrow.svg');
-                }
-            }
         }
     }
 
@@ -59,28 +52,6 @@ $highlight-min-height: 300px;
 
         @include media-query(mobile) {
             padding: 20px;
-        }
-
-        &::before {
-            position: absolute;
-            top: 65px;
-            left: 0;
-            width: 82px;
-            height: 94px;
-            background: {
-                size: cover;
-                image: url('../images/svg/blue-arrow.svg');
-            }
-            content: '';
-            transform: rotate(-90deg);
-
-            @include media-query(desktop) {
-                left: 6px;
-            }
-
-            @include media-query(mobile) {
-                display: none;
-            }
         }
     }
 
