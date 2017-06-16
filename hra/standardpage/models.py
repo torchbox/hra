@@ -4,7 +4,8 @@ from django.utils.functional import cached_property
 from modelcluster.fields import ParentalKey
 from wagtail.wagtailadmin.edit_handlers import (
     FieldPanel, StreamFieldPanel,
-    InlinePanel
+    InlinePanel,
+    MultiFieldPanel
 )
 
 from wagtail.wagtailcore.fields import StreamField, RichTextField
@@ -85,8 +86,10 @@ class StandardIndex(Page, SocialFields, ListingFields):
                                        related_name='+')
 
     content_panels = Page.content_panels + [
-        ImageChooserPanel('hero_image'),
-        FieldPanel('hero_introduction'),
+        MultiFieldPanel([
+            ImageChooserPanel('hero_image'),
+            FieldPanel('hero_introduction'),
+        ], heading="Hero block"),
         FieldPanel('introduction'),
         SnippetChooserPanel('call_to_action'),
         InlinePanel('section_pages', label='Section pages'),
