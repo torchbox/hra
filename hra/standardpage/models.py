@@ -38,6 +38,8 @@ class StandardPageRelatedPage(RelatedPage):
 
 
 class StandardPage(Page, SocialFields, ListingFields):
+    hero_image = models.ForeignKey('images.CustomImage', null=True, blank=True, on_delete=models.SET_NULL,
+                                   related_name='+')
     introduction = RichTextField(blank=True)
     body = StreamField(StoryBlock())
 
@@ -47,6 +49,7 @@ class StandardPage(Page, SocialFields, ListingFields):
     ]
 
     content_panels = Page.content_panels + [
+        ImageChooserPanel('hero_image'),
         FieldPanel('introduction'),
         StreamFieldPanel('body'),
         InlinePanel('related_pages', label="Related pages"),

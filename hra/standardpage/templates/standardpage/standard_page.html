@@ -2,7 +2,11 @@
 {% load wagtailcore_tags wagtailimages_tags static %}
 
 {% block content %}
-    <div class="hero hero--inner">
+    {% image page.hero_image width-1600 as hero_image %}
+
+    <div class="hero hero--inner"
+         {% if hero_image %}style="background-size:cover;background-image: url('{{ hero_image.url }}')"{% endif %}
+    >
         <div class="hero__content">
             <div class="hero__breadcrumbs">
                 {% include "navigation/breadcrumbs.html" %}
