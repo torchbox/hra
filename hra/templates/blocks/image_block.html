@@ -1,6 +1,10 @@
 {% load wagtailimages_tags %}
 
 <div class="image-block">
-  {% image value.image original %}
-  <p class="image-block__caption">{{ value.caption }}</p>
+    {% image value.image original %}
+
+    {% if value.caption %}
+        <p class="image-block__caption">{{ value.caption }}</p>
+    {% endif %}
+
 </div>
