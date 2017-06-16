@@ -9,6 +9,7 @@ from wagtail.wagtailadmin.edit_handlers import (
 
 from wagtail.wagtailcore.fields import StreamField, RichTextField
 from wagtail.wagtailcore.models import Page
+from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 
@@ -72,6 +73,8 @@ class StandardIndexSectionPage(RelatedPage):
 
 
 class StandardIndex(Page, SocialFields, ListingFields):
+    hero_image = models.ForeignKey('images.CustomImage', null=True, blank=True, on_delete=models.SET_NULL,
+                                   related_name='+')
     hero_introduction = models.CharField(blank=True, max_length=120,
                                          help_text='Short text to appear under page title')
     introduction = RichTextField(blank=True)
@@ -79,6 +82,7 @@ class StandardIndex(Page, SocialFields, ListingFields):
                                        related_name='+')
 
     content_panels = Page.content_panels + [
+        ImageChooserPanel('hero_image'),
         FieldPanel('hero_introduction'),
         FieldPanel('introduction'),
         SnippetChooserPanel('call_to_action'),
