@@ -3471,7 +3471,7 @@ textarea:focus {
 }
 
 .blockquote__quote p:first-of-type {
-  margin: 0;
+  margin-top: 0;
 }
 
 .blockquote__quote p:last-of-type {
