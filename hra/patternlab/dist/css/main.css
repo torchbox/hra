@@ -3503,11 +3503,6 @@ textarea:focus {
   background: linear-gradient(to bottom, #913a87, #ad2378);
 }
 
-.highlight--purple .highlight__left::before {
-  background-size: cover;
-  background-image: url("../images/svg/plain-arrow.svg");
-}
-
 .highlight__left, .highlight__right {
   display: inline-block;
   width: 100%;
@@ -3536,30 +3531,6 @@ textarea:focus {
 @media only screen and (max-width: 650px) {
   .highlight__left {
     padding: 20px;
-  }
-}
-
-.highlight__left::before {
-  position: absolute;
-  top: 65px;
-  left: 0;
-  width: 82px;
-  height: 94px;
-  background-size: cover;
-  background-image: url("../images/svg/blue-arrow.svg");
-  content: '';
-  transform: rotate(-90deg);
-}
-
-@media only screen and (max-width: 1100px) {
-  .highlight__left::before {
-    left: 6px;
-  }
-}
-
-@media only screen and (max-width: 650px) {
-  .highlight__left::before {
-    display: none;
   }
 }
 
