@@ -41,6 +41,16 @@
         margin: 0;
         font-style: normal;
         line-height: 1.2;
+
+        p {
+            &:first-of-type {
+                margin: 0;
+            }
+
+            &:last-of-type {
+                margin-bottom: 0;
+            }
+        }
     }
 
     &__cite {
