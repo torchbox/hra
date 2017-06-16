@@ -17,9 +17,9 @@ class ImageBlock(blocks.StructBlock):
 
 
 class QuoteBlock(blocks.StructBlock):
-    quote = blocks.CharBlock(classname="title")
+    quote = blocks.RichTextBlock()
     quotee = blocks.CharBlock(required=False)
-    image = ImageChooserBlock()
+    image = ImageChooserBlock(required=False)
 
     class Meta:
         icon = "openquote"
