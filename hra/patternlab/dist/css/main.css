@@ -3470,6 +3470,14 @@ textarea:focus {
   line-height: 1.2;
 }
 
+.blockquote__quote p:first-of-type {
+  margin: 0;
+}
+
+.blockquote__quote p:last-of-type {
+  margin-bottom: 0;
+}
+
 .blockquote__cite {
   display: block;
   margin: 15px 0 0;
