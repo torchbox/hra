@@ -4,6 +4,10 @@
 \*------------------------------------*/
 
 .article {
+    a {
+        text-decoration-skip: ink;
+    }
+
     h1 {
         font-family: $font--secondary;
         color: #000;
