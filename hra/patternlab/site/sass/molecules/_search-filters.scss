@@ -3,6 +3,8 @@
 \*------------------------------------*/
 
 .search-filters {
+    position: relative;
+
     &__heading {
         @include rem-font-size(40px);
         margin-bottom: 15px;
@@ -22,7 +24,7 @@
             opacity: 1;
         }
         width: 100%;
-        padding: 16px 30px;
+        padding: 16px 60px 16px 30px;
         color: #fff;
         background-color: transparent;
         border: 2px solid rgba(255, 255, 255, 0.45);
@@ -30,6 +32,38 @@
 
         @include media-query(laptop) {
             padding: 10px 20px;
+        }
+    }
+
+    &__submit {
+        position: absolute;
+        top: 77px;
+        right: 7px;
+        width: 67px;
+        height: 67px;
+        cursor: pointer;
+        background: {
+            position: center;
+            color: transparent;
+            size: 27px;
+            repeat: no-repeat;
+            image: url('../images/svg/search.svg');
+        }
+        border: 0;
+        transition: opacity $default-transition-speed;
+
+        &:hover {
+            opacity: 0.7;
+        }
+
+        @include media-query(laptop) {
+            top: 61px;
+            right: 0;
+            width: 67px;
+            height: 55px;
+            background: {
+                size: 24px;
+            }
         }
     }
 

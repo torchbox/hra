@@ -2459,7 +2459,7 @@ textarea:focus {
 .site-header__form {
   position: relative;
   display: inline-block;
-  margin: 0 0 0 70px;
+  margin: 0 0 0 55px;
   vertical-align: -16px;
 }
 
@@ -2483,7 +2483,7 @@ textarea:focus {
 
 .site-header__search {
   display: inline-block;
-  padding: 11px 20px;
+  padding: 11px 40px 11px 20px;
   color: #fff;
   background-color: #0d61b5;
   border: 0;
@@ -4154,6 +4154,10 @@ textarea:focus {
   }
 }
 
+.glossary__inner {
+  position: relative;
+}
+
 .glossary__search-heading {
   font-size: 40px;
   font-size: 2.5rem;
@@ -4165,7 +4169,7 @@ textarea:focus {
   font-size: 20px;
   font-size: 1.25rem;
   width: 100%;
-  padding: 16px 30px;
+  padding: 16px 60px 16px 30px;
   color: #fff;
   background-color: transparent;
   border: 2px solid rgba(255, 255, 255, 0.45);
@@ -4215,6 +4219,35 @@ textarea:focus {
 @media only screen and (max-width: 900px) {
   .glossary__search {
     padding: 10px 20px;
+  }
+}
+
+.glossary__submit {
+  position: absolute;
+  top: 77px;
+  right: 7px;
+  width: 67px;
+  height: 67px;
+  cursor: pointer;
+  background-position: center;
+  background-color: transparent;
+  background-size: 27px;
+  background-repeat: no-repeat;
+  background-image: url("../images/svg/search.svg");
+  border: 0;
+  transition: opacity 300ms;
+}
+
+.glossary__submit:hover {
+  opacity: 0.7;
+}
+
+@media only screen and (max-width: 900px) {
+  .glossary__submit {
+    right: 0;
+    width: 67px;
+    height: 55px;
+    background-size: 24px;
   }
 }
 
@@ -4614,6 +4647,10 @@ textarea:focus {
 
 /*------------------------------------*    $SEARCH FILTERS
 \*------------------------------------*/
+.search-filters {
+  position: relative;
+}
+
 .search-filters__heading {
   font-size: 40px;
   font-size: 2.5rem;
@@ -4632,7 +4669,7 @@ textarea:focus {
   font-size: 20px;
   font-size: 1.25rem;
   width: 100%;
-  padding: 16px 30px;
+  padding: 16px 60px 16px 30px;
   color: #fff;
   background-color: transparent;
   border: 2px solid rgba(255, 255, 255, 0.45);
@@ -4682,6 +4719,36 @@ textarea:focus {
 @media only screen and (max-width: 900px) {
   .search-filters__search {
     padding: 10px 20px;
+  }
+}
+
+.search-filters__submit {
+  position: absolute;
+  top: 77px;
+  right: 7px;
+  width: 67px;
+  height: 67px;
+  cursor: pointer;
+  background-position: center;
+  background-color: transparent;
+  background-size: 27px;
+  background-repeat: no-repeat;
+  background-image: url("../images/svg/search.svg");
+  border: 0;
+  transition: opacity 300ms;
+}
+
+.search-filters__submit:hover {
+  opacity: 0.7;
+}
+
+@media only screen and (max-width: 900px) {
+  .search-filters__submit {
+    top: 61px;
+    right: 0;
+    width: 67px;
+    height: 55px;
+    background-size: 24px;
   }
 }
 

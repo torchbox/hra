@@ -8,88 +8,91 @@
         {% spaceless %}
             <div class="glossary js-glossary" data-api-url="{% url 'wagtailapi:glossary_terms:listing' %}">
                 <div class="glossary__left">
-                    <div class="glossary__search-heading">Search glossary</div>
-                    <input class="glossary__search" type="text" placeholder="Lookup&hellip;">
-                    <div class="glossary__browse">Browse by letter</div>
-                    <div class="keyboard">
-                        <button class="keyboard__letter keyboard__letter--disabled" data-keyboard-letter="a">
-                            <div class="keyboard__letter-content"><span>A</span></div>
-                        </button>
-                        <button class="keyboard__letter keyboard__letter--disabled" data-keyboard-letter="b">
-                            <div class="keyboard__letter-content"><span>B</span></div>
-                        </button>
-                        <button class="keyboard__letter keyboard__letter--disabled" data-keyboard-letter="c">
-                            <div class="keyboard__letter-content"><span>C</span></div>
-                        </button>
-                        <button class="keyboard__letter keyboard__letter--disabled" data-keyboard-letter="d">
-                            <div class="keyboard__letter-content"><span>D</span></div>
-                        </button>
-                        <button class="keyboard__letter keyboard__letter--disabled" data-keyboard-letter="e">
-                            <div class="keyboard__letter-content"><span>E</span></div>
-                        </button>
-                        <button class="keyboard__letter keyboard__letter--disabled" data-keyboard-letter="f">
-                            <div class="keyboard__letter-content"><span>F</span></div>
-                        </button>
-                        <button class="keyboard__letter keyboard__letter--disabled" data-keyboard-letter="g">
-                            <div class="keyboard__letter-content"><span>G</span></div>
-                        </button>
-                        <button class="keyboard__letter keyboard__letter--disabled" data-keyboard-letter="h">
-                            <div class="keyboard__letter-content"><span>H</span></div>
-                        </button>
-                        <button class="keyboard__letter keyboard__letter--disabled" data-keyboard-letter="i">
-                            <div class="keyboard__letter-content"><span>I</span></div>
-                        </button>
-                        <button class="keyboard__letter keyboard__letter--disabled" data-keyboard-letter="j">
-                            <div class="keyboard__letter-content"><span>J</span></div>
-                        </button>
-                        <button class="keyboard__letter keyboard__letter--disabled" data-keyboard-letter="k">
-                            <div class="keyboard__letter-content"><span>K</span></div>
-                        </button>
-                        <button class="keyboard__letter keyboard__letter--disabled" data-keyboard-letter="l">
-                            <div class="keyboard__letter-content"><span>L</span></div>
-                        </button>
-                        <button class="keyboard__letter keyboard__letter--disabled" data-keyboard-letter="m">
-                            <div class="keyboard__letter-content"><span>M</span></div>
-                        </button>
-                        <button class="keyboard__letter keyboard__letter--disabled" data-keyboard-letter="n">
-                            <div class="keyboard__letter-content"><span>N</span></div>
-                        </button>
-                        <button class="keyboard__letter keyboard__letter--disabled" data-keyboard-letter="o">
-                            <div class="keyboard__letter-content"><span>O</span></div>
-                        </button>
-                        <button class="keyboard__letter keyboard__letter--disabled" data-keyboard-letter="p">
-                            <div class="keyboard__letter-content"><span>P</span></div>
-                        </button>
-                        <button class="keyboard__letter keyboard__letter--disabled" data-keyboard-letter="q">
-                            <div class="keyboard__letter-content"><span>Q</span></div>
-                        </button>
-                        <button class="keyboard__letter keyboard__letter--disabled" data-keyboard-letter="r">
-                            <div class="keyboard__letter-content"><span>R</span></div>
-                        </button>
-                        <button class="keyboard__letter keyboard__letter--disabled" data-keyboard-letter="s">
-                            <div class="keyboard__letter-content"><span>S</span></div>
-                        </button>
-                        <button class="keyboard__letter keyboard__letter--disabled" data-keyboard-letter="t">
-                            <div class="keyboard__letter-content"><span>T</span></div>
-                        </button>
-                        <button class="keyboard__letter keyboard__letter--disabled" data-keyboard-letter="u">
-                            <div class="keyboard__letter-content"><span>U</span></div>
-                        </button>
-                        <button class="keyboard__letter keyboard__letter--disabled" data-keyboard-letter="v">
-                            <div class="keyboard__letter-content"><span>V</span></div>
-                        </button>
-                        <button class="keyboard__letter keyboard__letter--disabled" data-keyboard-letter="w">
-                            <div class="keyboard__letter-content"><span>W</span></div>
-                        </button>
-                        <button class="keyboard__letter keyboard__letter--disabled" data-keyboard-letter="x">
-                            <div class="keyboard__letter-content"><span>X</span></div>
-                        </button>
-                        <button class="keyboard__letter keyboard__letter--disabled" data-keyboard-letter="y">
-                            <div class="keyboard__letter-content"><span>Y</span></div>
-                        </button>
-                        <button class="keyboard__letter keyboard__letter--disabled" data-keyboard-letter="z">
-                            <div class="keyboard__letter-content"><span>Z</span></div>
-                        </button>
+                    <div class="glossary__inner">
+                        <div class="glossary__search-heading">Search glossary</div>
+                        <input class="glossary__search" type="text" placeholder="Lookup&hellip;">
+                        <input type="submit" class="glossary__submit" value="">
+                        <div class="glossary__browse">Browse by letter</div>
+                        <div class="keyboard">
+                            <button class="keyboard__letter keyboard__letter--disabled" data-keyboard-letter="a">
+                                <div class="keyboard__letter-content"><span>A</span></div>
+                            </button>
+                            <button class="keyboard__letter keyboard__letter--disabled" data-keyboard-letter="b">
+                                <div class="keyboard__letter-content"><span>B</span></div>
+                            </button>
+                            <button class="keyboard__letter keyboard__letter--disabled" data-keyboard-letter="c">
+                                <div class="keyboard__letter-content"><span>C</span></div>
+                            </button>
+                            <button class="keyboard__letter keyboard__letter--disabled" data-keyboard-letter="d">
+                                <div class="keyboard__letter-content"><span>D</span></div>
+                            </button>
+                            <button class="keyboard__letter keyboard__letter--disabled" data-keyboard-letter="e">
+                                <div class="keyboard__letter-content"><span>E</span></div>
+                            </button>
+                            <button class="keyboard__letter keyboard__letter--disabled" data-keyboard-letter="f">
+                                <div class="keyboard__letter-content"><span>F</span></div>
+                            </button>
+                            <button class="keyboard__letter keyboard__letter--disabled" data-keyboard-letter="g">
+                                <div class="keyboard__letter-content"><span>G</span></div>
+                            </button>
+                            <button class="keyboard__letter keyboard__letter--disabled" data-keyboard-letter="h">
+                                <div class="keyboard__letter-content"><span>H</span></div>
+                            </button>
+                            <button class="keyboard__letter keyboard__letter--disabled" data-keyboard-letter="i">
+                                <div class="keyboard__letter-content"><span>I</span></div>
+                            </button>
+                            <button class="keyboard__letter keyboard__letter--disabled" data-keyboard-letter="j">
+                                <div class="keyboard__letter-content"><span>J</span></div>
+                            </button>
+                            <button class="keyboard__letter keyboard__letter--disabled" data-keyboard-letter="k">
+                                <div class="keyboard__letter-content"><span>K</span></div>
+                            </button>
+                            <button class="keyboard__letter keyboard__letter--disabled" data-keyboard-letter="l">
+                                <div class="keyboard__letter-content"><span>L</span></div>
+                            </button>
+                            <button class="keyboard__letter keyboard__letter--disabled" data-keyboard-letter="m">
+                                <div class="keyboard__letter-content"><span>M</span></div>
+                            </button>
+                            <button class="keyboard__letter keyboard__letter--disabled" data-keyboard-letter="n">
+                                <div class="keyboard__letter-content"><span>N</span></div>
+                            </button>
+                            <button class="keyboard__letter keyboard__letter--disabled" data-keyboard-letter="o">
+                                <div class="keyboard__letter-content"><span>O</span></div>
+                            </button>
+                            <button class="keyboard__letter keyboard__letter--disabled" data-keyboard-letter="p">
+                                <div class="keyboard__letter-content"><span>P</span></div>
+                            </button>
+                            <button class="keyboard__letter keyboard__letter--disabled" data-keyboard-letter="q">
+                                <div class="keyboard__letter-content"><span>Q</span></div>
+                            </button>
+                            <button class="keyboard__letter keyboard__letter--disabled" data-keyboard-letter="r">
+                                <div class="keyboard__letter-content"><span>R</span></div>
+                            </button>
+                            <button class="keyboard__letter keyboard__letter--disabled" data-keyboard-letter="s">
+                                <div class="keyboard__letter-content"><span>S</span></div>
+                            </button>
+                            <button class="keyboard__letter keyboard__letter--disabled" data-keyboard-letter="t">
+                                <div class="keyboard__letter-content"><span>T</span></div>
+                            </button>
+                            <button class="keyboard__letter keyboard__letter--disabled" data-keyboard-letter="u">
+                                <div class="keyboard__letter-content"><span>U</span></div>
+                            </button>
+                            <button class="keyboard__letter keyboard__letter--disabled" data-keyboard-letter="v">
+                                <div class="keyboard__letter-content"><span>V</span></div>
+                            </button>
+                            <button class="keyboard__letter keyboard__letter--disabled" data-keyboard-letter="w">
+                                <div class="keyboard__letter-content"><span>W</span></div>
+                            </button>
+                            <button class="keyboard__letter keyboard__letter--disabled" data-keyboard-letter="x">
+                                <div class="keyboard__letter-content"><span>X</span></div>
+                            </button>
+                            <button class="keyboard__letter keyboard__letter--disabled" data-keyboard-letter="y">
+                                <div class="keyboard__letter-content"><span>Y</span></div>
+                            </button>
+                            <button class="keyboard__letter keyboard__letter--disabled" data-keyboard-letter="z">
+                                <div class="keyboard__letter-content"><span>Z</span></div>
+                            </button>
+                        </div>
                     </div>
                 </div>
                 <div class="glossary__right">
