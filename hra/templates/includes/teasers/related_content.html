@@ -1,6 +1,7 @@
 {% load staticfiles wagtailcore_tags wagtailimages_tags %}
 
 {% if page.related_pages.exists %}
+    <div class="related-container">
 
     {% spaceless %}
         <div class="grid grid--wide">
@@ -45,4 +46,5 @@
         </div>
     {% endspaceless %}
 
+    </div>
 {% endif %}
