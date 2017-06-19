@@ -2457,6 +2457,7 @@ textarea:focus {
 }
 
 .site-header__form {
+  position: relative;
   display: inline-block;
   margin: 0 0 0 70px;
   vertical-align: -16px;
@@ -2543,6 +2544,26 @@ textarea:focus {
   height: 1px;
   overflow: hidden;
   clip: rect(1px, 1px, 1px, 1px);
+}
+
+.site-header__submit {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 53px;
+  height: 100%;
+  cursor: pointer;
+  background-position: center;
+  background-color: transparent;
+  background-size: 18px;
+  background-repeat: no-repeat;
+  background-image: url("../images/svg/search.svg");
+  border: 0;
+  transition: opacity 300ms;
+}
+
+.site-header__submit:hover {
+  opacity: 0.7;
 }
 
 .site-header__menu-trigger-container {

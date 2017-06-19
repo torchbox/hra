@@ -50,6 +50,7 @@
     }
 
     &__form {
+        position: relative;
         display: inline-block;
         margin: 0 0 0 70px;
         vertical-align: -16px;
@@ -91,6 +92,28 @@
 
     &__search-label {
         @include hidden;
+    }
+
+    &__submit {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 53px;
+        height: 100%;
+        cursor: pointer;
+        background: {
+            position: center;
+            color: transparent;
+            size: 18px;
+            repeat: no-repeat;
+            image: url('../images/svg/search.svg');
+        }
+        border: 0;
+        transition: opacity $default-transition-speed;
+
+        &:hover {
+            opacity: 0.7;
+        }
     }
 
     &__menu-trigger-container {
