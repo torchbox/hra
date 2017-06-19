@@ -137,7 +137,7 @@ class EventPage(Page, SocialFields, ListingFields):
         context = super().get_context(request, *args, **kwargs)
 
         # Access siblings like this to get the same order as on the index page
-        context['siblings'] = self.get_parent().specific.upcoming_events
+        context['sidebar_pages'] = self.get_parent().specific.upcoming_events
 
         return context
 
@@ -214,7 +214,7 @@ class EventIndexPage(Page, SocialFields, ListingFields):
 
         context.update({
             'events': events,
-            'siblings': self.get_siblings().live().public(),
+            'sidebar_pages': self.get_siblings().live().public(),
         })
 
         return context

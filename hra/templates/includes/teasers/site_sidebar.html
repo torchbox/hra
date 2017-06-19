@@ -2,14 +2,13 @@
 
 <aside class="site-sidebar {% if no_transparency %}site-sidebar--no-transparency{% endif %}">
     <div class="site-sidebar__inner">
-        <h2 class="site-sidebar__heading">Within this section</h2>
         <button class="site-sidebar__label"></button>
         <ul class="site-sidebar__menu">
 
-            {% for sibling in siblings %}
-                <li class="site-sidebar__menu-item {% if page.pk == sibling.pk %}site-sidebar__menu-item--active{% endif %}">
+            {% for sidebar_page in sidebar_pages %}
+                <li class="site-sidebar__menu-item {% if calling_page.pk == sidebar_page.pk %}site-sidebar__menu-item--active{% endif %}">
                     {% include 'includes/svg/default-arrow.html' %}
-                    <a href="{% pageurl sibling %}">{{ sibling.title }}</a>
+                    <a href="{% pageurl sidebar_page %}">{{ sidebar_page.title }}</a>
                 </li>
             {% endfor %}
 

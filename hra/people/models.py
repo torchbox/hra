@@ -111,7 +111,7 @@ class PersonIndexPage(Page, SocialFields, ListingFields):
         context = super().get_context(request, *args, **kwargs)
         context.update(
             people=people,
-            siblings=self.get_siblings().live().public(),
+            sidebar_pages=self.get_siblings().live().public(),
         )
 
         return context

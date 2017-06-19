@@ -108,6 +108,6 @@ class StandardIndex(Page, SocialFields, ListingFields):
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
 
-        context['siblings'] = self.get_siblings().live().public()
+        context['sidebar_pages'] = self.get_siblings().live().public()
 
         return context
