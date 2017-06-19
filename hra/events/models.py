@@ -181,7 +181,27 @@ class EventIndexPage(Page, SocialFields, ListingFields):
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
 
-        events = self.upcoming_events
+        # Get all events to display on an event index page.
+        # Apply ascending order by start_date to upcoming events,
+        # but for past events apply descending ordering by start_date.
+        date_now = timezone.now().date()
+        events = self._annotated_descendant_events()
+        events = events.annotate(
+            upcoming_order=models.Case(
+                models.When(latest_date__gte=date_now, then='start_date'),
+                default=models.Value(None),
+                output_field=models.DateField()
+            )
+        )
+        events = events.annotate(
+            past_order=models.Case(
+                models.When(latest_date__lt=date_now, then='start_date'),
+                default=models.Value(None),
+                output_field=models.DateField()
+            )
+        )
+        events = events.order_by('upcoming_order', '-past_order')
+
         page_number = request.GET.get('page')
         paginator = Paginator(events, settings.DEFAULT_PER_PAGE)
 
