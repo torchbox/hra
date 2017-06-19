@@ -2827,7 +2827,7 @@ textarea:focus {
   font-size: 0.8125rem;
   position: relative;
   display: block;
-  padding: 9px 0;
+  padding: 9px 25px 9px 0;
   color: #fff;
 }
 
