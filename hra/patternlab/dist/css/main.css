@@ -1941,6 +1941,10 @@ a:focus {
 /*------------------------------------*    $ARTICLE
     Default rich text styles
 \*------------------------------------*/
+.article a {
+  text-decoration-skip: ink;
+}
+
 .article h1 {
   font-family: "FrutigerRoman", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   color: #000;
@@ -3505,7 +3509,13 @@ textarea:focus {
 }
 
 .highlight--purple a {
-  color: #f9df32;
+  color: #fff;
+  text-decoration: underline;
+  text-decoration-skip: ink;
+}
+
+.highlight--purple a:hover {
+  color: #deb0cd;
 }
 
 .highlight--purple .highlight__left {
@@ -3528,7 +3538,7 @@ textarea:focus {
 
 .highlight__left {
   position: relative;
-  padding: 75px 75px 65px 130px;
+  padding: 110px 75px 95px 130px;
   background-color: #f2f2f2;
 }
 

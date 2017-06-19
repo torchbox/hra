@@ -20,7 +20,13 @@ $highlight-min-height: 300px;
 
     &--purple {
         a {
-            color: $color--yellow;
+            color: #fff;
+            text-decoration: underline;
+            text-decoration-skip: ink;
+
+            &:hover {
+                color: #deb0cd;
+            }
         }
 
         #{$root}__left {
@@ -43,7 +49,7 @@ $highlight-min-height: 300px;
 
     &__left {
         position: relative;
-        padding: 75px 75px 65px 130px;
+        padding: 110px 75px 95px 130px;
         background-color: #f2f2f2;
 
         @include media-query(tablet) {
