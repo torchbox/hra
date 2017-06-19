@@ -25,7 +25,7 @@
 
     &__content {
         max-width: $standard-body-width;
-        margin: 180px auto 0;
+        margin: 200px auto 0;
         color: #fff;
 
         @include media-query(tablet) {
@@ -88,7 +88,13 @@
     }
 
     &__heading {
+        margin: 8px 0;
+        line-height: 1.2;
         color: #fff;
+
+        @include media-query(tablet) {
+            @include font-size(beta);
+        }
     }
 
     &__date {

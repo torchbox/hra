@@ -12,7 +12,7 @@
         margin: 0 auto;
         overflow: auto;
         background: linear-gradient(to bottom, rgba(255, 255, 255, 0.7) 0, #fff 150px);
-        transform: translate3d(0, -200px, 0);
+        transform: translate3d(0, -150px, 0);
 
         @include media-query(laptop) {
             background: #fff;
@@ -30,5 +30,9 @@
         max-width: $standard-body-width;
         padding: 60px 0 40px;
         margin: 0 auto;
+
+        @include media-query(laptop) {
+            padding-top: 10px;
+        }
     }
 }

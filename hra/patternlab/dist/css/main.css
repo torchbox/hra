@@ -3180,7 +3180,7 @@ textarea:focus {
 
 .hero__content {
   max-width: 800px;
-  margin: 180px auto 0;
+  margin: 200px auto 0;
   color: #fff;
 }
 
@@ -3242,7 +3242,16 @@ textarea:focus {
 }
 
 .hero__heading {
+  margin: 8px 0;
+  line-height: 1.2;
   color: #fff;
+}
+
+@media only screen and (max-width: 800px) {
+  .hero__heading {
+    font-size: 30px;
+    font-size: 1.875rem;
+  }
 }
 
 .hero__date {
@@ -5646,7 +5655,7 @@ textarea:focus {
   margin: 0 auto;
   overflow: auto;
   background: linear-gradient(to bottom, rgba(255, 255, 255, 0.7) 0, #fff 150px);
-  transform: translate3d(0, -200px, 0);
+  transform: translate3d(0, -150px, 0);
 }
 
 @media only screen and (max-width: 900px) {
@@ -5666,6 +5675,12 @@ textarea:focus {
   max-width: 800px;
   padding: 60px 0 40px;
   margin: 0 auto;
+}
+
+@media only screen and (max-width: 900px) {
+  .standard-page-body__content {
+    padding-top: 10px;
+  }
 }
 
 /*------------------------------------*    $PERSON PAGE BODY
