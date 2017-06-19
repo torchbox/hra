@@ -3111,6 +3111,12 @@ textarea:focus {
   height: 700px;
 }
 
+@media only screen and (max-width: 800px) {
+  .hero--homepage {
+    height: 400px;
+  }
+}
+
 .hero--homepage .hero__caption {
   right: auto;
   left: 0;

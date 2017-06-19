@@ -5,6 +5,10 @@
 .hero--homepage {
     height: 700px;
 
+    @include media-query(tablet) {
+        height: 400px;
+    }
+
     .hero__caption {
         right: auto;
         left: 0;
