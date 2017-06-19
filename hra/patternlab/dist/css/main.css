@@ -3265,7 +3265,7 @@ textarea:focus {
 .teaser__image {
   position: relative;
   width: 100%;
-  height: 220px;
+  height: 170px;
   background-position: center;
   background-size: cover;
 }
@@ -3289,12 +3289,14 @@ textarea:focus {
 }
 
 .teaser__title {
-  font-size: 20px;
-  font-size: 1.25rem;
+  font-size: 18px;
+  font-size: 1.125rem;
   position: relative;
   display: inline-block;
-  padding: 10px 20px 0 0;
+  max-width: 90%;
+  padding: 10px 20px 1px 0;
   font-family: "FrutigerRoman", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  line-height: 1.3;
   color: #231f20;
   background-color: #fff;
 }
