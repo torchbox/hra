@@ -1942,6 +1942,7 @@ a:focus {
     Default rich text styles
 \*------------------------------------*/
 .article a {
+  text-decoration: underline;
   text-decoration-skip: ink;
 }
 
