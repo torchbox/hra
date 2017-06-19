@@ -8,7 +8,7 @@
          {% if header_image %}style="background-image: url('{{ header_image.url }}')"{% endif %}
     >
         {% if page.call_to_action %}
-            <a href="{{ call_to_action.get_link_url }}">
+            <a href="{{ page.call_to_action.get_link_url }}">
                 <div class="hero__caption">
                     <h1 class="hero__caption-title">
                         {{ page.call_to_action.title }}
