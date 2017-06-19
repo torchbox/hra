@@ -3587,7 +3587,17 @@ textarea:focus {
   display: block;
   max-width: 400px;
   padding: 45px 30px;
+  overflow: hidden;
   background: linear-gradient(to right, #0f5faf, #235789);
+}
+
+.call-to-action:hover::before {
+  transform: rotate(-90deg) translate3d(0, 10px, 0);
+}
+
+.call-to-action:hover::after {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
 }
 
 .call-to-action::before {
@@ -3600,10 +3610,26 @@ textarea:focus {
   background-image: url("../images/svg/plain-arrow.svg");
   content: '';
   transform: rotate(-90deg);
+  transition: transform 300ms ease;
+}
+
+.call-to-action::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 70%;
+  height: 100%;
+  background-image: linear-gradient(65deg, #134473, transparent 50%);
+  content: '';
+  opacity: 0;
+  transform: translate3d(-50%, 0, 0);
+  transition: transform 300ms ease, opacity 300ms ease;
 }
 
 .call-to-action__heading,
 .article .call-to-action__heading {
+  position: relative;
+  z-index: 1;
   padding: 0 70px 0 0;
   margin-bottom: 10px;
   line-height: 1.2;
@@ -3614,6 +3640,8 @@ textarea:focus {
 .article .call-to-action__description {
   font-size: 14px;
   font-size: 0.875rem;
+  position: relative;
+  z-index: 1;
   margin: 0;
   color: #fff;
 }
@@ -3811,6 +3839,7 @@ textarea:focus {
 \*------------------------------------*/
 .responsive-object {
   position: relative;
+  margin: 50px 0;
 }
 
 .responsive-object iframe,
