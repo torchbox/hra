@@ -3648,7 +3648,7 @@ textarea:focus {
   font-size: 0.875rem;
   position: relative;
   z-index: 1;
-  margin: 0;
+  margin: 25px 0 0;
   color: #fff;
 }
 
