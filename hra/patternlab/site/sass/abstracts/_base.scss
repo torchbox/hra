@@ -38,3 +38,7 @@ ol {
     margin: 0;
     list-style: none;
 }
+
+.visually-hidden {
+    @include hidden;
+}
