@@ -1758,10 +1758,6 @@ a {
   transition: color ease 300ms;
 }
 
-a:focus {
-  outline: 1px dotted #eee;
-}
-
 /*------------------------------------*    $SWATCHES
 \*------------------------------------*/
 .swatches {
