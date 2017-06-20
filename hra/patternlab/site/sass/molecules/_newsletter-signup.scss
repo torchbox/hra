@@ -46,6 +46,7 @@
 
     &__label {
         @include hidden;
+        color: #fff;
     }
 
     &__input {

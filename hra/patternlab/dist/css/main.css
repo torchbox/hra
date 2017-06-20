@@ -5152,6 +5152,7 @@ textarea:focus {
   height: 1px;
   overflow: hidden;
   clip: rect(1px, 1px, 1px, 1px);
+  color: #fff;
 }
 
 .newsletter-signup__input {
