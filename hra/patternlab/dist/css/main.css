@@ -3721,13 +3721,12 @@ textarea:focus {
 /*------------------------------------*    $RELATED
 \*------------------------------------*/
 .related-container {
-  margin: 20px 0;
+  margin-top: 20px;
 }
 
 .related {
   position: relative;
   display: block;
-  margin: 0 0 60px;
 }
 
 .related__image {

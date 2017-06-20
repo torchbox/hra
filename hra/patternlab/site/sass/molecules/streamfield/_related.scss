@@ -3,14 +3,13 @@
 \*------------------------------------*/
 
 .related-container {
-    margin: 20px 0;
+    margin-top: 20px;
 }
 
 .related {
     $root: &;
     position: relative;
     display: block;
-    margin: 0 0 60px;
 
     @include media-query(sidebar) {
         margin-bottom: 30px;
