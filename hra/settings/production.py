@@ -24,9 +24,9 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 CACHE_CONTROL_MAX_AGE = 600
 
 
-# Google analytics
+# Google tag manager
 
-GOOGLE_ANALYTICS_ACCOUNT = 'GTM-K8CGDX6'
+GOOGLE_TAG_MANAGER_ID = 'GTM-K8CGDX6'
 
 
 # Configuration from environment variables
