@@ -9,6 +9,9 @@
     margin-top: -130px;
     overflow: auto;
     background: linear-gradient(to bottom, rgba(255, 255, 255, 0.7), #fff 20%);
+    // sass-lint:disable no-vendor-prefixes no-misspelled-properties
+    -webkit-backdrop-filter: blur(20px);
+    // sass-lint:enddisable
 
     @include media-query(desktop) {
         padding: 25px;
@@ -43,6 +46,7 @@
 
     &__inner {
         float: right;
+        width: 100%;
         max-width: 300px;
 
         @include media-query(desktop) {
@@ -160,12 +164,6 @@
         &:hover {
             > svg {
                 transform: rotate(-90deg) translate3d(0, -10px, 0);
-            }
-        }
-
-        &:first-of-type {
-            > a {
-                border-top: 1px solid $color--border;
             }
         }
 
