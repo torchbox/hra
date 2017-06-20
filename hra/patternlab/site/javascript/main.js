@@ -8,6 +8,7 @@ import faqs from './components/faqs';
 import tableInteraction from './components/table-interaction';
 import searchFilter from './components/search-form';
 import tableHeight from './components/table-height';
+import heroHeadingAlignment from './components/hero-heading-alignment';
 
 glossary();
 glossaryTab();
@@ -19,3 +20,4 @@ faqs();
 tableInteraction();
 searchFilter();
 tableHeight();
+heroHeadingAlignment();

@@ -4,8 +4,8 @@
 
 .hero {
     &--inner {
-        height: 520px;
-        padding: 0 20px;
+        height: auto;
+        padding: 0 20px 200px;
         overflow: auto;
         background: {
             color: $color--primary;
@@ -14,7 +14,6 @@
         }
 
         @include media-query(laptop) {
-            height: auto;
             padding: 40px 20px;
         }
 

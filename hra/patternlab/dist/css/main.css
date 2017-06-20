@@ -3157,8 +3157,8 @@ textarea:focus {
 /*------------------------------------*    $HERO INNER
 \*------------------------------------*/
 .hero--inner {
-  height: 520px;
-  padding: 0 20px;
+  height: auto;
+  padding: 0 20px 200px;
   overflow: auto;
   background-color: #0d61b5;
   background-size: 69px 85px;
@@ -3167,7 +3167,6 @@ textarea:focus {
 
 @media only screen and (max-width: 900px) {
   .hero--inner {
-    height: auto;
     padding: 40px 20px;
   }
 }
@@ -5679,7 +5678,7 @@ textarea:focus {
 
 @media only screen and (max-width: 900px) {
   .standard-page-body__content {
-    padding-top: 10px;
+    padding-top: 30px;
   }
 }
 
