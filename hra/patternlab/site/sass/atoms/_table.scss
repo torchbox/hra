@@ -33,9 +33,10 @@
         a {
             color: $color--link;
             text-decoration: underline;
+            text-decoration-skip: ink;
 
             &:hover {
-                text-decoration: none;
+                color: rgba(255, 255, 255, 0.7);
             }
         }
     }
@@ -45,7 +46,6 @@
     display: flex;
     max-width: 100%;
     overflow: hidden;
-    white-space: nowrap;
     vertical-align: top;
     background: radial-gradient(ellipse at left, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0) 75%) 0 center, radial-gradient(ellipse at right, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0) 75%) 100% center;
     background-attachment: scroll;
@@ -64,8 +64,6 @@
     }
 
     thead {
-        display: flex;
-        flex-shrink: 0;
         min-width: min-content;
     }
 

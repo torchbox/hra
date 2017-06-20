@@ -2264,17 +2264,17 @@ textarea:focus {
 .table td a {
   color: #000;
   text-decoration: underline;
+  text-decoration-skip: ink;
 }
 
 .table td a:hover {
-  text-decoration: none;
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .table--pinned {
   display: flex;
   max-width: 100%;
   overflow: hidden;
-  white-space: nowrap;
   vertical-align: top;
   background: radial-gradient(ellipse at left, rgba(0, 0, 0, 0.2) 0%, transparent 75%) 0 center, radial-gradient(ellipse at right, rgba(0, 0, 0, 0.2) 0%, transparent 75%) 100% center;
   background-attachment: scroll;
@@ -2292,8 +2292,6 @@ textarea:focus {
 }
 
 .table--pinned thead {
-  display: flex;
-  flex-shrink: 0;
   min-width: min-content;
 }
 
