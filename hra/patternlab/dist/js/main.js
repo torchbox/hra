@@ -3204,8 +3204,6 @@ var promise = createCommonjsModule(function (module) {
   self.fetch.polyfill = true;
 })(typeof self !== 'undefined' ? self : undefined);
 
-// We have to manually make jQuery a global variable.
-// By default it will be in a closure and renamed to lowercase.
 window.jQuery = jquery$1;
 
 // Promise polyfill for older browsers
@@ -3360,6 +3358,7 @@ function glossaryTab() {
 
     var $glossaryTab = jquery$1('.glossary-tab'),
         $glossaryLabel = jquery$1('.glossary-tab__label'),
+        $glossaryClose = jquery$1('.glossary-tab__close'),
         tabOpen = 'glossary-tab--open',
         tabFixed = 'glossary-tab--fixed',
         stickValue = 600,
@@ -3382,6 +3381,7 @@ function glossaryTab() {
     }
 
     function close() {
+        console.log('close');
         if (!state.busy) {
             state.busy = true;
             setTimeout(function () {
@@ -3421,6 +3421,11 @@ function glossaryTab() {
             // Toggle tab on click
             $glossaryLabel.on('click', function () {
                 return toggle();
+            });
+
+            // Close tab on click
+            $glossaryClose.on('click', function () {
+                return close();
             });
 
             // Stick tab on scroll

@@ -4490,6 +4490,41 @@ textarea:focus {
   top: 121px;
 }
 
+.glossary-tab__close {
+  position: absolute;
+  top: 14px;
+  right: 11px;
+  z-index: 1;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  background-color: transparent;
+  border: 0;
+  transition: opacity 300ms ease;
+}
+
+.glossary-tab__close:focus, .glossary-tab__close:hover {
+  opacity: 0.7;
+}
+
+.glossary-tab__close::before, .glossary-tab__close::after {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #fff;
+  content: '';
+}
+
+.glossary-tab__close::before {
+  transform: rotate(45deg);
+}
+
+.glossary-tab__close::after {
+  transform: rotate(-45deg);
+}
+
 .glossary-tab__label {
   font-size: 20px;
   font-size: 1.25rem;
@@ -4523,9 +4558,98 @@ textarea:focus {
 .glossary-tab__content {
   position: absolute;
   top: 0;
-  left: 65px;
-  padding: 15px;
+  left: 60px;
+  width: calc(100% - 60px);
+  padding: 25px 30px;
   color: #fff;
+}
+
+.glossary-tab__input {
+  font-size: 16px;
+  font-size: 1rem;
+  width: 100%;
+  padding: 8px 20px;
+  color: #fff;
+  background-color: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.45);
+  border-radius: 40px;
+}
+
+.glossary-tab__input.placeholder {
+  font-family: "FrutigerLight", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  color: #fff;
+  opacity: 1;
+}
+
+.glossary-tab__input:-moz-placeholder {
+  font-family: "FrutigerLight", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  color: #fff;
+  opacity: 1;
+}
+
+.glossary-tab__input::-moz-placeholder {
+  font-family: "FrutigerLight", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  color: #fff;
+  opacity: 1;
+}
+
+.glossary-tab__input:-ms-input-placeholder {
+  font-family: "FrutigerLight", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  color: #fff;
+  opacity: 1;
+}
+
+.glossary-tab__input::-webkit-input-placeholder {
+  font-family: "FrutigerLight", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  color: #fff;
+  opacity: 1;
+}
+
+@media only screen and (max-width: 900px) {
+  .glossary-tab__input {
+    padding: 10px 20px;
+  }
+}
+
+.glossary-tab__input-label {
+  font-size: 24px;
+  font-size: 1.5rem;
+  display: block;
+  margin: 0 0 10px;
+}
+
+.glossary-tab__submit {
+  position: absolute;
+  top: 72px;
+  right: 35px;
+  width: 45px;
+  height: 45px;
+  cursor: pointer;
+  background-position: center;
+  background-color: transparent;
+  background-size: 21px;
+  background-repeat: no-repeat;
+  background-image: url("../images/svg/search.svg");
+  border: 0;
+  transition: opacity 300ms;
+}
+
+.glossary-tab__submit:hover {
+  opacity: 0.7;
+}
+
+@media only screen and (max-width: 900px) {
+  .glossary-tab__submit {
+    top: 61px;
+    right: 0;
+    width: 67px;
+    height: 55px;
+    background-size: 24px;
+  }
+}
+
+.template-glossary-index .glossary-tab {
+  display: none;
 }
 
 /*------------------------------------*    $CONTACT

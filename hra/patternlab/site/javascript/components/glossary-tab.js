@@ -4,6 +4,7 @@ function glossaryTab() {
 
     const $glossaryTab          = $('.glossary-tab'),
         $glossaryLabel          = $('.glossary-tab__label'),
+        $glossaryClose          = $('.glossary-tab__close'),
         tabOpen                 = 'glossary-tab--open',
         tabFixed                = 'glossary-tab--fixed',
         stickValue              = 600,
@@ -26,6 +27,7 @@ function glossaryTab() {
     }
 
     function close(){
+        console.log('close');
         if(!state.busy){
             state.busy = true;
             setTimeout(() => {
@@ -64,6 +66,9 @@ function glossaryTab() {
 
             // Toggle tab on click
             $glossaryLabel.on('click', () => toggle());
+
+            // Close tab on click
+            $glossaryClose.on('click', () => close());
 
             // Stick tab on scroll
             $(document).on('scroll', () => stick());
