@@ -11,12 +11,15 @@
                   method="post"
                   action="{{ newsletter_url }}">
 
-                {% spaceless %}
-                    <input class="newsletter-signup__input" type="text" name="MERGE1" placeholder="First Name">
-                    <input class="newsletter-signup__input" type="text" name="MERGE2" placeholder="Last Name">
-                    <input class="newsletter-signup__input" type="text" name="MERGE0" placeholder="Email Address">
-                    <input class="newsletter-signup__submit" type="submit" value="Sign up">
-                {% endspaceless %}
+            {% spaceless %}
+                <label class="newsletter-signup__label" for="newsletter-first-name">First name</label>
+                <input class="newsletter-signup__input" type="text" name="MERGE1" placeholder="First Name" id="newsletter-first-name">
+                <label class="newsletter-signup__label" for="newsletter-last-name">Last name</label>
+                <input class="newsletter-signup__input" type="text" name="MERGE2" placeholder="Last Name" id="newsletter-last-name">
+                <label class="newsletter-signup__label" for="newsletter-email">Email address</label>
+                <input class="newsletter-signup__input" type="text" name="MERGE0" placeholder="Email Address" id="newsletter-email">
+                <input class="newsletter-signup__submit" type="submit" value="Sign up">
+            {% endspaceless %}
 
             </form>
         </div>

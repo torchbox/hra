@@ -44,6 +44,10 @@
         }
     }
 
+    &__label {
+        @include hidden;
+    }
+
     &__input {
         @include placeholder-text {
             color: #a9b3b9;

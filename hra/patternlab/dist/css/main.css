@@ -5067,6 +5067,14 @@ textarea:focus {
   }
 }
 
+.newsletter-signup__label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
 .newsletter-signup__input {
   display: inline-block;
   width: calc(50% - 50px);
