@@ -99,3 +99,8 @@ class ResearchSummariesIndexPage(Page, SocialFields, ListingFields):
     )
 
     subpage_types = ['research_summaries.ResearchSummaryPage']
+
+    @classmethod
+    def can_create_at(cls, parent):
+        """Do not allow to create more than one instance of this page"""
+        return super().can_create_at(parent) and not cls.objects.count()
