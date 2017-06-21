@@ -1,5 +1,5 @@
 from django.db import models
-from wagtail.wagtailadmin.edit_handlers import FieldPanel, InlinePanel
+from wagtail.wagtailadmin.edit_handlers import FieldPanel
 from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailsearch import index
@@ -100,33 +100,33 @@ class ResearchSummaryPage(Page, SocialFields, ListingFields):
 
     content_panels = Page.content_panels + [
         # TODO: Make disabled or hide
-        FieldPanel('title')
-        FieldPanel('full_title')
-        FieldPanel('iras_id')
-        FieldPanel('contact_name')
-        FieldPanel('contact_email')
-        FieldPanel('sponsor_organisation')
-        FieldPanel('eudract_number')
-        FieldPanel('isrctn_number')
-        FieldPanel('clinicaltrials_number')
-        FieldPanel('additional_reference_number_fields')
-        FieldPanel('duration_of_study_in_uk')
-        FieldPanel('research_summary_text')
-        FieldPanel('rec_name')
-        FieldPanel('rec_reference')
-        FieldPanel('date_of_rec_opinion')
-        FieldPanel('rec_opinion')
-        FieldPanel('decision_date')
-        FieldPanel('data_collection_arrangements')
-        FieldPanel('research_programme')
-        FieldPanel('storage_license')
-        FieldPanel('rtb_title')
-        FieldPanel('research_database_title')
-        FieldPanel('establishment_organisation')
-        FieldPanel('establishment_organisation_address_1')
-        FieldPanel('establishment_organisation_address_2')
-        FieldPanel('establishment_organisation_address_3')
-        FieldPanel('establishment_organisation_address_postcode')
+        FieldPanel('title'),
+        FieldPanel('full_title'),
+        FieldPanel('iras_id'),
+        FieldPanel('contact_name'),
+        FieldPanel('contact_email'),
+        FieldPanel('sponsor_organisation'),
+        FieldPanel('eudract_number'),
+        FieldPanel('isrctn_number'),
+        FieldPanel('clinicaltrials_number'),
+        FieldPanel('additional_reference_number_fields'),
+        FieldPanel('duration_of_study_in_uk'),
+        FieldPanel('research_summary_text'),
+        FieldPanel('rec_name'),
+        FieldPanel('rec_reference'),
+        FieldPanel('date_of_rec_opinion'),
+        FieldPanel('rec_opinion'),
+        FieldPanel('decision_date'),
+        FieldPanel('data_collection_arrangements'),
+        FieldPanel('research_programme'),
+        FieldPanel('storage_license'),
+        FieldPanel('rtb_title'),
+        FieldPanel('research_database_title'),
+        FieldPanel('establishment_organisation'),
+        FieldPanel('establishment_organisation_address_1'),
+        FieldPanel('establishment_organisation_address_2'),
+        FieldPanel('establishment_organisation_address_3'),
+        FieldPanel('establishment_organisation_address_postcode'),
     ]
 
     promote_panels = (
