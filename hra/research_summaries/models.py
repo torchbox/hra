@@ -1,3 +1,5 @@
+from collections import OrderedDict
+
 from django.db import models
 from modelcluster.fields import ParentalManyToManyField
 from wagtail.wagtailadmin.edit_handlers import FieldPanel
@@ -23,20 +25,25 @@ class ResearchType(models.Model):
         verbose_name_plural = 'research types'
 
 
+# TODO: Add indexes (dates, type, etc)
+# TODO: Add ES filters
 class ResearchSummaryPage(Page, SocialFields, ListingFields):
-    REC_OPINION_CHOICES = (
-        ('unfavourable_opinion', 'Unfavourable Opinion'),
-        ('favourable_opinion', 'Favourable Opinion'),
-        ('further_information_favourable_opinion', 'Further Information Favourable Opinion'),
-        ('further_information_unfavourable_opinion', 'Further Information Unfavourable Opinion')
-    )
+    REC_OPINION_CHOICES = OrderedDict((
+        ('unfavourable', 'Unfavourable Opinion'),
+        ('favourable', 'Favourable Opinion'),
+        ('further_unfavourable', 'Further Information Unfavourable Opinion'),
+        ('further_favourable', 'Further Information Favourable Opinion'),
+    ))
+    REC_OPINION_CHOICES_REVERSE = OrderedDict((
+        (value, key) for key, value in REC_OPINION_CHOICES.items()
+    ))
 
     # Research summary ID from the HARP API.
     # Use it to check if an entry already exists in url local DB
     harp_application_id = models.PositiveIntegerField(editable=True, unique=True)
 
     research_types = ParentalManyToManyField('research_summaries.ResearchType')
-    full_title = models.CharField(max_length=255, blank=True, editable=False)
+    full_title = models.CharField(max_length=512, blank=True, editable=False)
     iras_id = models.CharField("IRAS ID", blank=True, max_length=255, editable=True)
     contact_name = models.CharField(max_length=255, blank=True, editable=True)
     contact_email = models.EmailField(max_length=255, blank=True, editable=True)
@@ -50,7 +57,7 @@ class ResearchSummaryPage(Page, SocialFields, ListingFields):
     rec_name = models.CharField(max_length=255, blank=True, editable=True)
     rec_reference = models.CharField(max_length=255, blank=True, editable=True)
     date_of_rec_opinion = models.DateField(blank=True, null=True, editable=True)
-    rec_opinion = models.CharField(choices=REC_OPINION_CHOICES, max_length=64, blank=True, editable=True)
+    rec_opinion = models.CharField(choices=REC_OPINION_CHOICES.items(), max_length=64, blank=True, editable=True)
     decision_date = models.DateField(blank=True, null=True, editable=True)
 
     data_collection_arrangements = models.CharField(max_length=512, blank=True, editable=True)
