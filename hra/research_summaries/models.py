@@ -1,5 +1,5 @@
 from django.db import models
-from modelcluster.fields import ParentalKey, ParentalManyToManyField
+from modelcluster.fields import ParentalManyToManyField
 from wagtail.wagtailadmin.edit_handlers import FieldPanel
 from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailcore.models import Page
@@ -8,44 +8,12 @@ from wagtail.wagtailsearch import index
 from hra.utils.models import SocialFields, ListingFields
 
 
-# TODO: Move into importer module
-mapping = {
-    'title': 'ApplicationTitle',
-    'full_title': 'ApplicationFullTitle',
-    'iras_id': 'IrasProjectID',
-    'contact_name': 'ContactName',
-    'contact_email': 'ContactEmail',
-    'sponsor_organisation': 'SponsorOrganisation',
-    'eudract_number': 'EudraCT',
-    'isrctn_number': 'ISRCTN',
-    'clinicaltrials_number': 'NCT',
-    'additional_reference_number_fields': 'AdditionalReferenceNumbers',
-    'duration_of_study_in_uk': 'DurationOfStudyInUK',
-    'research_summary_text': 'ResearchSummary',
-    'rec_name': 'CommitteeName',
-    'rec_reference': 'CommitteeReferenceNumber',
-    'date_of_rec_opinion': 'DecisionDate',
-    'rec_opinion': 'Decision',
-    'decision_date': 'DecisionDate',
-    'data_collection_arrangements': 'DataCollectionArrangements',
-    'research_programme': 'ResearchProgramme',
-    'storage_license': 'HumanTissueAuthorityStorageLicence',
-    'rtb_title': 'RTBTitle',
-    'research_database_title': 'ResearchDatabaseTitle',
-    'establishment_organisation': 'EstablishmentOrganisation',
-    'establishment_organisation_address_1': 'EstablishmentOrganisationAddress1',
-    'establishment_organisation_address_2': 'EstablishmentOrganisationAddress2',
-    'establishment_organisation_address_3': 'EstablishmentOrganisationAddress3',
-    'establishment_organisation_address_postcode': 'EstablishmentOrganisationPostcode',
-}
-
-
 class ResearchType(models.Model):
     name = models.CharField(max_length=255)
 
     # Research type (study type) ID from the HARP API.
     # Use it to check if an entry already exists in url local DB
-    harp_study_type_id = models.PositiveIntegerField(editable=False)
+    harp_study_type_id = models.PositiveIntegerField(editable=False, unique=True)
 
     def __str__(self):
         return self.name
@@ -65,9 +33,9 @@ class ResearchSummaryPage(Page, SocialFields, ListingFields):
 
     # Research summary ID from the HARP API.
     # Use it to check if an entry already exists in url local DB
-    harp_application_id = models.PositiveIntegerField(editable=True)
-    research_types = ParentalManyToManyField('research_summaries.ResearchType')
+    harp_application_id = models.PositiveIntegerField(editable=True, unique=True)
 
+    research_types = ParentalManyToManyField('research_summaries.ResearchType')
     full_title = models.CharField(max_length=255, blank=True, editable=False)
     iras_id = models.CharField("IRAS ID", blank=True, max_length=255, editable=True)
     contact_name = models.CharField(max_length=255, blank=True, editable=True)
@@ -119,6 +87,10 @@ class ResearchSummaryPage(Page, SocialFields, ListingFields):
 
 class ResearchSummariesIndexPage(Page, SocialFields, ListingFields):
     introduction = RichTextField(blank=True)
+
+    content_panels = Page.content_panels + [
+        FieldPanel('introduction'),
+    ]
 
     promote_panels = (
         Page.promote_panels +
