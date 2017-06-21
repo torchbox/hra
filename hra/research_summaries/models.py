@@ -1,4 +1,5 @@
 from django.db import models
+from modelcluster.fields import ParentalKey, ParentalManyToManyField
 from wagtail.wagtailadmin.edit_handlers import FieldPanel
 from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailcore.models import Page
@@ -39,9 +40,12 @@ mapping = {
 }
 
 
-# TODO: Link with ResearchSummaryPage
 class ResearchType(models.Model):
     name = models.CharField(max_length=255)
+
+    # Research type (study type) ID from the HARP API.
+    # Use it to check if an entry already exists in url local DB
+    harp_study_type_id = models.PositiveIntegerField(editable=False)
 
     def __str__(self):
         return self.name
@@ -58,6 +62,11 @@ class ResearchSummaryPage(Page, SocialFields, ListingFields):
         ('further_information_favourable_opinion', 'Further Information Favourable Opinion'),
         ('further_information_unfavourable_opinion', 'Further Information Unfavourable Opinion')
     )
+
+    # Research summary ID from the HARP API.
+    # Use it to check if an entry already exists in url local DB
+    harp_application_id = models.PositiveIntegerField(editable=True)
+    research_types = ParentalManyToManyField('research_summaries.ResearchType')
 
     full_title = models.CharField(max_length=255, blank=True, editable=False)
     iras_id = models.CharField("IRAS ID", blank=True, max_length=255, editable=True)
@@ -96,37 +105,6 @@ class ResearchSummaryPage(Page, SocialFields, ListingFields):
         index.SearchField('clinicaltrials_number'),
         index.SearchField('additional_reference_number_fields'),
         index.FilterField('rec_opinion'),
-    ]
-
-    content_panels = Page.content_panels + [
-        # TODO: Make disabled or hide
-        FieldPanel('title'),
-        FieldPanel('full_title'),
-        FieldPanel('iras_id'),
-        FieldPanel('contact_name'),
-        FieldPanel('contact_email'),
-        FieldPanel('sponsor_organisation'),
-        FieldPanel('eudract_number'),
-        FieldPanel('isrctn_number'),
-        FieldPanel('clinicaltrials_number'),
-        FieldPanel('additional_reference_number_fields'),
-        FieldPanel('duration_of_study_in_uk'),
-        FieldPanel('research_summary_text'),
-        FieldPanel('rec_name'),
-        FieldPanel('rec_reference'),
-        FieldPanel('date_of_rec_opinion'),
-        FieldPanel('rec_opinion'),
-        FieldPanel('decision_date'),
-        FieldPanel('data_collection_arrangements'),
-        FieldPanel('research_programme'),
-        FieldPanel('storage_license'),
-        FieldPanel('rtb_title'),
-        FieldPanel('research_database_title'),
-        FieldPanel('establishment_organisation'),
-        FieldPanel('establishment_organisation_address_1'),
-        FieldPanel('establishment_organisation_address_2'),
-        FieldPanel('establishment_organisation_address_3'),
-        FieldPanel('establishment_organisation_address_postcode'),
     ]
 
     promote_panels = (
