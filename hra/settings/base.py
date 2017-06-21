@@ -198,3 +198,10 @@ ESI_ENABLED = False
 # Custom settings
 
 ENABLE_STYLEGUIDE = False
+
+
+# HARP API
+
+HARP_API_URL = 'https://www.harp.org.uk/HARPApiExternal/api/ResearchSummaries'
+HARP_API_USERNAME = None
+HARP_API_PASSWORD = None
