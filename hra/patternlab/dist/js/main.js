@@ -3204,8 +3204,6 @@ var promise = createCommonjsModule(function (module) {
   self.fetch.polyfill = true;
 })(typeof self !== 'undefined' ? self : undefined);
 
-// We have to manually make jQuery a global variable.
-// By default it will be in a closure and renamed to lowercase.
 window.jQuery = jquery$1;
 
 // Promise polyfill for older browsers

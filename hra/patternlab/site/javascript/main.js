@@ -7,6 +7,7 @@ import notification from './components/notification';
 import faqs from './components/faqs';
 import tableInteraction from './components/table-interaction';
 import searchFilter from './components/search-form';
+import tableHeight from './components/table-height';
 
 glossary();
 glossaryTab();
@@ -17,3 +18,4 @@ notification();
 faqs();
 tableInteraction();
 searchFilter();
+tableHeight();
