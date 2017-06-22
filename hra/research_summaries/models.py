@@ -27,6 +27,7 @@ class ResearchType(models.Model):
 
 # TODO: Add indexes (dates, type, etc)
 # TODO: Add ES filters
+# TODO: Do not allow to create pages manually
 class ResearchSummaryPage(Page, SocialFields, ListingFields):
     REC_OPINION_CHOICES = OrderedDict((
         ('unfavourable', 'Unfavourable Opinion'),
@@ -43,6 +44,7 @@ class ResearchSummaryPage(Page, SocialFields, ListingFields):
     harp_application_id = models.PositiveIntegerField(editable=True, unique=True)
 
     research_types = ParentalManyToManyField('research_summaries.ResearchType')
+    # TODO: Make it TextField or increase max_length to be more than 512
     full_title = models.CharField(max_length=512, blank=True, editable=False)
     iras_id = models.CharField("IRAS ID", blank=True, max_length=255, editable=True)
     contact_name = models.CharField(max_length=255, blank=True, editable=True)
@@ -51,6 +53,7 @@ class ResearchSummaryPage(Page, SocialFields, ListingFields):
     eudract_number = models.CharField(max_length=255, blank=True, editable=True)
     isrctn_number = models.CharField("ISRCTN Number", max_length=255, blank=True, editable=True)
     clinicaltrials_number = models.CharField("Clinicaltrials.gov Identifier", max_length=255, blank=True, editable=True)
+    # TODO: Make it TextField or increase max_length to be more than 512
     additional_reference_number_fields = models.CharField(max_length=255, blank=True, editable=True)
     duration_of_study_in_uk = models.CharField("Duration of Study in UK", max_length=255, blank=True, editable=True)
     research_summary_text = models.TextField(blank=True, editable=True)
