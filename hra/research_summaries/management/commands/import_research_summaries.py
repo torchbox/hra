@@ -18,6 +18,8 @@ class APIError(Exception):
 class Command(BaseCommand):
     def handle(self, *args, **options):
         parent_page = ResearchSummariesIndexPage.objects.first()
+
+        # TODO: Use arguments
         start_date = date(2015, 12, 1)
         end_date = date(2015, 12, 31)
 
@@ -52,6 +54,11 @@ class Command(BaseCommand):
             )
 
         data = response.json()
+
+        if not isinstance(data, list):
+            raise APIError(
+                "API has returned {}. Expected type: {}".format(type(data), list)
+            )
 
         for item in data:
             importer = ResearchSummaryPageImporter(item)

@@ -37,17 +37,9 @@ class PageImporter:
         else:
             # Create a new page
             page = self.model()
-            # TODO: duplicated slugs
-            # page.slug = ''
             self._set_fields(page)
-            try:
-                page = parent.add_child(instance=page)
-                page.save_revision(changed=False)
-                # TODO: Get rid of it
-            except ValidationError:
-                print(page)
-                print(page.contact_email)
-                raise
+            page = parent.add_child(instance=page)
+            page.save_revision(changed=False)
 
         return page
 
