@@ -3852,7 +3852,7 @@ function searchFilter() {
 
 function tableHeight() {
 
-    var $bodyCell = jquery$1('.table td, .table th'),
+    var $bodyCell = jquery$1('.table--pinned td, .table--pinned th'),
         tallestCell = null,
         cellHeights = [];
 
