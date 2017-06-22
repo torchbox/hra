@@ -3850,6 +3850,47 @@ function searchFilter() {
     bindEvents();
 }
 
+function tableHeight() {
+
+    var $bodyCell = jquery$1('.table td, .table th'),
+        tallestCell = null,
+        cellHeights = [];
+
+    // Get tallest heading height
+    function getTallest() {
+        jquery$1('.table thead tr td').each(function () {
+            cellHeights.push(jquery$1(this).outerHeight());
+        });
+
+        tallestCell = Math.max.apply(Math, cellHeights);
+    }
+
+    // Update CSS
+    function setHeights(item) {
+        jquery$1(item).css({
+            'height': tallestCell
+        });
+    }
+
+    // Apply height
+    function targetElements() {
+        getTallest();
+
+        $bodyCell.each(function () {
+            var item = jquery$1(this);
+            setHeights(item);
+        });
+    }
+
+    function bindEvents() {
+        jquery$1(window).on('load', function () {
+            return targetElements();
+        });
+    }
+
+    bindEvents();
+}
+
 glossary();
 glossaryTab();
 resultsBorder();
@@ -3859,6 +3900,7 @@ notification();
 faqs();
 tableInteraction();
 searchFilter();
+tableHeight();
 
 })));
 //# sourceMappingURL=main.js.map

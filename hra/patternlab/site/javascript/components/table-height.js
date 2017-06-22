@@ -2,7 +2,7 @@ import $ from '../globals';
 
 function tableHeight() {
 
-    var $bodyCell   = $('.table td, .table th'),
+    var $bodyCell   = $('.table--pinned td, .table--pinned th'),
         tallestCell = null,
         cellHeights = [];
 
