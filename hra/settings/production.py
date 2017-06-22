@@ -126,63 +126,6 @@ if 'ELASTICSEARCH_URL' in env:
     }
 
 
-# Logging
-
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'mail_admins': {
-            'level': 'ERROR',
-            'class': 'django.utils.log.AdminEmailHandler',
-            'formatter': 'verbose',
-        },
-        'console': {
-            'level': 'ERROR',
-            'class': 'logging.StreamHandler',
-            'formatter': 'verbose',
-        },
-        'console_info': {
-            'level': 'INFO',
-            'class': 'logging.StreamHandler',
-            'formatter': 'verbose',
-        },
-    },
-    'formatters': {
-        'verbose': {
-            'format': '[%(asctime)s] (%(process)d/%(thread)d) %(name)s %(levelname)s: %(message)s'
-        }
-    },
-    'loggers': {
-        'hra': {
-            'handlers': [],
-            'level': 'INFO',
-            'propagate': False,
-        },
-        'hra.research_summaries': {
-            'handlers': ['console_info'],
-            'level': 'INFO',
-            'propagate': False,
-        },
-        'wagtail': {
-            'handlers': [],
-            'level': 'INFO',
-            'propagate': False,
-        },
-        'django.request': {
-            'handlers': ['mail_admins', 'console'],
-            'level': 'ERROR',
-            'propagate': False,
-        },
-        'django.security': {
-            'handlers': ['mail_admins'],
-            'level': 'ERROR',
-            'propagate': False,
-        },
-    },
-}
-
-
 if 'LOG_DIR' in env:
     # Health Research Authority log
     LOGGING['handlers']['hra_file'] = {
