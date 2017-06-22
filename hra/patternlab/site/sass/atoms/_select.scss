@@ -73,6 +73,10 @@
         margin-left: 10px;
         color: #fff;
         background-color: transparent;
+
+        option {
+            color: #000;
+        }
     }
 
     &::before {

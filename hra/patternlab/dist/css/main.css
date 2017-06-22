@@ -2076,6 +2076,10 @@ a:focus {
   background-color: transparent;
 }
 
+.custom-select--blue select option {
+  color: #000;
+}
+
 .custom-select--blue::before {
   width: 60px;
   height: 60px;
