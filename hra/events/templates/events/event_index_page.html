@@ -14,14 +14,9 @@
 
     <div class="default-body">
         {% spaceless %}
-            <div class="grid grid--full">
-                <div class="grid__item three-tenths tablet--one-whole">
-
-                    {% include 'includes/teasers/site_sidebar.html' with no_transparency=True calling_page=page sidebar_pages=sidebar_pages %}
-
-                </div>
+            <div class="grid grid--center">
                 <div class="grid__item seven-tenths tablet--one-whole">
-                    <div class="site-body site-body--restricted">
+                    <div class="site-body site-body--no-sidebar">
                         <div class="site-body__inner site-body__inner">
 
                             {% include 'includes/teasers/teaser_default.html' with section_pages=page.featured_pages.all %}
