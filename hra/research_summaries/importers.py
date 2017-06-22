@@ -1,4 +1,3 @@
-from django.core.exceptions import ValidationError
 from django.utils.dateparse import parse_date
 
 from hra.research_summaries.mappings import FieldMapping, ManyToManyMapping
