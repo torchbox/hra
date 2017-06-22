@@ -60,8 +60,8 @@ class ResearchSummaryPage(Page, SocialFields, ListingFields):
     rec_opinion = models.CharField(choices=REC_OPINION_CHOICES.items(), max_length=64, blank=True, editable=True)
     decision_date = models.DateField(blank=True, null=True, editable=True)
 
-    data_collection_arrangements = models.CharField(max_length=512, blank=True, editable=True)
-    research_programme = models.CharField(max_length=512, blank=True, editable=True)
+    data_collection_arrangements = models.TextField(blank=True, editable=True)
+    research_programme = models.TextField(blank=True, editable=True)
     storage_license = models.CharField(max_length=512, blank=True, editable=True)
     rtb_title = models.CharField("RTBTitle", max_length=512, blank=True, editable=True)
     research_database_title = models.CharField(max_length=255, blank=True, editable=True)
