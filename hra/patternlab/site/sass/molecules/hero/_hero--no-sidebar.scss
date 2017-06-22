@@ -1,0 +1,9 @@
+/*------------------------------------*\
+    $HERO (Pages without sidebars)
+\*------------------------------------*/
+
+.hero--no-sidebar {
+    .hero__content {
+        max-width: $standard-body-width;
+    }
+}

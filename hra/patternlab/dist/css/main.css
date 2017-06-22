@@ -3293,6 +3293,12 @@ textarea:focus {
   content: '';
 }
 
+/*------------------------------------*    $HERO (Pages without sidebars)
+\*------------------------------------*/
+.hero--no-sidebar .hero__content {
+  max-width: 800px;
+}
+
 /*------------------------------------*    $DEFAULT TEASER
 \*------------------------------------*/
 .teaser {
