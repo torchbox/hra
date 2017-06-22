@@ -11,7 +11,7 @@
     position: relative;
     display: block;
 
-    @include media-query(sidebar) {
+    @include media-query(laptop) {
         margin-bottom: 30px;
     }
 

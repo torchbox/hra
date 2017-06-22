@@ -61,6 +61,10 @@
                 }
             }
         }
+
+        @include media-query(tablet) {
+            overflow-x: hidden;
+        }
     }
 
     // Thicker, flexible border - width overridden with js
@@ -72,6 +76,10 @@
         height: 4px;
         max-width: 550px;
         background-color: #eee;
+
+        @include media-query(tablet) {
+            max-width: 100%;
+        }
 
         @include media-query(mobile) {
             opacity: 0;

@@ -2808,6 +2808,17 @@ textarea:focus {
   }
 }
 
+.site-body--no-sidebar {
+  padding-right: 100px;
+  padding-left: 100px;
+}
+
+@media only screen and (max-width: 1100px) {
+  .site-body--no-sidebar {
+    padding: 40px 20px;
+  }
+}
+
 /*------------------------------------*    $SITE FOOTER
 \*------------------------------------*/
 .site-footer {
@@ -3727,6 +3738,12 @@ textarea:focus {
   display: block;
 }
 
+@media only screen and (max-width: 900px) {
+  .related {
+    margin-bottom: 30px;
+  }
+}
+
 .related__image {
   position: relative;
   width: 100%;
@@ -4035,6 +4052,12 @@ textarea:focus {
   transform: rotate(-90deg) translate3d(0, -10px, 0);
 }
 
+@media only screen and (max-width: 800px) {
+  .results-listing__item {
+    overflow-x: hidden;
+  }
+}
+
 .results-listing__item-border {
   position: absolute;
   top: 0;
@@ -4043,6 +4066,12 @@ textarea:focus {
   height: 4px;
   max-width: 550px;
   background-color: #eee;
+}
+
+@media only screen and (max-width: 800px) {
+  .results-listing__item-border {
+    max-width: 100%;
+  }
 }
 
 @media only screen and (max-width: 650px) {

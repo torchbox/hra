@@ -28,4 +28,13 @@
             padding: 40px 20px;
         }
     }
+
+    &--no-sidebar {
+        padding-right: 100px;
+        padding-left: 100px;
+
+        @include media-query(desktop) {
+            padding: 40px 20px;
+        }
+    }
 }
