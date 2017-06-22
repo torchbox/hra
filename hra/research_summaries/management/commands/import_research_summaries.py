@@ -1,13 +1,17 @@
 from urllib import parse
 
+import logging
 import requests
 from django.conf import settings
-from django.core.exceptions import ImproperlyConfigured
-from django.core.management import BaseCommand
+from django.core.exceptions import ImproperlyConfigured, ValidationError
+from django.core.management import BaseCommand, CommandError
 from django.utils.datetime_safe import date
 
 from hra.research_summaries.importers import ResearchSummaryPageImporter
 from hra.research_summaries.models import ResearchSummariesIndexPage
+
+
+logger = logging.getLogger('hra.research_summaries')
 
 
 class APIError(Exception):
@@ -18,6 +22,12 @@ class APIError(Exception):
 class Command(BaseCommand):
     def handle(self, *args, **options):
         parent_page = ResearchSummariesIndexPage.objects.first()
+
+        if not parent_page:
+            raise CommandError(
+                "There is no ResearchSummariesIndexPage pages. "
+                "You have to create one to be able to import research summaries."
+            )
 
         # TODO: Use arguments
         start_date = date(2015, 12, 1)
@@ -62,4 +72,14 @@ class Command(BaseCommand):
 
         for item in data:
             importer = ResearchSummaryPageImporter(item)
-            importer.create_or_update_page(parent_page)
+
+            try:
+                importer.create_or_update_page(parent_page)
+            except (ValidationError, ValueError):
+                logger.exception(
+                    "Unable to create or update a page "
+                    "due to validation errors. {}={}".format(
+                        importer.id_mapping.source,
+                        importer.id_mapping.get_field_data(item),
+                    )
+                )
