@@ -2602,7 +2602,7 @@ textarea:focus {
   padding: 60px;
   margin-top: -130px;
   overflow: auto;
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.7), #fff 20%);
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.7), #fff 130px);
   -webkit-backdrop-filter: blur(20px);
 }
 
