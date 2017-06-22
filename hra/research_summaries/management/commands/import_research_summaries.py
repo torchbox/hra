@@ -11,7 +11,7 @@ from hra.research_summaries.importers import ResearchSummaryPageImporter
 from hra.research_summaries.models import ResearchSummariesIndexPage
 
 
-logger = logging.getLogger('hra.research_summaries')
+logger = logging.getLogger(__name__)
 
 
 class APIError(Exception):
@@ -73,13 +73,29 @@ class Command(BaseCommand):
         for item in data:
             importer = ResearchSummaryPageImporter(item)
 
+            logger.info(
+                "Processing research summary {}={}".format(
+                    importer.id_mapping.source,
+                    importer.id_mapping.get_field_data(item),
+                )
+            )
+
             try:
                 importer.create_or_update_page(parent_page)
-            except (ValidationError, ValueError):
+            except ValidationError:
                 logger.exception(
                     "Unable to create or update a page "
                     "due to validation errors. {}={}".format(
                         importer.id_mapping.source,
                         importer.id_mapping.get_field_data(item),
                     )
+                )
+            except ValueError:
+                logger.info(
+                    "Unable to create or update a page "
+                    "due to ValueError exception. {}={}".format(
+                        importer.id_mapping.source,
+                        importer.id_mapping.get_field_data(item),
+                    ),
+                    exc_info=True
                 )
