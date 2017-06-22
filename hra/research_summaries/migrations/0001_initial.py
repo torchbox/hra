@@ -45,7 +45,7 @@ class Migration(migrations.Migration):
                 ('full_title', models.CharField(blank=True, editable=False, max_length=512)),
                 ('iras_id', models.CharField(blank=True, max_length=255, verbose_name='IRAS ID')),
                 ('contact_name', models.CharField(blank=True, max_length=255)),
-                ('contact_email', models.EmailField(blank=True, max_length=255)),
+                ('contact_email', models.CharField(blank=True, max_length=255)),
                 ('sponsor_organisation', models.CharField(blank=True, max_length=255)),
                 ('eudract_number', models.CharField(blank=True, max_length=255)),
                 ('isrctn_number', models.CharField(blank=True, max_length=255, verbose_name='ISRCTN Number')),

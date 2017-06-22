@@ -46,7 +46,7 @@ class ResearchSummaryPage(Page, SocialFields, ListingFields):
     full_title = models.CharField(max_length=512, blank=True, editable=False)
     iras_id = models.CharField("IRAS ID", blank=True, max_length=255, editable=True)
     contact_name = models.CharField(max_length=255, blank=True, editable=True)
-    contact_email = models.EmailField(max_length=255, blank=True, editable=True)
+    contact_email = models.CharField(max_length=255, blank=True, editable=True)
     sponsor_organisation = models.CharField(max_length=255, blank=True, editable=True)
     eudract_number = models.CharField(max_length=255, blank=True, editable=True)
     isrctn_number = models.CharField("ISRCTN Number", max_length=255, blank=True, editable=True)
