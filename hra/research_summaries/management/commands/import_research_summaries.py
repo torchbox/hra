@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 
 class Command(BaseCommand):
     help = (
-        "The command that imports reports since the last update. If date range is "
+        "The command that imports reports since the last import. If date range is "
         "specified, imports summaries for a given period."
     )
 
@@ -37,11 +37,19 @@ class Command(BaseCommand):
             end_date = parse_date(end_date).date()
         else:
             # If there is no dates in arguments,
-            # use the date of the last update as a start date,
+            # use the date of the last import as a start date,
             # and the current date as an end date
             end_date = date.today()
-            start_date = ResearchSummaryPage.objects.aggregate(last_updated_at=models.Max('updated_at'))
-            start_date = start_date.get('last_updated_at').date()
+            last_updated_at = ResearchSummaryPage.objects.aggregate(last_updated_at=models.Max('updated_at'))
+            last_updated_at = last_updated_at.get('last_updated_at')
+
+            if not last_updated_at:
+                raise CommandError(
+                    "No research summaries were imported before."
+                    "You have to run import and specify date range manually."
+                )
+
+            start_date = last_updated_at.date()
 
         parent_page = ResearchSummariesIndexPage.objects.first()
 
