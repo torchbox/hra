@@ -135,15 +135,22 @@ LOGGING = {
         'mail_admins': {
             'level': 'ERROR',
             'class': 'django.utils.log.AdminEmailHandler',
+            'formatter': 'verbose',
         },
         'console': {
             'level': 'ERROR',
             'class': 'logging.StreamHandler',
-        }
+            'formatter': 'verbose',
+        },
+        'console_info': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose',
+        },
     },
     'formatters': {
-        'default': {
-            'verbose': '[%(asctime)s] (%(process)d/%(thread)d) %(name)s %(levelname)s: %(message)s'
+        'verbose': {
+            'format': '[%(asctime)s] (%(process)d/%(thread)d) %(name)s %(levelname)s: %(message)s'
         }
     },
     'loggers': {
@@ -151,25 +158,26 @@ LOGGING = {
             'handlers': [],
             'level': 'INFO',
             'propagate': False,
-            'formatter': 'verbose',
+        },
+        'hra.research_summaries': {
+            'handlers': ['console_info'],
+            'level': 'INFO',
+            'propagate': False,
         },
         'wagtail': {
             'handlers': [],
             'level': 'INFO',
             'propagate': False,
-            'formatter': 'verbose',
         },
         'django.request': {
             'handlers': ['mail_admins', 'console'],
             'level': 'ERROR',
             'propagate': False,
-            'formatter': 'verbose',
         },
         'django.security': {
             'handlers': ['mail_admins'],
             'level': 'ERROR',
             'propagate': False,
-            'formatter': 'verbose',
         },
     },
 }
@@ -180,16 +188,19 @@ if 'LOG_DIR' in env:
     LOGGING['handlers']['hra_file'] = {
         'level': 'INFO',
         'class': 'cloghandler.ConcurrentRotatingFileHandler',
+        'formatter': 'verbose',
         'filename': os.path.join(env['LOG_DIR'], 'hra.log'),
         'maxBytes': 5242880,  # 5MB
         'backupCount': 5
     }
     LOGGING['loggers']['hra']['handlers'].append('hra_file')
+    LOGGING['loggers']['hra.research_summaries']['handlers'].append('hra_file')
 
     # Wagtail log
     LOGGING['handlers']['wagtail_file'] = {
         'level': 'INFO',
         'class': 'cloghandler.ConcurrentRotatingFileHandler',
+        'formatter': 'verbose',
         'filename': os.path.join(env['LOG_DIR'], 'wagtail.log'),
         'maxBytes': 5242880,  # 5MB
         'backupCount': 5
@@ -200,6 +211,7 @@ if 'LOG_DIR' in env:
     LOGGING['handlers']['errors_file'] = {
         'level': 'ERROR',
         'class': 'cloghandler.ConcurrentRotatingFileHandler',
+        'formatter': 'verbose',
         'filename': os.path.join(env['LOG_DIR'], 'error.log'),
         'maxBytes': 5242880,  # 5MB
         'backupCount': 5
