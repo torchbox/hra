@@ -71,6 +71,9 @@ class ResearchSummaryPage(Page, SocialFields, ListingFields):
     establishment_organisation_address_3 = models.CharField(max_length=255, blank=True, editable=True)
     establishment_organisation_address_postcode = models.CharField(max_length=32, blank=True, editable=True)
 
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True, db_index=True)
+
     search_fields = Page.search_fields + [
         index.SearchField('full_title', partial_match=True),
         index.SearchField('research_summary_text', partial_match=True),
@@ -79,7 +82,8 @@ class ResearchSummaryPage(Page, SocialFields, ListingFields):
         index.SearchField('isrctn_number'),
         index.SearchField('clinicaltrials_number'),
         index.SearchField('additional_reference_number_fields'),
-        index.FilterField('rec_opinion'),
+        index.FilterField('date_of_rec_opinion'),
+        index.FilterField('updated_at'),
     ]
 
     promote_panels = (
