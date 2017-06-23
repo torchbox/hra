@@ -5,7 +5,7 @@ from django.core.management import BaseCommand, CommandError
 from django.db import models
 from django.utils.datetime_safe import date
 
-from hra.research_summaries.api import fetch_for_dates
+from hra.research_summaries.api import fetch_chunks_for_dates
 from hra.research_summaries.models import ResearchSummariesIndexPage, ResearchSummaryPage
 
 logger = logging.getLogger(__name__)
@@ -59,4 +59,4 @@ class Command(BaseCommand):
                 "You have to create one to be able to import research summaries."
             )
 
-        fetch_for_dates(parent_page, start_date, end_date)
+        fetch_chunks_for_dates(parent_page, start_date, end_date)

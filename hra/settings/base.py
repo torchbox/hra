@@ -262,3 +262,4 @@ ENABLE_STYLEGUIDE = False
 HARP_API_URL = 'https://www.harp.org.uk/HARPApiExternal/api/ResearchSummaries'
 HARP_API_USERNAME = None
 HARP_API_PASSWORD = None
+HARP_API_MAX_PERIOD_DAYS = 365
