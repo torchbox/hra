@@ -37,19 +37,11 @@ def fetch_for_dates(parent_page, start_date, end_date):
     because the API doesn't allow to fetch data for a period longer than 365 days.
     """
 
-    api_url = getattr(settings, 'HARP_API_URL', None)
-    api_username = getattr(settings, 'HARP_API_USERNAME', None)
-    api_password = getattr(settings, 'HARP_API_PASSWORD', None)
-    api_max_period_days = getattr(settings, 'HARP_API_MAX_PERIOD_DAYS', None)
+    api_url = settings.HARP_API_URL
+    api_username = settings.HARP_API_USERNAME
+    api_password = settings.HARP_API_PASSWORD
+    api_max_period_days = settings.HARP_API_MAX_PERIOD_DAYS
     api_date_format = '%Y-%m-%d'
-
-    if not all([api_url, api_username, api_password, api_max_period_days]):
-        raise ImproperlyConfigured(
-            "HARP API settings are incorrect. "
-            "You must specify the following settings: "
-            "HARP_API_URL, HARP_API_USERNAME, HARP_API_PASSWORD, "
-            "HARP_API_MAX_PERIOD_DAYS"
-        )
 
     if abs((start_date - end_date).days) > api_max_period_days:
         raise APIError(

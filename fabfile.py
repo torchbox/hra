@@ -15,6 +15,7 @@ def deploy_production():
 
     run('git pull')
     run('pip install -r requirements.txt')
+    run("django-admin check --deploy")
     _run_migrate()
     run('django-admin collectstatic --noinput')
 
@@ -28,6 +29,7 @@ def deploy_production():
 def deploy_staging():
     run('git pull')
     run('pip install -r requirements.txt')
+    run("django-admin check --deploy")
     _run_migrate()
     run('django-admin collectstatic --noinput')
 
