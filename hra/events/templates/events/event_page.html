@@ -76,6 +76,12 @@
                                 {% endif %}
                             </div>
 
+                            {% with parent_page=page.get_parent %}
+                                <a href="{% pageurl parent_page %}" class="results-listing__back person-page__back">
+                                    Back to {{ parent_page.title|lower }}
+                                </a>
+                            {% endwith %}
+
                             {% include "includes/teasers/related_content.html" %}
 
                         </div>
