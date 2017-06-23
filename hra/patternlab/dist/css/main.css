@@ -1973,18 +1973,6 @@ a:focus {
   }
 }
 
-.article__intro p {
-  font-size: 22px;
-  font-size: 1.375rem;
-}
-
-@media only screen and (max-width: 800px) {
-  .article__intro p {
-    font-size: 19px;
-    font-size: 1.1875rem;
-  }
-}
-
 .article ul,
 .article ol {
   font-size: 18px;
@@ -1998,6 +1986,32 @@ a:focus {
 
 .article ol {
   list-style: decimal;
+}
+
+.article__intro p {
+  font-size: 22px;
+  font-size: 1.375rem;
+}
+
+@media only screen and (max-width: 800px) {
+  .article__intro p {
+    font-size: 19px;
+    font-size: 1.1875rem;
+  }
+}
+
+.article__intro ul,
+.article__intro ol {
+  font-size: 22px;
+  font-size: 1.375rem;
+}
+
+@media only screen and (max-width: 800px) {
+  .article__intro ul,
+  .article__intro ol {
+    font-size: 19px;
+    font-size: 1.1875rem;
+  }
 }
 
 /*------------------------------------*    $CUSTOM SELECT STYLES
