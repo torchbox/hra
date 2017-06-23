@@ -3204,8 +3204,6 @@ var promise = createCommonjsModule(function (module) {
   self.fetch.polyfill = true;
 })(typeof self !== 'undefined' ? self : undefined);
 
-// We have to manually make jQuery a global variable.
-// By default it will be in a closure and renamed to lowercase.
 window.jQuery = jquery$1;
 
 // Promise polyfill for older browsers
@@ -3501,7 +3499,6 @@ function sidebarMenu() {
 
     var $sidebarMenu = jquery$1('.site-sidebar__menu'),
         $sidebarMenuToggle = jquery$1('.site-sidebar__label'),
-        activeItemLabel = jquery$1('.site-sidebar__menu-item--active'),
         labelActive = 'site-sidebar__label--active',
         slideSpeed = 300,
         displayBuffer = 10;
@@ -3543,20 +3540,9 @@ function sidebarMenu() {
         }
     }
 
-    function populateLabel() {
-
-        $sidebarMenuToggle.html(activeItemLabel.text());
-    }
-
     function bindEvents() {
-
-        // Toggle menu on click
         $sidebarMenuToggle.on('click', function () {
             return toggle();
-        });
-
-        jquery$1(window).on('load', function () {
-            return populateLabel();
         });
     }
 
