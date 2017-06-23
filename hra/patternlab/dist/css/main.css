@@ -5672,6 +5672,7 @@ textarea:focus {
 
 .standard-page-body__content {
   max-width: 800px;
+  min-height: 200px;
   padding: 60px 0 40px;
   margin: 0 auto;
 }
