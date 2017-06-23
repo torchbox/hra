@@ -61,9 +61,8 @@
         font-family: $font--tertiary;
         color: #000;
 
-        @include media-query(mobile) {
-            @include rem-font-size(25px);
-            margin-bottom: 10px;
+        @include media-query(tablet) {
+            display: none;
         }
     }
 
@@ -71,13 +70,14 @@
         display: none;
 
         @include media-query(tablet) {
-            @include rem-font-size(18px);
+            @include rem-font-size(25px);
             position: relative;
             display: block;
             width: 100%;
-            padding: 0;
+            padding: 0 0 0 27px;
             margin-bottom: 20px;
-            color: $color--primary;
+            font-family: $font--tertiary;
+            color: #000;
             text-align: left;
             cursor: pointer;
             background-color: transparent;
@@ -90,15 +90,18 @@
             &::after {
                 @include font-size(zeta);
                 position: absolute;
-                top: 0;
-                bottom: 0;
-                width: 40px;
-                margin: auto 0;
+                top: 10px;
+                left: 5px;
+                height: 13px;
+                padding: 0;
+                margin: 0;
                 font-weight: bold;
-                color: $color--primary;
+                line-height: 1;
+                color: #000;
                 text-align: center;
                 content: '❮';
                 transform: rotate(-90deg);
+
             }
 
             &--active {

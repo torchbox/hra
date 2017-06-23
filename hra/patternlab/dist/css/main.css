@@ -2670,11 +2670,9 @@ textarea:focus {
   color: #000;
 }
 
-@media only screen and (max-width: 650px) {
+@media only screen and (max-width: 800px) {
   .site-sidebar__heading {
-    font-size: 25px;
-    font-size: 1.5625rem;
-    margin-bottom: 10px;
+    display: none;
   }
 }
 
@@ -2684,14 +2682,15 @@ textarea:focus {
 
 @media only screen and (max-width: 800px) {
   .site-sidebar__label {
-    font-size: 18px;
-    font-size: 1.125rem;
+    font-size: 25px;
+    font-size: 1.5625rem;
     position: relative;
     display: block;
     width: 100%;
-    padding: 0;
+    padding: 0 0 0 27px;
     margin-bottom: 20px;
-    color: #0d61b5;
+    font-family: "FrutigerBold", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    color: #000;
     text-align: left;
     cursor: pointer;
     background-color: transparent;
@@ -2704,12 +2703,14 @@ textarea:focus {
     font-size: 16px;
     font-size: 1rem;
     position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 40px;
-    margin: auto 0;
+    top: 10px;
+    left: 5px;
+    height: 13px;
+    padding: 0;
+    margin: 0;
     font-weight: bold;
-    color: #0d61b5;
+    line-height: 1;
+    color: #000;
     text-align: center;
     content: '❮';
     transform: rotate(-90deg);
