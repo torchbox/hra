@@ -4,6 +4,18 @@
 
 .hero--no-sidebar {
     .hero__content {
-        max-width: $standard-body-width;
+        width: 70%;
+        max-width: 70%;
+        padding: 0 100px;
+
+        @include media-query(desktop) {
+            padding: 0 20px;
+        }
+
+        @include media-query(tablet) {
+            width: 100%;
+            max-width: 100%;
+            padding: 0;
+        }
     }
 }
