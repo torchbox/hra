@@ -80,13 +80,42 @@
         padding: 11px 40px 11px 20px;
         color: #fff;
         background-color: $color--blue;
-        border: 0;
+        border: 2px solid transparent;
         border-radius: 35px;
+        transition: color $default-transition-speed ease, background-color $default-transition-speed ease, border-color $default-transition-speed ease;
+
+        &:focus {
+            @include placeholder-text {
+                color: $color--blue;
+            }
+
+            color: $color--blue;
+            background-color: transparent;
+            border-color: $color--blue;
+        }
+
+        &:focus + input[type='submit'] {
+            background: {
+                image: url('../images/svg/search-blue.svg');
+            }
+        }
 
         @include media-query(mobile) {
             width: 100%;
             padding: 20px;
             border-radius: 0;
+
+            &:focus {
+                color: #fff;
+                background-color: $color--blue;
+                border-color: transparent;
+            }
+
+            &:focus + input[type='submit'] {
+                background: {
+                    image: url('../images/svg/search-.svg');
+                }
+            }
         }
     }
 
@@ -113,33 +142,6 @@
 
         &:hover {
             opacity: 0.7;
-        }
-    }
-
-    &__menu-trigger-container {
-        display: none;
-
-        @include media-query(laptop) {
-            display: inline-block;
-            text-align: right;
-            vertical-align: -30px;
-        }
-    }
-
-    &__menu-trigger {
-        @include font-size(milli);
-        position: relative;
-        z-index: $z-epsilon;
-        padding-top: 20px;
-        font-family: $font--secondary;
-        color: $color--primary;
-        text-transform: uppercase;
-        cursor: pointer;
-        background: transparent;
-        border: 0;
-
-        &:focus {
-            outline: 0;
         }
     }
 }
