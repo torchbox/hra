@@ -39,6 +39,6 @@ def get_search_queryset(request, page_types=None):
     if page_types:
         standard_pages = StandardPage.objects.filter(page_type_relationships__page_type__in=page_types)
 
-        queryset = queryset.filter(pk__in=standard_pages.values_list('pk', flat=True))
+        queryset = queryset.filter(pk__in=list(standard_pages.values_list('pk', flat=True)))
 
     return queryset
