@@ -4670,7 +4670,7 @@ textarea:focus {
     left: 0;
     z-index: 2;
     display: table;
-    width: 100%;
+    width: 100vw;
     padding: 10px 0;
     text-align: center;
     background-color: #fff;
