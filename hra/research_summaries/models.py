@@ -1,5 +1,7 @@
 from collections import OrderedDict
 
+from django.conf import settings
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.db import models
 from django.utils.functional import cached_property
 from wagtail.wagtailadmin.edit_handlers import FieldPanel
@@ -122,15 +124,52 @@ class ResearchSummariesIndexPage(Page, SocialFields, ListingFields):
         return super().can_create_at(parent) and not cls.objects.count()
 
     @cached_property
+    def _children_research_summary(self):
+        return ResearchSummaryPage.objects.live().public().descendant_of(self)
+
+    @cached_property
     def updated_at(self):
-        latest_page = (
-            ResearchSummaryPage.objects.live().public()
-                .descendant_of(self)
-                .order_by('-updated_at')
-        ).first()
+        latest_page = self._children_research_summary.order_by('-updated_at').first()
 
         latest_date = None
         if latest_page:
             latest_date = latest_page.updated_at
 
         return latest_date
+
+    def get_context(self, request, *args, **kwargs):
+        search_date_from = request.GET.get('date_from', None)
+        search_date_to = request.GET.get('date_to', None)
+        search_research_type = request.GET.get('research_type', None)
+        search_query = request.GET.get('query', None)
+        page_number = request.GET.get('page', 1)
+
+        search_results = self._children_research_summary
+
+        if search_date_from:
+            search_results = search_results.filter(date_of_rec_opinion__gte=search_date_from)
+
+        if search_date_to:
+            search_results = search_results.filter(date_of_rec_opinion__lte=search_date_to)
+
+        if search_research_type:
+            search_results = search_results.filter(research_type=search_research_type)
+
+        if search_query:
+            search_results = search_results.search(search_query, operator='and')
+
+        # Pagination
+        paginator = Paginator(search_results, settings.DEFAULT_PER_PAGE)
+        try:
+            search_results = paginator.page(page_number)
+        except PageNotAnInteger:
+            search_results = paginator.page(1)
+        except EmptyPage:
+            search_results = paginator.page(paginator.num_pages)
+
+        context = super().get_context(request, *args, **kwargs)
+        context.update({
+            'search_results': search_results,
+        })
+
+        return context
