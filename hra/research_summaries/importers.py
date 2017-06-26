@@ -1,5 +1,5 @@
+from dateutil.parser import parse as parse_date
 from django.utils import timezone
-from django.utils.dateparse import parse_date
 
 from hra.research_summaries.mappings import FieldMapping, ForeignKeyMapping
 from hra.research_summaries.models import ResearchSummaryPage, ResearchType
