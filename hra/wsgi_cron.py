@@ -25,11 +25,11 @@ def single_instance_command(command_name):
 
 
 if has_uwsgi:
-    @cron(0, 1, -1, -1, 0)
+    @cron(0, 1, -1, -1, -1)
     def clearsessions(signum):
         single_instance_command('clearsessions')
 
-    @cron(0, 0, -1, -1, 0)
+    @cron(0, 0, -1, -1, -1)
     def update_index(signum):
         single_instance_command('update_index')
 
