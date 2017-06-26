@@ -31,11 +31,16 @@ class Command(BaseCommand):
                 "to import research summaries for a given period."
             )
 
-        if start_date and end_date:
-            # Use dates provided in the arguments
+        if start_date:
             start_date = parse_date(start_date).date()
-            end_date = parse_date(end_date).date()
-        else:
+
+        if end_date:
+            if end_date == 'today':
+                end_date = date.today()
+            else:
+                end_date = parse_date(end_date).date()
+
+        if not (start_date and end_date):
             # If there is no dates in arguments,
             # use the date of the last import as a start date,
             # and the current date as an end date
