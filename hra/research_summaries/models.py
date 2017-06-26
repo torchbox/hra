@@ -72,8 +72,11 @@ class ResearchSummaryPage(Page, SocialFields, ListingFields):
     establishment_organisation_address_3 = models.CharField(max_length=255, blank=True, editable=True)
     establishment_organisation_address_postcode = models.CharField(max_length=32, blank=True, editable=True)
 
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True, db_index=True)
+    created_at = models.DateTimeField(auto_now_add=True, editable=True)
+    # Can't use `auto_now=True`, because we don't want to update this field,
+    # when an editor changes something in the admin UI.
+    # We should update this field only on import from the API.
+    updated_at = models.DateTimeField(db_index=True, editable=True)
 
     search_fields = Page.search_fields + [
         index.SearchField('full_title', partial_match=True),

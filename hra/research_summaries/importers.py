@@ -1,3 +1,4 @@
+from django.utils import timezone
 from django.utils.dateparse import parse_date
 
 from hra.research_summaries.mappings import FieldMapping, ManyToManyMapping
@@ -109,5 +110,9 @@ class ResearchSummaryPageImporter(PageImporter):
                 'StudyTypeID': data['StudyTypeID'],
                 'StudyType': data['StudyType']
             }],
-        )
+        ),
+        FieldMapping(
+            'updated_at',
+            source=lambda data: timezone.now()
+        ),
     ]
