@@ -27,8 +27,9 @@ class ResearchType(models.Model):
 
 # TODO: Add indexes (dates, type, etc)
 # TODO: Add ES filters
-# TODO: Do not allow to create pages manually
 class ResearchSummaryPage(Page, SocialFields, ListingFields):
+    is_creatable = False
+
     REC_OPINION_CHOICES = OrderedDict((
         ('unfavourable', 'Unfavourable Opinion'),
         ('favourable', 'Favourable Opinion'),
