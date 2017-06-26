@@ -3,7 +3,7 @@ from urllib import parse
 
 import requests
 from django.conf import settings
-from django.core.exceptions import ImproperlyConfigured, ValidationError
+from django.core.exceptions import ValidationError
 
 from hra.research_summaries.importers import ResearchSummaryPageImporter
 from hra.utils.datetime import iter_between_dates
