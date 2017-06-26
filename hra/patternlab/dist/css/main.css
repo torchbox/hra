@@ -4740,7 +4740,7 @@ textarea:focus {
   transition: opacity 300ms ease, transform 300ms ease;
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 900px) {
   .main-menu__item > a::after {
     display: none;
   }
@@ -4749,6 +4749,12 @@ textarea:focus {
 .main-menu__item > a:hover::after {
   opacity: 1;
   transform: translate3d(0, 0, 0);
+}
+
+@media only screen and (max-width: 900px) {
+  .main-menu__item--active > a {
+    color: #0d61b5;
+  }
 }
 
 .main-menu__item--active > a::after {

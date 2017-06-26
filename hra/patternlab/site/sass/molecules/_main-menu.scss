@@ -80,7 +80,7 @@
                 transform: translate3d(0, 3px, 0);
                 transition: opacity $default-transition-speed ease, transform $default-transition-speed ease;
 
-                @include media-query(tablet) {
+                @include media-query(laptop) {
                     display: none;
                 }
             }
@@ -95,6 +95,11 @@
 
         &--active {
             > a {
+
+                @include media-query(laptop) {
+                    color: $color--primary;
+                }
+
                 &::after {
                     opacity: 1;
                     transform: translate3d(0, 0, 0);
