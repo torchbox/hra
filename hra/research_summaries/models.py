@@ -25,8 +25,6 @@ class ResearchType(models.Model):
         verbose_name_plural = 'research types'
 
 
-# TODO: Add indexes (dates, type, etc)
-# TODO: Add ES filters
 class ResearchSummaryPage(Page, SocialFields, ListingFields):
     is_creatable = False
 
@@ -58,7 +56,7 @@ class ResearchSummaryPage(Page, SocialFields, ListingFields):
     research_summary_text = models.TextField(blank=True, editable=True)
     rec_name = models.CharField(max_length=255, blank=True, editable=True)
     rec_reference = models.CharField(max_length=255, blank=True, editable=True)
-    date_of_rec_opinion = models.DateField(blank=True, null=True, editable=True)
+    date_of_rec_opinion = models.DateField(blank=True, null=True, editable=True, db_index=True)
     rec_opinion = models.CharField(choices=REC_OPINION_CHOICES.items(), max_length=64, blank=True, editable=True)
     decision_date = models.DateField(blank=True, null=True, editable=True)
 
