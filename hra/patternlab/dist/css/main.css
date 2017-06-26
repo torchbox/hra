@@ -2594,7 +2594,7 @@ textarea:focus {
     border-color: transparent;
   }
   .site-header__search:focus + input[type='submit'] {
-    background-image: url("../images/svg/search-.svg");
+    background-image: url("../images/svg/search.svg");
   }
 }
 
