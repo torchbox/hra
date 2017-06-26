@@ -29,7 +29,7 @@ if has_uwsgi:
     def clearsessions(signum):
         single_instance_command('clearsessions')
 
-    @cron(0, 0, -1, -1, -1)
+    @cron(0, 0, -1, -1, -1, target='mule')
     def update_index(signum):
         single_instance_command('update_index')
 
