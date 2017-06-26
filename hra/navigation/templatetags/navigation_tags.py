@@ -14,6 +14,7 @@ def headernav(context):
     return {
         'headernav': NavigationSettings.for_site(context['request'].site).header_links,
         'request': context['request'],
+        'current_page': context.get('page')
     }
 
 
