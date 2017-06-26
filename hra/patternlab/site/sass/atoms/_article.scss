@@ -33,6 +33,7 @@
     ol {
         @include rem-font-size(18px);
         margin: 0 0 20px 35px;
+        line-height: 1.4;
     }
 
     ul {
