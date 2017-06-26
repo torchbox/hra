@@ -1956,6 +1956,7 @@ a {
 .article h4,
 .article h5 {
   margin: 40px 0 5px;
+  line-height: 1.3;
 }
 
 .article h1 {
