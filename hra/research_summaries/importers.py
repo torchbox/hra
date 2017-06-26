@@ -47,7 +47,7 @@ class ResearchSummaryPageImporter(PageImporter):
     model = ResearchSummaryPage
     id_mapping = FieldMapping('harp_application_id', source='ApplicationID')
     mappings = PageImporter.mappings + [
-        FieldMapping('title', source='ApplicationTitle'),
+        FieldMapping('title', source=lambda data: data['ApplicationTitle'] or ''),
         FieldMapping('full_title', source=lambda data: data['ApplicationFullTitle'] or ''),
         FieldMapping('iras_id', source=lambda data: data['IrasProjectID'] or ''),
         FieldMapping('contact_name', source=lambda data: data['ContactName'] or ''),
@@ -70,7 +70,7 @@ class ResearchSummaryPageImporter(PageImporter):
         ),
         FieldMapping(
             'rec_opinion',
-            source=lambda data: ResearchSummaryPage.REC_OPINION_CHOICES_REVERSE.get(data['Decision'], None)
+            source=lambda data: ResearchSummaryPage.REC_OPINION_CHOICES_REVERSE.get(data['Decision'], '')
         ),
         FieldMapping(
             'decision_date',
@@ -80,7 +80,7 @@ class ResearchSummaryPageImporter(PageImporter):
         FieldMapping('research_programme', source=lambda data: data['ResearchProgramme'] or ''),
         FieldMapping('storage_license', source=lambda data: data['HumanTissueAuthorityStorageLicence'] or ''),
         FieldMapping('rtb_title', source=lambda data: data['RTBTitle'] or ''),
-        FieldMapping('research_database_title', source='ResearchDatabaseTitle'),
+        FieldMapping('research_database_title', source=lambda data: data['ResearchDatabaseTitle'] or ''),
         FieldMapping('establishment_organisation', source=lambda data: data['EstablishmentOrganisation'] or ''),
         FieldMapping(
             'establishment_organisation_address_1',
