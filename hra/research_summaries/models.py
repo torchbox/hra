@@ -1,6 +1,7 @@
 from collections import OrderedDict
 
 from django.db import models
+from django.utils.functional import cached_property
 from modelcluster.fields import ParentalManyToManyField
 from wagtail.wagtailadmin.edit_handlers import FieldPanel
 from wagtail.wagtailcore.fields import RichTextField
@@ -115,3 +116,17 @@ class ResearchSummariesIndexPage(Page, SocialFields, ListingFields):
     def can_create_at(cls, parent):
         """Do not allow to create more than one instance of this page"""
         return super().can_create_at(parent) and not cls.objects.count()
+
+    @cached_property
+    def updated_at(self):
+        latest_page = (
+            ResearchSummaryPage.objects.live().public()
+                .descendant_of(self)
+                .order_by('-updated_at')
+        ).first()
+
+        latest_date = None
+        if latest_page:
+            latest_date = latest_page.updated_at
+
+        return latest_date
