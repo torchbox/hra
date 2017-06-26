@@ -1,7 +1,7 @@
 from django.utils import timezone
 from django.utils.dateparse import parse_date
 
-from hra.research_summaries.mappings import FieldMapping, ManyToManyMapping
+from hra.research_summaries.mappings import FieldMapping, ForeignKeyMapping
 from hra.research_summaries.models import ResearchSummaryPage, ResearchType
 
 
@@ -99,17 +99,17 @@ class ResearchSummaryPageImporter(PageImporter):
             'establishment_organisation_address_postcode',
             source=lambda data: data['EstablishmentOrganisationPostcode'] or ''
         ),
-        ManyToManyMapping(
-            'research_types',
+        ForeignKeyMapping(
+            'research_type',
             id_mapping=FieldMapping('harp_study_type_id', source='StudyTypeID'),
             mappings=[
                 FieldMapping('name', source='StudyType')
             ],
             cls=ResearchType,
-            source=lambda data: [{
+            source=lambda data: {
                 'StudyTypeID': data['StudyTypeID'],
                 'StudyType': data['StudyType']
-            }],
+            },
         ),
         FieldMapping(
             'updated_at',

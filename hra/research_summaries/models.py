@@ -2,7 +2,6 @@ from collections import OrderedDict
 
 from django.db import models
 from django.utils.functional import cached_property
-from modelcluster.fields import ParentalManyToManyField
 from wagtail.wagtailadmin.edit_handlers import FieldPanel
 from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailcore.models import Page
@@ -43,7 +42,8 @@ class ResearchSummaryPage(Page, SocialFields, ListingFields):
     # Use it to check if an entry already exists in url local DB
     harp_application_id = models.PositiveIntegerField(editable=True, unique=True)
 
-    research_types = ParentalManyToManyField('research_summaries.ResearchType')
+    research_type = models.ForeignKey('research_summaries.ResearchType', null=True, blank=True,
+                                      on_delete=models.SET_NULL, related_name='+')
     full_title = models.TextField(blank=True, editable=False)
     iras_id = models.CharField("IRAS ID", blank=True, max_length=255, editable=True)
     contact_name = models.CharField(max_length=255, blank=True, editable=True)
@@ -86,6 +86,7 @@ class ResearchSummaryPage(Page, SocialFields, ListingFields):
         index.SearchField('isrctn_number'),
         index.SearchField('clinicaltrials_number'),
         index.SearchField('additional_reference_number_fields'),
+        index.FilterField('research_type'),
         index.FilterField('date_of_rec_opinion'),
         index.FilterField('updated_at'),
     ]
