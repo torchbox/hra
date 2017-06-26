@@ -1950,6 +1950,14 @@ a {
   text-decoration-skip: ink;
 }
 
+.article h1,
+.article h2,
+.article h3,
+.article h4,
+.article h5 {
+  margin: 40px 0 5px;
+}
+
 .article h1 {
   font-family: "FrutigerRoman", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   color: #000;
