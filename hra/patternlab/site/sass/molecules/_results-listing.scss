@@ -144,8 +144,8 @@
 
     &__back {
         position: relative;
-        padding-left: 35px;
-        margin: 40px 0 0 10px;
+        padding-left: 30px;
+        margin-top: 40px;
         font-family: $font--secondary;
         color: #000;
 
@@ -166,7 +166,10 @@
             transition: transform $default-transition-speed ease;
         }
 
-        &:hover {
+        &:hover,
+        &:focus {
+            color: $color--primary;
+
             &::before {
                 transform: rotate(90deg) translate3d(0, 5px, 0);
             }

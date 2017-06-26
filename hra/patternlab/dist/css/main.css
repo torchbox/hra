@@ -4213,8 +4213,8 @@ textarea:focus {
 
 .results-listing__back {
   position: relative;
-  padding-left: 35px;
-  margin: 40px 0 0 10px;
+  padding-left: 30px;
+  margin-top: 40px;
   font-family: "FrutigerRoman", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   color: #000;
 }
@@ -4234,7 +4234,11 @@ textarea:focus {
   transition: transform 300ms ease;
 }
 
-.results-listing__back:hover::before {
+.results-listing__back:hover, .results-listing__back:focus {
+  color: #0d61b5;
+}
+
+.results-listing__back:hover::before, .results-listing__back:focus::before {
   transform: rotate(90deg) translate3d(0, 5px, 0);
 }
 
