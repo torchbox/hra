@@ -3204,8 +3204,6 @@ var promise = createCommonjsModule(function (module) {
   self.fetch.polyfill = true;
 })(typeof self !== 'undefined' ? self : undefined);
 
-// We have to manually make jQuery a global variable.
-// By default it will be in a closure and renamed to lowercase.
 window.jQuery = jquery$1;
 
 // Promise polyfill for older browsers
@@ -3274,7 +3272,9 @@ function glossary() {
     }
 
     function renderDefaultListing() {
-        var response = loadListing();
+        var startswith = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+        var response = loadListing(startswith);
 
         renderListingResponse(response);
 
@@ -3302,15 +3302,19 @@ function glossary() {
         });
     }
 
+    function getSearchQuery() {
+        return $searchInput.val().trim();
+    }
+
     function bindEvents() {
         // Initial screen
         jquery$1(document).ready(function () {
-            return renderDefaultListing();
+            renderDefaultListing(getSearchQuery());
         });
 
         // Search functionality
         $searchInput.on('keyup', function () {
-            var searchQuery = $searchInput.val().trim();
+            var searchQuery = getSearchQuery();
 
             if (searchQuery.length >= 1) {
                 if (searchQuery !== previousSearchQuery) {
@@ -3383,7 +3387,6 @@ function glossaryTab() {
     }
 
     function close() {
-        console.log('close');
         if (!state.busy) {
             state.busy = true;
             setTimeout(function () {
