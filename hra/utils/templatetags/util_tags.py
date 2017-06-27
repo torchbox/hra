@@ -8,6 +8,7 @@ from hra.forms.models import FormPage
 from hra.news.models import NewsPage
 from hra.people.models import PersonPage
 from hra.rec.models import CommitteePage
+from hra.research_summaries.models import ResearchSummaryPage
 from hra.standardpage.models import StandardPage
 from hra.utils.models import SocialMediaSettings
 
@@ -57,6 +58,9 @@ def page_verbose_names(page):
 
     if isinstance(page, StandardPage) and page.page_types:
         return page.page_types
+
+    if isinstance(page, ResearchSummaryPage):
+        return [page.display_research_type] if page.display_research_type else []
 
     mapping = {
         PersonPage: ["Blog post"],

@@ -1,5 +1,66 @@
 {% extends "base.html" %}
+{% load wagtailcore_tags %}
 
 {% block content %}
-    Last updated: {{ page.updated_at|date }}
+    <div class="results-container results-container--blue">
+        {% spaceless %}
+            <div class="results-container__left">
+
+                <div class="search-filters">
+                    <div class="search-filters__heading">Search results</div>
+
+                    <form action="{% pageurl page %}" method="get" role="search" class="js-main-search-form">
+                        <input class="search-filters__search" name="query" type="text" placeholder="Search&hellip;"
+                                {% if search_query %}
+                               value="{{ search_query }}"{% endif %}
+                        >
+                        <input type="submit" class="search-filters__submit" value="">
+
+                    </form>
+                </div>
+
+            </div>
+            <div class="results-container__right">
+
+                <article class="article">
+
+                    <p>Last updated: {{ page.updated_at|date }}</p>
+
+                    {% if page.introduction %}
+                        {{ page.introduction|richtext }}
+                    {% endif %}
+
+                </article>
+
+                {% if search_results %}
+
+                    {% if search_query %}
+                        {% with count=search_results.paginator.count %}
+                            <div class="results-container__heading">
+                                {{ count }} result{{ count|pluralize }} for <span>{{ search_query }}</span>
+                            </div>
+                        {% endwith %}
+                    {% endif %}
+
+                    <ul class="results-listing">
+
+                        {% for result in search_results %}
+                            <li>
+                                {% include "research_summaries/includes/research_summary_listing_item.html" with item=result %}
+                            </li>
+                        {% endfor %}
+
+                    </ul>
+
+                    {% include "includes/pagination.html" with subpages=search_results %}
+
+                {% else %}
+                    <div class="results-container__heading">
+                        No results found.
+                    </div>
+                {% endif %}
+            </div>
+        {% endspaceless %}
+    </div>
+
 {% endblock %}

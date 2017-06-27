@@ -102,6 +102,25 @@ class ResearchSummaryPage(Page, SocialFields, ListingFields):
     parent_page_types = ['research_summaries.ResearchSummariesIndexPage']
     subpage_types = []
 
+    @property
+    def display_date(self):
+        return self.decision_date
+
+    @property
+    def display_research_type(self):
+        """
+        Se should only display Research Database and Research Tissue Bank
+        research types. Other research types we should display as Research Study.
+        """
+
+        if not self.research_type:
+            return None
+
+        if self.research_type.harp_study_type_id in (8, 20):
+            return self.research_type.name
+
+        return "Research Study"
+
 
 class ResearchSummariesIndexPage(Page, SocialFields, ListingFields):
     introduction = RichTextField(blank=True)
