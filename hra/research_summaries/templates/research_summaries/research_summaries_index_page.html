@@ -61,7 +61,9 @@
 
                 <article class="article">
 
-                    <p>Last updated: {{ page.updated_at|date }}</p>
+                    {% if page.updated_at %}
+                        <p>Last updated: {{ page.updated_at|date }}</p>
+                    {% endif %}
 
                     {% if page.introduction %}
                         {{ page.introduction|richtext }}
