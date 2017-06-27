@@ -60,8 +60,8 @@ function glossary() {
         $resultsHeading.text(`Found ${totalCount} ${pluralize('result', totalCount)}`);
     }
 
-    function renderDefaultListing() {
-        const response = loadListing();
+    function renderDefaultListing(startswith = null) {
+        const response = loadListing(startswith);
 
         renderListingResponse(response);
 
@@ -88,13 +88,21 @@ function glossary() {
             });
     }
 
+    function getSearchQuery() {
+        return $searchInput.val().trim();
+    }
+
     function bindEvents() {
         // Initial screen
-        $(document).ready(() => renderDefaultListing());
+        $(document).ready(() => {
+            renderDefaultListing(
+                getSearchQuery()
+            );
+        });
 
         // Search functionality
         $searchInput.on('keyup', () => {
-            const searchQuery = $searchInput.val().trim();
+            const searchQuery = getSearchQuery();
 
             if (searchQuery.length >= 1) {
                 if (searchQuery !== previousSearchQuery) {

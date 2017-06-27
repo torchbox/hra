@@ -1,16 +1,17 @@
 {% extends "base.html" %}
-{% load staticfiles %}
+{% load wagtailcore_tags staticfiles %}
 
 {% block content %}
 
     <div class="glossary-page-body">
 
+        <form action="{% pageurl page %}">
         {% spaceless %}
             <div class="glossary js-glossary" data-api-url="{% url 'wagtailapi:glossary_terms:listing' %}">
                 <div class="glossary__left">
                     <div class="glossary__inner">
                         <div class="glossary__search-heading">Search glossary</div>
-                        <input class="glossary__search" type="text" placeholder="Lookup&hellip;">
+                        <input class="glossary__search" type="text" placeholder="Lookup&hellip;" name="term" value="{{ request.GET.term|default:"" }}">
                         <input type="submit" class="glossary__submit" value="">
                         <div class="glossary__browse">Browse by letter</div>
                         <div class="keyboard">
@@ -105,6 +106,7 @@
                 </div>
             </div>
         {% endspaceless %}
+        </form>
 
     </div>
 
