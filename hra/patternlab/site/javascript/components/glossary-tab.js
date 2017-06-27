@@ -27,7 +27,6 @@ function glossaryTab() {
     }
 
     function close(){
-        console.log('close');
         if(!state.busy){
             state.busy = true;
             setTimeout(() => {

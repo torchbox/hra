@@ -24,8 +24,6 @@ class GlossaryTermsPagination(BasePagination):
             count_queryset = queryset.annotate(letter=Lower(Substr('name', 1, 1))).values('letter')
             count_queryset = count_queryset.order_by('letter').annotate(count=Count('letter'))
 
-            print(count_queryset.query)
-
             self.count_per_letter = dict(count_queryset.values_list('letter', 'count'))
 
         return queryset
