@@ -7,7 +7,7 @@
             <div class="results-container__left">
 
                 <div class="search-filters">
-                    <div class="search-filters__heading">Search results</div>
+                    <div class="search-filters__heading">Research summaries</div>
 
                     <form action="{% pageurl page %}" method="get" role="search" class="js-main-search-form">
                         <input class="search-filters__search" name="query" type="text" placeholder="Search&hellip;"
@@ -15,6 +15,29 @@
                                value="{{ search_query }}"{% endif %}
                         >
                         <input type="submit" class="search-filters__submit" value="">
+
+                        <div class="search-filters__filter-main-heading">Filter results</div>
+
+                        {% if display_research_types %}
+                            <div class="search-filters__section-heading">Research type</div>
+                            <label for="research_type" class="custom-select__label custom-select--blue__label">
+                                Find by research type
+                            </label>
+                            <div class="custom-select custom-select--blue">
+                                <select id="research_type" name="research_type">
+                                    <option value="">All studies</option>
+                                    {% for key, name in display_research_types.items %}
+                                        <option value="{{ key }}"
+                                                {% if search_research_type == key %}selected="selected"{% endif %}
+                                        >
+                                            {{ name }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        {% endif %}
+
+                        <div class="search-filters__section-heading">Date</div>
 
                     </form>
                 </div>
@@ -34,13 +57,12 @@
 
                 {% if search_results %}
 
-                    {% if search_query %}
-                        {% with count=search_results.paginator.count %}
-                            <div class="results-container__heading">
-                                {{ count }} result{{ count|pluralize }} for <span>{{ search_query }}</span>
-                            </div>
-                        {% endwith %}
-                    {% endif %}
+                    {% with count=search_results.paginator.count %}
+                        <div class="results-container__heading">
+                            {{ count }} record{{ count|pluralize }}
+                            {% if search_query %}for <span>{{ search_query }}</span>{% endif %}
+                        </div>
+                    {% endwith %}
 
                     <ul class="results-listing">
 

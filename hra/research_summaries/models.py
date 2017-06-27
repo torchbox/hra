@@ -13,11 +13,27 @@ from hra.utils.models import SocialFields, ListingFields
 
 
 class ResearchType(models.Model):
+    NON_ALIASED_STUDY_TYPE_IDS = (8, 20)
+    ALIAS_NAME = "Research Study"
+
     name = models.CharField(max_length=255)
 
     # Research type (study type) ID from the HARP API.
     # Use it to check if an entry already exists in url local DB
     harp_study_type_id = models.PositiveIntegerField(editable=False, unique=True)
+
+    @cached_property
+    def display_name(self):
+        """
+        Only "Research Database" and "Research Tissue Bank"
+        research types must be displayed as is.
+        All other types should be displayed as "Research Study".
+        """
+
+        if self.harp_study_type_id in self.NON_ALIASED_STUDY_TYPE_IDS:
+            return self.name
+
+        return self.ALIAS_NAME
 
     def __str__(self):
         return self.name
@@ -102,24 +118,16 @@ class ResearchSummaryPage(Page, SocialFields, ListingFields):
     parent_page_types = ['research_summaries.ResearchSummariesIndexPage']
     subpage_types = []
 
-    @property
+    @cached_property
     def display_date(self):
         return self.decision_date
 
-    @property
+    @cached_property
     def display_research_type(self):
-        """
-        Se should only display Research Database and Research Tissue Bank
-        research types. Other research types we should display as Research Study.
-        """
-
         if not self.research_type:
             return None
 
-        if self.research_type.harp_study_type_id in (8, 20):
-            return self.research_type.name
-
-        return "Research Study"
+        return self.research_type.display_name
 
 
 class ResearchSummariesIndexPage(Page, SocialFields, ListingFields):
@@ -171,8 +179,28 @@ class ResearchSummariesIndexPage(Page, SocialFields, ListingFields):
         if search_date_to:
             search_results = search_results.filter(date_of_rec_opinion__lte=search_date_to)
 
-        if search_research_type:
-            search_results = search_results.filter(research_type=search_research_type)
+        # Research types to be displayed as is
+        non_aliased_research_types = dict(
+            ResearchType.objects.filter(
+                harp_study_type_id__in=ResearchType.NON_ALIASED_STUDY_TYPE_IDS
+            ).values_list('pk', 'name')
+        )
+        # Add the alias for rest research types
+        alias_fake_id = 0
+        display_research_types = non_aliased_research_types.copy()
+        display_research_types.update({
+            alias_fake_id: ResearchType.ALIAS_NAME,
+        })
+
+        try:
+            search_research_type = int(search_research_type)
+
+            if search_research_type == alias_fake_id:
+                search_results = search_results.exclude(research_type__in=non_aliased_research_types.keys())
+            elif search_research_type in non_aliased_research_types.keys():
+                search_results = search_results.filter(research_type=search_research_type)
+        except (TypeError, ValueError):
+            pass
 
         if search_query:
             search_results = search_results.search(search_query, operator='and')
@@ -188,7 +216,10 @@ class ResearchSummariesIndexPage(Page, SocialFields, ListingFields):
 
         context = super().get_context(request, *args, **kwargs)
         context.update({
+            'search_query': search_query,
             'search_results': search_results,
+            'display_research_types': display_research_types,
+            'search_research_type': search_research_type,
         })
 
         return context
