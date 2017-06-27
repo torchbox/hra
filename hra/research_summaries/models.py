@@ -216,10 +216,12 @@ class ResearchSummariesIndexPage(Page, SocialFields, ListingFields):
 
         context = super().get_context(request, *args, **kwargs)
         context.update({
+            'search_date_from': search_date_from,
+            'search_date_to': search_date_to,
+            'search_research_type': search_research_type,
             'search_query': search_query,
             'search_results': search_results,
             'display_research_types': display_research_types,
-            'search_research_type': search_research_type,
         })
 
         return context

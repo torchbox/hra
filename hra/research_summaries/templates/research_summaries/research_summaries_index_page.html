@@ -11,17 +11,15 @@
 
                     <form action="{% pageurl page %}" method="get" role="search" class="js-main-search-form">
                         <input class="search-filters__search" name="query" type="text" placeholder="Search&hellip;"
-                                {% if search_query %}
-                               value="{{ search_query }}"{% endif %}
+                               {% if search_query %}value="{{ search_query }}"{% endif %}
                         >
-                        <input type="submit" class="search-filters__submit" value="">
 
                         <div class="search-filters__filter-main-heading">Filter results</div>
 
                         {% if display_research_types %}
                             <div class="search-filters__section-heading">Research type</div>
                             <label for="research_type" class="custom-select__label custom-select--blue__label">
-                                Find by research type
+                                Filter by research type
                             </label>
                             <div class="custom-select custom-select--blue">
                                 <select id="research_type" name="research_type">
@@ -37,8 +35,24 @@
                             </div>
                         {% endif %}
 
-                        <div class="search-filters__section-heading">Date</div>
+                        <div class="search-filters__section-heading">Date from</div>
+                        <label for="date_from" class="custom-select__label custom-select--blue__label">
+                            Filter by date (date from)
+                        </label>
+                        <input class="search-filters__search" id="date_from" name="date_from" type="text"
+                               {% if search_date_from %}value="{{ search_date_from }}"{% endif %}
+                        >
 
+
+                        <div class="search-filters__section-heading">Date to</div>
+                        <label for="date_to" class="custom-select__label custom-select--blue__label">
+                            Filter by date (date to)
+                        </label>
+                        <input class="search-filters__search" id="date_to" name="date_to" type="text"
+                               {% if search_date_to %}value="{{ search_date_to }}"{% endif %}
+                        >
+
+                        <input type="submit" class="search-filters__submit" value="">
                     </form>
                 </div>
 
