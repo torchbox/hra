@@ -16,4 +16,11 @@ $alignment-values: (
             margin-#{map-get($j, 'margin')}: 30px;
         }
     }
+
+    @include media-query(tablet) {
+        float: none;
+        width: 100%;
+        height: auto;
+        margin: 0 0 30px;
+    }
 }
