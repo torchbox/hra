@@ -29,6 +29,11 @@ CACHE_CONTROL_MAX_AGE = 600
 GOOGLE_TAG_MANAGER_ID = 'GTM-K8CGDX6'
 
 
+# Newsletter
+
+NEWSLETTER_URL = '//nhs.us8.list-manage.com/subscribe?u=04af4dde330becaf38e8eb355&id=1a71ed9a1e'
+
+
 # Configuration from environment variables
 # Alternatively, you can set these in a local.py file on the server
 
