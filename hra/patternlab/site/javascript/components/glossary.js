@@ -60,8 +60,13 @@ function glossary() {
         $resultsHeading.text(`Found ${totalCount} ${pluralize('result', totalCount)}`);
     }
 
-    function renderDefaultListing(startswith = null) {
-        const response = loadListing(startswith);
+    function renderDefaultListing(searchQuery = null) {
+        let response;
+        if (searchQuery) {
+            response = loadSearchListing(searchQuery);
+        } else {
+            response = loadListing();
+        }
 
         renderListingResponse(response);
 
