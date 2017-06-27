@@ -3272,9 +3272,14 @@ function glossary() {
     }
 
     function renderDefaultListing() {
-        var startswith = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+        var searchQuery = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
 
-        var response = loadListing(startswith);
+        var response = void 0;
+        if (searchQuery) {
+            response = loadSearchListing(searchQuery);
+        } else {
+            response = loadListing();
+        }
 
         renderListingResponse(response);
 
