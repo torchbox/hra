@@ -1,4 +1,123 @@
 {% extends "base.html" %}
 
 {% block content %}
+    {% comment %}
+    Note that almost all fields are optional, so it makes sense
+    to ware display layout into an {% if %} condition.
+
+    Note also that some fields (storage_license, for example) depend on value of another
+    (see the API docs and the existing website).
+    {% endcomment %}
+
+    <p>{{ page.title }}</p>
+
+    {% if page.display_research_type %}
+        {% comment %}
+        Use page.display_research_type instead of page.research_type.
+        For more details see comments for the ResearchType class.
+        {% endcomment %}
+        <p>Research type: {{ page.display_research_type }}</p>
+    {% endif %}
+
+    {% if page.full_title %}
+        <p>Full title: {{ page.full_title }}</p>
+    {% endif %}
+
+    {% if page.iras_id %}
+        <p>IRAS ID: {{ page.iras_id }}</p>
+    {% endif %}
+
+    {% if page.contact_name %}
+        <p>Contact name: {{ page.contact_name }}</p>
+    {% endif %}
+
+    {% if page.contact_email %}
+        <p>Contact email: {{ page.contact_email }}</p>
+    {% endif %}
+
+    {% if page.sponsor_organisation %}
+        <p>Sponsor organisation: {{ page.sponsor_organisation }}</p>
+    {% endif %}
+
+    {% if page.eudract_number %}
+        <p>Eudract number: {{ page.eudract_number }}</p>
+    {% endif %}
+
+    {% if page.isrctn_number %}
+        <p>ISRCTN Number: {{ page.isrctn_number }}</p>
+    {% endif %}
+
+    {% if page.clinicaltrials_number %}
+        <p>Clinicaltrials.gov Identifier: {{ page.clinicaltrials_number }}</p>
+    {% endif %}
+
+    {% if page.additional_reference_number_fields %}
+        <p>Clinicaltrials.gov Identifier: {{ page.additional_reference_number_fields }}</p>
+    {% endif %}
+
+    {% if page.duration_of_study_in_uk %}
+        <p>Duration of Study in UK: {{ page.duration_of_study_in_uk }}</p>
+    {% endif %}
+
+    {% if page.research_summary_text %}
+        <p>Research summary: {{ page.research_summary_text }}</p>
+    {% endif %}
+
+    {% if page.rec_name %}
+        <p>REC name: {{ page.rec_name }}</p>
+    {% endif %}
+
+    {% if page.rec_reference %}
+        <p>REC reference: {{ page.rec_reference }}</p>
+    {% endif %}
+
+    {% if page.date_of_rec_opinion %}
+        <p>Date of REC Opinion: {{ page.date_of_rec_opinion|date }}</p>
+    {% endif %}
+
+    {% if page.rec_opinion %}
+        <p>REC opinion: {{ page.get_rec_opinion_display }}</p>
+    {% endif %}
+
+    {% if page.data_collection_arrangements %}
+        <p>Data collection arrangements: {{ page.data_collection_arrangements }}</p>
+    {% endif %}
+
+    {% if page.research_programme %}
+        <p>Research programme: {{ page.research_programme }}</p>
+    {% endif %}
+
+    {% if page.storage_license %}
+        <p>Storage license: {{ page.storage_license }}</p>
+    {% endif %}
+
+    {% if page.rtb_title %}
+        <p>RTBTitle: {{ page.rtb_title }}</p>
+    {% endif %}
+
+    {% if page.research_database_title %}
+        <p>Research database title: {{ page.research_database_title }}</p>
+    {% endif %}
+
+    {% if page.establishment_organisation %}
+        <p>Establishment organisation: {{ page.establishment_organisation }}</p>
+    {% endif %}
+
+    {% if page.establishment_organisation_address_1 %}
+        <p>Establishment organisation address 1: {{ page.establishment_organisation_address_1 }}</p>
+    {% endif %}
+
+    {% if page.establishment_organisation_address_2 %}
+        <p>Establishment organisation address 2: {{ page.establishment_organisation_address_2 }}</p>
+    {% endif %}
+
+    {% if page.establishment_organisation_address_3 %}
+        <p>Establishment organisation address 3: {{ page.establishment_organisation_address_3 }}</p>
+    {% endif %}
+
+    {% if page.establishment_organisation_address_postcode %}
+        <p>Establishment organisation address postcode: {{ page.establishment_organisation_address_postcode }}</p>
+    {% endif %}
+
+
 {% endblock %}
