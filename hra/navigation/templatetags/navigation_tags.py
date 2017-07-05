@@ -11,11 +11,18 @@ esi_inclusion_tag = register_inclusion_tag(register)
 # Primary nav
 @esi_inclusion_tag('navigation/headernav.html')
 def headernav(context):
-    return {
+    context = {
         'headernav': NavigationSettings.for_site(context['request'].site).header_links,
         'request': context['request'],
-        'current_page': context.get('page')
+        'current_page': context.get('page'),
+        'current_page_ancestors_pks': []
     }
+
+    if context['current_page']:
+        context['current_page_ancestors_pks'] = context['current_page'] \
+            .get_ancestors(inclusive=True).values_list('pk', flat=True)
+
+    return context
 
 
 # Footer nav

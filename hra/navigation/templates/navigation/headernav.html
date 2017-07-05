@@ -5,7 +5,7 @@
         {% for block in headernav %}
             {% if block.block_type == 'item' %}
                 {% if block.value.page.live %}
-                    <li class="main-menu__item {% if current_page.pk == block.value.page.pk %}main-menu__item--active{% endif %}">
+                    <li class="main-menu__item {% if block.value.page.pk in current_page_ancestors_pks %}main-menu__item--active{% endif %}">
                         <a href="{% pageurl block.value.page %}">{{ block.value.title|default:block.value.page.title }}</a>
                     </li>
                 {% endif %}
