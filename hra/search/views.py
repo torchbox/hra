@@ -4,6 +4,7 @@ from django.shortcuts import render
 from wagtail.wagtailsearch.models import Query
 
 from hra.categories.models import PageType
+from hra.research_summaries.models import ResearchSummaryPage
 from hra.search.utils import get_search_queryset
 
 
@@ -19,6 +20,9 @@ def search(request):
     selected_page_type_pks = [page_type.pk for page_type in selected_page_types]
 
     search_results = get_search_queryset(request, selected_page_types)
+
+    # Do not display ResearchSummaryPage pages in the main search
+    search_results = search_results.not_type(ResearchSummaryPage)
 
     # Search
     if search_query:
