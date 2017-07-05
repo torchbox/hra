@@ -2226,6 +2226,10 @@ textarea:focus {
   background-color: #0a4d8f;
 }
 
+.default-form input[type='radio'] {
+  margin-right: 3px;
+}
+
 .default-form textarea {
   min-height: 200px;
   resize: horizontal;
@@ -2233,6 +2237,7 @@ textarea:focus {
 
 .default-form input[type='submit'] {
   padding: 10px 20px;
+  margin-top: 20px;
   font-family: "FrutigerLight", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   color: #0d61b5;
   cursor: pointer;
@@ -2244,6 +2249,14 @@ textarea:focus {
 .default-form input[type='submit']:hover, .default-form input[type='submit']:focus {
   color: #fff;
   background-color: #0a4d8f;
+}
+
+.default-form div.radio_select {
+  margin-bottom: 30px;
+}
+
+.default-form div.radio_select label {
+  margin-bottom: 5px;
 }
 
 /*------------------------------------*    $SVG

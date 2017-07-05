@@ -63,6 +63,10 @@ textarea {
         }
     }
 
+    input[type='radio'] {
+        margin-right: 3px;
+    }
+
     textarea {
         min-height: 200px;
         resize: horizontal;
@@ -70,6 +74,7 @@ textarea {
 
     input[type='submit'] {
         padding: 10px 20px;
+        margin-top: 20px;
         font-family: $font--primary;
         color: $color--primary;
         cursor: pointer;
@@ -83,4 +88,14 @@ textarea {
             background-color: darken($color--primary, 8%);
         }
     }
+
+    // sass-lint:disable class-name-format force-element-nesting
+    div.radio_select {
+        margin-bottom: 30px;
+
+        label {
+            margin-bottom: 5px;
+        }
+    }
+    // sass-lint:enddisable
 }

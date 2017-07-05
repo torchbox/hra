@@ -38,6 +38,9 @@
                                             {{ field }}
 
                                         {% elif widget_type == 'select' %}
+                                            <label for="{{ field.id_for_label }}">
+                                                {{ field.label }}
+                                            </label>
                                             <div class="custom-select custom-select--blue">
                                                 {{ field }}
                                             </div>
