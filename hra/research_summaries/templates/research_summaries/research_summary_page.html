@@ -1,123 +1,201 @@
 {% extends "base.html" %}
 
 {% block content %}
-    {% comment %}
-    Note that almost all fields are optional, so it makes sense
-    to ware display layout into an {% if %} condition.
+    <div class="research-summary-page-body">
+        {% spaceless %}
+            <div class="research-summary-page-body__content">
+                {% comment %}
+                Note that almost all fields are optional, so it makes sense
+                to ware display layout into an {% if %} condition.
 
-    Note also that some fields (storage_license, for example) depend on value of another
-    (see the API docs and the existing website).
-    {% endcomment %}
+                Note also that some fields (storage_license, for example) depend on value of another
+                (see the API docs and the existing website).
+                {% endcomment %}
 
-    <p>{{ page.title }}</p>
+                <div class="research-summary-list">
+                    <h1 class="research-summary-list__heading">{{ page.title }}</h1>
 
-    {% if page.display_research_type %}
-        {% comment %}
-        Use page.display_research_type instead of page.research_type.
-        For more details see comments for the ResearchType class.
-        {% endcomment %}
-        <p>Research type: {{ page.display_research_type }}</p>
-    {% endif %}
+                    <ul>
+                        {% if page.display_research_type %}
+                        <li class="research-summary-list__item">
+                                <h4>Research type</h4>
+                                <p>{{ page.display_research_type }}</p>
+                        </li>
+                        {% endif %}
 
-    {% if page.full_title %}
-        <p>Full title: {{ page.full_title }}</p>
-    {% endif %}
+                        {% if page.full_title %}
+                            <li class="research-summary-list__item">
+                                <h4>Full title</h4>
+                                <p>{{ page.full_title }}</p>
+                            </li>
+                        {% endif %}
 
-    {% if page.iras_id %}
-        <p>IRAS ID: {{ page.iras_id }}</p>
-    {% endif %}
+                        {% if page.iras_id %}
+                            <li class="research-summary-list__item">
+                                <h4>IRAS ID</h4>
+                                <p>{{ page.iras_id }}</p>
+                            </li>
+                        {% endif %}
 
-    {% if page.contact_name %}
-        <p>Contact name: {{ page.contact_name }}</p>
-    {% endif %}
+                        {% if page.contact_name %}
+                            <li class="research-summary-list__item">
+                                <h4>Contact name</h4>
+                                <p>{{ page.contact_name }}</p>
+                            </li>
+                        {% endif %}
 
-    {% if page.contact_email %}
-        <p>Contact email: {{ page.contact_email }}</p>
-    {% endif %}
+                        {% if page.contact_email %}
+                            <li class="research-summary-list__item">
+                                <h4>Contact email</h4>
+                                <p>{{ page.contact_email|urlize }}</p>
+                            </li>
+                        {% endif %}
 
-    {% if page.sponsor_organisation %}
-        <p>Sponsor organisation: {{ page.sponsor_organisation }}</p>
-    {% endif %}
-
-    {% if page.eudract_number %}
-        <p>Eudract number: {{ page.eudract_number }}</p>
-    {% endif %}
-
-    {% if page.isrctn_number %}
-        <p>ISRCTN Number: {{ page.isrctn_number }}</p>
-    {% endif %}
-
-    {% if page.clinicaltrials_number %}
-        <p>Clinicaltrials.gov Identifier: {{ page.clinicaltrials_number }}</p>
-    {% endif %}
-
-    {% if page.additional_reference_number_fields %}
-        <p>Clinicaltrials.gov Identifier: {{ page.additional_reference_number_fields }}</p>
-    {% endif %}
-
-    {% if page.duration_of_study_in_uk %}
-        <p>Duration of Study in UK: {{ page.duration_of_study_in_uk }}</p>
-    {% endif %}
-
-    {% if page.research_summary_text %}
-        <p>Research summary: {{ page.research_summary_text }}</p>
-    {% endif %}
-
-    {% if page.rec_name %}
-        <p>REC name: {{ page.rec_name }}</p>
-    {% endif %}
-
-    {% if page.rec_reference %}
-        <p>REC reference: {{ page.rec_reference }}</p>
-    {% endif %}
-
-    {% if page.date_of_rec_opinion %}
-        <p>Date of REC Opinion: {{ page.date_of_rec_opinion|date }}</p>
-    {% endif %}
-
-    {% if page.rec_opinion %}
-        <p>REC opinion: {{ page.get_rec_opinion_display }}</p>
-    {% endif %}
-
-    {% if page.data_collection_arrangements %}
-        <p>Data collection arrangements: {{ page.data_collection_arrangements }}</p>
-    {% endif %}
-
-    {% if page.research_programme %}
-        <p>Research programme: {{ page.research_programme }}</p>
-    {% endif %}
-
-    {% if page.storage_license %}
-        <p>Storage license: {{ page.storage_license }}</p>
-    {% endif %}
-
-    {% if page.rtb_title %}
-        <p>RTBTitle: {{ page.rtb_title }}</p>
-    {% endif %}
-
-    {% if page.research_database_title %}
-        <p>Research database title: {{ page.research_database_title }}</p>
-    {% endif %}
-
-    {% if page.establishment_organisation %}
-        <p>Establishment organisation: {{ page.establishment_organisation }}</p>
-    {% endif %}
-
-    {% if page.establishment_organisation_address_1 %}
-        <p>Establishment organisation address 1: {{ page.establishment_organisation_address_1 }}</p>
-    {% endif %}
-
-    {% if page.establishment_organisation_address_2 %}
-        <p>Establishment organisation address 2: {{ page.establishment_organisation_address_2 }}</p>
-    {% endif %}
-
-    {% if page.establishment_organisation_address_3 %}
-        <p>Establishment organisation address 3: {{ page.establishment_organisation_address_3 }}</p>
-    {% endif %}
-
-    {% if page.establishment_organisation_address_postcode %}
-        <p>Establishment organisation address postcode: {{ page.establishment_organisation_address_postcode }}</p>
-    {% endif %}
+                        {% if page.sponsor_organisation %}
+                            <li class="research-summary-list__item">
+                                <h4>Sponsor organisation</h4>
+                                <p>{{ page.sponsor_organisation }}</p>
+                            </li>
+                        {% endif %}
 
 
+                        {% if page.eudract_number %}
+                            <li class="research-summary-list__item">
+                                <h4>Eudract number</h4>
+                                <p>{{ page.eudract_number }}</p>
+                            </li>
+                        {% endif %}
+
+                        {% if page.isrctn_number %}
+                            <li class="research-summary-list__item">
+                                <h4>ISRCTN Number</h4>
+                                <p>{{ page.isrctn_number }}</p>
+                            </li>
+                        {% endif %}
+
+                        {% if page.clinicaltrials_number %}
+                            <li class="research-summary-list__item">
+                                <h4>Clinicaltrials.gov Identifier</h4>
+                                <p><a href="https://clinicaltrials.gov/ct2/show/{{ page.clinicaltrials_number|urlencode }}">{{ page.clinicaltrials_number }}</a></p>
+                            </li>
+                        {% endif %}
+
+                        {% if page.additional_reference_number_fields %}
+                            <li class="research-summary-list__item">
+                                <h4>Clinicaltrials.gov Identifier</h4>
+                                <p>{{ page.additional_reference_number_fields }}</p>
+                            </li>
+                        {% endif %}
+
+                        {% if page.duration_of_study_in_uk and page.duration_of_study_in_uk != '0 years, 0 months, 0 days' %}
+                            <li class="research-summary-list__item">
+                                <h4>Duration of Study in the UK</h4>
+                                <p>{{ page.duration_of_study_in_uk }}</p>
+                            </li>
+                        {% endif %}
+
+                        {% if page.research_summary_text %}
+                            <li class="research-summary-list__item">
+                                <h4>Research summary</h4>
+                                <div>
+                                    {{ page.research_summary_text|linebreaks }}
+                                </div>
+                            </li>
+                        {% endif %}
+
+                        {% if page.rec_name %}
+                            <li class="research-summary-list__item">
+                                <h4>REC name</h4>
+                                <p>{{ page.rec_name }}</p>
+                            </li>
+                        {% endif %}
+
+                        {% if page.rec_reference %}
+                            <li class="research-summary-list__item">
+                                <h4>REC reference</h4>
+                                <p>{{ page.rec_reference }}</p>
+                            </li>
+                        {% endif %}
+
+                        {% if page.date_of_rec_opinion %}
+                            <li class="research-summary-list__item">
+                                <h4>Date of REC Opinion</h4>
+                                <p>{{ page.date_of_rec_opinion|date }}</p>
+                            </li>
+                        {% endif %}
+
+                        {% if page.rec_opinion %}
+                            <li class="research-summary-list__item">
+                                <h4>REC opinion</h4>
+                                <p>{{ page.get_rec_opinion_display }}</p>
+                            </li>
+                        {% endif %}
+
+                        {% if page.data_collection_arrangements %}
+                            <li class="research-summary-list__item">
+                                <h4>Data collection arrangements</h4>
+                                <div>{{ page.data_collection_arrangements|linebreaks }}</div>
+                            </li>
+                        {% endif %}
+
+                        {% if page.research_programme %}
+                            <li class="research-summary-list__item">
+                                <h4>Research programme</h4>
+                                <p>{{ page.research_programme }}</p>
+                            </li>
+                        {% endif %}
+
+                        {% if page.storage_license %}
+                            <li class="research-summary-list__item">
+                                <h4>Storage license</h4>
+                                <p>{{ page.storage_license }}</p>
+                            </li>
+                        {% endif %}
+
+                        {% if page.rtb_title %}
+                            <li class="research-summary-list__item">
+                                <h4>RTBTitle</h4>
+                                <p>{{ page.rtb_title }}</p>
+                            </li>
+                        {% endif %}
+
+                        {% if page.research_database_title %}
+                            <li class="research-summary-list__item">
+                                <h4>Research database title</h4>
+                                <p>{{ page.research_database_title }}</p>
+                            </li>
+                        {% endif %}
+
+                        {% if page.establishment_organisation %}
+                            <li class="research-summary-list__item">
+                                <h4>Establishment organisation</h4>
+                                <p>{{ page.establishment_organisation }}</p>
+                            </li>
+                        {% endif %}
+
+                        {% if page.establishment_organisation_address_1 or page.establishment_organisation_address_2 or page.establishment_organisation_address_3 or page.establishment_organisation_address_postcode %}
+                            <li class="research-summary-list__item">
+                                <h4>Establishment organisation address</h4>
+                                {% if page.establishment_organisation_address_1 %}
+                                    <p>{{ page.establishment_organisation_address_1 }}</p>
+                                {% endif %}
+
+                                 {% if page.establishment_organisation_address_2 %}
+                                    <p>{{ page.establishment_organisation_address_2 }}</p>
+                                 {% endif %}
+
+                                 {% if page.establishment_organisation_address_3 %}
+                                    <p>{{ page.establishment_organisation_address_3 }}</p>
+                                 {% endif %}
+
+                                 {% if page.establishment_organisation_address_postcode %}
+                                    <p>{{ page.establishment_organisation_address_postcode }}</p>
+                                 {% endif %}
+                            </li>
+                        {% endif %}
+                    </ul>
+                {% endspaceless %}
+            </div>
+        </div>
+    </div>
 {% endblock %}

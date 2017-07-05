@@ -1,0 +1,28 @@
+/*------------------------------------*\
+    $RESERACH SUMMARY PAGE BODY
+\*------------------------------------*/
+
+.research-summary-page-body {
+    position: relative;
+    z-index: $z-milli;
+    padding: 60px 5% 20px;
+    margin: 0 auto;
+
+    @include media-query(desktop) {
+        padding: 60px 20px 20px;
+    }
+
+    @include media-query(tablet) {
+        padding-top: 90px;
+    }
+
+    &__content {
+        display: inline-block;
+        width: 100%;
+        vertical-align: top;
+
+        @include media-query(tablet) {
+            width: 100%;
+        }
+    }
+}

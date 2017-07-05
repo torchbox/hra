@@ -9,6 +9,8 @@
         @include rem-font-size(40px);
         margin-bottom: 15px;
         color: #fff;
+        overflow: hidden;
+        white-space: nowrap;
 
         @include media-query(laptop) {
             @include font-size(beta);

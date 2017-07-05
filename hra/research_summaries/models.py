@@ -118,6 +118,20 @@ class ResearchSummaryPage(Page, SocialFields, ListingFields):
     parent_page_types = ['research_summaries.ResearchSummariesIndexPage']
     subpage_types = []
 
+    def __init__(self, *args, **kwargs):
+        super(ResearchSummaryPage, self).__init__(*args, **kwargs)
+
+        # Some of the fields have one or more spaces in them, need to trim them
+        # so we can evaluate whether they are empty with not operator.
+        for field in self._meta.get_fields():
+            # Skip non-textual fields
+            if not isinstance(field, (models.CharField, models.TextField)):
+                continue
+
+            if isinstance(getattr(self, field.name), str):
+                stripped_value = getattr(self, field.name).strip()
+                setattr(self, field.name, stripped_value)
+
     @cached_property
     def display_date(self):
         return self.decision_date
