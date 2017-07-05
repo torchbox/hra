@@ -70,23 +70,7 @@
 
         {% notification_bar %}
         
-        {# Glossary fly-in tab #}
-        <div class="glossary-tab">
-          <button class="glossary-tab__label">
-            Glossary
-            <svg height="25px" width="25px">
-              <use xlink:href="#info-icon"></use>
-            </svg>
-          </button>
-          <button class="glossary-tab__close"></button>
-          <div class="glossary-tab__content">
-            <form action="/approvals-amendments/glossary/" method="get" role="search">
-              <label class="glossary-tab__input-label">Search glossary</label>
-              <input type="text" class="glossary-tab__input" name="search" placeholder="Lookup&hellip;">
-              <input type="submit" class="glossary-tab__submit" value="">
-            </form>
-          </div>
-        </div>
+        {% include 'includes/glossary-tab.html' %}
 
         {% include 'header.html' %}
 
