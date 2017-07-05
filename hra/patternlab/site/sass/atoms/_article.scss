@@ -4,6 +4,8 @@
 \*------------------------------------*/
 
 .article {
+    @include rem-font-size(18px);
+
     a {
         text-decoration: underline;
         text-decoration-skip: ink;
@@ -43,6 +45,10 @@
         @include rem-font-size(18px);
         margin: 0 0 20px 35px;
         line-height: 1.4;
+
+        li {
+            margin-bottom: 3px;
+        }
     }
 
     ul {

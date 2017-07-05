@@ -1945,6 +1945,11 @@ a {
 /*------------------------------------*    $ARTICLE
     Default rich text styles
 \*------------------------------------*/
+.article {
+  font-size: 18px;
+  font-size: 1.125rem;
+}
+
 .article a {
   text-decoration: underline;
   text-decoration-skip: ink;
@@ -1992,6 +1997,11 @@ a {
   font-size: 1.125rem;
   margin: 0 0 20px 35px;
   line-height: 1.4;
+}
+
+.article ul li,
+.article ol li {
+  margin-bottom: 3px;
 }
 
 .article ul {
