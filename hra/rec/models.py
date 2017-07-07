@@ -98,7 +98,6 @@ class CommitteePage(Page, SocialFields, ListingFields):
         ('north_west', 'North West'),
         ('northern_ireland', 'Northern Ireland'),
         ('scotland', 'Scotland'),
-        ('social_care_institute_for_excellence', 'Social Care Institute for Excellence'),
         ('south_central', 'South Central'),
         ('south_east_coast', 'South East Coast'),
         ('south_west', 'South West'),
