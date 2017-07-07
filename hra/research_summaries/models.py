@@ -3,6 +3,7 @@ from collections import OrderedDict
 from django.conf import settings
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.db import models
+from django.utils.dateparse import parse_date
 from django.utils.functional import cached_property
 from wagtail.wagtailadmin.edit_handlers import FieldPanel
 from wagtail.wagtailcore.fields import RichTextField
@@ -187,11 +188,32 @@ class ResearchSummariesIndexPage(Page, SocialFields, ListingFields):
 
         search_results = self._children_research_summary
 
+        # Convert dates to the Python format
         if search_date_from:
-            search_results = search_results.filter(date_of_rec_opinion__gte=search_date_from)
+            try:
+                # Can return None or raise ValueError in case of bad format
+                search_date_from = parse_date(search_date_from)
+            except ValueError:
+                search_date_from = None
 
         if search_date_to:
+            try:
+                # Can return None or raise ValueError in case of bad format
+                search_date_to = parse_date(search_date_to)
+            except ValueError:
+                search_date_to = None
+
+        # Swap dates around if "date from" happens after "date to".
+        if search_date_from and search_date_to:
+            if search_date_from > search_date_to:
+                    search_date_to, search_date_from = search_date_from, search_date_to
+
+        # Search queryset
+        if search_date_to:
             search_results = search_results.filter(date_of_rec_opinion__lte=search_date_to)
+
+        if search_date_from:
+            search_results = search_results.filter(date_of_rec_opinion__gte=search_date_from)
 
         # Research types to be displayed as is
         non_aliased_research_types = dict(
@@ -230,12 +252,17 @@ class ResearchSummariesIndexPage(Page, SocialFields, ListingFields):
 
         context = super().get_context(request, *args, **kwargs)
         context.update({
-            'search_date_from': search_date_from,
-            'search_date_to': search_date_to,
             'search_research_type': search_research_type,
             'search_query': search_query,
             'search_results': search_results,
             'display_research_types': display_research_types,
         })
+
+        # Convert dates back to YYYY-MM-DD
+        if search_date_from:
+            context['search_date_from'] = search_date_from.isoformat()
+
+        if search_date_to:
+            context['search_date_to'] = search_date_to.isoformat()
 
         return context
