@@ -8,8 +8,8 @@
     &__heading {
         @include rem-font-size(40px);
         margin-bottom: 15px;
-        color: #fff;
         overflow: hidden;
+        color: #fff;
         white-space: nowrap;
 
         @include media-query(laptop) {
