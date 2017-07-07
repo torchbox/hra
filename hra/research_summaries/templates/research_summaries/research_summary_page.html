@@ -76,7 +76,14 @@
                         {% if page.clinicaltrials_number %}
                             <li class="research-summary-list__item">
                                 <h4>Clinicaltrials.gov Identifier</h4>
-                                <p><a href="https://clinicaltrials.gov/ct2/show/{{ page.clinicaltrials_number|urlencode }}">{{ page.clinicaltrials_number }}</a></p>
+                                <p>
+                                    {# If it's 11 characters long, show a link #}
+                                    {% if page.clinicaltrials_number.10 and not page.clinicaltrials_number.11 %}
+                                        <a href="https://clinicaltrials.gov/ct2/show/{{ page.clinicaltrials_number|urlencode }}">{{ page.clinicaltrials_number }}</a>
+                                    {% else %}
+                                        {{ page.clinicaltrials_number }}
+                                    {% endif %}
+                                </p>
                             </li>
                         {% endif %}
 
@@ -131,67 +138,80 @@
                             </li>
                         {% endif %}
 
-                        {% if page.data_collection_arrangements %}
-                            <li class="research-summary-list__item">
-                                <h4>Data collection arrangements</h4>
-                                <div>{{ page.data_collection_arrangements|linebreaks }}</div>
-                            </li>
+                        {# Study type 8 or 20 only #}
+                        {% if page.research_type.harp_study_type_id == 8 or page.research_type.harp_study_type_id == 20 %}
+                            {% if page.data_collection_arrangements %}
+                                <li class="research-summary-list__item">
+                                    <h4>Data collection arrangements</h4>
+                                    <div>{{ page.data_collection_arrangements|linebreaks }}</div>
+                                </li>
+                            {% endif %}
+
+                            {% if page.research_programme %}
+                                <li class="research-summary-list__item">
+                                    <h4>Research programme</h4>
+                                    <p>{{ page.research_programme }}</p>
+                                </li>
+                            {% endif %}
                         {% endif %}
 
-                        {% if page.research_programme %}
-                            <li class="research-summary-list__item">
-                                <h4>Research programme</h4>
-                                <p>{{ page.research_programme }}</p>
-                            </li>
+                        {# Study type 8 only #}
+                        {% if page.research_type.harp_study_type_id == 8 %}
+                            {% if page.storage_license %}
+                                <li class="research-summary-list__item">
+                                    <h4>Storage license</h4>
+                                    <p>{{ page.storage_license }}</p>
+                                </li>
+                            {% endif %}
+
+                            {% if page.rtb_title %}
+                                <li class="research-summary-list__item">
+                                    <h4>RTBTitle</h4>
+                                    <p>{{ page.rtb_title }}</p>
+                                </li>
+                            {% endif %}
                         {% endif %}
 
-                        {% if page.storage_license %}
-                            <li class="research-summary-list__item">
-                                <h4>Storage license</h4>
-                                <p>{{ page.storage_license }}</p>
-                            </li>
+                        {% if page.research_type.harp_study_type_id == 20 %}
+                            {% if page.research_database_title %}
+                                <li class="research-summary-list__item">
+                                    <h4>Research database title</h4>
+                                    <p>{{ page.research_database_title }}</p>
+                                </li>
+                            {% endif %}
                         {% endif %}
 
-                        {% if page.rtb_title %}
-                            <li class="research-summary-list__item">
-                                <h4>RTBTitle</h4>
-                                <p>{{ page.rtb_title }}</p>
-                            </li>
-                        {% endif %}
+                        {# Study type 8 or 20 only #}
+                        {% if page.research_type.harp_study_type_id == 8 or page.research_type.harp_study_type_id == 20 %}
 
-                        {% if page.research_database_title %}
-                            <li class="research-summary-list__item">
-                                <h4>Research database title</h4>
-                                <p>{{ page.research_database_title }}</p>
-                            </li>
-                        {% endif %}
+                            {% if page.establishment_organisation %}
+                                <li class="research-summary-list__item">
+                                    <h4>Establishment organisation</h4>
+                                    <p>{{ page.establishment_organisation }}</p>
+                                </li>
+                            {% endif %}
 
-                        {% if page.establishment_organisation %}
-                            <li class="research-summary-list__item">
-                                <h4>Establishment organisation</h4>
-                                <p>{{ page.establishment_organisation }}</p>
-                            </li>
-                        {% endif %}
+                            {% if page.establishment_organisation_address_1 or page.establishment_organisation_address_2 or page.establishment_organisation_address_3 or page.establishment_organisation_address_postcode %}
+                                <li class="research-summary-list__item">
+                                    <h4>Establishment organisation address</h4>
+                                    {% if page.establishment_organisation_address_1 %}
+                                        <p>{{ page.establishment_organisation_address_1 }}</p>
+                                    {% endif %}
 
-                        {% if page.establishment_organisation_address_1 or page.establishment_organisation_address_2 or page.establishment_organisation_address_3 or page.establishment_organisation_address_postcode %}
-                            <li class="research-summary-list__item">
-                                <h4>Establishment organisation address</h4>
-                                {% if page.establishment_organisation_address_1 %}
-                                    <p>{{ page.establishment_organisation_address_1 }}</p>
-                                {% endif %}
+                                    {% if page.establishment_organisation_address_2 %}
+                                        <p>{{ page.establishment_organisation_address_2 }}</p>
+                                    {% endif %}
 
-                                 {% if page.establishment_organisation_address_2 %}
-                                    <p>{{ page.establishment_organisation_address_2 }}</p>
-                                 {% endif %}
+                                    {% if page.establishment_organisation_address_3 %}
+                                        <p>{{ page.establishment_organisation_address_3 }}</p>
+                                    {% endif %}
 
-                                 {% if page.establishment_organisation_address_3 %}
-                                    <p>{{ page.establishment_organisation_address_3 }}</p>
-                                 {% endif %}
+                                    {% if page.establishment_organisation_address_postcode %}
+                                        <p>{{ page.establishment_organisation_address_postcode }}</p>
+                                    {% endif %}
+                                </li>
+                            {% endif %}
 
-                                 {% if page.establishment_organisation_address_postcode %}
-                                    <p>{{ page.establishment_organisation_address_postcode }}</p>
-                                 {% endif %}
-                            </li>
                         {% endif %}
                     </ul>
                 {% endspaceless %}
