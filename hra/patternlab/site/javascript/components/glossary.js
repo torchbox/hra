@@ -20,14 +20,14 @@ function glossary() {
             qs = `?term_startswith=${startswith}`;
         }
 
-        return fetch(apiURL + qs)
+        return fetch(apiURL + qs, { credentials: 'same-origin' })
             .then(response => response.json());
     }
 
     function loadSearchListing(searchQuery) {
         let qs = `?search=${searchQuery}`;
 
-        return fetch(apiURL + qs)
+        return fetch(apiURL + qs, { credentials: 'same-origin' })
             .then(response => response.json());
     }
 
