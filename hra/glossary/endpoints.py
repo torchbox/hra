@@ -1,3 +1,4 @@
+from rest_framework.permissions import AllowAny
 from wagtail.api.v2.endpoints import BaseAPIEndpoint
 from wagtail.api.v2.filters import FieldsFilter, OrderingFilter, SearchFilter
 
@@ -16,6 +17,7 @@ class GlossaryTermsAPIEndpoint(BaseAPIEndpoint):
     name = 'glossary_terms'
     model = GlossaryTerm
     pagination_class = GlossaryTermsPagination
+    permission_classes = (AllowAny,)
 
     known_query_parameters = BaseAPIEndpoint.known_query_parameters.union([
         GlossaryTermsStartsWithFilter.query_parameter
