@@ -5499,6 +5499,16 @@ textarea:focus {
   color: #c7c7c7;
 }
 
+.notification__content a {
+  color: #c7c7c7;
+  text-decoration: underline;
+  text-decoration-skip: ink;
+}
+
+.notification__content a:hover {
+  color: #fff;
+}
+
 .notification__close {
   position: absolute;
   top: 0;
