@@ -107,7 +107,7 @@ else:
 
 # Redis
 
-if 'CACHE_URL' in env:
+if 'CACHE_URL' in os.environ:
     CACHES = {'default': django_cache_url.config()}
 
 

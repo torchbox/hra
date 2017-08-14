@@ -172,7 +172,7 @@ STATICFILES_FINDERS = [
 ]
 
 STATICFILES_DIRS = [
-    os.path.join(PROJECT_DIR, 'patternlab'),
+    os.path.join(PROJECT_DIR, 'patternlab/dist'),
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
