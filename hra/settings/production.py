@@ -12,7 +12,7 @@ from .base import *  # noqa
 # Disable debug mode
 DEBUG = False
 
-SECURE_SSL_REDIRECT = True
+SECURE_SSL_REDIRECT = False
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # enable HSTS only once the site is working properly on https with the actual live domain name
 # SECURE_HSTS_SECONDS = 31536000  # 1 year
@@ -85,6 +85,14 @@ if 'MEDIA_URL' in env:
 
 if 'MEDIA_DIR' in env:
     MEDIA_ROOT = env['MEDIA_DIR']
+
+
+if 'MEDIA_BUCKET' in env:
+    AWS_LOCATION ='media/'
+    AWS_STORAGE_BUCKET_NAME = env['MEDIA_BUCKET']
+    AWS_S3_CUSTOM_DOMAIN = env['AWS_S3_CUSTOM_DOMAIN']
+    AWS_S3_URL_PROTOCOL= 'http:' # TODO
+    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 
 # Database

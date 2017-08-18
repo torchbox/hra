@@ -10,7 +10,7 @@ Template to display default teasers. Takes:
 {% spaceless %}
     <div class="grid grid--wide">
 
-        {% static 'dist/images/teaser.png' as default_listing_image %}
+        {% static 'images/teaser.png' as default_listing_image %}
         {% for teaser in section_pages %}
             {% with teaser_page=teaser.page.specific %}
                 {% if teaser_page.live %}

@@ -49,7 +49,7 @@
         <meta property="og:description" content="{{ page|social_text:request.site }}" />
         <meta property="og:site_name" content="{{ settings.utils.SocialMediaSettings.site_name }}" />
 
-        <link rel="stylesheet" type="text/css" href="{% static 'dist/css/main.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
         <link rel="manifest" href="{% static 'manifest.json' %}">
         {% block extra_css %}{% endblock %}
     </head>
@@ -69,7 +69,7 @@
         {% wagtailuserbar %}
 
         {% notification_bar %}
-        
+
         {% include 'includes/glossary-tab.html' %}
 
         {% include 'header.html' %}
@@ -83,9 +83,8 @@
             {% include 'footer.html' %}
         {% endblock %}
 
-        <script type="text/javascript" src="{% static 'dist/js/main.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
 
         {% block extra_js %}{% endblock %}
     </body>
 </html>
-

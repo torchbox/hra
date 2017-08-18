@@ -6,7 +6,7 @@
         <div class="grid grid--wide">
             <div class="grid__item four-tenths tablet--one-whole">
 
-                {% static 'dist/images/teaser.png' as default_listing_image %}
+                {% static 'images/teaser.png' as default_listing_image %}
                 {% for teaser_page in value.featured_pages %}
                     {% if teaser_page.live %}
                         {% with teaser_page=teaser_page.specific %}
