@@ -16,13 +16,10 @@ except ImportError:
 def single_instance_command(command_name):
     """Runs command only on one instance of a uWSGI legion"""
 
-    if uwsgi.i_am_the_lord(os.getenv("CFG_APP_NAME")):
+    if os.getenv("CFG_I_AM_CRON"):
         print("I am the lord.")
         print("Running %s" % command_name)
         call_command(command_name, interactive=False)
-    else:
-        print("I am not the lord.")
-
 
 if has_uwsgi:
     @cron(0, 1, -1, -1, -1)

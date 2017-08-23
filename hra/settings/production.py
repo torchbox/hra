@@ -61,6 +61,11 @@ if 'PRIMARY_HOST' in env:
 if 'SERVER_EMAIL' in env:
     SERVER_EMAIL = env['SERVER_EMAIL']
     DEFAULT_FROM_EMAIL = env['SERVER_EMAIL']
+    EMAIL_USE_TLS = True
+    EMAIL_HOST = env['EMAIL_HOST']
+    EMAIL_PORT = 587
+    EMAIL_HOST_USER = env['EMAIL_HOST_USER']
+    EMAIL_HOST_PASSWORD = env['EMAIL_HOST_PASSWORD']
 
 if 'EMAIL_SUBJECT_PREFIX' in env:
     EMAIL_SUBJECT_PREFIX = env['EMAIL_SUBJECT_PREFIX']
@@ -127,14 +132,24 @@ if 'BROKER_URL' in env:
 
 
 # Elasticsearch
+from elasticsearch import Elasticsearch, RequestsHttpConnection
+from requests_aws4auth import AWS4Auth
 
-if 'ELASTICSEARCH_URL' in env:
+if 'ELASTICSEARCH_HOST' in env:
     WAGTAILSEARCH_BACKENDS = {
         'default': {
-            'BACKEND': 'wagtail.wagtailsearch.backends.elasticsearch',
-            'URLS': [env['ELASTICSEARCH_URL']],
+            'BACKEND': 'wagtail.wagtailsearch.backends.elasticsearch5',
             'INDEX': APP_NAME,
-            'ATOMIC_REBUILD': True,
+            'HOSTS': [{
+                'host': env['ELASTICSEARCH_HOST'],
+                'port': 443,
+                'use_ssl': True,
+                'verify_certs': True,
+                'http_auth': AWS4Auth(env['AWS_ACCESS_KEY_ID'], env['AWS_SECRET_ACCESS_KEY'], 'eu-west-2', 'es'),
+            }],
+            'OPTIONS': {
+                'connection_class': RequestsHttpConnection,
+            },
         },
     }
 
