@@ -12,8 +12,6 @@ ADD requirements.txt /app/requirements.txt
 RUN pip install -r requirements.txt
 ADD manage.py /app/manage.py
 ADD hra /app/hra
-ADD start.sh /app/start.sh
-RUN chmod +x /app/start.sh
 ADD public /app/public
 
 RUN python manage.py collectstatic
