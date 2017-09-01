@@ -1,10 +1,8 @@
 import logging
+import os
 
 from django.conf import settings
 from django.http import HttpResponse
-
-# from django.contrib.sites.models import Site
-from ten_self_service.core.models import SiteScheme
 
 logger = logging.getLogger(__name__)
 
@@ -19,17 +17,16 @@ class BasicAuth(object):
     defaults to 'Development')
     """
 
-    def render_401(self, site_scheme):
+    def render_401(self):
         response = HttpResponse(
             "<html><title>401 Unauthorized</title><body><h1>401 Unauthorized</h1></body></html>",
             content_type="text/html",
         )
-        realm = site_scheme.basic_auth_realm
-        response['WWW-Authenticate'] = "Basic realm=\"%s\"" % realm
+        response['WWW-Authenticate'] = "Basic realm=\"%s\"" % os.environ['BASIC_AUTH_REALM']
         response.status_code = 401
         return response
 
-    def is_authenticated(self, request, site_scheme):
+    def is_authenticated(self, request):
         if 'HTTP_AUTHORIZATION' not in request.META:
             logger.debug('basicauth: no HTTP_AUTHORIZATION - {}'.format(request.path))
             return False
@@ -40,30 +37,17 @@ class BasicAuth(object):
             return False
 
         username, password = auth.strip().decode('base64').split(':', 1)
-        if site_scheme.basic_auth_user != username or site_scheme.basic_auth_pass != password:
+        basic_auth_user, basic_auth_pass = os.environ['BASIC_AUTH_USER'], os.environ['BASIC_AUTH_PASS']
+        if basic_auth_user != username or basic_auth_pass != password:
             logger.debug('basicauth: password mismatch {}/{} != {}/{}'.format(username,
                                                                               password,
-                                                                              site_scheme.basic_auth_user,
-                                                                              site_scheme.basic_auth_pass))
+                                                                              basic_auth_user,
+                                                                              basic_auth_pass))
             return False
 
         return True
 
     def process_request(self, request):
-        site_scheme = SiteScheme.objects.only(
-            'basic_auth_enabled',
-            'basic_auth_user',
-            'basic_auth_pass'
-        ).get(site=settings.SITE_ID)  # get without caching
-        required_fields = (
-            site_scheme.basic_auth_enabled,
-            site_scheme.basic_auth_user,
-            site_scheme.basic_auth_pass
-        )
-        if all(required_fields):
-            if request.path.startswith("/static/"):
-                return
-            if request.path in getattr(settings, "BASIC_AUTH_DISABLED", []):
-                return
-            if not self.is_authenticated(request, site_scheme):
-                return self.render_401(site_scheme)
+        if os.environ.get('BASIC_AUTH_REALM', '') != '':
+            if not self.is_authenticated(request):
+                return self.render_401()
