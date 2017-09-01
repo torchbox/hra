@@ -1,4 +1,4 @@
-0.4 (unreleased)
+0.4 (2017-09-01)
 ----------------
 
 - python 3 base64 decode
