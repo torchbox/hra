@@ -1,4 +1,4 @@
-0.3 (unreleased)
+0.3 (2017-09-01)
 ----------------
 
 - remove reference to manifest.json
