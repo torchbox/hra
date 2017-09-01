@@ -1,7 +1,7 @@
 0.6 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- getting a bit bored of base64 if i am completely honest
 
 
 0.5 (2017-09-01)
