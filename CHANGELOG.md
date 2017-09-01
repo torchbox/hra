@@ -1,7 +1,7 @@
 0.8 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Simplify starting container
 
 
 0.7 (2017-09-01)

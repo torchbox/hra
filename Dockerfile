@@ -16,12 +16,10 @@ ADD start.sh /app/start.sh
 RUN chmod +x /app/start.sh
 ADD public /app/public
 
-
 RUN python manage.py collectstatic
 
 EXPOSE 80
 
 ENV Name HRA
 
-CMD /app/start.sh
-
+CMD uwsgi --chdir /app --master --processes 4 --threads 2 --http-socket :80 --wsgi-file hra/wgi.py
