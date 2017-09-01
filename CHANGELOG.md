@@ -1,7 +1,7 @@
 0.7 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- add recaptcha to prod settings
 
 
 0.6 (2017-09-01)

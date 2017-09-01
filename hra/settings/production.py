@@ -49,6 +49,10 @@ for key, value in os.environ.items():
 
 APP_NAME = env.get('APP_NAME', 'hra')
 
+if 'RECAPTCHA_PUBLIC_KEY' in env:
+    RECAPTCHA_PUBLIC_KEY = env['RECAPTCHA_PUBLIC_KEY']
+    RECAPTCHA_PRIVATE_KEY = env['RECAPTCHA_PRIVATE_KEY']
+
 if 'SECRET_KEY' in env:
     SECRET_KEY = env['SECRET_KEY']
 
