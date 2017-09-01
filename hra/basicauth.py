@@ -1,5 +1,6 @@
 import logging
 import os
+from base64 import standard_b64decode
 
 from django.conf import settings
 from django.http import HttpResponse
@@ -36,7 +37,7 @@ class BasicAuth(object):
             logger.debug('basicauth: HTTP_AUTHORIZATION not basic - {}'.format(request.path))
             return False
 
-        username, password = auth.strip().decode('base64').split(':', 1)
+        username, password = standard_b64decode(auth.strip()).split(':', 1)
         basic_auth_user, basic_auth_pass = os.environ['BASIC_AUTH_USER'], os.environ['BASIC_AUTH_PASS']
         if basic_auth_user != username or basic_auth_pass != password:
             logger.debug('basicauth: password mismatch {}/{} != {}/{}'.format(username,
