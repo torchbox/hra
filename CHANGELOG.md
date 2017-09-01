@@ -1,7 +1,7 @@
 0.5 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- more base64 fixes
 
 
 0.4 (2017-09-01)
