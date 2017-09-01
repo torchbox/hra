@@ -1,7 +1,7 @@
 0.2 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Basic Auth fixes
 
 
 0.1 (2017-09-01)
