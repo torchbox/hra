@@ -20,4 +20,4 @@ EXPOSE 80
 
 ENV Name HRA
 
-CMD uwsgi --chdir /app --master --processes 4 --threads 2 --http-socket :80 --wsgi-file hra/wgi.py
+CMD uwsgi --chdir /app --master --processes 4 --threads 2 --http-socket :80 --wsgi-file hra/wsgi.py

@@ -1,7 +1,7 @@
 0.9 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Fix typo in Dockerfile
 
 
 0.8 (2017-09-01)
