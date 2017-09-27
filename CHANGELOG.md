@@ -1,4 +1,4 @@
-0.11 (unreleased)
+0.11 (2017-09-27)
 -----------------
 
 - Change elasticsearch settings to mirror others on platform
