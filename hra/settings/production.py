@@ -2,7 +2,8 @@ import os
 
 import django_cache_url
 import dj_database_url
-import raven
+from elasticsearch import Elasticsearch, RequestsHttpConnection
+from requests_aws4auth import AWS4Auth
 
 from .base import *  # noqa
 
@@ -136,64 +137,23 @@ if 'BROKER_URL' in env:
     BROKER_URL = env['BROKER_URL']
 
 
-# Elasticsearch
-from elasticsearch import Elasticsearch, RequestsHttpConnection
-from requests_aws4auth import AWS4Auth
-
-if 'ELASTICSEARCH_HOST' in env:
+if 'ES_HOST' in env:
     WAGTAILSEARCH_BACKENDS = {
         'default': {
             'BACKEND': 'wagtail.wagtailsearch.backends.elasticsearch5',
-            'INDEX': APP_NAME,
+            'INDEX': env['ES_INDEX'],
             'HOSTS': [{
-                'host': env['ELASTICSEARCH_HOST'],
+                'host': env['ES_HOST'],
                 'port': 443,
                 'use_ssl': True,
                 'verify_certs': True,
-                'http_auth': AWS4Auth(env['AWS_ACCESS_KEY_ID'], env['AWS_SECRET_ACCESS_KEY'], 'eu-west-2', 'es'),
+                'http_auth': AWS4Auth(env['ES_ACCESS_KEY_ID'], env['ES_SECRET_ACCESS_KEY'], env['ES_REGION'], 'es'),
             }],
             'OPTIONS': {
                 'connection_class': RequestsHttpConnection,
             },
         },
     }
-
-
-if 'LOG_DIR' in env:
-    # Health Research Authority log
-    LOGGING['handlers']['hra_file'] = {
-        'level': 'INFO',
-        'class': 'cloghandler.ConcurrentRotatingFileHandler',
-        'formatter': 'verbose',
-        'filename': os.path.join(env['LOG_DIR'], 'hra.log'),
-        'maxBytes': 5242880,  # 5MB
-        'backupCount': 5
-    }
-    LOGGING['loggers']['hra']['handlers'].append('hra_file')
-    LOGGING['loggers']['hra.research_summaries']['handlers'].append('hra_file')
-
-    # Wagtail log
-    LOGGING['handlers']['wagtail_file'] = {
-        'level': 'INFO',
-        'class': 'cloghandler.ConcurrentRotatingFileHandler',
-        'formatter': 'verbose',
-        'filename': os.path.join(env['LOG_DIR'], 'wagtail.log'),
-        'maxBytes': 5242880,  # 5MB
-        'backupCount': 5
-    }
-    LOGGING['loggers']['wagtail']['handlers'].append('wagtail_file')
-
-    # Error log
-    LOGGING['handlers']['errors_file'] = {
-        'level': 'ERROR',
-        'class': 'cloghandler.ConcurrentRotatingFileHandler',
-        'formatter': 'verbose',
-        'filename': os.path.join(env['LOG_DIR'], 'error.log'),
-        'maxBytes': 5242880,  # 5MB
-        'backupCount': 5
-    }
-    LOGGING['loggers']['django.request']['handlers'].append('errors_file')
-    LOGGING['loggers']['django.security']['handlers'].append('errors_file')
 
 
 # Raven (sentry) configuration.
@@ -203,8 +163,19 @@ if 'RAVEN_DSN' in env:
         'release': raven.fetch_git_sha(BASE_DIR),
     }
 
-
-try:
-    from .local import *  # noqa
-except ImportError:
-    pass
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': True,
+        }
+    }
+}

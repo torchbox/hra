@@ -1,8 +1,8 @@
 0.11 (unreleased)
 -----------------
 
-- Nothing changed yet.
-
+- Change elasticsearch settings to mirror others on platform
+- Ensure the ES Index can be varied between production/stage
 
 0.10 (2017-09-27)
 -----------------
