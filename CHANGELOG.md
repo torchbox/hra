@@ -1,4 +1,4 @@
-0.10 (unreleased)
+0.10 (2017-09-27)
 -----------------
 
 - Add version file to docker image
