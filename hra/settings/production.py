@@ -100,7 +100,8 @@ if 'MEDIA_BUCKET' in env:
     AWS_LOCATION ='media/'
     AWS_STORAGE_BUCKET_NAME = env['MEDIA_BUCKET']
     AWS_S3_CUSTOM_DOMAIN = env['AWS_S3_CUSTOM_DOMAIN']
-    AWS_S3_URL_PROTOCOL= 'http:' # TODO
+    AWS_DEFAULT_ACL = 'public-read'
+    AWS_S3_URL_PROTOCOL= 'https:' # TODO
     DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 

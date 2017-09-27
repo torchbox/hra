@@ -2,6 +2,8 @@
 -----------------
 
 - Add version file to docker image
+- Set S3 uploads to public-read, because we're not using OAI
+- Change S3 protocol to https
 
 
 0.9 (2017-09-04)
