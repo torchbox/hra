@@ -1,7 +1,7 @@
 0.14 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ok, http: is required.
 
 
 0.13 (2017-10-02)
