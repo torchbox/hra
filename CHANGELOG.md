@@ -1,7 +1,7 @@
 0.12 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- Make AWS_S3_URL_PROTOCOL an empty string
 
 
 0.11 (2017-09-27)
