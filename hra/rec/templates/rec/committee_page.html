@@ -67,7 +67,7 @@
                         {% with email_addresses=page.email_addresses.all %}
                             {% if email_addresses %}
                                 <li class="committee-list__item">
-                                    <h4>Phone number{{ email_addresses|length|pluralize }}</h4>
+                                    <h4>Email address{{ email_addresses|length|pluralize:"es" }}</h4>
                                     <p>
                                         {% for email_address in email_addresses %}
                                             <a href="mailto:{{ email_address }}">
