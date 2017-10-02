@@ -5,13 +5,16 @@
 .error-page {
     position: relative;
     width: 100%;
-    height: calc(70vh - 103px);
+    max-width: 900px;
+    padding-top: 0;
+    margin: 0 auto 40px;
 
-    &__content {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+    @include media-query(laptop) {
+        padding-top: 95px;
+    }
+
+    @include media-query(wide) {
+        width: 90%;
     }
 
     h1 {
@@ -22,5 +25,11 @@
 
     h2 {
         @include rem-font-size(26px);
+        margin-bottom: 20px;
+    }
+
+    ul {
+        padding-left: 20px;
+        list-style: disc outside;
     }
 }
