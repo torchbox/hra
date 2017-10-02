@@ -1,4 +1,4 @@
-0.14 (unreleased)
+0.14 (2017-10-02)
 -----------------
 
 - ok, http: is required.
