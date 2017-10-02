@@ -9,6 +9,7 @@ import tableInteraction from './components/table-interaction';
 import searchFilter from './components/search-form';
 import tableHeight from './components/table-height';
 import heroHeadingAlignment from './components/hero-heading-alignment';
+import datepicker from './components/datepicker';
 
 glossary();
 glossaryTab();
@@ -21,3 +22,4 @@ tableInteraction();
 searchFilter();
 tableHeight();
 heroHeadingAlignment();
+datepicker();
