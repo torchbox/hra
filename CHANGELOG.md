@@ -1,7 +1,7 @@
 0.13 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- OK, lets try insecure S3 urls!
 
 
 0.12 (2017-10-02)
