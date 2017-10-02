@@ -1,4 +1,4 @@
-0.13 (unreleased)
+0.13 (2017-10-02)
 -----------------
 
 - OK, lets try insecure S3 urls!
