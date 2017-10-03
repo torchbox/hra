@@ -2,6 +2,7 @@
 -----------------
 
 - Add HARP API to production settings
+- Merge ongoing dev changes
 
 
 0.14 (2017-10-02)
@@ -19,7 +20,7 @@
 0.12 (2017-10-02)
 -----------------
 
-- Make AWS_S3_URL_PROTOCOL an empty string
+- Make `AWS_S3_URL_PROTOCOL` an empty string
 
 
 0.11 (2017-09-27)
