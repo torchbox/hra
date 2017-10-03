@@ -1,7 +1,7 @@
 0.15 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- Add HARP API to production settings
 
 
 0.14 (2017-10-02)
