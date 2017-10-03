@@ -1,9 +1,9 @@
 from collections import OrderedDict
 
+from dateutil.parser import parse as parse_date
 from django.conf import settings
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.db import models
-from django.utils.dateparse import parse_date
 from django.utils.functional import cached_property
 from wagtail.wagtailadmin.edit_handlers import FieldPanel
 from wagtail.wagtailcore.fields import RichTextField
@@ -192,14 +192,14 @@ class ResearchSummariesIndexPage(Page, SocialFields, ListingFields):
         if search_date_from:
             try:
                 # Can return None or raise ValueError in case of bad format
-                search_date_from = parse_date(search_date_from)
+                search_date_from = parse_date(search_date_from).date()
             except ValueError:
                 search_date_from = None
 
         if search_date_to:
             try:
                 # Can return None or raise ValueError in case of bad format
-                search_date_to = parse_date(search_date_to)
+                search_date_to = parse_date(search_date_to).date()
             except ValueError:
                 search_date_to = None
 
@@ -256,13 +256,8 @@ class ResearchSummariesIndexPage(Page, SocialFields, ListingFields):
             'search_query': search_query,
             'search_results': search_results,
             'display_research_types': display_research_types,
+            'search_date_from': search_date_from,
+            'search_date_to': search_date_to,
         })
-
-        # Convert dates back to YYYY-MM-DD
-        if search_date_from:
-            context['search_date_from'] = search_date_from.isoformat()
-
-        if search_date_to:
-            context['search_date_to'] = search_date_to.isoformat()
 
         return context
