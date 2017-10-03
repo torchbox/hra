@@ -1,0 +1,34 @@
+/*------------------------------------*\
+    $DATEPICKER
+\*------------------------------------*/
+
+// Tiny Date Picker overrides
+.dp-modal {
+    z-index: 100;
+}
+
+.dp::before {
+    background: $color--blue;
+}
+
+.dp-day:hover,
+.dp-month:hover,
+.dp-year:hover,
+.dp-current:focus,
+.dp-current,
+.dp-day:focus,
+.dp-month:focus,
+.dp-year:focus {
+    background: $color--light-blue;
+}
+
+.dp-day-today::after {
+    border: 7px solid $color--blue;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+}
+
+.dp-cal-header [class^='dp-']:hover,
+.dp-cal-footer [class^='dp-']:hover {
+    background: $color--light-blue;
+}
