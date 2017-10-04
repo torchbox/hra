@@ -39,7 +39,7 @@
                         <label for="date_from" class="custom-select__label custom-select--blue__label">
                             Filter by date (date from)
                         </label>
-                        <input class="js-datepicker search-filters__search" id="date_from" name="date_from" type="text"
+                        <input class="search-filters__search" id="date_from" name="date_from" type="text"
                                {% if search_date_from %}value="{{ search_date_from|date:"SHORT_DATE_FORMAT" }}"{% endif %}
                         >
 
@@ -48,7 +48,7 @@
                             Filter by date (date to)
                         </label>
 
-                        <input class="js-datepicker search-filters__search" id="date_to" name="date_to" type="text"
+                        <input class="search-filters__search" id="date_to" name="date_to" type="text"
                                {% if search_date_to %}value="{{ search_date_to|date:"SHORT_DATE_FORMAT" }}"{% endif %}
                         >
                         <input type="submit" class="search-filters__submit" value="">
