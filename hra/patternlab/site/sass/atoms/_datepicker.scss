@@ -2,4 +2,13 @@
     $DATEPICKER
 \*------------------------------------*/
 
+// Pikaday overrides
+.pika-button {
+    .is-selected & {
+        background: $color--light-blue;
+    }
+
+    &:hover {
+        background: $color--blue;
+    }
 }
