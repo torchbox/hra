@@ -192,14 +192,14 @@ class ResearchSummariesIndexPage(Page, SocialFields, ListingFields):
         if search_date_from:
             try:
                 # Can return None or raise ValueError in case of bad format
-                search_date_from = parse_date(search_date_from).date()
+                search_date_from = parse_date(search_date_from, dayfirst=True).date()
             except ValueError:
                 search_date_from = None
 
         if search_date_to:
             try:
                 # Can return None or raise ValueError in case of bad format
-                search_date_to = parse_date(search_date_to).date()
+                search_date_to = parse_date(search_date_to, dayfirst=True).date()
             except ValueError:
                 search_date_to = None
 
