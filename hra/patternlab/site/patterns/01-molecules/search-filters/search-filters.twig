@@ -2,11 +2,14 @@
   <div class="search-filters__heading">Search results</div>
   <input class="search-filters__search" type="text" placeholder="Search&hellip;">
   <input type="submit" class="glossary__submit" value="">
-  <div class="search-filters__filter-main-heading">Filter results</div>
-  <div class="search-filters__section-heading">Sort by</div>
-  {% include "atoms-custom-select--blue" %}
-  <div class="search-filters__section-heading">Filter by type</div>
-  {% include "atoms-checkbox" %}
-  {% include "atoms-checkbox" %}
-  {% include "atoms-datepicker" %}
+  <form class="default-form" action="#">
+    <div class="search-filters__filter-main-heading">Filter results</div>
+    <div class="search-filters__section-heading">Sort by</div>
+    {% include "atoms-custom-select--blue" %}
+    <div class="search-filters__section-heading">Filter by type</div>
+    {% include "atoms-checkbox" %}
+    {% include "atoms-checkbox" %}
+    {% include "atoms-datepicker" %}
+    <input type="submit" value="Filter" class="default-submit">
+  </form>
 </div>
