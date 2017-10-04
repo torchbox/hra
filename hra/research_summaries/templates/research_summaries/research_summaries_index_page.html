@@ -51,6 +51,7 @@
                         <input class="search-filters__search" id="date_to" name="date_to" type="text"
                                {% if search_date_to %}value="{{ search_date_to|date:"SHORT_DATE_FORMAT" }}"{% endif %}
                         >
+                        <input type="submit" value="Filter" class="search-filters__submit--block-button">
                         <input type="submit" class="search-filters__submit" value="">
                     </form>
                 </div>
