@@ -1,7 +1,7 @@
 0.18 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- Integrate sentry
 
 
 0.17 (2017-10-05)

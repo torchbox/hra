@@ -1,4 +1,5 @@
 import os
+import raven
 
 import django_cache_url
 import dj_database_url
@@ -162,7 +163,7 @@ if 'ES_HOST' in env:
 if 'RAVEN_DSN' in env:
     RAVEN_CONFIG = {
         'dsn': env['RAVEN_DSN'],
-        'release': raven.fetch_git_sha(BASE_DIR),
+        'release': open("version.txt").read(),
     }
 
 LOGGING = {
