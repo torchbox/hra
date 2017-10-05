@@ -181,6 +181,7 @@ LOGGING = {
     }
 }
 
-HARP_API_USERNAME = os.environ['HARP_API_USERNAME']
-HARP_API_PASSWORD = os.environ['HARP_API_PASSWORD']
+if 'HARP_API_USERNAME' in os.environ:
+    HARP_API_USERNAME = os.environ['HARP_API_USERNAME']
+    HARP_API_PASSWORD = os.environ['HARP_API_PASSWORD']
 
