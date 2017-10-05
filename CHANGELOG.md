@@ -1,4 +1,4 @@
-0.18 (unreleased)
+0.18 (2017-10-05)
 -----------------
 
 - Integrate sentry
