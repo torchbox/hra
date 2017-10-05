@@ -1,4 +1,4 @@
-0.17 (unreleased)
+0.17 (2017-10-05)
 -----------------
 
 - Applied all changes from master
