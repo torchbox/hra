@@ -30,6 +30,7 @@ CACHE_CONTROL_MAX_AGE = 600
 GOOGLE_TAG_MANAGER_ID = 'GTM-K8CGDX6'
 
 
+
 # Newsletter
 
 NEWSLETTER_URL = '//nhs.us8.list-manage.com/subscribe?u=04af4dde330becaf38e8eb355&id=1a71ed9a1e'
@@ -185,3 +186,7 @@ if 'HARP_API_USERNAME' in os.environ:
     HARP_API_USERNAME = os.environ['HARP_API_USERNAME']
     HARP_API_PASSWORD = os.environ['HARP_API_PASSWORD']
 
+if 'GOOGLE_TAG_MANAGER_ID' in os.environ:
+    GOOGLE_TAG_MANAGER_ID = os.environ['GOOGLE_TAG_MANAGER_ID']
+
+    

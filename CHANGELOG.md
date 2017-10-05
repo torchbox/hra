@@ -1,7 +1,7 @@
 0.16 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- Add new GTM ID
 
 
 0.15 (2017-10-03)
