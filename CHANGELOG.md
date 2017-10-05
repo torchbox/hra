@@ -1,7 +1,7 @@
 0.17 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- Applied all changes from master
 
 
 0.16 (2017-10-05)
