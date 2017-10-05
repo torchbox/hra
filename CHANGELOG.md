@@ -1,4 +1,4 @@
-0.19 (unreleased)
+0.19 (2017-10-05)
 -----------------
 
 - Update google tag tracking code
