@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-redirector
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: hra-redir
+    spec:
+      containers:
+      - env:
+        - name: REDIRECT
+          value: {{ required "RedirectTo" .Values.RedirectTo }}
+        image: {{ required "DockerRegistry" .Values.DockerRegistry }}/redirector
+        name: redirector
+        ports:
+        - containerPort: 80

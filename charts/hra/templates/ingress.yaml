@@ -4,6 +4,12 @@ metadata:
   name: {{ .Release.Name }}
 spec:
   rules:
+  - host: {{ .Release.Name }}.{{ .Values.Domain }}
+    http:
+      paths:
+      - backend:
+          serviceName: {{ .Release.Name }}
+          servicePort: 80
   {{range $var := .Values.Endpoints }}
   - host: {{ $var }}
     http:

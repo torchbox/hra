@@ -11,20 +11,20 @@ data:
   CACHE_PORT: {{ required "RedisPort" .Values.RedisPort | quote }}
   CACHE_DB: {{ required "RedisDatabase" .Values.RedisDatabase | quote }}
   CFG_SECRET_KEY: {{ randAlphaNum 30 | b64enc | quote }}
-  CFG_EMAIL_HOST: {{ required "SmtpHost" .Values.SmtpHost | quote }}
-  CFG_EMAIL_HOST_USER: {{ required "SmtpUser" .Values.SmtpUser | quote }}
+  CFG_EMAIL_HOST: {{ required "SmtpHostname" .Values.SmtpHostname | quote }}
+  CFG_EMAIL_HOST_USER: {{ required "SmtpUsername" .Values.SmtpUsername | quote }}
   ALLOWED_HOSTS: {{range $i, $elem := .Values.Endpoints}}{{if $i}},{{end}}{{$elem}}{{end}}
   CFG_MEDIA_BUCKET: {{ required "MediaBucket" .Values.MediaBucket | quote }}
   CFG_SERVER_EMAIL: {{ required "ServerEmail" .Values.ServerEmail | quote }}
   CFG_AWS_S3_CUSTOM_DOMAIN: {{ required "AwsS3CustomDomain" .Values.AwsS3CustomDomain | quote }}
-  {{ if BasicAuthRealm }}
-  BASIC_AUTH_REALM: {{ .Values.BasicAuthRealm | qote }}
+  {{ if .Values.BasicAuthRealm }}
+  BASIC_AUTH_REALM: {{ .Values.BasicAuthRealm | quote }}
   BASIC_AUTH_USER: {{ .Values.BasicAuthUser | quote }}
   BASIC_AUTH_PASS: {{ .Values.BasicAuthPass | quote }}
   {{ end }}
   ES_INDEX: {{ required "ElasticSearchIndex" .Values.ElasticSearchIndex | quote }}
-  ES_HOST: {{ required "ElasticSearchEndpoint5" .Values.ElasticSearchHost | quote }}
-  ES_ACCESS_KEY_ID: {{ required "ElasticSearchAccessKey" .Values.ElasticSearchAccessKey | quote }}
+  ES_HOST: {{ required "ElasticSearchEndpoint5" .Values.ElasticSearchEndpoint5 | quote }}
+  ES_ACCESS_KEY_ID: {{ required "ElasticsearchAccessKey" .Values.ElasticSearchAccessKey | quote }}
   ES_REGION: {{ required "Region" .Values.Region | quote }}
   RECAPTCHA_PUBLIC_KEY: {{ required "RecaptchaPublicKey" .Values.RecaptchaPublicKey | quote }}
   HARP_API_USERNAME: {{ required "HarpApiUsername" .Values.HarpApiUsername | quote }}

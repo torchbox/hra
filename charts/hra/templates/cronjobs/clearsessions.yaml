@@ -1,0 +1,22 @@
+apiVersion: batch/v2alpha1
+kind: CronJob
+metadata:
+  name: {{ .Release.Name }}-clearsessions
+spec:
+  schedule: "0 1 * * *"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: Never
+          containers:
+              - name: hra
+                image: {{ required "A valid dockerRegistry is required" .Values.DockerRegistry }}/hra
+                command:
+                - python
+                - manage.py
+                - clearsessions
+                {{- include "environment" . | indent 16 }}
