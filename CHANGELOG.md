@@ -1,7 +1,60 @@
-0.20 (unreleased)
+0.28 (unreleased)
 -----------------
 
 - Nothing changed yet.
+
+
+0.27 (2017-11-08)
+-----------------
+
+- add pod anti-affinity for even zone distribution
+- reduce processes per container
+- revert to console logging
+- chart fixage
+
+0.26 (2017-11-06)
+-----------------
+
+- Bugfixes to secret keys
+- Logging refinements
+
+
+0.25 (2017-11-03)
+-----------------
+
+- Add authentication to watchtower
+
+
+0.24 (2017-11-03)
+-----------------
+
+- use watchtower
+
+
+0.23 (2017-11-03)
+-----------------
+
+- region typo
+
+
+0.22 (2017-11-03)
+-----------------
+
+- fix le bugs in watchtower
+
+
+0.21 (2017-11-03)
+-----------------
+
+- bump raven client
+
+
+0.20 (2017-11-03)
+-----------------
+
+- Add helm package
+- Stop using `dj_database_url` and `django_cache_url`
+- integrate watchtower
 
 
 0.19 (2017-10-05)
