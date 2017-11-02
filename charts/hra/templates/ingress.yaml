@@ -1,0 +1,15 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: {{ .Release.Name }}
+spec:
+  rules:
+  {{range $var := .Values.Endpoints }}
+  - host: {{ $var }}
+    http:
+      paths:
+      - backend:
+          serviceName: {{ $.Release.Name }}
+          servicePort: 80
+  {{end}}
+

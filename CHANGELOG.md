@@ -1,7 +1,9 @@
 0.20 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- Add helm package
+- Stop using `dj_database_url` and `django_cache_url`
+- integrate watchtower
 
 
 0.19 (2017-10-05)

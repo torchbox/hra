@@ -1,0 +1,47 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+spec:
+  replicas: {{ required "A valid number of replicas is required" .Values.Replicas }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+    spec:
+      containers:
+      - env:
+        - name: DATABASE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Release.Name }}
+              key: DatabasePassword
+        - name: CFG_EMAIL_HOST_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ BackingServices }}
+              key: SmtpPassword
+        - name: ES_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: {{ BackingServices }}
+              key: ElasticSearchSecretAccessKey
+        - name: RECAPTCHA_PRIVATE_KEY
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Release.Name }}
+              key: RecaptchaPrivateKey
+        - name: HARP_API_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Release.Name }}
+              key: HarpApiPassword
+        envFrom: 
+        - configMapRef:
+            name: {{ .Release.Name }}
+        image: {{ required "A valid dockerRegistry is required" .Values.DockerRegistry }}/joinos-hire
+        name: joinos-hire
+        ports:
+        - containerPort: 80

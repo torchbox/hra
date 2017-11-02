@@ -113,24 +113,30 @@ if 'MEDIA_BUCKET' in env:
 
 if 'DATABASE_URL' in os.environ:
     DATABASES = {'default': dj_database_url.config()}
-
 else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': env.get('PGDATABASE', APP_NAME),
-            'CONN_MAX_AGE': 600,  # number of seconds database connections should persist for
-
-            # User, host and port can be configured by the PGUSER, PGHOST and
-            # PGPORT environment variables (these get picked up by libpq).
-        }
+            'NAME': env['DATABASE_SCHEMA'],
+            'USER': env['DATABASE_USERNAME'],
+            'PASSWORD': env['DATABASE_PASSWORD'],
+            'HOST': env['DATABASE_HOST'],
+            'PORT': env['DATABASE_PORT'],
+        },
     }
-
 
 # Redis
 
 if 'CACHE_URL' in os.environ:
     CACHES = {'default': django_cache_url.config()}
+else:
+    CACHES = {
+        'default': {
+            'BACKEND': 'django_redis.cache.RedisCache',
+            'LOCATION': "redis://%s:%s/%s" % (env['CACHE_HOST'], env['CACHE_PORT'], env['CACHE_DB']),
+            'KEY_PREFIX': 'hra',
+        }
+    }
 
 
 # Celery
