@@ -113,7 +113,7 @@ if 'MEDIA_BUCKET' in env:
 
 if 'DATABASE_URL' in os.environ:
     DATABASES = {'default': dj_database_url.config()}
-else:
+elif 'DATABASE_SCHEMA' in os.environ:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -129,7 +129,7 @@ else:
 
 if 'CACHE_URL' in os.environ:
     CACHES = {'default': django_cache_url.config()}
-else:
+elif 'CACHE_HOST' in os.environ:
     CACHES = {
         'default': {
             'BACKEND': 'django_redis.cache.RedisCache',
