@@ -14,7 +14,7 @@ spec:
           restartPolicy: Never
           containers:
               - name: hra
-                image: {{ required "A valid dockerRegistry is required" .Values.DockerRegistry }}/hra
+                image: {{ required "A valid DockerRegistry is required" .Values.DockerRegistry }}/hra
                 command:
                 - python
                 - manage.py
