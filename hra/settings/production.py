@@ -1,6 +1,8 @@
 import os
 import raven
 
+from boto3.session import Session
+
 import django_cache_url
 import dj_database_url
 from elasticsearch import Elasticsearch, RequestsHttpConnection
@@ -175,18 +177,40 @@ if 'RAVEN_DSN' in env:
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
-    'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
+    'root': {
+        'level': logging.ERROR,
+        'handlers': ['console'],
+    },
+    'formatters': {
+        'simple': {
+            'format': u"%(asctime)s [%(levelname)-8s] %(message)s",
+            'datefmt': "%Y-%m-%d %H:%M:%S"
+        },
+        'aws': {
+            # you can add specific format for aws here
+            'format': u"%(asctime)s [%(levelname)-8s] %(message)s",
+            'datefmt': "%Y-%m-%d %H:%M:%S"
         },
     },
+
+    'handlers': {
+        'watchtower': {
+            'level': 'DEBUG',
+            'class': 'watchtower.CloudWatchLogHandler',
+                     'boto3_session': Session(),
+                     'log_group': 'MyLogGroupName',
+                     'stream_name': 'MyStreamName',
+            'formatter': 'aws',
+        },
+    }
     'loggers': {
         'django': {
-            'handlers': ['console'],
             'level': 'INFO',
-            'propagate': True,
-        }
-    }
+            'handlers': ['watchtower'],
+            'propagate': False,
+        },
+        # add your other loggers here...
+    },
 }
 
 if 'HARP_API_USERNAME' in os.environ:
