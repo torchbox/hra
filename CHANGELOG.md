@@ -1,7 +1,7 @@
 0.25 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- Add authentication to watchtower
 
 
 0.24 (2017-11-03)

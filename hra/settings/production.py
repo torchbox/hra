@@ -176,6 +176,11 @@ if 'RAVEN_DSN' in env:
     }
 
 if 'CLOUDWATCH_REGION' in os.environ:
+    cwsession = Session(
+        aws_access_key_id=os.environ['CLOUDWATCH_ACCESS_KEY_ID'],
+        aws_secret_access_key=os.environ['CLOUDWATCH_SECRET_ACCESS_KEY'],
+        region_name=os.environ['CLOUDWATCH_REGION'])
+
     LOGGING = {
         'version': 1,
         'disable_existing_loggers': False,
@@ -198,7 +203,7 @@ if 'CLOUDWATCH_REGION' in os.environ:
             'watchtower': {
                 'level': 'DEBUG',
                 'class': 'watchtower.CloudWatchLogHandler',
-                        'boto3_session': Session(region_name=os.environ['CLOUDWATCH_REGION']),
+                        'boto3_session': cwsession,
                         'log_group': 'hra',
                         'stream_name': 'django',
                 'formatter': 'aws',
