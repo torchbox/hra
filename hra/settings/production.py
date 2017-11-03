@@ -198,7 +198,7 @@ if 'CLOUDWATCH_REGION' in os.environ:
             'watchtower': {
                 'level': 'DEBUG',
                 'class': 'watchtower.CloudWatchLogHandler',
-                        'boto3_session': Session(region=os.environ['CLOUDWATCH_REGION']),
+                        'boto3_session': Session(region_name=os.environ['CLOUDWATCH_REGION']),
                         'log_group': 'hra',
                         'stream_name': 'django',
                 'formatter': 'aws',

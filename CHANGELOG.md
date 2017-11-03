@@ -1,7 +1,7 @@
 0.23 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- region typo
 
 
 0.22 (2017-11-03)
