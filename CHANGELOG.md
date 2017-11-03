@@ -1,4 +1,4 @@
-0.25 (unreleased)
+0.25 (2017-11-03)
 -----------------
 
 - Add authentication to watchtower
