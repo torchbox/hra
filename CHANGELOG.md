@@ -1,4 +1,4 @@
-0.20 (unreleased)
+0.20 (2017-11-03)
 -----------------
 
 - Add helm package
