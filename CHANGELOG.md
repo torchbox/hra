@@ -1,7 +1,7 @@
 0.22 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- fix le bugs in watchtower
 
 
 0.21 (2017-11-03)

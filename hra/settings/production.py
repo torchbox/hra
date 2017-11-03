@@ -3,6 +3,7 @@ import raven
 
 from boto3.session import Session
 
+import logging
 import django_cache_url
 import dj_database_url
 from elasticsearch import Elasticsearch, RequestsHttpConnection
@@ -174,43 +175,44 @@ if 'RAVEN_DSN' in env:
         'release': open("version.txt").read(),
     }
 
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'root': {
-        'level': logging.ERROR,
-        'handlers': ['console'],
-    },
-    'formatters': {
-        'simple': {
-            'format': u"%(asctime)s [%(levelname)-8s] %(message)s",
-            'datefmt': "%Y-%m-%d %H:%M:%S"
+if 'CLOUDWATCH_REGION' in os.environ:
+    LOGGING = {
+        'version': 1,
+        'disable_existing_loggers': False,
+        'root': {
+            'level': logging.ERROR,
+            'handlers': ['console'],
         },
-        'aws': {
-            'format': u"%(asctime)s [%(levelname)-8s] %(message)s",
-            'datefmt': "%Y-%m-%d %H:%M:%S"
+        'formatters': {
+            'simple': {
+                'format': u"%(asctime)s [%(levelname)-8s] %(message)s",
+                'datefmt': "%Y-%m-%d %H:%M:%S"
+            },
+            'aws': {
+                'format': u"%(asctime)s [%(levelname)-8s] %(message)s",
+                'datefmt': "%Y-%m-%d %H:%M:%S"
+            },
         },
-    },
 
-    'handlers': {
-        'watchtower': {
-            'level': 'DEBUG',
-            'class': 'watchtower.CloudWatchLogHandler',
-                     'boto3_session': Session(),
-                     'log_group': 'hra',
-                     'stream_name': 'django',
-            'formatter': 'aws',
+        'handlers': {
+            'watchtower': {
+                'level': 'DEBUG',
+                'class': 'watchtower.CloudWatchLogHandler',
+                        'boto3_session': Session(region=os.environ['CLOUDWATCH_REGION']),
+                        'log_group': 'hra',
+                        'stream_name': 'django',
+                'formatter': 'aws',
+            },
+        },
+        'loggers': {
+            'django': {
+                'level': 'INFO',
+                'handlers': ['watchtower'],
+                'propagate': False,
+            },
+            # add your other loggers here...
         },
     }
-    'loggers': {
-        'django': {
-            'level': 'INFO',
-            'handlers': ['watchtower'],
-            'propagate': False,
-        },
-        # add your other loggers here...
-    },
-}
 
 if 'HARP_API_USERNAME' in os.environ:
     HARP_API_USERNAME = os.environ['HARP_API_USERNAME']
