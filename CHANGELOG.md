@@ -1,7 +1,7 @@
 0.21 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- bump raven client
 
 
 0.20 (2017-11-03)
