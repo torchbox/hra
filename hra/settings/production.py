@@ -187,7 +187,6 @@ LOGGING = {
             'datefmt': "%Y-%m-%d %H:%M:%S"
         },
         'aws': {
-            # you can add specific format for aws here
             'format': u"%(asctime)s [%(levelname)-8s] %(message)s",
             'datefmt': "%Y-%m-%d %H:%M:%S"
         },
@@ -198,8 +197,8 @@ LOGGING = {
             'level': 'DEBUG',
             'class': 'watchtower.CloudWatchLogHandler',
                      'boto3_session': Session(),
-                     'log_group': 'MyLogGroupName',
-                     'stream_name': 'MyStreamName',
+                     'log_group': 'hra',
+                     'stream_name': 'django',
             'formatter': 'aws',
         },
     }
