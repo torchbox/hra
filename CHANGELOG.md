@@ -1,7 +1,7 @@
 0.24 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- use watchtower
 
 
 0.23 (2017-11-03)

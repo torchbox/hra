@@ -181,7 +181,7 @@ if 'CLOUDWATCH_REGION' in os.environ:
         'disable_existing_loggers': False,
         'root': {
             'level': logging.ERROR,
-            'handlers': ['console'],
+            'handlers': ['watchtower'],
         },
         'formatters': {
             'simple': {
@@ -210,7 +210,6 @@ if 'CLOUDWATCH_REGION' in os.environ:
                 'handlers': ['watchtower'],
                 'propagate': False,
             },
-            # add your other loggers here...
         },
     }
 
