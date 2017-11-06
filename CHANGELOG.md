@@ -1,7 +1,7 @@
 0.27 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- add pod anti-affinity for even zone distribution
 
 
 0.26 (2017-11-06)
