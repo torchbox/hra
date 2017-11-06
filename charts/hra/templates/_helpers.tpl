@@ -32,5 +32,5 @@ env:
   valueFrom:
     secretKeyRef:
       name: backing-services
-      value: CloudWatchSecretKey
+      key: CloudWatchLogsSecretKey
 {{- end }}

@@ -25,7 +25,8 @@ data:
   ES_INDEX: {{ required "ElasticSearchIndex" .Values.ElasticSearchIndex | quote }}
   ES_HOST: {{ required "ElasticSearchEndpoint5" .Values.ElasticSearchEndpoint5 | quote }}
   ES_ACCESS_KEY_ID: {{ required "ElasticsearchAccessKey" .Values.ElasticSearchAccessKey | quote }}
-  CLOUDWATCH_ACCESS_KEY_ID: {{ required "CloudWatchAccessKey" . Values.CloudWatchAccessKey | quote }}
+  CLOUDWATCH_REGION: {{ required "Region" .Values.Region | quote }}
+  CLOUDWATCH_ACCESS_KEY_ID: {{ required "CloudWatchLogsAccessKey" .Values.CloudWatchLogsAccessKey | quote }}
   ES_REGION: {{ required "Region" .Values.Region | quote }}
   RECAPTCHA_PUBLIC_KEY: {{ required "RecaptchaPublicKey" .Values.RecaptchaPublicKey | quote }}
   HARP_API_USERNAME: {{ required "HarpApiUsername" .Values.HarpApiUsername | quote }}

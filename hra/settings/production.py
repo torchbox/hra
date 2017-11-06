@@ -185,15 +185,11 @@ if 'CLOUDWATCH_REGION' in os.environ:
         'version': 1,
         'disable_existing_loggers': False,
         'root': {
-            'level': logging.ERROR,
+            'level': logging.INFO,
             'handlers': ['watchtower'],
         },
         'formatters': {
             'simple': {
-                'format': u"%(asctime)s [%(levelname)-8s] %(message)s",
-                'datefmt': "%Y-%m-%d %H:%M:%S"
-            },
-            'aws': {
                 'format': u"%(asctime)s [%(levelname)-8s] %(message)s",
                 'datefmt': "%Y-%m-%d %H:%M:%S"
             },
@@ -204,16 +200,16 @@ if 'CLOUDWATCH_REGION' in os.environ:
                 'level': 'DEBUG',
                 'class': 'watchtower.CloudWatchLogHandler',
                         'boto3_session': cwsession,
-                        'log_group': 'hra',
-                        'stream_name': 'django',
-                'formatter': 'aws',
+                        'log_group': os.environ.get('CLOUDWATCH_LOG_GROUP', 'hra'),
+                        'stream_name': os.environ.get('CLOUDWATCH_STREAM_NAME', 'django'),
+                'formatter': 'simple',
             },
         },
         'loggers': {
             'django': {
                 'level': 'INFO',
                 'handlers': ['watchtower'],
-                'propagate': False,
+                'propagate': True,
             },
         },
     }

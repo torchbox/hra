@@ -1,7 +1,8 @@
 0.26 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- Bugfixes to secret keys
+- Logging refinements
 
 
 0.25 (2017-11-03)
