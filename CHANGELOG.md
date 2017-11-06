@@ -1,4 +1,4 @@
-0.26 (unreleased)
+0.26 (2017-11-06)
 -----------------
 
 - Bugfixes to secret keys
