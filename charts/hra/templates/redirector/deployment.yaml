@@ -1,3 +1,4 @@
+{{ if .Values.RedirectTo }}
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
@@ -7,7 +8,7 @@ spec:
   template:
     metadata:
       labels:
-        app: hra-redir
+        app: {{ .Release.Name }}-redirector
     spec:
       containers:
       - env:
@@ -17,3 +18,4 @@ spec:
         name: redirector
         ports:
         - containerPort: 80
+{{ end }}

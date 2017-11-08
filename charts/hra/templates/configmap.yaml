@@ -31,6 +31,8 @@ data:
   RECAPTCHA_PUBLIC_KEY: {{ required "RecaptchaPublicKey" .Values.RecaptchaPublicKey | quote }}
   HARP_API_USERNAME: {{ required "HarpApiUsername" .Values.HarpApiUsername | quote }}
   GOOGLE_TAG_MANAGER_ID: {{ required "GoogleTagManagerId" .Values.GoogleTagManagerId | quote }}
-  CFG_RAVEN_DSN: {{ required "RavenDsn" .Values.RavenDsn | quote }}
+  {{ if .Values.RavenDsn }}
+  CFG_RAVEN_DSN: {{ .Values.RavenDsn | quote }}
+  {{ end }}
 
 
