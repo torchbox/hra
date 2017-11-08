@@ -175,44 +175,22 @@ if 'RAVEN_DSN' in env:
         'release': open("version.txt").read(),
     }
 
-if 'CLOUDWATCH_REGION' in os.environ:
-    cwsession = Session(
-        aws_access_key_id=os.environ['CLOUDWATCH_ACCESS_KEY_ID'],
-        aws_secret_access_key=os.environ['CLOUDWATCH_SECRET_ACCESS_KEY'],
-        region_name=os.environ['CLOUDWATCH_REGION'])
-
-    LOGGING = {
-        'version': 1,
-        'disable_existing_loggers': False,
-        'root': {
-            'level': logging.INFO,
-            'handlers': ['watchtower'],
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
         },
-        'formatters': {
-            'simple': {
-                'format': u"%(asctime)s [%(levelname)-8s] %(message)s",
-                'datefmt': "%Y-%m-%d %H:%M:%S"
-            },
-        },
-
-        'handlers': {
-            'watchtower': {
-                'level': 'DEBUG',
-                'class': 'watchtower.CloudWatchLogHandler',
-                        'boto3_session': cwsession,
-                        'log_group': os.environ.get('CLOUDWATCH_LOG_GROUP', 'hra'),
-                        'stream_name': os.environ.get('CLOUDWATCH_STREAM_NAME', 'django'),
-                'formatter': 'simple',
-            },
-        },
-        'loggers': {
-            'django': {
-                'level': 'INFO',
-                'handlers': ['watchtower'],
-                'propagate': True,
-            },
-        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': True,
+        }
     }
+}
 
 if 'HARP_API_USERNAME' in os.environ:
     HARP_API_USERNAME = os.environ['HARP_API_USERNAME']
