@@ -2,7 +2,9 @@
 -----------------
 
 - add pod anti-affinity for even zone distribution
-
+- reduce processes per container
+- revert to console logging
+- chart fixage
 
 0.26 (2017-11-06)
 -----------------
