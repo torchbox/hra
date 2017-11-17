@@ -26,6 +26,10 @@ spec:
       containers:
       - name: hra
         image: {{ required "A valid DockerRegistry is required" .Values.DockerRegistry }}/hra
+        resources:
+          requests:
+            memory: "200Mi"
+            cpu: "200m"
         ports:
         - containerPort: 80
         {{- include "environment" . | indent 8 }}
