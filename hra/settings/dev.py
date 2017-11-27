@@ -26,6 +26,9 @@ WAGTAILSEARCH_BACKENDS = {
     'default': {
         'BACKEND': 'wagtail.wagtailsearch.backends.elasticsearch5',
         'INDEX': 'hra',
+        'HOSTS': [{
+            'host': 'search',
+        }],    
     },
 }
 
