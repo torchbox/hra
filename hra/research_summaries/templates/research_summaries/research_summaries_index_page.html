@@ -7,52 +7,57 @@
             <div class="results-container__left">
 
                 <div class="search-filters">
-                    <div class="search-filters__heading">Research summaries</div>
-
                     <form action="{% pageurl page %}" method="get" role="search" class="js-main-search-form">
-                        <input class="search-filters__search" name="query" type="text" placeholder="Search&hellip;"
+
+                        <h1 class="search-filters__heading">Research summaries</h1>
+                        <label class="visually-hidden" for="search-query">Search</label>
+                        <input id="search-query" class="search-filters__search" name="query" type="text" placeholder="Search&hellip;"
                                {% if search_query %}value="{{ search_query }}"{% endif %}
                         >
+                        <input type="submit" class="search-filters__submit" value="" aria-label="Search">
 
-                        <div class="search-filters__filter-main-heading">Filter results</div>
+                        <fieldset class="search-filters__filter-fieldset">
+                            <legend class="search-filters__filter-main-heading">Filter results</legend>
 
-                        {% if display_research_types %}
-                            <div class="search-filters__section-heading">Research type</div>
-                            <label for="research_type" class="custom-select__label custom-select--blue__label">
-                                Filter by research type
+                            {% if display_research_types %}
+                                <div class="search-filters__section-heading">Research type</div>
+                                <label for="research_type" class="custom-select__label custom-select--blue__label">
+                                    Filter by research type
+                                </label>
+                                <div class="custom-select custom-select--blue">
+                                    <select id="research_type" name="research_type">
+                                        <option value="">All studies</option>
+                                        {% for key, name in display_research_types.items %}
+                                            <option value="{{ key }}"
+                                                    {% if search_research_type == key %}selected="selected"{% endif %}
+                                            >
+                                                {{ name }}
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            {% endif %}
+
+                            <div class="search-filters__section-heading">Date from</div>
+                            <label for="date_from" class="custom-select__label custom-select--blue__label">
+                                Filter by date (date from)
                             </label>
-                            <div class="custom-select custom-select--blue">
-                                <select id="research_type" name="research_type">
-                                    <option value="">All studies</option>
-                                    {% for key, name in display_research_types.items %}
-                                        <option value="{{ key }}"
-                                                {% if search_research_type == key %}selected="selected"{% endif %}
-                                        >
-                                            {{ name }}
-                                        </option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                        {% endif %}
+                            <input class="search-filters__search" id="date_from" name="date_from" type="text"
+                                   {% if search_date_from %}value="{{ search_date_from|date:"SHORT_DATE_FORMAT" }}"{% endif %}
+                            >
 
-                        <div class="search-filters__section-heading">Date from</div>
-                        <label for="date_from" class="custom-select__label custom-select--blue__label">
-                            Filter by date (date from)
-                        </label>
-                        <input class="search-filters__search" id="date_from" name="date_from" type="text"
-                               {% if search_date_from %}value="{{ search_date_from|date:"SHORT_DATE_FORMAT" }}"{% endif %}
-                        >
+                            <div class="search-filters__section-heading">Date to</div>
+                            <label for="date_to" class="custom-select__label custom-select--blue__label">
+                                Filter by date (date to)
+                            </label>
 
-                        <div class="search-filters__section-heading">Date to</div>
-                        <label for="date_to" class="custom-select__label custom-select--blue__label">
-                            Filter by date (date to)
-                        </label>
+                            <input class="search-filters__search" id="date_to" name="date_to" type="text"
+                                   {% if search_date_to %}value="{{ search_date_to|date:"SHORT_DATE_FORMAT" }}"{% endif %}
+                            >
+                            <input type="submit" value="Filter" class="search-filters__submit--block-button">
 
-                        <input class="search-filters__search" id="date_to" name="date_to" type="text"
-                               {% if search_date_to %}value="{{ search_date_to|date:"SHORT_DATE_FORMAT" }}"{% endif %}
-                        >
-                        <input type="submit" value="Filter" class="search-filters__submit--block-button">
-                        <input type="submit" class="search-filters__submit" value="">
+                        </fieldset>
+
                     </form>
                 </div>
 
@@ -76,10 +81,10 @@
                 {% if search_results %}
 
                     {% with count=search_results.paginator.count %}
-                        <div class="results-container__heading">
+                        <h2 class="results-container__heading">
                             {{ count }} record{{ count|pluralize }}
                             {% if search_query %}for <span>{{ search_query }}</span>{% endif %}
-                        </div>
+                        </h2>
                     {% endwith %}
 
                     <ul class="results-listing">
@@ -95,9 +100,9 @@
                     {% include "includes/pagination.html" with subpages=search_results %}
 
                 {% else %}
-                    <div class="results-container__heading">
+                    <h2 class="results-container__heading">
                         No results found.
-                    </div>
+                    </h2>
                 {% endif %}
             </div>
         {% endspaceless %}

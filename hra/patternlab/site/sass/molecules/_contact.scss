@@ -3,15 +3,13 @@
 \*------------------------------------*/
 
 .contact {
-    &__left,
-    &__right {
-        display: inline-block;
-        min-height: calc(100vh - 103px);
-        vertical-align: top;
+    display: flex;
+    flex-direction: row-reverse;
+    min-height: calc(100vh - 103px);
 
-        @include media-query(laptop) {
-            min-height: 0;
-        }
+    @include media-query(laptop) {
+        min-height: 0;
+        flex-wrap: wrap;
     }
 
     &__left {
@@ -21,18 +19,18 @@
 
         @include media-query(laptop) {
             width: 100%;
-            padding: 100px 20px 50px;
+            padding: 20px 20px 50px;
         }
     }
 
     &__right {
         width: 40%;
         padding: 100px;
-        overflow: scroll;
+        overflow: auto;
 
         @include media-query(laptop) {
             width: 100%;
-            padding: 50px 20px;
+            padding: 100px 20px 20px;
         }
     }
 

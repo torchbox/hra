@@ -10,6 +10,12 @@ from .models import CallToActionSnippet
 class ImageBlock(blocks.StructBlock):
     image = ImageChooserBlock()
     caption = blocks.CharBlock(required=False)
+    longdesc = blocks.PageChooserBlock(
+        label='Long description',
+        required=False,
+        target_model='standardpage.StandardPage',
+        help_text='If this image conveys infomation not given in the page text, provide a page with an full description for non-sighted users.'
+    )
 
     class Meta:
         icon = "image"

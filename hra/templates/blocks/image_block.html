@@ -1,10 +1,25 @@
-{% load wagtailimages_tags %}
+{% load wagtailcore_tags wagtailimages_tags %}
 
-<div class="image-block">
-    {% image value.image original %}
+<figure class="image-block" role="group">
+    {% with longdesc='' %}
 
-    {% if value.caption %}
-        <p class="image-block__caption">{{ value.caption }}</p>
-    {% endif %}
+        {% if value.longdesc and value.longdesc.live %}
+            {% pageurl value.longdesc.specific as longdesc %}
+            {% image value.image original longdesc=longdesc %}
+        {% else %}
+            {% image value.image original %}
+        {% endif %}
 
-</div>
+        {% if value.caption or longdesc %}
+            <figcaption class="image-block__caption">
+
+                {{ value.caption }}
+                {% if longdesc %}
+                    <a class="image-block__longdesc" href="{{ longdesc }}">Long description</a>
+                {% endif %}
+
+            </figcaption>
+        {% endif %}
+
+    {% endwith %}
+</figure>

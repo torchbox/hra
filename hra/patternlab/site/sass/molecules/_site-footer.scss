@@ -14,6 +14,7 @@
 
     &__heading {
         color: #fff;
+        @include font-size(delta);
     }
 
     &__list {
@@ -113,6 +114,7 @@
 
             span {
                 display: block;
+                margin-top: 1em;
                 font-weight: bold;
             }
         }

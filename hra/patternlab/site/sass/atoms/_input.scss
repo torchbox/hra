@@ -26,6 +26,13 @@ textarea {
         background-color: #0c4e90;
     }
 
+    fieldset {
+        border: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    legend,
     label {
         @include font-size(milli);
         display: block;
@@ -34,7 +41,8 @@ textarea {
 
         > span {
             margin-left: 3px;
-            opacity: 0.5;
+            opacity: 0.8;
+            font-style: italic;
         }
     }
 
@@ -74,7 +82,7 @@ textarea {
 
     input[type='submit'] {
         padding: 10px 20px;
-        margin-top: 20px;
+        margin-top: 35px;
         font-family: $font--primary;
         color: $color--primary;
         cursor: pointer;
@@ -90,6 +98,7 @@ textarea {
     }
 
     // sass-lint:disable class-name-format force-element-nesting
+    div.checkbox_select_multiple,
     div.radio_select {
         margin-bottom: 30px;
 

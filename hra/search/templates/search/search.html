@@ -13,32 +13,38 @@
             <div class="results-container__left">
 
                 <div class="search-filters">
-                    <div class="search-filters__heading">Search results</div>
+                    <h1 class="search-filters__heading">Search results</h1>
 
                     <form action="{% url 'search' %}" method="get" role="search" class="js-main-search-form">
-                        <input class="search-filters__search" name="query" type="text" placeholder="Search&hellip;"
+                        <label class="visually-hidden" for="search-query">Search again</label>
+                        <input id="search-query" class="search-filters__search" name="query" type="text" placeholder="Search&hellip;"
                                 {% if search_query %}
                                value="{{ search_query }}"{% endif %}
                         >
-                        <input type="submit" class="search-filters__submit" value="">
+                        <input type="submit" class="search-filters__submit" value="" aria-label="Search">
 
-                        <div class="search-filters__filter-main-heading">Filter by type</div>
-                        {#<div class="search-filters__section-heading">Filter by type</div>#}
+                        <fieldset class="search-filters__filter-fieldset">
+                            <legend class="search-filters__filter-main-heading">Filter by type</legend>
 
-                        {% for page_type in page_types %}
-                            <div class="checkbox">
-                                <input type="checkbox" name="type"
-                                       id="page_type-{{ page_type.pk }}"
-                                       value="{{ page_type.pk }}"
-                                       {% if page_type.pk in selected_page_type_pks %}checked{% endif %}
-                                >
-                                <label class="checkbox-label"
-                                       for="page_type-{{ page_type.pk }}"
-                                >
-                                    {{ page_type.name }}
-                                </label>
-                            </div>
-                        {% endfor %}
+                            {% for page_type in page_types %}
+                                <div class="checkbox">
+                                    <input type="checkbox" name="type"
+                                           id="page_type-{{ page_type.pk }}"
+                                           value="{{ page_type.pk }}"
+                                           {% if page_type.pk in selected_page_type_pks %}checked{% endif %}
+                                    >
+                                    <label class="checkbox-label"
+                                           for="page_type-{{ page_type.pk }}"
+                                    >
+                                        {{ page_type.name }}
+                                    </label>
+                                </div>
+                            {% endfor %}
+
+                            <noscript>
+                                <input type="submit" value="Filter" class="search-filters__submit--block-button">
+                            </noscript>
+                        </fieldset>
 
                     </form>
                 </div>
@@ -51,24 +57,20 @@
 
                     {% if search_query %}
                         {% with count=search_results.paginator.count|add:search_picks.count %}
-                            <div class="results-container__heading">
+                            <h2 class="results-container__heading">
                                 {{ count }} result{{ count|pluralize }} for <span>{{ search_query }}</span>
-                            </div>
+                            </h2>
                         {% endwith %}
                     {% endif %}
 
                     <ul class="results-listing">
 
                         {% for pick in search_picks %}
-                            <li>
-                                {% include "includes/listings/generic_listing_item.html" with pick=pick item=pick.page.specific %}
-                            </li>
+                            {% include "includes/listings/generic_listing_item.html" with pick=pick item=pick.page.specific %}
                         {% endfor %}
 
                         {% for result in search_results %}
-                            <li>
-                                {% include "includes/listings/generic_listing_item.html" with item=result.specific %}
-                            </li>
+                            {% include "includes/listings/generic_listing_item.html" with item=result.specific %}
                         {% endfor %}
 
                     </ul>
@@ -76,9 +78,9 @@
                     {% include "includes/pagination.html" with subpages=search_results %}
 
                 {% else %}
-                    <div class="results-container__heading">
+                    <h2 class="results-container__heading">
                         No results found.
-                    </div>
+                    </h2>
                 {% endif %}
             </div>
         {% endspaceless %}

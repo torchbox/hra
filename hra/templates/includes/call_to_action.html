@@ -10,12 +10,14 @@ Example:
 
 {% endcomment %}
 
-<a class="call-to-action" href="{{ call_to_action.get_link_url }}">
-    <h5 class="call-to-action__heading">
-        {{ call_to_action.title }}
-    </h5>
-    <p class="call-to-action__description">
-        {{ call_to_action.summary }}
-        <span>{{ call_to_action.get_link_text|default:"Read more" }}</span>
-    </p>
-</a>
+<aside>
+    <a class="call-to-action" href="{{ call_to_action.get_link_url }}">
+        <h5 class="call-to-action__heading">
+            {{ call_to_action.title }}
+        </h5>
+        <p class="call-to-action__description">
+            {{ call_to_action.summary }}
+            <span>{{ call_to_action.get_link_text|default:"Read more" }}</span>
+        </p>
+    </a>
+</aside>

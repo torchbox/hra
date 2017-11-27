@@ -51,7 +51,7 @@
 
     &__input {
         @include placeholder-text {
-            color: #a9b3b9;
+            color: #bbb;
         }
         display: inline-block;
         width: calc(50% - 50px);

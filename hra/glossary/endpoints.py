@@ -1,3 +1,5 @@
+from django.db.models.functions import Lower
+
 from wagtail.api.v2.endpoints import BaseAPIEndpoint
 from wagtail.api.v2.filters import FieldsFilter, OrderingFilter, SearchFilter
 
@@ -20,3 +22,6 @@ class GlossaryTermsAPIEndpoint(BaseAPIEndpoint):
     known_query_parameters = BaseAPIEndpoint.known_query_parameters.union([
         GlossaryTermsStartsWithFilter.query_parameter
     ])
+
+    def get_queryset(self):
+        return super().get_queryset().order_by(Lower('name'))

@@ -27,5 +27,10 @@
                 padding: 10px;
             }
         }
+
+        &__longdesc {
+            display: block;
+            @include font-size(milli);
+        }
     }
 }

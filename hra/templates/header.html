@@ -2,6 +2,7 @@
 
 <header class="site-header">
     {% spaceless %}
+        <a class="visually-hidden sr-only-focusable" href="#main">Skip menu</a>
         <div class="grid">
             <div class="grid__item two-tenths mobile--one-third">
                 <a href="{% slugurl 'home' %}" class="site-header__logo">
@@ -22,7 +23,7 @@
                                placeholder="Search&hellip;"
                                 {% if search_query %}
                                value="{{ search_query }}"{% endif %}>
-                        <input type="submit" class="site-header__submit" value="">
+                        <input type="submit" class="site-header__submit" value="" aria-label="Search">
                     </form>
 
                 </div>

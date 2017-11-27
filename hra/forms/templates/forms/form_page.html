@@ -7,6 +7,20 @@
 
         <div class="contact">
             {% spaceless %}
+                <div class="contact__right">
+                    <div class="contact__content">
+
+                        {% if page.introduction %}
+                            <article class="article">
+                                <div class="article__intro">
+                                    {{ page.introduction|richtext }}
+                                </div>
+                            </article>
+                        {% endif %}
+
+                        {{ page.body|richtext }}
+                    </div>
+                </div>
                 <div class="contact__left">
                     <h1 class="contact__heading">
                         {{ page.title }}
@@ -53,6 +67,24 @@
                                                 </label>
                                             </div>
 
+                                        {% elif widget_type == 'checkbox_select_multiple' or widget_type == 'radio_select' %}
+                                            <fieldset class="{{ field_type }} {{ widget_type }} {% if field.field.required %}required{% endif %}">
+                                                <legend>
+                                                    {{ field.label }}
+
+                                                    {% if field.help_text or field.field.required %}
+                                                        <span>
+                                                            &ndash; {% if field.field.required %}Required.{% endif %}
+                                                            {% if field.help_text %}{{ field.help_text }}{% endif %}
+                                                        </span>
+                                                    {% endif %}
+                                                </legend>
+
+                                                <div class="{{ widget_type }}">
+                                                    {{ field }}
+                                                </div>
+                                            </fieldset>
+
                                         {% else %}
                                             <label for="{{ field.id_for_label }}"
                                                    class="{{ field_type }} {{ widget_type }} {% if field.field.required %}required{% endif %}">
@@ -82,20 +114,6 @@
                         </form>
                     {% endif %}
 
-                </div>
-                <div class="contact__right">
-                    <div class="contact__content">
-
-                        {% if page.introduction %}
-                            <article class="article">
-                                <div class="article__intro">
-                                    {{ page.introduction|richtext }}
-                                </div>
-                            </article>
-                        {% endif %}
-
-                        {{ page.body|richtext }}
-                    </div>
                 </div>
             {% endspaceless %}
         </div>

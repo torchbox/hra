@@ -24,12 +24,12 @@
         padding: 17px 0 25px;
         border-top: 1px solid $color--border;
 
-        h4 {
+        dt {
             @include font-size(zeta);
             font-family: $font--tertiary;
         }
 
-        p {
+        dd {
             @include font-size(milli);
             margin: 3px 0 0;
         }

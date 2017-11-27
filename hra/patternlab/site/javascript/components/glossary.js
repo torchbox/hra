@@ -20,15 +20,35 @@ function glossary() {
             qs = `?term_startswith=${startswith}`;
         }
 
-        return fetch(apiURL + qs, { credentials: 'same-origin' })
+        const response = fetch(apiURL + qs, { credentials: 'same-origin' })
             .then(response => response.json());
+
+        response.then(json => {
+            history.pushState(
+                { startswith, json },
+                document.title,
+                document.location.pathname + (startswith ? `#${startswith}` : '')
+            );
+        });
+
+        return response;
     }
 
     function loadSearchListing(searchQuery) {
         let qs = `?search=${searchQuery}`;
 
-        return fetch(apiURL + qs, { credentials: 'same-origin' })
+        const response = fetch(apiURL + qs, { credentials: 'same-origin' })
             .then(response => response.json());
+
+        response.then(json => {
+            history.pushState(
+                { searchQuery, json },
+                document.title,
+                document.location.pathname + qs
+            );
+        });
+
+        return response;
     }
 
     function renderListingResponse(response) {
@@ -43,14 +63,13 @@ function glossary() {
         let resultList = '';
         items.forEach(item => {
             resultList += `
-            <li class="glossary__result js-border-result">
-                <div class="glossary__result-border js-border-result__border"></div>
-                <div class="glossary__result-heading js-border-result__heading">
-                    ${item.name}
+            <div class="glossary__result">
+                <dt class="glossary__result-heading">
+                    <dfn>${item.name}</dfn>
                     ${item.is_noun ? '<span class="glossary__noun">Noun</span>' : ''}
-                </div>
-                <div class="glossary__result-content">${item.description}</div>
-            </li>`;
+                </dt>
+                <dd class="glossary__result-content">${item.description}</dd>
+            </div>`;
         });
 
         $resultsContainer.html(resultList);
@@ -60,36 +79,47 @@ function glossary() {
         $resultsHeading.text(`Found ${totalCount} ${pluralize('result', totalCount)}`);
     }
 
-    function renderDefaultListing(searchQuery = null) {
+    function renderActiveLetter(startswith = null) {
+        $keyboardLetters.removeClass(keyboardLettersActiveClass);
+        if (startswith) {
+            $keyboardLetters.filter(`[data-keyboard-letter='${startswith}']`).addClass(keyboardLettersActiveClass);
+        }
+    }
+
+    function renderLetters(count_per_letter) {
+        if (!count_per_letter) {
+            return;
+        }
+
+        $keyboardLetters.addClass(keyboardLettersDisabledClass);
+
+        for (const letter in count_per_letter) {
+            if (!count_per_letter.hasOwnProperty(letter)) {
+                continue;
+            }
+
+            const letter_count = count_per_letter[letter];
+            if (letter_count >= 0) {
+                const lookup = `[data-keyboard-letter="${letter}"]`;
+                $keyboardLetters.closest(lookup).removeClass(keyboardLettersDisabledClass);
+            }
+        }
+    }
+
+    function renderDefaultListing(searchQuery = null, startswith = null) {
         let response;
         if (searchQuery) {
             response = loadSearchListing(searchQuery);
         } else {
-            response = loadListing();
+            response = loadListing(startswith);
         }
 
         renderListingResponse(response);
-
-        response.then(json => json.meta.count_per_letter)
-            .then((count_per_letter) => {
-                if (!count_per_letter) {
-                    return;
-                }
-
-                $keyboardLetters.addClass(keyboardLettersDisabledClass);
-
-                for (const letter in count_per_letter) {
-                    if (!count_per_letter.hasOwnProperty(letter)) {
-                        continue;
-                    }
-
-                    const letter_count = count_per_letter[letter];
-                    if (letter_count >= 0) {
-                        const lookup = `[data-keyboard-letter="${letter}"]`;
-
-                        $keyboardLetters.closest(lookup).removeClass(keyboardLettersDisabledClass);
-                    }
-                }
+        response
+            .then(json => json.meta.count_per_letter)
+            .then(renderLetters)
+            .then(() => {
+                renderActiveLetter(startswith);
             });
     }
 
@@ -97,36 +127,46 @@ function glossary() {
         return $searchInput.val().trim();
     }
 
+    // https://gist.github.com/anaibol/b511550e0d6faed05bf777a50ed37e59 seems legit
+    function debounce(func, wait, immediate = false) {
+        let timeout;
+        return function(...args) {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => {
+                timeout = null;
+                if (!immediate) func.apply(this, args);
+            }, wait);
+            if (immediate && !timeout) func.apply(this, [...args]);
+        }
+    }
+
     function bindEvents() {
         // Initial screen
         $(document).ready(() => {
             renderDefaultListing(
-                getSearchQuery()
+                getSearchQuery(),
+                document.location.hash && document.location.hash.slice(1, 2)
             );
         });
 
         // Search functionality
-        $searchInput.on('keyup', () => {
+        $searchInput.on('keyup', debounce(() => {
             const searchQuery = getSearchQuery();
 
             if (searchQuery.length >= 1) {
                 if (searchQuery !== previousSearchQuery) {
-                    renderListingResponse(
-                        loadSearchListing(searchQuery)
-                    );
+                    const response = loadSearchListing(searchQuery);
+                    renderListingResponse(response);
+                    response.then(() => {
+                        renderActiveLetter();
+                    });
 
                     previousSearchQuery = searchQuery;
                 }
             } else {
                 renderDefaultListing();
             }
-
-            // Deactivate letter buttons
-            $keyboardLetters.removeClass(keyboardLettersActiveClass);
-
-            // Trigger border refresh
-            $(window).trigger('refresh-results-border');
-        });
+        }, 250));
 
         // Browse by letter functionality
         $keyboardLetters.on('click', (e) => {
@@ -142,14 +182,21 @@ function glossary() {
                 );
 
                 // Deactivate other buttons and activate current button
-                $keyboardLetters.removeClass(keyboardLettersActiveClass);
-                $element.addClass(keyboardLettersActiveClass);
+                renderActiveLetter(letter);
 
                 // Cleanup the search field
                 $searchInput.val('');
+            }
+        });
 
-                // Trigger border refresh
-                $(window).trigger('refresh-results-border');
+        window.addEventListener('popstate', event => {
+            const { searchQuery, startswith, json } = event.state;
+            if (json) {
+                renderResultItems(json.items);
+                renderResultHeader(json.meta.total_count);
+                renderLetters(json.meta.count_per_letter);
+                renderActiveLetter(startswith);
+                $searchInput.val(searchQuery || '');
             }
         });
     }

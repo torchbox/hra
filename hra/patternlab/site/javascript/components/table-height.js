@@ -8,7 +8,7 @@ function tableHeight() {
 
     // Get tallest heading height
     function getTallest() {
-        $('.table thead tr td').each(function () {
+        $('.table thead tr th, .table thead tr td').each(function () {
             cellHeights.push($(this).outerHeight());
         });
 

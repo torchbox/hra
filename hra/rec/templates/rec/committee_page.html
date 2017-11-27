@@ -8,104 +8,104 @@
 
                 <div class="committee-list">
                     <h1 class="committee-list__heading">{{ page.title }}</h1>
-                    <ul>
+                    <dl>
                         {% with previous_names=page.previous_names.all %}
                             {% if previous_names %}
 
-                                <li class="committee-list__item">
-                                    <h4>Previous name(s)</h4>
-                                    <p>
+                                <div class="committee-list__item">
+                                    <dt>Previous name(s)</dt>
+                                    <dd>
                                         {{ previous_names|join:", " }}
-                                    </p>
-                                </li>
+                                    </dd>
+                                </div>
 
                             {% endif %}
                         {% endwith %}
 
                         {% if page.chair %}
-                            <li class="committee-list__item">
-                                <h4>Chair</h4>
-                                <p>{{ page.chair }}</p>
-                            </li>
+                            <div class="committee-list__item">
+                                <dt>Chair</dt>
+                                <dd>{{ page.chair }}</dd>
+                            </div>
                         {% endif %}
 
                         {% if page.rec_manager %}
-                            <li class="committee-list__item">
-                                <h4>REC Manager</h4>
-                                <p>{{ page.rec_manager }}</p>
-                            </li>
+                            <div class="committee-list__item">
+                                <dt>REC Manager</dt>
+                                <dd>{{ page.rec_manager }}</dd>
+                            </div>
                         {% endif %}
 
                         {% if page.rec_assistant %}
-                            <li class="committee-list__item">
-                                <h4>REC Assistant</h4>
-                                <p>{{ page.rec_assistant }}</p>
-                            </li>
+                            <div class="committee-list__item">
+                                <dt>REC Assistant</dt>
+                                <dd>{{ page.rec_assistant }}</dd>
+                            </div>
                         {% endif %}
 
                         {% if page.hra_office_name %}
-                            <li class="committee-list__item">
-                                <h4>HRA Office name</h4>
-                                <p>{{ page.hra_office_name }}</p>
-                            </li>
+                            <div class="committee-list__item">
+                                <dt>HRA Office name</dt>
+                                <dd>{{ page.hra_office_name }}</dd>
+                            </div>
                         {% endif %}
 
                         {% with phone_numbers=page.phone_numbers.all %}
                             {% if phone_numbers %}
-                                <li class="committee-list__item">
-                                    <h4>Phone number{{ phone_numbers|length|pluralize }}</h4>
-                                    <p>
+                                <div class="committee-list__item">
+                                    <dt>Phone number{{ phone_numbers|length|pluralize }}</dt>
+                                    <dd>
                                         {% for phone_number in phone_numbers %}
                                             <a href="tel:{{ phone_number|cut:" " }}">
                                                 {{ phone_number }}</a>{% if not forloop.last %}, {% endif %}
                                         {% endfor %}
-                                    </p>
-                                </li>
+                                    </dd>
+                                </div>
                             {% endif %}
                         {% endwith %}
 
                         {% with email_addresses=page.email_addresses.all %}
                             {% if email_addresses %}
-                                <li class="committee-list__item">
-                                    <h4>Email address{{ email_addresses|length|pluralize:"es" }}</h4>
-                                    <p>
+                                <div class="committee-list__item">
+                                    <dt>Email address{{ email_addresses|length|pluralize:"es" }}</dt>
+                                    <dd>
                                         {% for email_address in email_addresses %}
                                             <a href="mailto:{{ email_address }}">
                                                 {{ email_address }}</a>{% if not forloop.last %}, {% endif %}
                                         {% endfor %}
-                                    </p>
-                                </li>
+                                    </dd>
+                                </div>
                             {% endif %}
                         {% endwith %}
 
                         {% if page.hra_office_name %}
-                            <li class="committee-list__item">
-                                <h4>HRA Office name</h4>
-                                <p>{{ page.hra_office_name }}</p>
-                            </li>
+                            <div class="committee-list__item">
+                                <dt>HRA Office name</dt>
+                                <dd>{{ page.hra_office_name }}</dd>
+                            </div>
                         {% endif %}
 
                         {% if page.region %}
-                            <li class="committee-list__item">
-                                <h4>Region/Nation</h4>
-                                <p>{{ page.get_region_display }}</p>
-                            </li>
+                            <div class="committee-list__item">
+                                <dt>Region/Nation</dt>
+                                <dd>{{ page.get_region_display }}</dd>
+                            </div>
                         {% endif %}
 
                         {% if page.usual_meeting_venue %}
-                            <li class="committee-list__item">
-                                <h4>Usual meeting venue</h4>
-                                <p>{{ page.usual_meeting_venue }}</p>
-                            </li>
+                            <div class="committee-list__item">
+                                <dt>Usual meeting venue</dt>
+                                <dd>{{ page.usual_meeting_venue }}</dd>
+                            </div>
                         {% endif %}
 
                         {% if page.usual_meeting_time %}
-                            <li class="committee-list__item">
-                                <h4>Usual meeting time</h4>
-                                <p>{{ page.usual_meeting_time }}</p>
-                            </li>
+                            <div class="committee-list__item">
+                                <dt>Usual meeting time</dt>
+                                <dd>{{ page.usual_meeting_time }}</dd>
+                            </div>
                         {% endif %}
-                    </ul>
+                    </dl>
                 </div>
 
             </div>
@@ -118,18 +118,18 @@
 
                         <table class="table">
                             <thead>
-                            <tr>
-                                <td>Day</td>
-                                <td>Month</td>
-                            </tr>
+                                <tr>
+                                    <th class="td">Day</th>
+                                    <th class="td">Month</th>
+                                </tr>
                             </thead>
                             <tbody>
-                            {% for meeting_date in upcoming_meeting_dates %}
-                                <tr>
-                                    <td>{{ meeting_date.date|date:"jS" }}</td>
-                                    <td>{{ meeting_date.date|date:"M y" }}</td>
-                                </tr>
-                            {% endfor %}
+                                {% for meeting_date in upcoming_meeting_dates %}
+                                    <tr>
+                                        <td>{{ meeting_date.date|date:"jS" }}</td>
+                                        <td>{{ meeting_date.date|date:"M y" }}</td>
+                                    </tr>
+                                {% endfor %}
                             </tbody>
                         </table>
                     </div>

@@ -86,11 +86,11 @@
 
         {% notification_bar %}
 
-        {% include 'includes/glossary-tab.html' %}
-
         {% include 'header.html' %}
 
-        <main>
+        {% include 'includes/glossary-tab.html' %}
+
+        <main id="main">
             {% block content %}{% endblock %}
         </main>
 

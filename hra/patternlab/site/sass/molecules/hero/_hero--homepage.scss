@@ -9,8 +9,19 @@
         height: 400px;
     }
 
+    > a {
+        position: absolute;
+        top: 245px;
+
+        &:focus {
+            outline: 1px dotted $color--blue;
+        }
+    }
+
     .hero__caption {
+        position: relative;
         right: auto;
         left: 0;
+        top: 0;
     }
 }

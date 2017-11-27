@@ -24,6 +24,10 @@
         }
     }
 
+    &:focus {
+        outline: 1px dotted $color--blue;
+    }
+
     &::before {
         position: absolute;
         top: 40px;

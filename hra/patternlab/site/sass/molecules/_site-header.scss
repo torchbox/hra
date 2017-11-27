@@ -140,6 +140,7 @@
         border: 0;
         transition: opacity $default-transition-speed;
 
+        &:focus,
         &:hover {
             opacity: 0.7;
         }

@@ -3,16 +3,19 @@
 <aside class="site-sidebar {% if no_transparency %}site-sidebar--no-transparency{% endif %}">
     <div class="site-sidebar__inner">
         <h2 class="site-sidebar__heading">Within this section</h2>
+        <a class="visually-hidden sr-only-focusable" href="#content">Skip menu</a>
         <button class="site-sidebar__label">Within this section</button>
-        <ul class="site-sidebar__menu">
+        <nav aria-label="Within this section">
+            <ul class="site-sidebar__menu">
 
-            {% for sidebar_page in sidebar_pages %}
-                <li class="site-sidebar__menu-item {% if calling_page.pk == sidebar_page.pk %}site-sidebar__menu-item--active{% endif %}">
-                    {% include 'includes/svg/default-arrow.html' %}
-                    <a href="{% pageurl sidebar_page %}">{{ sidebar_page.title }}</a>
-                </li>
-            {% endfor %}
+                {% for sidebar_page in sidebar_pages %}
+                    <li class="site-sidebar__menu-item {% if calling_page.pk == sidebar_page.pk %}site-sidebar__menu-item--active{% endif %}">
+                        {% include 'includes/svg/default-arrow.html' %}
+                        <a href="{% pageurl sidebar_page %}">{{ sidebar_page.title }}</a>
+                    </li>
+                {% endfor %}
 
-        </ul>
+            </ul>
+        </nav>
     </div>
 </aside>

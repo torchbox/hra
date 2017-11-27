@@ -11,6 +11,10 @@ $keyboard-padding: ($keyboard-letter-width / 2);
     $root: &;
     margin: 15px -11px;
 
+    li {
+        display: inline;
+    }
+
     &__letter {
         position: relative;
         display: inline-block;
@@ -40,7 +44,7 @@ $keyboard-padding: ($keyboard-letter-width / 2);
         }
 
         &:focus {
-            outline: 0;
+            outline: 1px dotted #fff;
         }
 
         &--disabled {

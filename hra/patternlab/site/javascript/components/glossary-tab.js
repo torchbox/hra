@@ -60,6 +60,14 @@ function glossaryTab() {
         }
     }
 
+    function focus(element){
+        if (!$glossaryLabel.is(element.target) && $glossaryTab.has(element.target).length > 0) {
+            if (!state.open) {
+                open();
+            }
+        }
+    }
+
     function bindEvents(){
         if ($(window).width() >= 800) {
 
@@ -74,6 +82,10 @@ function glossaryTab() {
 
             // Close tab on click outside
             $(document).on('mouseup', e => outOfBounds(e));
+
+            // Open on focus (i.e. keyboard tab)
+            $glossaryTab.on('focusin', e => focus(e));
+
         }
     }
 

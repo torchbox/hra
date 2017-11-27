@@ -72,9 +72,10 @@ $highlight-min-height: 300px;
         }
     }
 
+    h2.highlight__heading, /* override .article h2 */
     &__heading {
         @include font-size(delta);
-        margin-bottom: 20px;
+        margin: 0 0 20px 0;
         font-family: $font--secondary;
         line-height: 1.3;
     }

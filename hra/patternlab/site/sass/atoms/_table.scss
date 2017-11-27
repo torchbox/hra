@@ -13,6 +13,7 @@
         color: #fff;
         background-color: $color--primary;
 
+        th.td,
         td {
             border: 1px solid #0f549a;
 
@@ -27,6 +28,7 @@
         padding: 15px 25px;
     }
 
+    th.td,
     td {
         border: 1px solid #f2f2f2;
 
@@ -79,6 +81,7 @@
         display: block;
     }
 
+    th.td,
     td {
         // sass-lint:disable no-important
         background-image: none !important;

@@ -258,6 +258,8 @@ DEFAULT_PER_PAGE = 20
 
 ESI_ENABLED = False
 
+TITLE_SUFFIX = ' - ' + WAGTAIL_SITE_NAME
+
 # Custom settings
 
 ENABLE_STYLEGUIDE = False

@@ -10,75 +10,83 @@
                 <div class="search-filters">
                     <form action="" method="get" role="search" class="js-main-search-form">
 
-                        <div class="search-filters__heading">Search RECs</div>
-                        <input name="query" class="search-filters__search" type="text" placeholder="Search&hellip;"
+                        <h1 class="search-filters__heading">Search RECs</h1>
+                        <label class="visually-hidden" for="search-query">Search</label>
+                        <input id="search-query" name="query" class="search-filters__search" type="text" placeholder="Search&hellip;"
                                {% if search_query %}value="{{ search_query }}"{% endif %}
                         >
-                        <input type="submit" class="search-filters__submit" value="">
-                        <div class="search-filters__filter-main-heading">Filter results</div>
+                        <input type="submit" class="search-filters__submit" value="" aria-label="Search">
 
-                        {% if committee_region_choices %}
-                            <div class="search-filters__section-heading">Region</div>
-                            <label class="custom-select__label custom-select--blue__label"
-                                   for="custom-select--blue__select">
-                                Region
-                            </label>
-                            <div class="custom-select custom-select--blue">
-                                <select name="committee_region" id="custom-select custom-select--blue__select">
-                                    <option value="">All Regions</option>
+                        <fieldset class="search-filters__filter-fieldset">
+                            <legend class="search-filters__filter-main-heading">Filter results</legend>
 
-                                    {% for region_key, region_display_name in committee_region_choices %}
-                                        <option value="{{ region_key }}"
-                                                {% if region_key == selected_committee_region %}selected{% endif %}
-                                        >
-                                            {{ region_display_name }}
-                                        </option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                        {% endif %}
+                            {% if committee_region_choices %}
+                                <div class="search-filters__section-heading">Region</div>
+                                <label class="custom-select__label custom-select--blue__label"
+                                       for="committee_region">
+                                    Region
+                                </label>
+                                <div class="custom-select custom-select--blue">
+                                    <select id="committee_region" name="committee_region" class="custom-select custom-select--blue__select">
+                                        <option value="">All Regions</option>
 
-                        {% if committee_types %}
-
-                            <div class="search-filters__section-heading">Committee Type</div>
-                            <label class="custom-select__label custom-select--blue__label"
-                                   for="custom-select--blue__select">
-                                Committee Type
-                            </label>
-                            <div class="custom-select custom-select--blue">
-
-                                <select name="committee_type" id="custom-select custom-select--blue__select">
-                                    <option value="">All Committee Types</option>
-
-                                    {% for committee_type in committee_types %}
-                                        <option value="{{ committee_type.pk }}"
-                                                {% if committee_type.pk == selected_committee_type_pk %}selected{% endif %}
-                                        >
-                                            {{ committee_type.name }}
-                                        </option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-
-                        {% endif %}
-
-                        {% if committee_flags %}
-                            <div class="search-filters__section-heading">Committee Flag</div>
-                            {% for committee_flag in committee_flags %}
-
-                                <div class="checkbox">
-                                    <input name="committee_flag" type="checkbox"
-                                           id="committee_flag-{{ committee_flag.pk }}"
-                                           value="{{ committee_flag.pk }}"
-                                           {% if committee_flag.pk in selected_committee_flag_pks %}checked{% endif %}
-                                    >
-                                    <label class="checkbox-label" for="committee_flag-{{ committee_flag.pk }}">
-                                        {{ committee_flag }}
-                                    </label>
+                                        {% for region_key, region_display_name in committee_region_choices %}
+                                            <option value="{{ region_key }}"
+                                                    {% if region_key == selected_committee_region %}selected{% endif %}
+                                            >
+                                                {{ region_display_name }}
+                                            </option>
+                                        {% endfor %}
+                                    </select>
                                 </div>
+                            {% endif %}
 
-                            {% endfor %}
-                        {% endif %}
+                            {% if committee_types %}
+                                <div class="search-filters__section-heading">Committee Type</div>
+                                <label class="custom-select__label custom-select--blue__label"
+                                       for="committee_type">
+                                    Committee Type
+                                </label>
+                                <div class="custom-select custom-select--blue">
+                                    <select id="committee_type" name="committee_type" class="custom-select custom-select--blue__select">
+                                        <option value="">All Committee Types</option>
+
+                                        {% for committee_type in committee_types %}
+                                            <option value="{{ committee_type.pk }}"
+                                                    {% if committee_type.pk == selected_committee_type_pk %}selected{% endif %}
+                                            >
+                                                {{ committee_type.name }}
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            {% endif %}
+
+                            {% if committee_flags %}
+                                <fieldset class="search-filters__filter-sub-fieldset">
+                                    <legend class="search-filters__section-heading">Committee Flag</legend>
+                                    {% for committee_flag in committee_flags %}
+
+                                        <div class="checkbox">
+                                            <input name="committee_flag" type="checkbox"
+                                                   id="committee_flag-{{ committee_flag.pk }}"
+                                                   value="{{ committee_flag.pk }}"
+                                                   {% if committee_flag.pk in selected_committee_flag_pks %}checked{% endif %}
+                                            >
+                                            <label class="checkbox-label" for="committee_flag-{{ committee_flag.pk }}">
+                                                {{ committee_flag }}
+                                            </label>
+                                        </div>
+
+                                    {% endfor %}
+                                </fieldset>
+                            {% endif %}
+
+                            <noscript>
+                                <input type="submit" value="Filter" class="search-filters__submit--block-button">
+                            </noscript>
+
+                        </fieldset>
 
                     </form>
                 </div>
@@ -98,28 +106,28 @@
                         {% spaceless %}
                             <div class="grid">
                                 <div class="grid__item one-quarter mobile--one-whole">
-                                    <button class="table-navigation__button table-navigation__button--left js-table-left"></button>
+                                    <button class="table-navigation__button table-navigation__button--left js-table-left" aria-label="Scroll table left"></button>
                                 </div>
                                 <div class="grid__item two-quarters mobile--one-whole">
-                                    <div class="table-navigation__heading">Meeting Dates</div>
+                                    <h2 class="table-navigation__heading">Meeting Dates</h2>
                                 </div>
                                 <div class="grid__item one-quarter mobile--one-whole">
-                                    <button class="table-navigation__button table-navigation__button--right js-table-right"></button>
+                                    <button class="table-navigation__button table-navigation__button--right js-table-right" aria-label="Scroll table right"></button>
                                 </div>
                             </div>
                         {% endspaceless %}
                     </div>
 
-                    <table class="table table--pinned">
+                    <table class="table table--pinned committees-table">
                         <thead>
                         <tr>
                             <th>Committee</th>
                             {% for committee_page in committee_pages %}
-                                <td>
+                                <th class="td">
                                     <a href="{% pageurl committee_page %}">
                                         {{ committee_page.title }}
                                     </a>
-                                </td>
+                                </th>
                             {% endfor %}
                         </tr>
                         </thead>
@@ -128,7 +136,7 @@
 
                         {% for meeting_month, all_meetings in calendar_matrix %}
                             <tr>
-                                <td>{{ meeting_month|date:"M y" }}</td>
+                                <th class="td">{{ meeting_month|date:"M y" }}</th>
 
                                 {% for committee_meetings in all_meetings %}
                                     <td>
@@ -147,9 +155,9 @@
                     </table>
 
                 {% else %}
-                    <div class="results-container__heading">
+                    <h2 class="results-container__heading">
                         No results found.
-                    </div>
+                    </h2>
                 {% endif %}
 
             </div>

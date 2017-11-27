@@ -57,8 +57,7 @@
     }
 
     &__label {
-        position: absolute;
-        visibility: hidden;
+        @include hidden;
     }
 }
 

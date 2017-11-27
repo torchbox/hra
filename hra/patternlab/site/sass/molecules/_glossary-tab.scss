@@ -4,7 +4,7 @@
 
 .glossary-tab {
     position: absolute;
-    top: 720px;
+    top: 250px;
     right: 0;
     z-index: $z-epsilon;
     width: 360px;
@@ -145,6 +145,7 @@
         border: 0;
         transition: opacity $default-transition-speed;
 
+        &:focus,
         &:hover {
             opacity: 0.7;
         }

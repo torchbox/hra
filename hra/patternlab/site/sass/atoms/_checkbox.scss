@@ -5,8 +5,7 @@
 // Hide checkbox from view
 .checkbox {
     input {
-        padding: 0;
-        opacity: 0;
+        @include hidden;
     }
 }
 
@@ -15,7 +14,7 @@
     position: relative;
     display: block;
     padding: 3px 0 0 35px;
-    margin-top: -8px;
+    margin-bottom: 35px !important; /* override .default_form label */
     color: #fff;
     cursor: pointer;
 
@@ -49,4 +48,8 @@
             content: '';
         }
     }
+}
+
+.checkbox input:focus ~ .checkbox-label::before {
+    outline: 1px dotted #fff;
 }

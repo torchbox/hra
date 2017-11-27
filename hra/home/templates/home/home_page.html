@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% load wagtailcore_tags wagtailimages_tags %}
 
+{% block title_suffix %}{% endblock %}
+
 {% block content %}
     {% image page.header_image width-1600 as header_image %}
 

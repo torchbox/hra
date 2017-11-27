@@ -4,7 +4,8 @@
     <div class="related-container">
 
         {% spaceless %}
-            <div class="grid grid--wide">
+            <h2 class="visually-hidden">Related links</h2>
+            <ul class="grid grid--wide">
 
                 {% static 'images/teaser.png' as default_listing_image %}
                 {% for related_page in page.related_pages.all %}
@@ -13,7 +14,7 @@
                     {% with specific_related_page=related_page.page.specific %}
                         {% if specific_related_page.live %}
 
-                            <div class="grid__item one-third laptop--one-whole">
+                            <li class="grid__item one-third laptop--one-whole">
                                 <a class="related" href="{% pageurl specific_related_page %}">
                                     {% if specific_related_page.listing_image %}
                                         {% image specific_related_page.listing_image width-600 as listing_image %}
@@ -37,13 +38,13 @@
                                         </div>
                                     {% endif %}
                                 </a>
-                            </div>
+                            </li>
 
                         {% endif %}
 
                     {% endwith %}
                 {% endfor %}
-            </div>
+            </ul>
         {% endspaceless %}
 
     </div>
