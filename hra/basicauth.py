@@ -2,7 +2,6 @@ import logging
 import os
 from base64 import standard_b64decode
 
-from django.conf import settings
 from django.http import HttpResponse
 
 logger = logging.getLogger(__name__)

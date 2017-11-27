@@ -21,6 +21,7 @@ def single_instance_command(command_name):
         print("Running %s" % command_name)
         call_command(command_name, interactive=False)
 
+
 if has_uwsgi:
     @cron(0, 1, -1, -1, -1)
     def clearsessions(signum):

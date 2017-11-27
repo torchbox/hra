@@ -34,7 +34,6 @@ CACHE_CONTROL_MAX_AGE = 600
 GOOGLE_TAG_MANAGER_ID = 'GTM-K8CGDX6'
 
 
-
 # Newsletter
 
 NEWSLETTER_URL = '//nhs.us8.list-manage.com/subscribe?u=04af4dde330becaf38e8eb355&id=1a71ed9a1e'
@@ -103,11 +102,11 @@ if 'MEDIA_DIR' in env:
 
 
 if 'MEDIA_BUCKET' in env:
-    AWS_LOCATION ='media/'
+    AWS_LOCATION = 'media/'
     AWS_STORAGE_BUCKET_NAME = env['MEDIA_BUCKET']
     AWS_S3_CUSTOM_DOMAIN = env['AWS_S3_CUSTOM_DOMAIN']
     AWS_DEFAULT_ACL = 'public-read'
-    AWS_S3_URL_PROTOCOL= 'https:'
+    AWS_S3_URL_PROTOCOL = 'https:'
     AWS_S3_SECURE_URLS = True
     DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
@@ -198,5 +197,3 @@ if 'HARP_API_USERNAME' in os.environ:
 
 if 'GOOGLE_TAG_MANAGER_ID' in os.environ:
     GOOGLE_TAG_MANAGER_ID = os.environ['GOOGLE_TAG_MANAGER_ID']
-
-    
