@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'hra.search',
     'hra.standardpage',
     'hra.utils',
+    'hra.waf',
 
     'wagtail.contrib.wagtailsitemaps',
     'wagtail.contrib.wagtailsearchpromotions',
