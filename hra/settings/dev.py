@@ -18,8 +18,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 AUTH_PASSWORD_VALIDATORS = []
 
+# Read URLs set in docker-compose.yml
 DATABASES = {'default': dj_database_url.config()}
-
 CACHES = {'default': django_cache_url.config()}
 
 WAGTAILSEARCH_BACKENDS = {
@@ -28,6 +28,12 @@ WAGTAILSEARCH_BACKENDS = {
         'INDEX': 'hra',
     },
 }
+
+# For Database performance debugging...
+MIDDLEWARE_CLASSES = ['hra.rec.middleware.QueryCountDebugMiddleware',] + MIDDLEWARE_CLASSES
+LOGGING['loggers']['hra.rec.middleware'] = {'level': 'DEBUG', 'handlers': ['console']}
+# LOGGING['loggers']['django.db.backends'] = {'level': 'DEBUG', 'handlers': ['console']}
+LOGGING['handlers']['console']['level'] = 'DEBUG'
 
 try:
     from .local import *  # noqa

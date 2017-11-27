@@ -18,7 +18,7 @@ def exclude_invisible_pages(request, pages):
     return pages
 
 
-def get_search_queryset(request, page_types=None):
+def get_search_queryset(request, page_type_pks=None):
     """
     Returns a QuerySet for further search.
     We need to keep in mind, that we must not perform any
@@ -36,8 +36,8 @@ def get_search_queryset(request, page_types=None):
     # to filter search results in ElasticSearch using queryset API,
     # so we need to get PKs of all pages of a specific types
     # and pass them into queryset for further search.
-    if page_types:
-        standard_pages = StandardPage.objects.filter(page_type_relationships__page_type__in=page_types)
+    if page_type_pks:
+        standard_pages = StandardPage.objects.filter(page_type_relationships__page_type__in=page_type_pks)
 
         queryset = queryset.filter(pk__in=list(standard_pages.values_list('pk', flat=True)))
 

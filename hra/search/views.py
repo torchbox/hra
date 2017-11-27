@@ -15,11 +15,15 @@ def search(request):
     # Allow to filter search results using a page types, if specified
     page_types = PageType.objects.all()
     selected_page_type_pks = request.GET.getlist('type', None)
-    selected_page_types = page_types.filter(pk__in=selected_page_type_pks) if selected_page_type_pks else []
-    # User really existing pks
-    selected_page_type_pks = [page_type.pk for page_type in selected_page_types]
+    # Use really existing pks
+    try:
+        selected_page_type_pks = \
+            set(int(pk) for pk in selected_page_type_pks) & \
+            set(obj.pk for obj in page_types)
+    except ValueError:
+        selected_page_type_pks = []
 
-    search_results = get_search_queryset(request, selected_page_types)
+    search_results = get_search_queryset(request, selected_page_type_pks)
 
     # Do not display ResearchSummaryPage pages in the main search
     search_results = search_results.not_type(ResearchSummaryPage)

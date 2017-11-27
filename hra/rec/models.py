@@ -188,7 +188,8 @@ class CommitteeIndexPage(Page, SocialFields, ListingFields):
         search_query = request.GET.get('query', None)
 
         # Get all initial objects values
-        committee_pages = CommitteePage.objects.live().public().descendant_of(self)
+        # Prefetch meeting dates to avoid repeatedly hitting the database when generating matrix
+        committee_pages = CommitteePage.objects.live().public().descendant_of(self).prefetch_related('meeting_dates')
         committee_flags = CommitteeFlag.objects.all()
         committee_types = CommitteeType.objects.all()
         committee_region_choices = CommitteePage.REGION_CHOICES
@@ -205,26 +206,31 @@ class CommitteeIndexPage(Page, SocialFields, ListingFields):
             committee_pages = committee_pages.filter(pk__in=[page.pk for page in search_results])
 
         # Filter by committee flags, if present in the request
-        selected_committee_flags = committee_flags.filter(pk__in=selected_committee_flag_pks)
-        selected_committee_flag_pks = [flag.pk for flag in selected_committee_flags]
         if selected_committee_flag_pks:
-            committee_pages = committee_pages.filter(
-                committee_flags__committee_flag__pk__in=selected_committee_flag_pks
-            )
+            try:
+                selected_committee_flag_pks = \
+                    set(int(pk) for pk in selected_committee_flag_pks) & \
+                    set(obj.pk for obj in committee_flags)
+                if selected_committee_flag_pks:
+                    committee_pages = committee_pages.filter(
+                        committee_flags__committee_flag__pk__in=selected_committee_flag_pks
+                    )
+            except ValueError:
+                pass
 
         # Filter by committee types, if present in the request
         if selected_committee_type_pk:
             try:
-                selected_committee_type = committee_types.get(pk=selected_committee_type_pk)
-                committee_pages = committee_pages.filter(
-                    committee_types__committee_type__pk__in=selected_committee_type_pk
-                )
-                selected_committee_type_pk = selected_committee_type.pk
-            except CommitteeType.DoesNotExist:
-                selected_committee_type_pk = None
+                selected_committee_type_pk = int(selected_committee_type_pk)
+                if selected_committee_type_pk in (obj.pk for obj in committee_types):
+                    committee_pages = committee_pages.filter(
+                        committee_types__committee_type__pk=selected_committee_type_pk
+                    )
+            except ValueError:
+                pass
 
         # Filter by committee region, if present in the request
-        if selected_committee_region:
+        if selected_committee_region in (key for key, _ in committee_region_choices):
             committee_pages = committee_pages.filter(region=selected_committee_region)
 
         # Do not display past meetings
@@ -243,14 +249,19 @@ class CommitteeIndexPage(Page, SocialFields, ListingFields):
         calendar_matrix = []
         if committee_pages and start_and_end_dates['start_date'] and start_and_end_dates['end_date']:
             dates_range = range_month(start_and_end_dates['start_date'], start_and_end_dates['end_date'])
+
             for meeting_month in dates_range:
                 all_meetings = []
 
                 for committee in committee_pages:
-                    committee_meetings = committee.meeting_dates.filter(
-                        date__year=meeting_month.year,
-                        date__month=meeting_month.month,
-                    ).values_list('date', flat=True)
+                    # Rather inefficient to sweep through these for every month in range
+                    # But a lot easier to comprehend
+                    committee_meetings = [
+                        meeting.date
+                        for meeting in committee.meeting_dates.all()
+                        if meeting.date.year == meeting_month.year and
+                        meeting.date.month == meeting_month.month
+                    ]
 
                     all_meetings.append(committee_meetings)
 
