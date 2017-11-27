@@ -17,8 +17,8 @@ class NotificationBarSettings(BaseSetting):
 
     type = models.CharField(max_length=32, choices=NOTIFICATION_TYPES, blank=True,
                             help_text='Set empty type to hide the notification')
-    title = models.CharField(max_length=128)
-    text = RichTextField(max_length=128, blank=True)
+    title = models.CharField(max_length=100)
+    text = RichTextField(max_length=150, blank=True)
 
     updated_at = models.DateTimeField(auto_now=True)
 

@@ -33,6 +33,12 @@
         }
     }
 
+    &__heading,
+    &__content,
+    &__content * {
+        display: inline;
+    }
+
     &__heading {
         @include font-size(zeta);
         font-family: $font--secondary;
