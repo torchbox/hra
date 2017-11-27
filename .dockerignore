@@ -1,0 +1,9 @@
+charts
+esdata
+*.pg
+*.wpr
+*.wpu
+media
+pgdata
+tmp
+vagrant
