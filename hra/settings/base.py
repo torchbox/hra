@@ -261,6 +261,8 @@ ESI_ENABLED = False
 
 ENABLE_STYLEGUIDE = False
 
+# Use "I'm not a robot" style CAPTCHAs
+NOCAPTCHA = True
 
 # HARP API
 
