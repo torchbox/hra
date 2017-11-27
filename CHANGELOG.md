@@ -1,4 +1,4 @@
-0.28 (unreleased)
+0.28 (2017-11-27)
 -----------------
 
 - HRA-1 Remove unwanted tags on paste to avoid triggering WAF (#104)
