@@ -109,7 +109,42 @@
 
         // Focus state
         &:focus {
-            outline: 0;
+            outline: 1px dotted #fff;
         }
     }
+}
+
+/* HRA-3 Temporary feedback promotion */
+
+html.with-footer {
+    padding-bottom: 70px;
+
+    .notification--footer {
+        opacity: 1;
+        transition: opacity $default-transition-speed ease;
+    }
+}
+
+.notification--footer {
+    opacity: 0;
+    position: fixed;
+    bottom: 0;
+    padding: 20px 5%;
+    z-index: 10;
+}
+
+.notification--footer .notification__heading,
+.notification--footer .notification__content,
+.notification--footer .rich-text,
+.notification--footer p {
+    display: inline;
+}
+
+@media (max-width: 768px), (max-height: 640px) {
+  .notification--footer {
+    position: static;
+  }
+  html.with-footer {
+    padding-bottom: 0;
+  }
 }

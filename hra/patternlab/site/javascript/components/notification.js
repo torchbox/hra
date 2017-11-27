@@ -2,14 +2,16 @@ import $ from '../globals';
 
 function notification() {
 
-    const $notification         = $('.notification'),
+    const $notification         = $('.notification').not('.notification--footer'),
         $closeButton            = $('.notification__close'),
+        $html                   = $('html'),
         notificationHeight      = $notification.outerHeight(),
         notificationTime        = $notification.data('updatedAt'),
         notificationStorageKey  = 'notification-bar',
         notificationDarken      = 'notification--darken',
         notificationHide        = 'notification--hide',
-        notificationClose       = 'notification--close';
+        notificationClose       = 'notification--close',
+        withFooter              = 'with-footer';
 
     function darken(){
         $notification.addClass(notificationDarken);
@@ -27,12 +29,19 @@ function notification() {
         $notification.removeClass(notificationClose);
     }
 
+    function closeFooter(){
+        $html.removeClass(withFooter);
+    }
+
+    function openFooter() {
+        $html.addClass(withFooter);
+    }
+
     function openWithAnimation() {
 
         $notification.css({
             'margin-top': -notificationHeight,
         });
-
 
         setTimeout(() => {
             open();
@@ -63,6 +72,7 @@ function notification() {
         // Remove entirely
         setTimeout(() => {
             close();
+            openFooter();
         }, 500);
     }
 
@@ -71,11 +81,13 @@ function notification() {
 
         if (!latestNotificationTime || notificationTime > latestNotificationTime) {
             localStorage.removeItem(notificationStorageKey);
+            closeFooter();
             openWithAnimation();
         } else {
             // Notification should be closed by default (should contain the `notification--close` class).
             // Otherwise the notification bar will flash to the users who have decided to close the notification.
             close();
+            openFooter();
         }
     }
 
