@@ -1,7 +1,16 @@
 0.28 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- HRA-1 Remove unwanted tags on paste to avoid triggering WAF (#104)
+- HRA-3 Add feedback "popup" (#106)
+- HRA-5 Improve efficiency of REC index page (#109)
+- HRA-6 Add lots of favicons (#108)
+- HRA-7 Use new reCAPTCHA version (#103)
+- HRA-14 Avoid JavaScript error on non-glossary pages (#105)
+- HRA-15 Fix sitemap.xml (#107)
+- HRA-18 Accessibility audit actions (#111)
+- HRA-70 Adjust notification length/style to fit cookie banner (#112)
+- Fix some flake8 warnings (#110)
 
 
 0.27 (2017-11-08)
