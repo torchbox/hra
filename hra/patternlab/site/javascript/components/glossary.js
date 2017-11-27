@@ -154,7 +154,9 @@ function glossary() {
         });
     }
 
-    bindEvents();
+    if ($container.length > 0) {
+        bindEvents();
+    }
 }
 
 export default glossary;
