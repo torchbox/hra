@@ -1,0 +1,61 @@
+version: '3.3'
+services:
+
+  redis:
+    image: redis
+
+  database:
+    image: postgres:9.6
+    restart: always
+    volumes:
+      - ./data:/data
+    environment:
+      POSTGRES_DB: hra
+      POSTGRES_USER: hra
+      POSTGRES_PASSWORD: hra
+
+  search:
+    image: docker.elastic.co/elasticsearch/elasticsearch:5.4.3
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      mem_limit: 1g
+    volumes:
+      - ./esdata:/usr/share/elasticsearch/data
+    environment:
+      - xpack.security.enabled=false
+      - bootstrap.memory_lock=true
+      - 'ES_JAVA_OPTS=-Xms512m -Xmx512m'
+
+  web:
+    depends_on:
+      - redis
+      - database
+      - search
+    build: .
+    ports:
+      - 8000:80
+    volumes:
+      - ./tmp:/tmp
+    environment:
+      - 'DJANGO_SETTINGS_MODULE=hra.settings.dev'
+      - 'DATABASE_URL=postgres://hra:hra@database:5432/hra'
+      - 'CACHE_URL=redis://redis:6379/'
+
+  pgadmin:
+    depends_on:
+      - database
+    image: dpage/pgadmin4
+    ports:
+      - 8001:80
+    environment:
+      PGADMIN_DEFAULT_EMAIL: hra
+      PGADMIN_DEFAULT_PASSWORD: hra
+
+  shell:
+    depends_on:
+      - web
+    image: ubuntu:xenial
+    volumes:
+      - .:/local

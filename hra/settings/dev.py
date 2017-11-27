@@ -1,4 +1,8 @@
+import dj_database_url
+import django_cache_url
+
 from .base import *  # noqa
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -14,30 +18,16 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 AUTH_PASSWORD_VALIDATORS = []
 
+DATABASES = {'default': dj_database_url.config()}
 
-# Use Redis as the cache backend for extra performance
-
-CACHES = {
-    'default': {
-        'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': '127.0.0.1:6379',
-        'KEY_PREFIX': 'hra',
-        'OPTIONS': {
-            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
-        }
-    }
-}
-
-
-# Use Elasticsearch as the search backend for extra performance and better search results
+CACHES = {'default': django_cache_url.config()}
 
 WAGTAILSEARCH_BACKENDS = {
     'default': {
-        'BACKEND': 'wagtail.wagtailsearch.backends.elasticsearch',
+        'BACKEND': 'wagtail.wagtailsearch.backends.elasticsearch5',
         'INDEX': 'hra',
     },
 }
-
 
 try:
     from .local import *  # noqa
