@@ -7,19 +7,19 @@
     top: 180px;
     right: 0;
     z-index: $z-epsilon;
-    width: 360px;
+    width: 59px;
     height: 160px;
     background: linear-gradient(to right, #0d61b5, #0c5196);
-    transform: translate3d(301px, 0, 0);
     box-shadow: 0 0 25px rgba(0, 0, 0, 0.35);
-    transition: transform $default-transition-speed ease, box-shadow $default-transition-speed ease;
+    transition: width $default-transition-speed ease, box-shadow $default-transition-speed ease;
+    overflow: hidden;
 
     @include media-query(tablet) {
         display: none;
     }
 
     &--open {
-        transform: translate3d(0, 0, 0);
+        width: 360px;
     }
 
     &--fixed {
@@ -28,9 +28,9 @@
     }
 
     &__close {
-        position: absolute;
+        position: relative;
         top: 14px;
-        right: 11px;
+        right: -329px;
         z-index: $z-milli;
         width: 20px;
         height: 20px;
@@ -98,7 +98,7 @@
         position: absolute;
         top: 0;
         left: 60px;
-        width: calc(100% - 60px);
+        width: 300px;
         padding: 25px 30px;
         color: #fff;
     }
@@ -151,10 +151,6 @@
         }
 
         @include media-query(laptop) {
-            top: 61px;
-            right: 0;
-            width: 67px;
-            height: 55px;
             background: {
                 size: 24px;
             }
