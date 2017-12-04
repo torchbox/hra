@@ -52,6 +52,7 @@
     &__input {
         @include placeholder-text {
             color: #bbb;
+            opacity: 1;
         }
         display: inline-block;
         width: calc(50% - 50px);
