@@ -1,7 +1,12 @@
 0.29 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- HRA-15 Monkeypatch Wagtail Sitemap to avoid timeout (#117)
+- HRA-63 Missed opacity change in newsletter signup placeholder (#113)
+- HRA-66 Adjust glossary tab based on further testing (#115)
+- HRA-70 Remove unwanted <br/> added by hallo.js in cookie banner (#114)
+- HRA-73 Fix glossary tab page overflow on iPad (#116)
+- HRA-76 Fix regression in search filter checkbox spacing (#118)
 
 
 0.28 (2017-11-27)
