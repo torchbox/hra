@@ -15,3 +15,7 @@ def notification_bar(context):
         'notification_settings': NotificationBarSettings.for_site(context['request'].site),
         'request': context['request'],
     }
+
+@register.filter(is_safe=True)
+def lose_br(value):
+    return value.replace('<br/>', '')

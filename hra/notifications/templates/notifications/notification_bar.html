@@ -1,4 +1,4 @@
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags notification_tags %}
 
 {% with type=notification_settings.type %}
     {% if type %}
@@ -11,7 +11,7 @@
              data-updated-at="{{ notification_settings.updated_at|date:"U" }}">
             <div class="notification__heading">{{ notification_settings.title }}</div>
             <div class="notification__content">
-                {{ notification_settings.text|richtext }}
+                {{ notification_settings.text|richtext|lose_br }}
             </div>
             <button class="notification__close" aria-label="Close"></button>
         </div>
