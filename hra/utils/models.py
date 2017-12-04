@@ -1,4 +1,6 @@
+from django.contrib.sitemaps import Sitemap as DjangoSitemap
 from django.core.exceptions import ValidationError
+from django.core.urlresolvers import reverse
 from django.db import models
 
 from wagtail.wagtailadmin.edit_handlers import (
@@ -6,11 +8,13 @@ from wagtail.wagtailadmin.edit_handlers import (
     MultiFieldPanel,
     PageChooserPanel
 )
-from wagtail.wagtailcore.models import Orderable, Page
+from wagtail.wagtailcore.models import Orderable, Page, Site
+from wagtail.wagtailcore.utils import WAGTAIL_APPEND_SLASH
 from wagtail.wagtaildocs.edit_handlers import DocumentChooserPanel
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
 from wagtail.contrib.settings.models import BaseSetting, register_setting
+from wagtail.contrib.wagtailsitemaps import sitemap_generator
 
 
 class LinkFields(models.Model):
@@ -200,3 +204,54 @@ class SocialMediaSettings(BaseSetting):
         default='Health Research Authority',
         help_text='Site name, used by Open Graph.',
     )
+
+
+# MONKEYPATCH Wagtail Sitemap to use generic page data
+# as this site doesn't have any specific URL or last modified behaviour
+
+# based on Wagtail 1.11.1 wagtail.contrib.wagtailsitemaps.sitemap_generator.Sitemap
+class Sitemap(DjangoSitemap):
+
+    def __init__(self, site=None):
+        self.site = site
+        self._wagtail_root_paths = Site.get_site_root_paths()
+
+    def location(self, obj):
+        # based on Wagtail 1.11.1 wagtail.wagtailcore.models.Page.full_url
+        for (site_id, root_path, root_url) in self._wagtail_root_paths:
+            if obj[0].startswith(root_path):
+                page_path = reverse('wagtail_serve', args=(obj[0][len(root_path):],))
+                if not WAGTAIL_APPEND_SLASH and page_path != '/':
+                    page_path = page_path.rstrip('/')
+                return root_url + page_path
+
+    def lastmod(self, obj):
+        return obj[1] or obj[2]
+
+    def items(self):
+        return (
+            self.site
+            .root_page
+            .get_descendants(inclusive=True)
+            .live()
+            .public()
+            .order_by('path')
+            .values_list('url_path', 'last_published_at', 'latest_revision_created_at'))
+
+    def _urls(self, page, protocol, domain):
+        urls = []
+        last_mods = set()
+
+        for item in self.paginator.page(page).object_list:
+            url_info = {
+                'location': self.location(item),
+                'lastmod': self.lastmod(item),
+            }
+            urls.append(url_info)
+            last_mods.add(url_info.get('lastmod'))
+
+        if None not in last_mods:
+            self.latest_lastmod = max(last_mods)
+        return urls
+
+sitemap_generator.Sitemap = Sitemap
