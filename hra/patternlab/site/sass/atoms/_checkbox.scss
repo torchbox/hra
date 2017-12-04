@@ -9,12 +9,15 @@
     }
 }
 
+.default-form .checkbox-label {
+    margin-bottom: 35px; /* override .default-form label */
+}
+
 .checkbox-label {
     @include font-size(milli);
     position: relative;
     display: block;
     padding: 3px 0 0 35px;
-    margin-bottom: 35px !important; /* override .default_form label */
     color: #fff;
     cursor: pointer;
 
