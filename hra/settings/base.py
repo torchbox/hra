@@ -241,6 +241,11 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': False,
         },
+        'hra.standardpage.models': {
+            'handlers': ['console_info'],
+            'level': 'INFO',
+            'propagate': False,
+        },
     },
 }
 

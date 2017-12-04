@@ -1,3 +1,7 @@
+import logging
+
+from django.conf import settings
+from django.core.handlers.base import BaseHandler
 from django.db import models
 from django.utils.functional import cached_property
 
@@ -16,6 +20,9 @@ from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 
 from hra.utils.blocks import StoryBlock
 from hra.utils.models import ListingFields, SocialFields, RelatedPage, CallToActionSnippet
+
+
+logger = logging.getLogger(__name__)
 
 
 class StandardPagePageType(models.Model):
@@ -70,6 +77,19 @@ class StandardPage(Page, SocialFields, ListingFields):
             n.page_type for n in self.page_type_relationships.all()
         ]
         return page_types
+
+    def dummy_request(self, original_request=None, **meta):
+        logger.info('Has MIDDLEWARE attribute: {}'.format(hasattr(settings, 'MIDDLEWARE')))
+        logger.info('ORIGINAL REQUEST: {}'.format(original_request.__dict__))
+        request = super().dummy_request(original_request, **meta)
+        logger.info('DUMMY REQUEST: {}'.format(request.__dict__))
+        handler = BaseHandler()
+        handler.load_middleware()
+        # use pre-Django 1.10 method to go through middleware classes (again, but noisily)
+        for middleware_method in handler._request_middleware:
+            middleware_method(request)
+        logger.info('POST-MIDDLEWARE DUMMY REQUEST: {}'.format(request.__dict__))
+        return request
 
 
 class StandardIndexSectionPage(RelatedPage):
