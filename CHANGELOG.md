@@ -1,5 +1,5 @@
-0.29.hra71.test1 (unreleased)
------------------
+0.29.hra71.test1 (2017-12-04)
+-----------------------------
 
 - HRA-71 Try to trigger middleware exceptions that are failing silently
 
