@@ -27,7 +27,7 @@
         }
 
         @include media-query(desktop) {
-            padding: 30px 30px 30px 60px;
+            padding: 30px 70px 30px 60px;
 
             &::before {
                 top: 60px;
