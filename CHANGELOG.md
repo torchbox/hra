@@ -1,4 +1,4 @@
-0.29 (unreleased)
+0.29 (2017-12-04)
 -----------------
 
 - HRA-15 Monkeypatch Wagtail Sitemap to avoid timeout (#117)
