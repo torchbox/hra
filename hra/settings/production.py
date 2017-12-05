@@ -181,13 +181,22 @@ LOGGING = {
         'console': {
             'class': 'logging.StreamHandler',
         },
+        'console_info': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+        },
     },
     'loggers': {
         'django': {
             'handlers': ['console'],
             'level': 'INFO',
             'propagate': True,
-        }
+        },
+        'hra.standardpage.models': {
+            'handlers': ['console_info'],
+            'level': 'INFO',
+            'propagate': False,
+        },
     }
 }
 
