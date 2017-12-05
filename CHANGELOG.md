@@ -1,7 +1,7 @@
-0.30 (unreleased)
+0.29.hra71.test2 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- HRA-71 Rework diagnostics to only run middleware once
 
 
 0.29.hra71.test1 (2017-12-04)
