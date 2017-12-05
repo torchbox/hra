@@ -1,4 +1,4 @@
-0.29.hra71.test3 (unreleased)
+0.29.hra71.test3 (2017-12-05)
 -----------------------------
 
 - HRA-71 Don't trigger basic auth for Wagtail dummy requests
