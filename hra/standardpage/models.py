@@ -2,8 +2,11 @@ import logging
 
 from django.conf import settings
 from django.core.handlers.base import BaseHandler
+from django.core.handlers.wsgi import WSGIRequest
 from django.db import models
 from django.utils.functional import cached_property
+from django.utils.six import StringIO
+from django.utils.six.moves.urllib.parse import urlparse
 
 from modelcluster.fields import ParentalKey
 from wagtail.wagtailadmin.edit_handlers import (
@@ -79,16 +82,88 @@ class StandardPage(Page, SocialFields, ListingFields):
         return page_types
 
     def dummy_request(self, original_request=None, **meta):
-        logger.info('Has MIDDLEWARE attribute: {}'.format(hasattr(settings, 'MIDDLEWARE')))
         logger.info('ORIGINAL REQUEST: {}'.format(original_request.__dict__))
-        request = super().dummy_request(original_request, **meta)
-        logger.info('DUMMY REQUEST: {}'.format(request.__dict__))
-        handler = BaseHandler()
-        handler.load_middleware()
-        # use pre-Django 1.10 method to go through middleware classes (again, but noisily)
-        for middleware_method in handler._request_middleware:
-            middleware_method(request)
-        logger.info('POST-MIDDLEWARE DUMMY REQUEST: {}'.format(request.__dict__))
+
+        # build dummy request - copied from superclass
+
+        url = self.full_url
+        if url:
+            url_info = urlparse(url)
+            hostname = url_info.hostname
+            path = url_info.path
+            port = url_info.port or 80
+            scheme = url_info.scheme
+        else:
+            # Cannot determine a URL to this page - cobble one together based on
+            # whatever we find in ALLOWED_HOSTS
+            try:
+                hostname = settings.ALLOWED_HOSTS[0]
+                if hostname == '*':
+                    # '*' is a valid value to find in ALLOWED_HOSTS[0], but it's not a valid domain name.
+                    # So we pretend it isn't there.
+                    raise IndexError
+            except IndexError:
+                hostname = 'localhost'
+            path = '/'
+            port = 80
+            scheme = 'http'
+
+        dummy_values = {
+            'REQUEST_METHOD': 'GET',
+            'PATH_INFO': path,
+            'SERVER_NAME': hostname,
+            'SERVER_PORT': port,
+            'SERVER_PROTOCOL': 'HTTP/1.1',
+            'HTTP_HOST': hostname,
+            'wsgi.version': (1, 0),
+            'wsgi.input': StringIO(),
+            'wsgi.errors': StringIO(),
+            'wsgi.url_scheme': scheme,
+            'wsgi.multithread': True,
+            'wsgi.multiprocess': True,
+            'wsgi.run_once': False,
+        }
+
+        # Add important values from the original request object, if it was provided.
+        HEADERS_FROM_ORIGINAL_REQUEST = [
+            'REMOTE_ADDR', 'HTTP_X_FORWARDED_FOR', 'HTTP_COOKIE', 'HTTP_USER_AGENT',
+            'wsgi.version', 'wsgi.multithread', 'wsgi.multiprocess', 'wsgi.run_once',
+        ]
+        if settings.SECURE_PROXY_SSL_HEADER:
+            HEADERS_FROM_ORIGINAL_REQUEST.append(settings.SECURE_PROXY_SSL_HEADER[0])
+        if original_request:
+            for header in HEADERS_FROM_ORIGINAL_REQUEST:
+                if header in original_request.META:
+                    dummy_values[header] = original_request.META[header]
+
+        # Add additional custom metadata sent by the caller.
+        dummy_values.update(**meta)
+
+        request = WSGIRequest(dummy_values)
+
+        logger.info('PRE-MIDDLEWARE: {}'.format(request.__dict__))
+
+        # Apply middleware to the request
+        # Note that Django makes sure only one of the middleware settings are
+        # used in a project
+        if hasattr(settings, 'MIDDLEWARE'):
+            logger.info('MIDDLEWARE processing')
+            handler = BaseHandler()
+            handler.load_middleware()
+            response = handler._middleware_chain(request)
+            logger.info('MIDDLEWARE RESPONSE: {}'.format(response.__dict__))
+        elif hasattr(settings, 'MIDDLEWARE_CLASSES'):
+            logger.info('MIDDLEWARE_CLASSES processing')
+            # Pre Django 1.10 style - see http://www.mellowmorning.com/2011/04/18/mock-django-request-for-testing/
+            handler = BaseHandler()
+            handler.load_middleware()
+            # call each middleware in turn and throw away any responses that they might return
+            for middleware_method in handler._request_middleware:
+                response = middleware_method(request)
+                logger.info('MIDDLEWARE RESPONSE (brief): {}'.format(response))
+
+        logger.info('POST-MIDDLEWARE: {}'.format(request.__dict__))
+
         return request
 
 
