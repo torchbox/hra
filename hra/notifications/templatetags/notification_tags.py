@@ -3,6 +3,7 @@ from django import template
 from hra.esi import register_inclusion_tag
 from hra.notifications.models import NotificationBarSettings
 
+
 register = template.Library()
 
 esi_inclusion_tag = register_inclusion_tag(register)
@@ -15,6 +16,7 @@ def notification_bar(context):
         'notification_settings': NotificationBarSettings.for_site(context['request'].site),
         'request': context['request'],
     }
+
 
 @register.filter(is_safe=True)
 def lose_br(value):

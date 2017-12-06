@@ -6,6 +6,7 @@ from django.conf import settings
 from wagtail.wagtailcore import hooks
 from wagtail.wagtailcore.rich_text import DbWhitelister
 
+
 @hooks.register('insert_editor_js')
 def editor_js():
     js_files = [

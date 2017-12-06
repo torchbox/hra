@@ -3,7 +3,7 @@ import os
 from django.core.management import call_command
 
 try:
-    import uwsgi
+    import uwsgi  # noqa
     from uwsgidecorators import timer, cron
 
     print("We have a uWSGI")

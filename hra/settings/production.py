@@ -1,12 +1,9 @@
 import os
-import raven
+import raven  # noqa
 
-from boto3.session import Session
-
-import logging
 import django_cache_url
 import dj_database_url
-from elasticsearch import Elasticsearch, RequestsHttpConnection
+from elasticsearch import RequestsHttpConnection
 from requests_aws4auth import AWS4Auth
 
 from .base import *  # noqa
