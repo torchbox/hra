@@ -49,5 +49,8 @@ class BasicAuth(object):
 
     def process_request(self, request):
         if os.environ.get('BASIC_AUTH_REALM', '') != '':
-            if not self.is_authenticated(request):
+            # only prompt for basic auth from CloudFront requests (i.e. not Wagtail dummy requests)
+            # need to do this until request.is_dummy attribute becomes available
+            # https://github.com/wagtail/wagtail/commit/c8b0fff58670b31b9876b0866617d317b54e4bc9
+            if request.META.get('HTTP_CLOUDFRONT_FORWARDED_PROTO') and not self.is_authenticated(request):
                 return self.render_401()
