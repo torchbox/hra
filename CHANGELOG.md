@@ -1,7 +1,13 @@
 0.30 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- HRA-15 Remove sitemap (#119)
+- HRA-71 Stop basic auth middleware clobbering Wagtail preview requests (#120)
+- HRA-73 Fix glossary tab page overflow on iPad (#116)
+- HRA-76 Fix regression in search filter checkbox spacing (#118)
+- HRA-78 Remove duplicate HRA Office heading
+- HRA-67 Fix Glossary JavaScript error when no history state recorded
+- Some flake8 fixes (#121)
 
 
 0.29 (2017-12-04)
@@ -11,8 +17,6 @@
 - HRA-63 Missed opacity change in newsletter signup placeholder (#113)
 - HRA-66 Adjust glossary tab based on further testing (#115)
 - HRA-70 Remove unwanted <br/> added by hallo.js in cookie banner (#114)
-- HRA-73 Fix glossary tab page overflow on iPad (#116)
-- HRA-76 Fix regression in search filter checkbox spacing (#118)
 
 
 0.28 (2017-11-27)
