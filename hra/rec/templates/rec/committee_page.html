@@ -43,13 +43,6 @@
                             </div>
                         {% endif %}
 
-                        {% if page.hra_office_name %}
-                            <div class="committee-list__item">
-                                <dt>HRA Office name</dt>
-                                <dd>{{ page.hra_office_name }}</dd>
-                            </div>
-                        {% endif %}
-
                         {% with phone_numbers=page.phone_numbers.all %}
                             {% if phone_numbers %}
                                 <div class="committee-list__item">
