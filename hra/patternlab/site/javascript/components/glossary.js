@@ -190,7 +190,7 @@ function glossary() {
         });
 
         window.addEventListener('popstate', event => {
-            const { searchQuery, startswith, json } = event.state;
+            const { searchQuery, startswith, json } = event.state || {};
             if (json) {
                 renderResultItems(json.items);
                 renderResultHeader(json.meta.total_count);
