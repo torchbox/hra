@@ -5,8 +5,7 @@
 
             <li class="pagination__back {% if subpages.has_previous %}pagination__back--active{% endif %}">
                 {% if subpages.has_previous %}
-                    <a href="?page=
-                            {{ subpages.previous_page_number }}{% if search_query %}&amp;query={{ search_query|urlencode }}{% endif %}{% if extra_url_params %}&amp;{{ extra_url_params }}{% endif %}"><span>Back</span></a>
+                    <a href="?page={{ subpages.previous_page_number }}{% if search_query %}&amp;query={{ search_query|urlencode }}{% endif %}{% if extra_url_params %}&amp;{{ extra_url_params }}{% endif %}"><span>Back</span></a>
                 {% else %}
                     {# Dispaly array, but it should be disabled #}
                     <span></span>
@@ -14,13 +13,25 @@
             </li>
 
 
-            {% for page_number in subpages.paginator.page_range %}
-                <li class="pagination__item {% if subpages.number == page_number %}pagination__item--active{% endif %}">
-                    <a href="?page={{ page_number }}{% if search_query %}&amp;query={{ search_query|urlencode }}{% endif %}{% if extra_url_params %}&amp;{{ extra_url_params }}{% endif %}">
-                        {{ page_number }}
-                    </a>
-                </li>
+            {% if show_first %}
+                {% include "includes/page_link.html" with page_number=1 %}
+            {% endif %}
+
+            {% if show_first_hellip %}
+                <li class="pagination__item disabled"><span aria-hidden="true">&hellip;</span></li>
+            {% endif %}
+
+            {% for page_number in page_numbers %}
+                {% include "includes/page_link.html" with page_number=page_number %}
             {% endfor %}
+
+            {% if show_last_hellip %}
+                <li class="pagination__item disabled"><span aria-hidden="true">&hellip;</span></li>
+            {% endif %}
+
+            {% if show_last %}
+                {% include "includes/page_link.html" with page_number=subpages.paginator.num_pages %}
+            {% endif %}
 
 
             <li class="pagination__forward {% if subpages.has_next %}pagination__forward--active{% endif %}">

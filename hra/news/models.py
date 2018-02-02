@@ -14,7 +14,7 @@ from wagtail.wagtailadmin.edit_handlers import (
     PageChooserPanel)
 from wagtail.wagtailsearch import index
 
-from hra.utils.models import ListingFields, SocialFields, RelatedPage
+from hra.utils.models import ListingFields, SocialFields, RelatedPage, get_adjacent_pages
 from hra.utils.blocks import StoryBlock
 
 
@@ -105,10 +105,10 @@ class NewsIndex(Page, SocialFields, ListingFields):
         ).order_by('-date')
 
         # Pagination
-        page = request.GET.get('page', 1)
+        page_number = request.GET.get('page', 1)
         paginator = Paginator(news, settings.DEFAULT_PER_PAGE)
         try:
-            news = paginator.page(page)
+            news = paginator.page(page_number)
         except PageNotAnInteger:
             news = paginator.page(1)
         except EmptyPage:
@@ -119,6 +119,7 @@ class NewsIndex(Page, SocialFields, ListingFields):
             news=news,
             sidebar_pages=self.get_siblings().live().public(),
         )
+        context.update(get_adjacent_pages(paginator, page_number))
         return context
 
     subpage_types = ['NewsPage']

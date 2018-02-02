@@ -6,7 +6,7 @@ Health Research Authority Wagtail site
 This repository includes a Vagrantfile for running the project in a Debian VM and
 a fabfile for running common commands with Fabric.
 
-To set up a new build:
+To set up a new build you will require compatible versions of vagrant and virtualbox installed then:
 
 ``` bash
 git clone git@github.com:torchbox/hra.git

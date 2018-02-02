@@ -10,7 +10,7 @@ from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailsearch import index
 
-from hra.utils.models import SocialFields, ListingFields
+from hra.utils.models import SocialFields, ListingFields, get_adjacent_pages
 
 
 class ResearchType(models.Model):
@@ -259,5 +259,6 @@ class ResearchSummariesIndexPage(Page, SocialFields, ListingFields):
             'search_date_from': search_date_from,
             'search_date_to': search_date_to,
         })
+        context.update(get_adjacent_pages(paginator, page_number))
 
         return context

@@ -200,3 +200,24 @@ class SocialMediaSettings(BaseSetting):
         default='Health Research Authority',
         help_text='Site name, used by Open Graph.',
     )
+
+
+def get_adjacent_pages(paginator, page_number):
+    adjacent_pages = 2
+    if paginator.num_pages <= 2 * adjacent_pages + 3:
+        page_numbers = range(1, paginator.num_pages + 1)
+    else:
+        page_numbers = [n for n in
+            range(int(page_number) - adjacent_pages,
+                  int(page_number) + adjacent_pages + 1)
+            if n > 0 and n <= paginator.num_pages]
+    show_first = 1 not in page_numbers
+    show_last = paginator.num_pages not in page_numbers
+
+    return {
+        'page_numbers': page_numbers,
+        'show_first': show_first,
+        'show_first_hellip': show_first and 2 not in page_numbers,
+        'show_last': show_last,
+        'show_last_hellip': show_last and (paginator.num_pages - 1) not in page_numbers,
+    }

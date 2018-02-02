@@ -20,7 +20,7 @@ from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
 
 from hra.utils.blocks import StoryBlock
-from hra.utils.models import ListingFields, RelatedPage, SocialFields
+from hra.utils.models import ListingFields, RelatedPage, SocialFields, get_adjacent_pages
 
 
 @register_snippet
@@ -216,5 +216,6 @@ class EventIndexPage(Page, SocialFields, ListingFields):
             'events': events,
             'sidebar_pages': self.get_siblings().live().public(),
         })
+        context.update(get_adjacent_pages(paginator, page_number))
 
         return context

@@ -18,7 +18,7 @@ from wagtail.wagtailsnippets.models import register_snippet
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 
 from hra.utils.blocks import StoryBlock
-from hra.utils.models import ListingFields, SocialFields
+from hra.utils.models import ListingFields, SocialFields, get_adjacent_pages
 
 
 class SocialMediaProfile(models.Model):
@@ -113,6 +113,7 @@ class PersonIndexPage(Page, SocialFields, ListingFields):
             people=people,
             sidebar_pages=self.get_siblings().live().public(),
         )
+        context.update(get_adjacent_pages(paginator, page_number))
 
         return context
 

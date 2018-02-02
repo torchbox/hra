@@ -1,0 +1,5 @@
+<li class="pagination__item {% if subpages.number == page_number %}pagination__item--active{% endif %}">
+    <a href="?page={{ page_number }}{% if search_query %}&amp;query={{ search_query|urlencode }}{% endif %}{% if extra_url_params %}&amp;{{ extra_url_params }}{% endif %}">
+        {{ page_number }}
+    </a>
+</li>

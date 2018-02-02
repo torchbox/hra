@@ -6,11 +6,12 @@ from wagtail.wagtailsearch.models import Query
 from hra.categories.models import PageType
 from hra.research_summaries.models import ResearchSummaryPage
 from hra.search.utils import get_search_queryset
+from hra.utils.models import get_adjacent_pages
 
 
 def search(request):
     search_query = request.GET.get('query', None)
-    page = request.GET.get('page', 1)
+    page_number = request.GET.get('page', 1)
 
     # Allow to filter search results using a page types, if specified
     page_types = PageType.objects.all()
@@ -40,15 +41,17 @@ def search(request):
     # Pagination
     paginator = Paginator(search_results, settings.DEFAULT_PER_PAGE)
     try:
-        search_results = paginator.page(page)
+        search_results = paginator.page(page_number)
     except PageNotAnInteger:
         search_results = paginator.page(1)
     except EmptyPage:
         search_results = paginator.page(paginator.num_pages)
 
-    return render(request, 'search/search.html', {
+    context = {
         'search_query': search_query,
         'search_results': search_results,
         'page_types': page_types,
         'selected_page_type_pks': selected_page_type_pks,
-    })
+    }
+    context.update(get_adjacent_pages(paginator, page_number))
+    return render(request, 'search/search.html', context)
