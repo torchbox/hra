@@ -108,6 +108,24 @@ class ResearchSummaryPage(Page, SocialFields, ListingFields):
         index.FilterField('research_type'),
         index.FilterField('date_of_rec_opinion'),
         index.FilterField('updated_at'),
+
+        index.FilterField('rec_opinion'),
+
+        index.SearchField('harp_application_id'),
+        index.SearchField('contact_name'),
+        index.SearchField('contact_email'),
+        index.SearchField('sponsor_organisation'),
+        index.SearchField('rec_name'),
+        index.SearchField('rec_reference'),
+        index.SearchField('data_collection_arrangements', partial_match=True),
+        index.SearchField('research_programme', partial_match=True),
+        index.SearchField('rtb_title', partial_match=True),
+        index.SearchField('research_database_title'),
+        index.SearchField('establishment_organisation', partial_match=True),
+        index.SearchField('establishment_organisation_address_1'),
+        index.SearchField('establishment_organisation_address_2'),
+        index.SearchField('establishment_organisation_address_3'),
+        index.SearchField('establishment_organisation_address_postcode'),
     ]
 
     promote_panels = (
