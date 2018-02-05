@@ -8,6 +8,7 @@
 
 {% block content %}
 
+
     <div class="results-container results-container--blue">
         {% spaceless %}
             <div class="results-container__left">
@@ -51,6 +52,7 @@
 
             </div>
             <div class="results-container__right">
+                <p><strong>If you are looking for research summaries please go to <a href="{% slugurl 'research-summaries' %}">the reasearch summary page.</a></strong></p>
                 {% get_search_promotions search_query as search_picks %}
 
                 {% if search_results or search_picks %}
