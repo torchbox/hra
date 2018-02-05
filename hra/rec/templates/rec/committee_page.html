@@ -98,6 +98,25 @@
                                 <dd>{{ page.usual_meeting_time }}</dd>
                             </div>
                         {% endif %}
+
+                        {% if page.committee_types.count %}
+                            <div class="committee-list__item">
+                                <dt>Committee types</dt>
+                                {% for type in page.committee_types.all %}
+                                    <dd>{{ type.committee_type }}</dd>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+
+                        {% if page.committee_flags.count %}
+                            <div class="committee-list__item">
+                                <dt>Committee flags</dt>
+                                {% for flag in page.committee_flags.all %}
+                                    <dd>{{ flag.committee_flag }}</dd>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+
                     </dl>
                 </div>
 
