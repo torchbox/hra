@@ -48,7 +48,7 @@
         <meta name="twitter:description" content="{{ page|social_text:request.site }}">
         {% if page.social_image  %}
             {% image page.social_image width-320 as social_img %}
-            <meta name="twitter:image:src" content="https://{{ request.site.root_url }}{% if page.social_image %}{{ social_img.url }}{% else %}{% static 'favicons/apple-touch-icon-152x152.png' %}{% endif %}">
+            <meta name="twitter:image:src" content="{{ request.site.root_url }}{% if page.social_image %}{{ social_img.url }}{% else %}{% static 'favicons/apple-touch-icon-152x152.png' %}{% endif %}">
         {% else %}
             <!-- Add a default image to use for social sharing here in case one is not provided on the page. -->
         {% endif %}
