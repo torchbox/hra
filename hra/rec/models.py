@@ -92,7 +92,6 @@ class CommitteePage(Page, SocialFields, ListingFields):
     REGION_CHOICES = (
         ('east_midlands', 'East Midlands'),
         ('east_of_england', 'East of England'),
-        ('england', 'England'),
         ('london', 'London'),
         ('north_east', 'North East'),
         ('north_west', 'North West'),
