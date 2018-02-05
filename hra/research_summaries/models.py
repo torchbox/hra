@@ -44,15 +44,17 @@ class ResearchType(models.Model):
         verbose_name_plural = 'research types'
 
 
+REC_OPINION_CHOICES = OrderedDict((
+    ('unfavourable', 'Unfavourable Opinion'),
+    ('favourable', 'Favourable Opinion'),
+    ('further_unfavourable', 'Further Information Unfavourable Opinion'),
+    ('further_favourable', 'Further Information Favourable Opinion'),
+))
+
+
 class ResearchSummaryPage(Page, SocialFields, ListingFields):
     is_creatable = False
 
-    REC_OPINION_CHOICES = OrderedDict((
-        ('unfavourable', 'Unfavourable Opinion'),
-        ('favourable', 'Favourable Opinion'),
-        ('further_unfavourable', 'Further Information Unfavourable Opinion'),
-        ('further_favourable', 'Further Information Favourable Opinion'),
-    ))
     REC_OPINION_CHOICES_REVERSE = OrderedDict((
         (value, key) for key, value in REC_OPINION_CHOICES.items()
     ))
@@ -201,6 +203,7 @@ class ResearchSummariesIndexPage(Page, SocialFields, ListingFields):
         search_date_from = request.GET.get('date_from', None)
         search_date_to = request.GET.get('date_to', None)
         search_research_type = request.GET.get('research_type', None)
+        search_rec_opinion = request.GET.get('rec_opinion', None)
         search_query = request.GET.get('query', None)
         page_number = request.GET.get('page', 1)
 
@@ -256,6 +259,10 @@ class ResearchSummariesIndexPage(Page, SocialFields, ListingFields):
         except (TypeError, ValueError):
             pass
 
+        # rec opinion filter
+        if search_rec_opinion:
+            search_results = search_results.filter(rec_opinion=search_rec_opinion)
+
         if search_query:
             search_results = search_results.search(search_query, operator='and')
 
@@ -271,11 +278,13 @@ class ResearchSummariesIndexPage(Page, SocialFields, ListingFields):
         context = super().get_context(request, *args, **kwargs)
         context.update({
             'search_research_type': search_research_type,
+            'search_rec_opinion': search_rec_opinion,
             'search_query': search_query,
             'search_results': search_results,
             'display_research_types': display_research_types,
             'search_date_from': search_date_from,
             'search_date_to': search_date_to,
+            'rec_opinions': REC_OPINION_CHOICES,
         })
         context.update(get_adjacent_pages(paginator, page_number))
 

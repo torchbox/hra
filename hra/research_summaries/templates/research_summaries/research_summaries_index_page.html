@@ -38,6 +38,25 @@
                                 </div>
                             {% endif %}
 
+                            {% if rec_opinions %}
+                                <div class="search-filters__section-heading">REC opinion</div>
+                                <label for="rec_opinion" class="custom-select__label custom-select--blue__label">
+                                    Filter by REC opinion
+                                </label>
+                                <div class="custom-select custom-select--blue">
+                                    <select id="rec_opinion" name="rec_opinion">
+                                        <option value="">All opinions</option>
+                                        {% for key, name in rec_opinions.items %}
+                                            <option value="{{ key }}"
+                                                    {% if search_rec_opinion == key %}selected="selected"{% endif %}
+                                            >
+                                                {{ name }}
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            {% endif %}
+
                             <div class="search-filters__section-heading">Date from</div>
                             <label for="date_from" class="custom-select__label custom-select--blue__label">
                                 Filter by date (date from)
