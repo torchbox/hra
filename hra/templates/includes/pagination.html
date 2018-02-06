@@ -7,7 +7,7 @@
                 {% if subpages.has_previous %}
                     <a href="?page={{ subpages.previous_page_number }}{% if search_query %}&amp;query={{ search_query|urlencode }}{% endif %}{% if extra_url_params %}&amp;{{ extra_url_params }}{% endif %}"><span>Back</span></a>
                 {% else %}
-                    {# Dispaly array, but it should be disabled #}
+                    {# Dispaly arrow, but it should be disabled #}
                     <span></span>
                 {% endif %}
             </li>
@@ -38,7 +38,7 @@
                 {% if subpages.has_next %}
                     <a href="?page={{ subpages.next_page_number }}{% if search_query %}&amp;query={{ search_query|urlencode }}{% endif %}{% if extra_url_params %}&amp;{{ extra_url_params }}{% endif %}"><span>Forward</span></a>
                 {% else %}
-                    {# Dispaly array, but it should be disabled #}
+                    {# Dispaly arrow, but it should be disabled #}
                     <span></span>
                 {% endif %}
             </li>

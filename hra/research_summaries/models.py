@@ -122,7 +122,7 @@ class ResearchSummaryPage(Page, SocialFields, ListingFields):
         index.SearchField('data_collection_arrangements', partial_match=True),
         index.SearchField('research_programme', partial_match=True),
         index.SearchField('rtb_title', partial_match=True),
-        index.SearchField('research_database_title'),
+        index.SearchField('research_database_title', partial_match=True),
         index.SearchField('establishment_organisation', partial_match=True),
         index.SearchField('establishment_organisation_address_1'),
         index.SearchField('establishment_organisation_address_2'),
