@@ -1,7 +1,14 @@
-0.31 (unreleased)
------------------
+1.0.0 (2018-02-06)
+------------------
 
-- Nothing changed yet.
+- HRA-81 Fix for social image twitter url
+- HRA-86 Add link from search to summaries
+- HRA-86 Add REC opinion filter
+- HRA-86 Add extra fields to research summaries index
+- HRA-78 Back button on Committee page
+- HRA-78 Add committee types and flags to committee page
+- HRA-78 Remove England option
+- HRA-72 Improved pagination
 
 
 0.30 (2017-12-06)
