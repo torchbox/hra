@@ -1,3 +1,4 @@
+from urllib.parse import urlencode
 from django.conf import settings
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.shortcuts import render
@@ -47,11 +48,14 @@ def search(request):
     except EmptyPage:
         search_results = paginator.page(paginator.num_pages)
 
+    extra_url_params = '&'.join(['type={}'.format(type) for type in selected_page_type_pks])
+
     context = {
         'search_query': search_query,
         'search_results': search_results,
         'page_types': page_types,
         'selected_page_type_pks': selected_page_type_pks,
+        'extra_url_params': extra_url_params,
     }
     context.update(get_adjacent_pages(paginator, page_number))
     return render(request, 'search/search.html', context)
