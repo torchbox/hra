@@ -1,4 +1,5 @@
 from collections import OrderedDict
+from urllib.parse import urlencode
 
 from dateutil.parser import parse as parse_date
 from django.conf import settings
@@ -275,6 +276,13 @@ class ResearchSummariesIndexPage(Page, SocialFields, ListingFields):
         except EmptyPage:
             search_results = paginator.page(paginator.num_pages)
 
+        extra_url_params = {
+            'date_from': search_date_from,
+            'date_to': search_date_to,
+            'research_type': search_research_type,
+            'rec_opinion': search_rec_opinion,
+        }
+
         context = super().get_context(request, *args, **kwargs)
         context.update({
             'search_research_type': search_research_type,
@@ -285,6 +293,7 @@ class ResearchSummariesIndexPage(Page, SocialFields, ListingFields):
             'search_date_from': search_date_from,
             'search_date_to': search_date_to,
             'rec_opinions': REC_OPINION_CHOICES,
+            'extra_url_params': urlencode(extra_url_params),
         })
         context.update(get_adjacent_pages(paginator, page_number))
 
