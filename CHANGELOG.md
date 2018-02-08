@@ -1,7 +1,8 @@
-1.0.1 (unreleased)
+1.0.1 (2018-02-08)
 ------------------
 
-- Nothing changed yet.
+- HRA-93 Fix pagination with filters on search results
+- HRA-93 Fix pagination with filters on research summaries
 
 
 1.0.0 (2018-02-06)
