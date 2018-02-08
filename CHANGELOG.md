@@ -1,7 +1,7 @@
-1.0.2 (unreleased)
+1.0.2 (2018-02-08)
 ------------------
 
-- Nothing changed yet.
+- HRA-94 Correct date format for research summaries search with pagination
 
 
 1.0.1 (2018-02-08)
