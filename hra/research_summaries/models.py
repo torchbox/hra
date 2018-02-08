@@ -201,8 +201,10 @@ class ResearchSummariesIndexPage(Page, SocialFields, ListingFields):
         return latest_date
 
     def get_context(self, request, *args, **kwargs):
-        search_date_from = request.GET.get('date_from', None)
-        search_date_to = request.GET.get('date_to', None)
+        date_from = request.GET.get('date_from', None)
+        search_date_from = None
+        date_to = request.GET.get('date_to', None)
+        search_date_to = None
         search_research_type = request.GET.get('research_type', None)
         search_rec_opinion = request.GET.get('rec_opinion', None)
         search_query = request.GET.get('query', None)
@@ -211,17 +213,17 @@ class ResearchSummariesIndexPage(Page, SocialFields, ListingFields):
         search_results = self._children_research_summary
 
         # Convert dates to the Python format
-        if search_date_from:
+        if date_from:
             try:
                 # Can return None or raise ValueError in case of bad format
-                search_date_from = parse_date(search_date_from, dayfirst=True).date()
+                search_date_from = parse_date(date_from, dayfirst=True).date()
             except ValueError:
                 search_date_from = None
 
-        if search_date_to:
+        if date_to:
             try:
                 # Can return None or raise ValueError in case of bad format
-                search_date_to = parse_date(search_date_to, dayfirst=True).date()
+                search_date_to = parse_date(date_to, dayfirst=True).date()
             except ValueError:
                 search_date_to = None
 
@@ -277,8 +279,8 @@ class ResearchSummariesIndexPage(Page, SocialFields, ListingFields):
             search_results = paginator.page(paginator.num_pages)
 
         extra_url_params = {
-            'date_from': search_date_from,
-            'date_to': search_date_to,
+            'date_from': date_from,
+            'date_to': date_to,
             'research_type': search_research_type,
             'rec_opinion': search_rec_opinion,
         }
