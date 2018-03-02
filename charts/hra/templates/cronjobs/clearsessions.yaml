@@ -16,6 +16,11 @@ spec:
               - name: hra
                 image: {{ required "A valid DockerRegistry is required" .Values.DockerRegistry }}/hra
                 command:
+                - /sbin/k8s-safe-cronjob
+                {{ if .Values.RavenDsn }}
+                - "-dsn"
+                - {{ .Values.RavenDsn }}
+                {{ end }}
                 - python
                 - manage.py
                 - clearsessions

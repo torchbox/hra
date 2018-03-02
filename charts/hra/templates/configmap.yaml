@@ -10,7 +10,7 @@ data:
   CACHE_HOST: {{ required "RedisAddress" .Values.RedisAddress | quote }}
   CACHE_PORT: {{ required "RedisPort" .Values.RedisPort | quote }}
   CACHE_DB: {{ required "RedisDatabase" .Values.RedisDatabase | quote }}
-  CFG_SECRET_KEY: {{ randAlphaNum 30 | b64enc | quote }}
+  CFG_SECRET_KEY: {{ required "SecretKey" .Values.SecretKey | quote }}
   CFG_EMAIL_HOST: {{ required "SmtpHostname" .Values.SmtpHostname | quote }}
   CFG_EMAIL_HOST_USER: {{ required "SmtpUsername" .Values.SmtpUsername | quote }}
   ALLOWED_HOSTS: {{range $i, $elem := .Values.Endpoints}}{{if $i}},{{end}}{{$elem}}{{end}}
