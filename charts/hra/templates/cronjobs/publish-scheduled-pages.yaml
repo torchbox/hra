@@ -23,5 +23,5 @@ spec:
                 {{ end }}
                 - python
                 - manage.py
-                - publish_scheduled_pages_blork
+                - publish_scheduled_pages
                 {{- include "environment" . | indent 16 }}
