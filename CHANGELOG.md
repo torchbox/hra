@@ -1,4 +1,4 @@
-1.0.4 (unreleased)
+1.0.4 (2018-03-02)
 ------------------
 
 - Integration with k8s-safe-cronjob and add error reporting
