@@ -57,6 +57,7 @@ class Command(BaseCommand):
             start_date = last_updated_at.date()
 
         parent_page = ResearchSummariesIndexPage.objects.first()
+        logger.info('Importing research summaries %s - %s', start_date, end_date)
 
         if not parent_page:
             raise CommandError(
