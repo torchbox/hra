@@ -1,7 +1,9 @@
-1.0.5 (unreleased)
+1.0.5 (2018-03-13)
 ------------------
 
-- Nothing changed yet.
+- HRA-101 Reduce search chunk size to 50 (#124)
+- info log for research summaries import
+- fix to cronjobs/publish-scheduled-pages.yaml
 
 
 1.0.4 (2018-03-02)
