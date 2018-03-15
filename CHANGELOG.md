@@ -1,7 +1,7 @@
 1.0.6 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Reduce log level
 
 
 1.0.5 (2018-03-13)
