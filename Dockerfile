@@ -21,4 +21,4 @@ EXPOSE 80
 
 ENV Name HRA
 
-CMD uwsgi --chdir /app --master --processes 1 --threads 2 --http-socket :80 --wsgi-file hra/wsgi.py
+CMD uwsgi --disable-logging --chdir /app --master --processes 1 --threads 2 --http-socket :80 --wsgi-file hra/wsgi.py

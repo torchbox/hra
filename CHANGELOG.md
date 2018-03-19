@@ -1,7 +1,7 @@
 1.0.7 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Disable UWSGI request logging
 
 
 1.0.6 (2018-03-15)
