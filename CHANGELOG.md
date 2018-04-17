@@ -1,7 +1,7 @@
-1.0.8 (unreleased)
+1.0.8 (2018-04-17)
 ------------------
 
-- Nothing changed yet.
+- Update elastic search timeout from 10 to 30 seconds
 
 
 1.0.7 (2018-03-19)
