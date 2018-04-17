@@ -1,4 +1,4 @@
-1.0.9 (unreleased)
+1.0.9 (2018-04-17)
 ------------------
 
 - Update from raven 6.3.0 to 6.6.0 to hopefully fix error logging for Elastic search
