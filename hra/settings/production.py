@@ -150,6 +150,7 @@ if 'ES_HOST' in env:
         'default': {
             'BACKEND': 'wagtail.wagtailsearch.backends.elasticsearch5',
             'INDEX': env['ES_INDEX'],
+            'TIMEOUT': 30,
             'HOSTS': [{
                 'host': env['ES_HOST'],
                 'port': 443,
