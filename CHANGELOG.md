@@ -1,4 +1,4 @@
-1.0.10 (unreleased)
+1.0.10 (2018-08-21)
 -------------------
 
 - HRA-119 upgrade to Django and Pillow
