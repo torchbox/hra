@@ -1,4 +1,4 @@
-1.0.11 (unreleased)
+1.0.11 (2018-10-30)
 -------------------
 
 - #HRA-126 bump Django version on advisory
