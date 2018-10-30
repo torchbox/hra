@@ -9,15 +9,20 @@ jobs:
       # specify the version you desire here
       # use `-browsers` prefix for selenium tests, e.g. `3.6.1-browsers`
       - image: circleci/python:3.6.1
-      
+        environment:
+          - PIPENV_VENV_IN_PROJECT=true
+          - DATABASE_URL=postgres://root@localhost/circle_test?sslmode=disable
+
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
       - image: circleci/postgres:9.4
+        environment:
+          POSTGRES_USER: root
+          POSTGRES_DB: circle_test
 
     environment:
       - DJANGO_SETTINGS_MODULE=hra.settings.production
-      - DATABASE_URL=postgres://root@localhost/circle_test
       - CFG_SECRET_KEY=iamnotsosecret
       - CFG_ALLOWED_HOSTS=localhost
 
@@ -45,7 +50,7 @@ jobs:
           paths:
             - ./venv
           key: v1-dependencies-{{ checksum "requirements.txt" }}
-        
+
       # run tests!
       - run:
           name: run tests
@@ -58,4 +63,4 @@ jobs:
       - store_artifacts:
           path: test-reports
           destination: test-reports
-          
+

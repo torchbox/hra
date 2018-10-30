@@ -127,12 +127,14 @@ html.with-footer {
 
     .notification--footer {
         opacity: 1;
+        visibility: visible;
         transition: opacity $default-transition-speed ease;
     }
 }
 
 .notification--footer {
     opacity: 0;
+    visibility: hidden;
     position: fixed;
     bottom: 0;
     padding: 20px 5%;
