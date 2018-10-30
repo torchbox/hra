@@ -1,7 +1,8 @@
 1.0.11 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- #HRA-126 bump Django version on advisory
+- #HRA-125 hide notification footer
 
 
 1.0.10 (2018-08-21)
