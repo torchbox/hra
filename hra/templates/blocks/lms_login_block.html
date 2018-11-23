@@ -1,0 +1,43 @@
+<div class="rich-text lms-login">
+    <form action="https://hra.premierit.host/login_check" method="post">
+        <input type="hidden" name="_targetPath" value="https://hra.premierit.host/dashboard">
+        <div>
+            <label class="search-filters__section-heading" for="lms_username">Username</label>
+            <input class="search-filters__search" id="lms_username" type="text" name="_username" maxlength="120" required="required">
+        </div>
+        <div>
+            <label class="search-filters__section-heading" for="lms_password">Password</label>
+            <input class="search-filters__search" id="lms_password" type="password" name="_password" maxlength="120" required="required">
+        </div>
+        <div class="lms-login--sign-in">
+            <input class="search-filters__submit--block-button" type="submit" name="_submit" value="Sign in">
+        </div>
+    </form>
+    <p class="lms-login--self-help">
+        <a href="https://hra.premierit.host/resetting/request">Forgotten password</a> |
+        <a href="https://hra.premierit.host/register">Register</a>
+    </p>
+</div>
+{# TODO merge into SASS once accepted by client #}
+<style>
+.lms-login form {
+    background: linear-gradient(to bottom, #0058b5, #004c97);
+    padding: 16px 20% 30px 20%;
+    margin: 10px 0;
+}
+.lms-login label {
+    display: block;
+}
+.lms-login label[for=lms_username] {
+    margin-top: 10px;
+}
+.lms-login label[for=lms_password] {
+    margin-top: 20px;
+}
+.lms-login .lms-login--sign-in {
+    text-align: right;
+}
+.lms-login .lms-login--self-help {
+    text-align: center;
+}
+</style>

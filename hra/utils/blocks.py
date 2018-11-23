@@ -51,6 +51,14 @@ class HighlightBlock(blocks.StructBlock):
         template = "blocks/highlight_block.html"
 
 
+class LMSLoginBlock(blocks.StaticBlock):
+
+    class Meta:
+        icon = "password"
+        label = 'LMS Login'
+        template = 'blocks/lms_login_block.html'
+
+
 class StoryBlock(blocks.StreamBlock):
     """
     Main streamfield block to be inherited by Pages
@@ -64,6 +72,7 @@ class StoryBlock(blocks.StreamBlock):
     call_to_action = CallToActionWithTextBlock()
     highlight = HighlightBlock()
     table = TableBlock(template='blocks/table_block.html')
+    lms_login = LMSLoginBlock()
 
     class Meta:
         template = "blocks/stream_block.html"
