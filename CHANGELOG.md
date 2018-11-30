@@ -1,7 +1,8 @@
-1.0.12 (unreleased)
+1.0.12 (2018-11-30)
 -------------------
 
-- Nothing changed yet.
+- HRA-127 Add LMS Login block
+- Pin django-redis dependency
 
 
 1.0.11 (2018-10-30)
