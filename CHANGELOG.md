@@ -1,7 +1,7 @@
-1.0.13 (unreleased)
+1.0.13 (2018-12-19)
 -------------------
 
-- Nothing changed yet.
+- HRA-133 Enable more HARP logging (#129)
 
 
 1.0.12 (2018-11-30)
