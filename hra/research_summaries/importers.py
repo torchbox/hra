@@ -5,6 +5,9 @@ from hra.research_summaries.mappings import FieldMapping, ForeignKeyMapping
 from hra.research_summaries.models import ResearchSummaryPage, ResearchType
 
 
+DEFERRED = 'Publication of this data is currently deferred.'
+
+
 class PageImporter:
     model = None
     id_mapping = None
@@ -44,11 +47,28 @@ class PageImporter:
         return page
 
 
+def get_decision_date(data):
+    # Ignore decision date if publication deferred
+    if data['DecisionDate'] and data['DecisionDate'] != DEFERRED:
+        return parse_date(data['DecisionDate'])
+    return None
+
+
+def get_study_type(data):
+    # Ignore study type if id or name are publication deferred
+    if data['StudyTypeID'] and data['StudyTypeID'] != DEFERRED and data['StudyType'] != DEFERRED:
+        return {
+            'StudyTypeID': data['StudyTypeID'],
+            'StudyType': data['StudyType'] or '',
+        }
+    return None
+
+
 class ResearchSummaryPageImporter(PageImporter):
     model = ResearchSummaryPage
     id_mapping = FieldMapping('harp_application_id', source='ApplicationID')
     mappings = PageImporter.mappings + [
-        FieldMapping('title', source=lambda data: data['ApplicationTitle'] or ''),
+        FieldMapping('title', source=lambda data: data['ApplicationTitle'].strip() or data['ApplicationID']),
         FieldMapping('full_title', source=lambda data: data['ApplicationFullTitle'] or ''),
         FieldMapping('iras_id', source=lambda data: data['IrasProjectID'] or ''),
         FieldMapping('contact_name', source=lambda data: data['ContactName'] or ''),
@@ -65,17 +85,10 @@ class ResearchSummaryPageImporter(PageImporter):
         FieldMapping('research_summary_text', source=lambda data: data['ResearchSummary'] or ''),
         FieldMapping('rec_name', source=lambda data: data['CommitteeName'] or ''),
         FieldMapping('rec_reference', source=lambda data: data['CommitteeReferenceNumber'] or ''),
-        FieldMapping(
-            'date_of_rec_opinion',
-            source=lambda data: parse_date(data['DecisionDate']) if data['DecisionDate'] else None,
-        ),
+        FieldMapping('date_of_rec_opinion', source=get_decision_date),
         FieldMapping(
             'rec_opinion',
             source=lambda data: ResearchSummaryPage.REC_OPINION_CHOICES_REVERSE.get(data['Decision'], '')
-        ),
-        FieldMapping(
-            'decision_date',
-            source=lambda data: parse_date(data['DecisionDate']) if data['DecisionDate'] else None,
         ),
         FieldMapping('data_collection_arrangements', source=lambda data: data['DataCollectionArrangements'] or ''),
         FieldMapping('research_programme', source=lambda data: data['ResearchProgramme'] or ''),
@@ -106,10 +119,7 @@ class ResearchSummaryPageImporter(PageImporter):
                 FieldMapping('name', source='StudyType')
             ],
             cls=ResearchType,
-            source=lambda data: {
-                'StudyTypeID': data['StudyTypeID'],
-                'StudyType': data['StudyType']
-            },
+            source=get_study_type,
         ),
         FieldMapping(
             'updated_at',

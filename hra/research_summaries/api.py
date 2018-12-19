@@ -88,15 +88,16 @@ def fetch_for_dates(parent_page, start_date, end_date):
         try:
             importer.create_or_update_page(parent_page)
         except ValidationError:
-            logger.exception(
+            logger.warning(
                 "Unable to create or update a page "
                 "due to validation errors. {}={}".format(
                     importer.id_mapping.source,
                     importer.id_mapping.get_field_data(item),
-                )
+                ),
+                exc_info=True
             )
         except ValueError:
-            logger.info(
+            logger.warning(
                 "Unable to create or update a page "
                 "due to ValueError exception. {}={}".format(
                     importer.id_mapping.source,

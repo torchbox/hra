@@ -185,7 +185,12 @@ LOGGING = {
             'handlers': ['console'],
             'level': 'WARNING',
             'propagate': True,
-        }
+        },
+        'hra.research_summaries': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': True,
+        },
     }
 }
 

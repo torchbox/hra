@@ -50,7 +50,7 @@ class Command(BaseCommand):
 
             if not last_updated_at:
                 raise CommandError(
-                    "No research summaries were imported before."
+                    "No research summaries were imported before. "
                     "You have to run import and specify date range manually."
                 )
 

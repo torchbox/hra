@@ -67,32 +67,31 @@ class ResearchSummaryPage(Page, SocialFields, ListingFields):
     research_type = models.ForeignKey('research_summaries.ResearchType', null=True, blank=True,
                                       on_delete=models.SET_NULL, related_name='+')
     full_title = models.TextField(blank=True, editable=False)
-    iras_id = models.CharField("IRAS ID", blank=True, max_length=255, editable=True)
-    contact_name = models.CharField(max_length=255, blank=True, editable=True)
-    contact_email = models.CharField(max_length=255, blank=True, editable=True)
-    sponsor_organisation = models.CharField(max_length=255, blank=True, editable=True)
-    eudract_number = models.CharField(max_length=255, blank=True, editable=True)
-    isrctn_number = models.CharField("ISRCTN Number", max_length=255, blank=True, editable=True)
-    clinicaltrials_number = models.CharField("Clinicaltrials.gov Identifier", max_length=255, blank=True, editable=True)
+    iras_id = models.CharField("IRAS ID", blank=True, max_length=1000, editable=True)
+    contact_name = models.CharField(max_length=1000, blank=True, editable=True)
+    contact_email = models.CharField(max_length=1000, blank=True, editable=True)
+    sponsor_organisation = models.CharField(max_length=1000, blank=True, editable=True)
+    eudract_number = models.CharField(max_length=1000, blank=True, editable=True)
+    isrctn_number = models.CharField("ISRCTN Number", max_length=1000, blank=True, editable=True)
+    clinicaltrials_number = models.CharField("Clinicaltrials.gov Identifier", max_length=1000, blank=True, editable=True)
     additional_reference_number_fields = models.TextField(blank=True, editable=True)
-    duration_of_study_in_uk = models.CharField("Duration of Study in UK", max_length=255, blank=True, editable=True)
+    duration_of_study_in_uk = models.CharField("Duration of Study in UK", max_length=1000, blank=True, editable=True)
     research_summary_text = models.TextField(blank=True, editable=True)
-    rec_name = models.CharField(max_length=255, blank=True, editable=True)
-    rec_reference = models.CharField(max_length=255, blank=True, editable=True)
+    rec_name = models.CharField(max_length=1000, blank=True, editable=True)
+    rec_reference = models.CharField(max_length=1000, blank=True, editable=True)
     date_of_rec_opinion = models.DateField(blank=True, null=True, editable=True, db_index=True)
     rec_opinion = models.CharField(choices=REC_OPINION_CHOICES.items(), max_length=64, blank=True, editable=True)
-    decision_date = models.DateField(blank=True, null=True, editable=True)
 
     data_collection_arrangements = models.TextField(blank=True, editable=True)
     research_programme = models.TextField(blank=True, editable=True)
-    storage_license = models.CharField(max_length=512, blank=True, editable=True)
-    rtb_title = models.CharField("RTBTitle", max_length=512, blank=True, editable=True)
-    research_database_title = models.CharField(max_length=255, blank=True, editable=True)
-    establishment_organisation = models.CharField(max_length=255, blank=True, editable=True)
-    establishment_organisation_address_1 = models.CharField(max_length=255, blank=True, editable=True)
-    establishment_organisation_address_2 = models.CharField(max_length=255, blank=True, editable=True)
-    establishment_organisation_address_3 = models.CharField(max_length=255, blank=True, editable=True)
-    establishment_organisation_address_postcode = models.CharField(max_length=32, blank=True, editable=True)
+    storage_license = models.CharField(max_length=1000, blank=True, editable=True)
+    rtb_title = models.CharField("RTBTitle", max_length=1000, blank=True, editable=True)
+    research_database_title = models.TextField(blank=True, editable=True)
+    establishment_organisation = models.CharField(max_length=1000, blank=True, editable=True)
+    establishment_organisation_address_1 = models.CharField(max_length=1000, blank=True, editable=True)
+    establishment_organisation_address_2 = models.CharField(max_length=1000, blank=True, editable=True)
+    establishment_organisation_address_3 = models.CharField(max_length=1000, blank=True, editable=True)
+    establishment_organisation_address_postcode = models.CharField(max_length=100, blank=True, editable=True)
 
     created_at = models.DateTimeField(auto_now_add=True, editable=True)
     # Can't use `auto_now=True`, because we don't want to update this field,
@@ -156,7 +155,7 @@ class ResearchSummaryPage(Page, SocialFields, ListingFields):
 
     @cached_property
     def display_date(self):
-        return self.decision_date
+        return self.date_of_rec_opinion
 
     @cached_property
     def display_research_type(self):
