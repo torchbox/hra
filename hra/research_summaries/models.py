@@ -276,8 +276,6 @@ class ResearchSummariesIndexPage(Page, SocialFields, ListingFields):
             search_results = paginator.page(1)
         except EmptyPage:
             search_results = paginator.page(paginator.num_pages)
-            
-            
 
         extra_url_params = {
             'date_from': date_from,
