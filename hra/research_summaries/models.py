@@ -276,6 +276,8 @@ class ResearchSummariesIndexPage(Page, SocialFields, ListingFields):
             search_results = paginator.page(1)
         except EmptyPage:
             search_results = paginator.page(paginator.num_pages)
+            
+            
 
         extra_url_params = {
             'date_from': date_from,
@@ -296,8 +298,6 @@ class ResearchSummariesIndexPage(Page, SocialFields, ListingFields):
             'rec_opinions': REC_OPINION_CHOICES,
             'extra_url_params': urlencode(extra_url_params),
         })
-        # page_number is sometimes a blank string (instead of the request.GET.get() fallback, integer 1) causing a 500 in get_adjacent_pages
-        page_number = 1 if page_number == '' else page_number
-        context.update(get_adjacent_pages(paginator, page_number))
+        context.update(get_adjacent_pages(paginator, search_results.number))
 
         return context
