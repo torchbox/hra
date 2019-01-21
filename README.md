@@ -1,53 +1,71 @@
 Health Research Authority Wagtail site
 ==================
 
-# Setting up a local build
+## URLs
+- live: https://www.hra.nhs.uk/
+- stage: http://hra-stage.trustsrv.io/
 
-This repository includes a Vagrantfile for running the project in a Debian VM and
-a fabfile for running common commands with Fabric.
+## Setting up a dev environment
 
-To set up a new build you will require compatible versions of vagrant and virtualbox installed then:
+First clone the repository
 
-``` bash
-git clone git@github.com:torchbox/hra.git
+```bash
+git clone git@github.com:isotoma/hra.git
 cd hra
-vagrant up
-vagrant ssh
 ```
 
-Then within the SSH session:
+Then set up the dependencies:
 
-``` bash
-dj createsuperuser
-djrun
+### Docker
+
+From https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-ce
+
+```bash
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+sudo apt install docker
 ```
 
-This will make the site available on the host machine at: http://127.0.0.1:8000/
-
-
-# Available Fabric commands
-
-To populate your local database with the content of staging/production:
-
-``` bash
-fab pull_staging_data
-fab pull_production_data
+### Docker compose
+```bash
+virtualenv --python=python3 venv
+source venv/bin/activate
+pip install docker-compose
 ```
 
-Additionally, to fetch images from staging:
+### Elastic search requirements
+`sudo sysctl -w vm.max_map_count=262144` (or put in /etc/sysctl.conf for permanent change)
 
-``` bash
-fab pull_staging_media
+### Run the containers
+`docker-compose up`
+or individual containers can be run with `docker-compose start <name>`: See docker-compose.yml for the names
+
+### Reload the web app
+Uwsgi does not auto reload. To force a reload send a SIGHUP to the process on the web container.
+`kill -HUP <pid>`
+
+
+### Running a django shell or management command
+```
+docker exec -it hra_web bash
+./manage.py <command>
+```
+or
+
+```
+docker-compose run web python manage.py shell
 ```
 
-(This will only take the "original" images. New versions of the other renditions will be recreated on the fly.)
-
-
-
-To deploy the site to staging/production:
-
-
-``` bash
-fab deploy_staging
-fab deploy_production
+### Restoring a postgres dump
 ```
+sudo cp ~/Downloads/<dumpfile>.pg pgdata/
+sudo chown 999:999 pgdata/<dumpfile>.pg
+docker exec -it hra_database_1 bash
+dropdb hra -U hra
+createdb hra -U hra
+pg_restore -d hra -U hra /var/lib/postgresql/data/<dumpfile>.pg
+```
+
+## Static content
+npm compile:css:prod and npm compile:js:prod in the hra/patternlab folder
+TBC
