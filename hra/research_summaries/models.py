@@ -296,6 +296,6 @@ class ResearchSummariesIndexPage(Page, SocialFields, ListingFields):
             'rec_opinions': REC_OPINION_CHOICES,
             'extra_url_params': urlencode(extra_url_params),
         })
-        context.update(get_adjacent_pages(paginator, page_number))
+        context.update(get_adjacent_pages(paginator, search_results.number))
 
         return context
