@@ -267,6 +267,7 @@ ENABLE_STYLEGUIDE = False
 
 # Use "I'm not a robot" style CAPTCHAs
 NOCAPTCHA = True
+SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
 
 # HARP API
 

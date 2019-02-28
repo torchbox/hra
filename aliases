@@ -1,0 +1,57 @@
+#!/bin/bash
+
+alias dr="docker-compose run --rm web"
+alias dx="docker-compose exec web"
+alias dup="docker-compose up"
+
+function django {
+    if [ "$1" = "test" ]; then
+        docker-compose run --rm web bash -c \
+	        "pip install mock && /app/manage.py test ${@:2}"
+    else
+        docker-compose run --rm web /app/manage.py $@
+    fi
+}
+
+function rebuild {
+
+    while true; do
+        echo "You are about to lay waste to EVERYTHING, including the database and search volumes."
+        read -p "Are you sure? [yN] " yn
+        case $yn in
+            [Yy]* ) {
+                echo "Stopping docker containers and removing volumes"
+                docker-compose down -v
+                echo "Starting docker"
+                docker-compose up -d --build
+                echo "Waiting for docker to complete"
+                sleep 10
+                echo "Migrating database"
+                docker-compose run --rm web /app/manage.py migrate || return 1
+                echo "Initialising search"
+                docker-compose run --rm web bash -c "/app/manage.py update_index"
+                echo "Stopping containers"
+                docker-compose stop
+
+                break
+            };;
+            [Nn]* ) break;;
+            * ) echo "Please answer yes or no.";;
+        esac
+    done
+
+
+}
+
+function debug {
+    # Currently web is the only service that can be debugged this
+    # way. More may follow.
+    #
+    # To use this, put a `pdb.set_trace()` or similar in your code
+    # somewhere, then run `$ debug` in a terminal somewhere, and you
+    # will tune into the goings on of the web service, and drop into a
+    # pdb shell as and when it is reached.
+    service="${1:-web}"
+    number="${2:-1}"
+    docker attach "hra_${service}_${number}"
+}

@@ -38,6 +38,18 @@ LOGGING['loggers']['hra.rec.middleware'] = {'level': 'DEBUG', 'handlers': ['cons
 # LOGGING['loggers']['django.db.backends'] = {'level': 'DEBUG', 'handlers': ['console']}
 LOGGING['handlers']['console']['level'] = 'DEBUG'
 
+AWS_ACCESS_KEY_ID = 'fake_key'
+AWS_SECRET_ACCESS_KEY = 'fake_secret_key'
+AWS_STORAGE_BUCKET_NAME = 'hra'
+AWS_AUTO_CREATE_BUCKET = True
+AWS_S3_ENDPOINT_URL = 'http://localstack:4572'
+AWS_S3_CUSTOM_DOMAIN = 'localhost:4572/hra'
+AWS_S3_USE_SSL = False
+AWS_S3_SECURE_URLS = False
+AWS_DEFAULT_ACL = 'public-read'
+AWS_LOCATION = 'media/'
+MEDIA_URL = 'http://localhost:4572/hra/media/'
+
 try:
     from .local import *  # noqa
 except ImportError:
