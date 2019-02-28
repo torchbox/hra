@@ -32,13 +32,19 @@ class Command(BaseCommand):
             )
 
         if start_date:
-            start_date = parse_date(start_date).date()
+            try:
+                start_date = parse_date(start_date).date()
+            except ValueError:
+                raise CommandError("Invalid --date-from: '{}'".format(start_date))
 
         if end_date:
             if end_date == 'today':
                 end_date = date.today()
             else:
-                end_date = parse_date(end_date).date()
+                try:
+                    end_date = parse_date(end_date).date()
+                except ValueError:
+                    raise CommandError("Invalid --date-to: '{}'".format(end_date))
 
         if not (start_date and end_date):
             # If there is no dates in arguments,
