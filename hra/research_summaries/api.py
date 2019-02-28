@@ -4,6 +4,7 @@ from urllib import parse
 import requests
 from django.conf import settings
 from django.core.exceptions import ValidationError
+from django.db.utils import DatabaseError
 
 from hra.research_summaries.importers import ResearchSummaryPageImporter
 from hra.utils.datetime import iter_between_dates
@@ -96,10 +97,11 @@ def fetch_for_dates(parent_page, start_date, end_date):
                 ),
                 exc_info=True
             )
-        except ValueError:
+        except (DatabaseError, ValueError) as ex:
             logger.warning(
                 "Unable to create or update a page "
-                "due to ValueError exception. {}={}".format(
+                "due to {} exception. {}={}".format(
+                    ex.__class__.__name__,
                     importer.id_mapping.source,
                     importer.id_mapping.get_field_data(item),
                 ),
