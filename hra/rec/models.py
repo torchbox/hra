@@ -151,9 +151,9 @@ class CommitteePage(Page, SocialFields, ListingFields):
         context = super().get_context(request, *args, **kwargs)
 
         meeting_dates = self.meeting_dates.all()
-        # We have to do that instead of jsut meeting_dates.filter(date__gte=timezone.now().date())
+        # We have to do that instead of just meeting_dates.filter(date__gte=timezone.now().date())
         # Because it will not work on preview in the Wagtail admin
-        today = date.today()
+        today = timezone.now().date()
         meeting_dates = [meeting_date for meeting_date in meeting_dates if meeting_date.date >= today]
 
         context.update({
@@ -232,24 +232,18 @@ class CommitteeIndexPage(Page, SocialFields, ListingFields):
         if selected_committee_region in (key for key, _ in committee_region_choices):
             committee_pages = committee_pages.filter(region=selected_committee_region)
 
-        # Do not display past meetings
-        committee_pages = committee_pages.filter(meeting_dates__date__gte=timezone.now().date())
-
         # Exclude duplicates after filtering
         committee_pages = committee_pages.distinct()
 
-        # Get the first and the last meeting dates from the resulting set
-        start_and_end_dates = committee_pages.aggregate(
-            start_date=models.Min('meeting_dates__date'),
-            end_date=models.Max('meeting_dates__date'),
-        )
+        # Get the first and last dates to show
+        start_date = timezone.now().date()
+        end_date_qs = committee_pages.aggregate(end_date=models.Max('meeting_dates__date'))
+        end_date = end_date_qs['end_date'] or start_date
 
         # Build a matrix for front-end
         calendar_matrix = []
-        if committee_pages and start_and_end_dates['start_date'] and start_and_end_dates['end_date']:
-            dates_range = range_month(start_and_end_dates['start_date'], start_and_end_dates['end_date'])
-
-            for meeting_month in dates_range:
+        if committee_pages:
+            for meeting_month in range_month(start_date, end_date):
                 all_meetings = []
 
                 for committee in committee_pages:
