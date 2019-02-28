@@ -105,6 +105,7 @@ if 'MEDIA_BUCKET' in env:
     AWS_DEFAULT_ACL = 'public-read'
     AWS_S3_URL_PROTOCOL = 'https:'
     AWS_S3_SECURE_URLS = True
+    AWS_S3_FILE_OVERWRITE = False
     DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 
