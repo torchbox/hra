@@ -1,7 +1,11 @@
-1.0.14 (unreleased)
+1.0.14 (2019-03-11)
 -------------------
 
-- Nothing changed yet.
+- HRA-84 Clearer date validation in HARP import command (#133)
+- HRA-95 Fix error when non-integer page number in URL (#132)
+- HRA-133 Improve robustness of HARP logging (#130)
+- HRA-141 Fix S3 file delete on overwrite leaving broken document (#137)
+- HRA-148 Fix REC not shown if no future meeting dates (#135)
 
 
 1.0.13 (2018-12-19)
@@ -20,8 +24,8 @@
 1.0.11 (2018-10-30)
 -------------------
 
-- #HRA-126 bump Django version on advisory
-- #HRA-125 hide notification footer
+- HRA-125 Hide notification footer
+- HRA-126 Bump Django version on advisory
 
 
 1.0.10 (2018-08-21)
@@ -33,7 +37,7 @@
 1.0.9 (2018-04-17)
 ------------------
 
-- Update from raven 6.3.0 to 6.6.0 to hopefully fix error logging for Elastic search
+- Update from raven 6.3.0 to 6.6.0 to hopefully fix error logging for Elasticsearch
 https://github.com/getsentry/raven-python/issues/604
 
 
@@ -59,8 +63,8 @@ https://github.com/getsentry/raven-python/issues/604
 ------------------
 
 - HRA-101 Reduce search chunk size to 50 (#124)
-- info log for research summaries import
-- fix to cronjobs/publish-scheduled-pages.yaml
+- Info log for research summaries import
+- Fix to cronjobs/publish-scheduled-pages.yaml
 
 
 1.0.4 (2018-03-02)
