@@ -207,7 +207,6 @@ class ResearchSummariesIndexPage(Page, SocialFields, ListingFields):
         search_research_type = request.GET.get('research_type', None)
         search_rec_opinion = request.GET.get('rec_opinion', None)
         search_query = request.GET.get('query', None)
-        page_number = request.GET.get('page', 1)
 
         search_results = self._children_research_summary
 
@@ -271,7 +270,7 @@ class ResearchSummariesIndexPage(Page, SocialFields, ListingFields):
         # Pagination
         paginator = Paginator(search_results, settings.DEFAULT_PER_PAGE)
         try:
-            search_results = paginator.page(page_number)
+            search_results = paginator.page(request.GET.get('page'))
         except PageNotAnInteger:
             search_results = paginator.page(1)
         except EmptyPage:

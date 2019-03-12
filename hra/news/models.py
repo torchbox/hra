@@ -105,10 +105,9 @@ class NewsIndex(Page, SocialFields, ListingFields):
         ).order_by('-date')
 
         # Pagination
-        page_number = request.GET.get('page', 1)
         paginator = Paginator(news, settings.DEFAULT_PER_PAGE)
         try:
-            news = paginator.page(page_number)
+            news = paginator.page(request.GET.get('page'))
         except PageNotAnInteger:
             news = paginator.page(1)
         except EmptyPage:
@@ -119,7 +118,7 @@ class NewsIndex(Page, SocialFields, ListingFields):
             news=news,
             sidebar_pages=self.get_siblings().live().public(),
         )
-        context.update(get_adjacent_pages(paginator, page_number))
+        context.update(get_adjacent_pages(paginator, news.number))
         return context
 
     subpage_types = ['NewsPage']

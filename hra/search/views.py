@@ -11,7 +11,6 @@ from hra.utils.models import get_adjacent_pages
 
 def search(request):
     search_query = request.GET.get('query', None)
-    page_number = request.GET.get('page', 1)
 
     # Allow to filter search results using a page types, if specified
     page_types = PageType.objects.all()
@@ -41,7 +40,7 @@ def search(request):
     # Pagination
     paginator = Paginator(search_results, settings.DEFAULT_PER_PAGE)
     try:
-        search_results = paginator.page(page_number)
+        search_results = paginator.page(request.GET.get('page'))
     except PageNotAnInteger:
         search_results = paginator.page(1)
     except EmptyPage:
@@ -56,5 +55,5 @@ def search(request):
         'selected_page_type_pks': selected_page_type_pks,
         'extra_url_params': extra_url_params,
     }
-    context.update(get_adjacent_pages(paginator, page_number))
+    context.update(get_adjacent_pages(paginator, search_results.number))
     return render(request, 'search/search.html', context)

@@ -99,10 +99,9 @@ class PersonIndexPage(Page, SocialFields, ListingFields):
         return self.get_children().specific().live().public().order_by('title')
 
     def get_context(self, request, *args, **kwargs):
-        page_number = request.GET.get('page')
         paginator = Paginator(self.people, settings.DEFAULT_PER_PAGE)
         try:
-            people = paginator.page(page_number)
+            people = paginator.page(request.GET.get('page'))
         except PageNotAnInteger:
             people = paginator.page(1)
         except EmptyPage:
@@ -113,7 +112,7 @@ class PersonIndexPage(Page, SocialFields, ListingFields):
             people=people,
             sidebar_pages=self.get_siblings().live().public(),
         )
-        context.update(get_adjacent_pages(paginator, page_number))
+        context.update(get_adjacent_pages(paginator, people.number))
 
         return context
 

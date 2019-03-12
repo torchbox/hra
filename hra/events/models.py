@@ -202,11 +202,9 @@ class EventIndexPage(Page, SocialFields, ListingFields):
         )
         events = events.order_by('upcoming_order', '-past_order')
 
-        page_number = request.GET.get('page')
         paginator = Paginator(events, settings.DEFAULT_PER_PAGE)
-
         try:
-            events = paginator.page(page_number)
+            events = paginator.page(request.GET.get('page'))
         except PageNotAnInteger:
             events = paginator.page(1)
         except EmptyPage:
@@ -216,6 +214,6 @@ class EventIndexPage(Page, SocialFields, ListingFields):
             'events': events,
             'sidebar_pages': self.get_siblings().live().public(),
         })
-        context.update(get_adjacent_pages(paginator, page_number))
+        context.update(get_adjacent_pages(paginator, events.number))
 
         return context
