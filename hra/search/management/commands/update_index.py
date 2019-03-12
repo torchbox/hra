@@ -4,6 +4,7 @@
 
 from wagtail.wagtailsearch.management.commands.update_index import Command as SuperCommand
 
+
 class Command(SuperCommand):
     def queryset_chunks(self, qs):
         return super().queryset_chunks(qs, 50)

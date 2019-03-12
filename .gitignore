@@ -30,5 +30,8 @@ wheels/
 .installed.cfg
 *.egg
 
+# Localstack
+localstack/
+
 # VSCode folder settings
 .vscode/

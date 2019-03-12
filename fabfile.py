@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from fabric.api import *
+from fabric.api import *  # noqa
 
 env.roledefs = {
     'production': [],  # CHANGEME

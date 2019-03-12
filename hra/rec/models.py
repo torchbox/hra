@@ -1,6 +1,5 @@
 from django.db import models
 from django.utils import timezone
-from django.utils.datetime_safe import date
 from modelcluster.fields import ParentalKey
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, InlinePanel
 from wagtail.wagtailcore.fields import RichTextField

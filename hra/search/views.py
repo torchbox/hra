@@ -1,4 +1,3 @@
-from urllib.parse import urlencode
 from django.conf import settings
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.shortcuts import render

@@ -229,7 +229,7 @@ class ResearchSummariesIndexPage(Page, SocialFields, ListingFields):
         # Swap dates around if "date from" happens after "date to".
         if search_date_from and search_date_to:
             if search_date_from > search_date_to:
-                    search_date_to, search_date_from = search_date_from, search_date_to
+                search_date_to, search_date_from = search_date_from, search_date_to
 
         # Search queryset
         if search_date_to:

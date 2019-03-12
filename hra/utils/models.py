@@ -207,10 +207,12 @@ def get_adjacent_pages(paginator, page_number):
     if paginator.num_pages <= 2 * adjacent_pages + 3:
         page_numbers = range(1, paginator.num_pages + 1)
     else:
-        page_numbers = [n for n in
+        page_numbers = [
+            n for n in
             range(int(page_number) - adjacent_pages,
                   int(page_number) + adjacent_pages + 1)
-            if n > 0 and n <= paginator.num_pages]
+            if n > 0 and n <= paginator.num_pages
+        ]
     show_first = 1 not in page_numbers
     show_last = paginator.num_pages not in page_numbers
 
