@@ -237,7 +237,8 @@ class CommitteeIndexPage(Page, SocialFields, ListingFields):
         # Get the first and last dates to show
         start_date = timezone.now().date()
         end_date_qs = committee_pages.aggregate(end_date=models.Max('meeting_dates__date'))
-        end_date = end_date_qs['end_date'] or start_date
+        # Start and end with this month if no meetings or last meeting is before this month
+        end_date = max(start_date, end_date_qs['end_date'] or start_date)
 
         # Build a matrix for front-end
         calendar_matrix = []
