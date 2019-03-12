@@ -17,6 +17,9 @@ PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
 
 
+APP_VERSION = open(os.path.join(BASE_DIR, 'version.txt')).read().strip('\n\r \t')
+
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
@@ -65,7 +68,6 @@ INSTALLED_APPS = [
     'template_debug',
     'captcha',
     'wagtailcaptcha',
-    'raven.contrib.django.raven_compat',
     'storages',
 
     # API

@@ -11,10 +11,10 @@ RUN mkdir /var/log/django
 ADD requirements.txt /app/requirements.txt
 RUN pip install -r requirements.txt
 ADD manage.py /app/manage.py
+ADD version.txt /app/version.txt
 ADD public /app/public
 ADD hra /app/hra
 RUN python manage.py collectstatic
-ADD version.txt /app/version.txt
 
 
 EXPOSE 80

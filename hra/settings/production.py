@@ -1,5 +1,4 @@
 import os
-import raven  # noqa
 
 import django_cache_url
 import dj_database_url
@@ -166,12 +165,16 @@ if 'ES_HOST' in env:
     }
 
 
-# Raven (sentry) configuration.
-if 'RAVEN_DSN' in env:
-    RAVEN_CONFIG = {
-        'dsn': env['RAVEN_DSN'],
-        'release': open("version.txt").read(),
-    }
+# Sentry settings
+if 'SENTRY_DSN' in env:
+    import sentry_sdk
+    from sentry_sdk.integrations.django import DjangoIntegration
+    sentry_sdk.init(
+        dsn=env['SENTRY_DSN'],
+        environment=env['SENTRY_ENVIRONMENT'],
+        release=APP_VERSION,
+        integrations=[DjangoIntegration()]
+    )
 
 LOGGING = {
     'version': 1,

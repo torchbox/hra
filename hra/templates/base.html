@@ -99,6 +99,9 @@
             {% include 'footer.html' %}
         {% endblock %}
 
+        <script>
+            APP_VERSION = '{{ APP_VERSION }}';
+        </script>
         <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
 
         {% block extra_js %}{% endblock %}
