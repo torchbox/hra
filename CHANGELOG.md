@@ -1,7 +1,10 @@
 1.0.15 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- HRA-162 Fix all occurrences of page number validation (#139)
+- HRA-163 Fix error when latest meeting for RECs is before this month (#141)
+- Devops improvements (#138)
+- Sentry upgrade and fix version tracking (#140)
 
 
 1.0.14 (2019-03-11)
