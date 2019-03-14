@@ -1,7 +1,7 @@
-1.0.16 (unreleased)
+1.0.16 (2019-03-14)
 -------------------
 
-- Nothing changed yet.
+- Fix CircleCI filters to test and deploy tags
 
 
 1.0.15 (2019-03-14)
