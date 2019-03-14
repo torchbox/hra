@@ -8,16 +8,16 @@ workflows:
     - test:
         filters:
           branches:
-            only:
-            - /.*/
+            only: /.*/
+          tags:
+            only: /.*/
     # Push master branch and all tags to ECR
     - push:
         requires:
           - test
         filters:
           branches:
-            only:
-            - master
+            only: master
           tags:
             only: /.*/
 
