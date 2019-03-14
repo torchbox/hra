@@ -1,4 +1,4 @@
-1.0.15 (unreleased)
+1.0.15 (2019-03-14)
 -------------------
 
 - HRA-162 Fix all occurrences of page number validation (#139)
