@@ -43,6 +43,20 @@
                             </div>
                         {% endif %}
 
+                        {% if page.approvals_officer %}
+                            <div class="committee-list__item">
+                                <dt>Approvals Officer</dt>
+                                <dd>{{ page.approvals_officer }}</dd>
+                            </div>
+                        {% endif %}
+
+                        {% if page.approvals_administrator %}
+                            <div class="committee-list__item">
+                                <dt>Approvals Administrator</dt>
+                                <dd>{{ page.approvals_administrator }}</dd>
+                            </div>
+                        {% endif %}
+
                         {% with phone_numbers=page.phone_numbers.all %}
                             {% if phone_numbers %}
                                 <div class="committee-list__item">
@@ -70,13 +84,6 @@
                                 </div>
                             {% endif %}
                         {% endwith %}
-
-                        {% if page.hra_office_name %}
-                            <div class="committee-list__item">
-                                <dt>HRA Office name</dt>
-                                <dd>{{ page.hra_office_name }}</dd>
-                            </div>
-                        {% endif %}
 
                         {% if page.region %}
                             <div class="committee-list__item">
