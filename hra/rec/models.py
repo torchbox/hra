@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from modelcluster.fields import ParentalKey
-from wagtail.wagtailadmin.edit_handlers import FieldPanel, InlinePanel
+from wagtail.wagtailadmin.edit_handlers import FieldPanel, InlinePanel, MultiFieldPanel
 from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailcore.models import Page, Orderable
 from wagtail.wagtailsearch import index
@@ -126,10 +126,14 @@ class CommitteePage(Page, SocialFields, ListingFields):
     content_panels = Page.content_panels + [
         InlinePanel('previous_names', label="Previous name of REC"),
         FieldPanel('chair'),
-        FieldPanel('rec_manager'),
-        FieldPanel('rec_assistant'),
-        FieldPanel('approvals_officer'),
-        FieldPanel('approvals_administrator'),
+        MultiFieldPanel([
+            FieldPanel('rec_manager'),
+            FieldPanel('rec_assistant'),
+        ], heading='REC'),
+        MultiFieldPanel([
+            FieldPanel('approvals_officer'),
+            FieldPanel('approvals_administrator'),
+        ], heading='Approvals'),
         InlinePanel('phone_numbers', label="Phone numbers"),
         InlinePanel('email_addresses', label="Email addresses"),
         FieldPanel('region'),
