@@ -1,7 +1,7 @@
 1.0.17 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- HRA-169 Removed HRA office field, added two new fields Approvals Officer and Approvals Administrator to REC Directory
 
 
 1.0.16 (2019-03-14)
