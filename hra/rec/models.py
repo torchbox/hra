@@ -107,7 +107,8 @@ class CommitteePage(Page, SocialFields, ListingFields):
     chair = models.CharField(max_length=255, blank=True)
     rec_manager = models.CharField("REC Manager", max_length=255, blank=True)
     rec_assistant = models.CharField("REC Assistant", max_length=255, blank=True)
-    hra_office_name = models.CharField("HRA Office name", max_length=255, blank=True)
+    approvals_officer = models.CharField("Approvals Officer", max_length=255, blank=True)
+    approvals_administrator = models.CharField("Approvals Administrator", max_length=255, blank=True)
     region = models.CharField("Region/Nation", max_length=64, choices=REGION_CHOICES)
     usual_meeting_venue = models.CharField(max_length=255, blank=True)
     usual_meeting_time = models.TimeField(blank=True, null=True)
@@ -116,7 +117,8 @@ class CommitteePage(Page, SocialFields, ListingFields):
         index.SearchField('chair'),
         index.SearchField('rec_manager'),
         index.SearchField('rec_assistant'),
-        index.SearchField('hra_office_name'),
+        index.SearchField('approvals_officer'),
+        index.SearchField('approvals_administrator'),
         index.FilterField('region'),
         index.SearchField('usual_meeting_venue'),
     ]
@@ -126,9 +128,10 @@ class CommitteePage(Page, SocialFields, ListingFields):
         FieldPanel('chair'),
         FieldPanel('rec_manager'),
         FieldPanel('rec_assistant'),
+        FieldPanel('approvals_officer'),
+        FieldPanel('approvals_administrator'),
         InlinePanel('phone_numbers', label="Phone numbers"),
         InlinePanel('email_addresses', label="Email addresses"),
-        FieldPanel('hra_office_name'),
         FieldPanel('region'),
         FieldPanel('usual_meeting_venue'),
         FieldPanel('usual_meeting_time'),
