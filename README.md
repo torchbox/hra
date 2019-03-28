@@ -69,3 +69,7 @@ pg_restore -d hra -U hra /var/lib/postgresql/data/<dumpfile>.pg
 ## Static content
 npm compile:css:prod and npm compile:js:prod in the hra/patternlab folder
 TBC
+
+## Deployments & Environment Specific Documentation
+The application is hosted by Isotoma in their Trustserve hosting cluster - environment specific instructions can be found at:
+https://github.com/isotoma/trustsrv.io/blob/master/doc/hra-dev.md
