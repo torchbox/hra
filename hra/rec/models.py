@@ -127,13 +127,13 @@ class CommitteePage(Page, SocialFields, ListingFields):
         InlinePanel('previous_names', label="Previous name of REC"),
         FieldPanel('chair'),
         MultiFieldPanel([
-            FieldPanel('rec_manager'),
-            FieldPanel('rec_assistant'),
-        ], heading='REC'),
-        MultiFieldPanel([
             FieldPanel('approvals_officer'),
             FieldPanel('approvals_administrator'),
         ], heading='Approvals'),
+        MultiFieldPanel([
+            FieldPanel('rec_manager'),
+            FieldPanel('rec_assistant'),
+        ], heading='REC (non-England only)'),
         InlinePanel('phone_numbers', label="Phone numbers"),
         InlinePanel('email_addresses', label="Email addresses"),
         FieldPanel('region'),
