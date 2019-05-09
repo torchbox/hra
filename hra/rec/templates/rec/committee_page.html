@@ -29,20 +29,6 @@
                             </div>
                         {% endif %}
 
-                        {% if page.rec_manager %}
-                            <div class="committee-list__item">
-                                <dt>REC Manager</dt>
-                                <dd>{{ page.rec_manager }}</dd>
-                            </div>
-                        {% endif %}
-
-                        {% if page.rec_assistant %}
-                            <div class="committee-list__item">
-                                <dt>REC Assistant</dt>
-                                <dd>{{ page.rec_assistant }}</dd>
-                            </div>
-                        {% endif %}
-
                         {% if page.approvals_officer %}
                             <div class="committee-list__item">
                                 <dt>Approvals Officer</dt>
@@ -54,6 +40,20 @@
                             <div class="committee-list__item">
                                 <dt>Approvals Administrator</dt>
                                 <dd>{{ page.approvals_administrator }}</dd>
+                            </div>
+                        {% endif %}
+
+                        {% if page.rec_manager %}
+                            <div class="committee-list__item">
+                                <dt>REC Manager</dt>
+                                <dd>{{ page.rec_manager }}</dd>
+                            </div>
+                        {% endif %}
+
+                        {% if page.rec_assistant %}
+                            <div class="committee-list__item">
+                                <dt>REC Assistant</dt>
+                                <dd>{{ page.rec_assistant }}</dd>
                             </div>
                         {% endif %}
 
