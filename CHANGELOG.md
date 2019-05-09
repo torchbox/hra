@@ -1,4 +1,4 @@
-1.0.18 (unreleased)
+1.0.18 (2019-05-09)
 -------------------
 
 - HRA-169 Tweaked order of Approvals and REC sections in REC Directory
