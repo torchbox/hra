@@ -1,7 +1,7 @@
-1.0.19 (unreleased)
+1.0.19 (2019-07-03)
 -------------------
 
-- Nothing changed yet.
+- HRA-190 Avoid search indexing bug in TableBlock (#145)
 
 
 1.0.18 (2019-05-09)
