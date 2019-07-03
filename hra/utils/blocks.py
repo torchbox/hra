@@ -76,3 +76,17 @@ class StoryBlock(blocks.StreamBlock):
 
     class Meta:
         template = "blocks/stream_block.html"
+
+
+# Monkeypatch TableBlock to avoid killing search indexing when empty
+# Note it will be still rendered on page as 'None'
+
+_tableblock_get_searchable_content = TableBlock.get_searchable_content
+
+def _safe_tableblock_get_searchable_content(self, value):  # noqa:E302
+    if value is not None:
+        return _tableblock_get_searchable_content(self, value)
+    else:
+        return []
+
+TableBlock.get_searchable_content = _safe_tableblock_get_searchable_content  # noqa:E305
