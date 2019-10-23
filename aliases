@@ -20,6 +20,12 @@ function rebuild {
         read -p "Are you sure? [yN] " yn
         case $yn in
             [Yy]* ) {
+                if [ ! -e "hra/settings/local.py" ]; then
+                    echo "Creating file for local environment variables with dummy data"
+                    cat > hra/settings/local.py << EOF
+ALLOWED_HOSTS = ['localhost', '$HOSTNAME.local', '127.0.0.1', '0.0.0.0']
+EOF
+                fi
                 echo "Stopping docker containers and removing volumes"
                 docker-compose down -v
                 echo "Starting docker"
