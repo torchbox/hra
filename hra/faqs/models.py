@@ -68,4 +68,4 @@ class FAQPage(Page, SocialFields, ListingFields):
         verbose_name = "FAQ page"
 
     def get_faqs(self):
-        return FAQ.objects.filter(faq_entries__page=self)
+        return FAQ.objects.filter(faq_entries__page=self).order_by('faq_entries__sort_order')

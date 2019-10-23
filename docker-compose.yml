@@ -28,6 +28,7 @@ services:
       - search
       - localstack
     build: .
+    command: python /app/manage.py runserver 0.0.0.0:80
     ports:
       - 8000:80
     volumes:
