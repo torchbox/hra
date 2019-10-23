@@ -14,7 +14,7 @@ ADD manage.py /app/manage.py
 ADD version.txt /app/version.txt
 ADD public /app/public
 ADD hra /app/hra
-RUN python manage.py collectstatic
+RUN python /app/manage.py collectstatic --noinput
 
 
 EXPOSE 80
