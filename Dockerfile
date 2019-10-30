@@ -1,9 +1,10 @@
-FROM python:3.6
+FROM python:3.6-slim
 ENV PYTHONUNBUFFERED 1
 ENV DJANGO_SETTINGS_MODULE hra.settings.production
 ENV SECRET_KEY this-is-not-a-secret
 ENV STATIC_DIR /app/static
 #RUN apt update && apt install -y python3-psycopg2
+RUN apt update && apt install -y build-essential zlib1g-dev libjpeg-dev
 COPY k8s-safe-cronjob /sbin
 RUN mkdir /app
 WORKDIR /app
