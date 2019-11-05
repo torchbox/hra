@@ -1,3 +1,6 @@
+from django.utils.html import format_html
+from django.core import validators
+
 from wagtail.contrib.table_block.blocks import TableBlock
 from wagtail.wagtailcore import blocks
 from wagtail.wagtailimages.blocks import ImageChooserBlock
@@ -59,6 +62,26 @@ class LMSLoginBlock(blocks.StaticBlock):
         template = 'blocks/lms_login_block.html'
 
 
+class AnchorBlock(blocks.CharBlock):
+    """
+    In-page anchor
+    """
+    def render_basic(self, value, context=None):
+        if value:
+            return format_html('<a id="{0}"></a>', value)
+        else:
+            return ''
+
+    def clean(self, value):
+        clean_value = super().clean(value)
+        validators.validate_slug(clean_value)
+        return clean_value
+
+    class Meta:
+        icon = "link"
+        label = "Anchor"
+
+
 class StoryBlock(blocks.StreamBlock):
     """
     Main streamfield block to be inherited by Pages
@@ -73,6 +96,7 @@ class StoryBlock(blocks.StreamBlock):
     highlight = HighlightBlock()
     table = TableBlock(template='blocks/table_block.html')
     lms_login = LMSLoginBlock()
+    anchor = AnchorBlock(help_text='Value to append to URL after # character')
 
     class Meta:
         template = "blocks/stream_block.html"
