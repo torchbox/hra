@@ -1,7 +1,7 @@
-1.0.20 (unreleased)
+1.0.20 (2019-12-18)
 -------------------
 
-- Nothing changed yet.
+- Update Django version to 1.11.27 for CVE-2019-19844
 
 
 1.0.19 (2019-07-03)

@@ -1,4 +1,4 @@
-Django==1.11.16
+Django==1.11.27
 wagtail==1.11.1
 psycopg2==2.7.3.1
 elasticsearch==5.4.0
