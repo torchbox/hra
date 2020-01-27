@@ -1,7 +1,7 @@
-1.0.21 (unreleased)
+1.0.21 (2020-01-27)
 -------------------
 
-- Nothing changed yet.
+- Update LMS login form to point at .co.uk instead of .host (#157)
 
 
 1.0.20 (2019-12-18)
