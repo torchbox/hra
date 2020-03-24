@@ -107,6 +107,7 @@ class CommitteePage(Page, SocialFields, ListingFields):
     chair = models.CharField(max_length=255, blank=True)
     rec_manager = models.CharField("REC Manager", max_length=255, blank=True)
     rec_assistant = models.CharField("REC Assistant", max_length=255, blank=True)
+    approvals_specialist = models.CharField("Approvals Specialist", max_length=255, blank=True)
     approvals_officer = models.CharField("Approvals Officer", max_length=255, blank=True)
     approvals_administrator = models.CharField("Approvals Administrator", max_length=255, blank=True)
     region = models.CharField("Region/Nation", max_length=64, choices=REGION_CHOICES)
@@ -117,6 +118,7 @@ class CommitteePage(Page, SocialFields, ListingFields):
         index.SearchField('chair'),
         index.SearchField('rec_manager'),
         index.SearchField('rec_assistant'),
+        index.SearchField('approvals_specialist'),
         index.SearchField('approvals_officer'),
         index.SearchField('approvals_administrator'),
         index.FilterField('region'),
@@ -127,6 +129,7 @@ class CommitteePage(Page, SocialFields, ListingFields):
         InlinePanel('previous_names', label="Previous name of REC"),
         FieldPanel('chair'),
         MultiFieldPanel([
+            FieldPanel('approvals_specialist'),
             FieldPanel('approvals_officer'),
             FieldPanel('approvals_administrator'),
         ], heading='Approvals'),
