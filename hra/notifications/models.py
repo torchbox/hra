@@ -36,7 +36,7 @@ class NotificationBarSettings(BaseSetting):
 @register_setting(icon='cog')
 class CookieBannerSettings(BaseSetting):
 
-    is_active = models.BooleanField("Active", default=True)
+    is_active = models.BooleanField("Active", default=False)
     title = models.CharField(blank=True, max_length=100)
     text = RichTextField(blank=True)
     policy_page = models.ForeignKey(

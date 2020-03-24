@@ -12,7 +12,9 @@
         <div class="cookie-banner__content">
             {{ cookiebanner_settings.text|richtext|lose_br }}
             <button id="accept-button" class="button button--primary" aria-label="Accept all cookies">Accept all cookies</button>
-            <a class="button button--primary" href="{% pageurl cookiebanner_settings.policy_page %}">See cookie policy</a>
+            {% if cookiebanner_settings.policy_page %}
+                <a class="button button--primary" href="{% pageurl cookiebanner_settings.policy_page %}">See cookie policy</a>
+            {% endif %}
         </div>
     </div>
 

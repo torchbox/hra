@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
             name='CookieBannerSettings',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('is_active', models.BooleanField(default=True, verbose_name='Active')),
+                ('is_active', models.BooleanField(default=False, verbose_name='Active')),
                 ('title', models.CharField(blank=True, max_length=100)),
                 ('text', wagtail.wagtailcore.fields.RichTextField(blank=True)),
                 ('updated_at', models.DateTimeField(auto_now=True)),
