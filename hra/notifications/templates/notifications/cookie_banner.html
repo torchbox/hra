@@ -1,0 +1,19 @@
+{% load wagtailcore_tags notification_tags %}
+
+{% if cookiebanner_settings.is_active %}
+
+    {% comment %}
+    Notification should be closed by default (should contain the `notification--close` class).
+    Otherwise the notification bar will flash to the users who have decided to close the notification.
+    {% endcomment %}
+    <div id="cookie-banner" class="notification notification--close notification--default"
+          data-updated-at="{{ cookiebanner_settings.updated_at|date:"U" }}">
+        <div class="cookie-banner__heading">{{ cookiebanner_settings.title }}</div>
+        <div class="cookie-banner__content">
+            {{ cookiebanner_settings.text|richtext|lose_br }}
+            <button id="accept-button" class="button button--primary" aria-label="Accept all cookies">Accept all cookies</button>
+            <a class="button button--primary" href="{% pageurl cookiebanner_settings.policy_page %}">See cookie policy</a>
+        </div>
+    </div>
+
+{% endif %}

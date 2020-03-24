@@ -62,6 +62,16 @@ class LMSLoginBlock(blocks.StaticBlock):
         template = 'blocks/lms_login_block.html'
 
 
+class CookieOptionsBlock(blocks.StructBlock):
+    measurement_desc = blocks.RichTextBlock()
+    necessary_desc = blocks.RichTextBlock()
+
+    class Meta:
+        icon = "cog"
+        label = 'Cookie Options'
+        template = 'blocks/cookie_options.html'
+
+
 class AnchorBlock(blocks.CharBlock):
     """
     In-page anchor
@@ -96,6 +106,7 @@ class StoryBlock(blocks.StreamBlock):
     highlight = HighlightBlock()
     table = TableBlock(template='blocks/table_block.html')
     lms_login = LMSLoginBlock()
+    cookie_options = CookieOptionsBlock()
     anchor = AnchorBlock(help_text='Value to append to URL after # character')
 
     class Meta:

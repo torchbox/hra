@@ -67,6 +67,8 @@ pg_restore -d hra -U hra /var/lib/postgresql/data/<dumpfile>.pg
 ```
 
 ## Static content
+nvm use 8
+npm install moment
 npm compile:css:prod and npm compile:js:prod in the hra/patternlab folder
 TBC
 

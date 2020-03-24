@@ -1,0 +1,38 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+<form id="cookie-options-form">
+    {% if GOOGLE_TAG_MANAGER_ID %}
+        <h3>Measurement</h3>
+        {{ value.measurement_desc|richtext }}
+        <div>
+            <input type="radio" id="use_cookies" name="measurement_cookies" value="allow" {% if MEASUREMENT_COOKIE_PREFERENCES == 'allow' %} checked {% endif %}>
+            <label for="use_cookies">Use cookies that measure my website use</label>
+        </div>
+        <div>
+            <input type="radio" id="dont_use_cookies" name="measurement_cookies" value="noallow"  {% if MEASUREMENT_COOKIE_PREFERENCES != 'allow' %} checked {% endif %}>
+            <label for="dont_use_cookies">Do not use cookies that measure my website use</label>
+        </div>
+    {% endif %}
+
+        <h3>Strictly Necessary</h3>
+        {{ value.necessary_desc|richtext }}
+    
+    {% if GOOGLE_TAG_MANAGER_ID %}
+        <button class="button button--primary" type="submit">Save</button>
+    {% endif %}
+</form>
+
+<script>
+    var form = document.querySelector("#cookie-options-form");
+    form.addEventListener("submit", function(event) {
+        event.preventDefault();
+        var useCookies = form.querySelector("#use_cookies").checked;
+
+        if (useCookies) {
+            window.allowMeasurementCookies();
+        } else {
+            window.disallowMeasurementCookies();
+        }
+        
+    }, false);
+</script>

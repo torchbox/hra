@@ -6,4 +6,5 @@ def global_vars(request):
         'APP_VERSION': getattr(settings, 'APP_VERSION', None),
         'GOOGLE_TAG_MANAGER_ID': getattr(settings, 'GOOGLE_TAG_MANAGER_ID', None),
         'TITLE_SUFFIX': getattr(settings, 'TITLE_SUFFIX', None),
+        'MEASUREMENT_COOKIE_PREFERENCES': request.COOKIES.get('cookie-preferences_measurement', None),
     }

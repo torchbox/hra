@@ -2,16 +2,14 @@ import $ from '../globals';
 
 function notification() {
 
-    const $notification         = $('.notification').not('.notification--footer'),
+    const $notification         = $('.notification').not('.notification--footer').not('#cookie-banner'),
         $closeButton            = $('.notification__close'),
-        $html                   = $('html'),
         notificationHeight      = $notification.outerHeight(),
         notificationTime        = $notification.data('updatedAt'),
         notificationStorageKey  = 'notification-bar',
         notificationDarken      = 'notification--darken',
         notificationHide        = 'notification--hide',
-        notificationClose       = 'notification--close',
-        withFooter              = 'with-footer';
+        notificationClose       = 'notification--close';
 
     function darken(){
         $notification.addClass(notificationDarken);
@@ -27,14 +25,6 @@ function notification() {
 
     function open() {
         $notification.removeClass(notificationClose);
-    }
-
-    function closeFooter(){
-        $html.removeClass(withFooter);
-    }
-
-    function openFooter() {
-        $html.addClass(withFooter);
     }
 
     function openWithAnimation() {
@@ -72,7 +62,6 @@ function notification() {
         // Remove entirely
         setTimeout(() => {
             close();
-            openFooter();
         }, 500);
     }
 
@@ -81,13 +70,11 @@ function notification() {
 
         if (!latestNotificationTime || notificationTime > latestNotificationTime) {
             localStorage.removeItem(notificationStorageKey);
-            closeFooter();
             openWithAnimation();
         } else {
             // Notification should be closed by default (should contain the `notification--close` class).
             // Otherwise the notification bar will flash to the users who have decided to close the notification.
             close();
-            openFooter();
         }
     }
 

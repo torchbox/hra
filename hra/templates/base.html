@@ -7,15 +7,42 @@
         <meta name="description" content="{% if page.search_description %}{{ page.search_description }}{% else %}{{ page.listing_summary }}{% endif %}" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+        <!-- COOKIES -->
+        <script>
+          window.allowMeasurementCookies = function() {
+              document.cookie = 'cookie-preferences_measurement=allow; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/';
+              location.reload();
+          }
+          window.disallowMeasurementCookies = function() {
+              document.cookie = 'cookie-preferences_measurement=noallow; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/';
+              location.reload();
+          }
+        </script>
+
         {% if GOOGLE_TAG_MANAGER_ID %}
             <!-- Global Site Tag (gtag.js) - Google Analytics -->
             <script async src="https://www.googletagmanager.com/gtag/js?id={{ GOOGLE_TAG_MANAGER_ID }}"></script>
             <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
+                const cookies = document.cookie.split(';');
+                const measurementCookiePreferences = cookies.find(item => item.trim().startsWith('cookie-preferences_measurement='));
 
-            gtag('config', '{{ GOOGLE_TAG_MANAGER_ID }}');
+                if (measurementCookiePreferences && measurementCookiePreferences.trim() === 'cookie-preferences_measurement=allow') {
+                    window['ga-disable-{{ GOOGLE_TAG_MANAGER_ID }}'] = undefined;
+                    document.cookie = 'ga-disable-{{ GOOGLE_TAG_MANAGER_ID }}=; expires=Wed, 1 Jan 2020 23:59:59 UTC; path=/';
+                } else {
+                    window['ga-disable-{{ GOOGLE_TAG_MANAGER_ID }}'] = true;
+                    document.cookie = 'ga-disable-{{ GOOGLE_TAG_MANAGER_ID }}=true; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/';
+
+                    document.cookie = '_ga=; expires=Wed, 1 Jan 2020 23:59:59 UTC; path=/';
+                    document.cookie = '_gid=; expires=Wed, 1 Jan 2020 23:59:59 UTC; path=/';
+                    const Id = '{{ GOOGLE_TAG_MANAGER_ID }}'.replace(/-/g, '_')
+                    document.cookie = `_gat_gtag_${Id}=; expires=Wed, 1 Jan 2020 23:59:59 UTC; path=/`;
+                }
+
+                function gtag(){dataLayer.push(arguments);}
+                window.dataLayer = window.dataLayer || [];
+                gtag('js', new Date());
+                gtag('config', '{{ GOOGLE_TAG_MANAGER_ID }}');
             </script>
         {% endif %}
 
@@ -71,8 +98,7 @@
     </head>
 
     <body class="{% block body_class %}template-{{ page.get_verbose_name|slugify }}{% endblock %}">
-
-        {% if GOOGLE_TAG_MANAGER_ID %}
+        {% if GOOGLE_TAG_MANAGER_ID and MEASUREMENT_COOKIE_PREFERENCES %}
             <!-- Google Tag Manager (noscript) -->
             <noscript><iframe src="//www.googletagmanager.com/ns.html?id={{ GOOGLE_TAG_MANAGER_ID }}"
             height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -83,6 +109,8 @@
         {% include 'includes/svg_sprite.html' %}
 
         {% wagtailuserbar %}
+
+        {% cookie_banner %}
 
         {% notification_bar %}
 

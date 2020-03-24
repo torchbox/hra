@@ -2,7 +2,7 @@
     $NOTIFICATION
 \*------------------------------------*/
 
-.notification {
+.notification, .cookie-banner {
     $root: &;
     position: relative;
     width: 100%;
@@ -33,12 +33,6 @@
         }
     }
 
-    &__heading,
-    &__content,
-    &__content * {
-        display: inline;
-    }
-
     &__heading {
         @include font-size(zeta);
         font-family: $font--secondary;
@@ -51,7 +45,7 @@
         margin: 5px 0 0;
         color: #c7c7c7;
 
-        a {
+        a:not(.button) {
             color: #c7c7c7;
             text-decoration: underline;
             text-decoration-skip: ink;
@@ -118,6 +112,14 @@
             outline: 1px dotted #fff;
         }
     }
+}
+
+.notification {
+  &__heading,
+  &__content,
+  &__content * {
+      display: inline;
+  }
 }
 
 /* HRA-3 Temporary feedback promotion */
