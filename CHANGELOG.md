@@ -1,7 +1,9 @@
-1.0.22 (unreleased)
+1.0.22 (2020-05-14)
 -------------------
 
-- Nothing changed yet.
+- Upgrade from Django 1.11.27 to 1.11.29 (#162)
+- HRA-200 update cookie banner (#159)
+- HRA-199 New approvals specialist field (#158)
 
 
 1.0.21 (2020-01-27)
