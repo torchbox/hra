@@ -27,6 +27,8 @@ services:
       - database
       - search
       - localstack
+      - patternlab-css
+      - patternlab-js
     build: .
     command: python /app/manage.py runserver 0.0.0.0:80
     ports:
@@ -68,3 +70,32 @@ services:
     volumes:
       - "./localstack:/tmp/localstack"
       - "/var/run/docker.sock:/var/run/docker.sock"
+      - ./localstack-init:/docker-entrypoint-initaws.d
+
+  patternlab:
+    build:
+      context: ./
+      dockerfile: Dockerfile-patternlab
+    command: npm run watch
+    volumes:
+      - ./hra/patternlab:/app
+
+  patternlab-css:
+    depends_on:
+      - patternlab
+    build:
+      context: ./
+      dockerfile: Dockerfile-patternlab
+    command: npm run compile:css:watch-prod
+    volumes:
+      - ./hra/patternlab:/app
+
+  patternlab-js:
+    depends_on:
+      - patternlab
+    build:
+      context: ./
+      dockerfile: Dockerfile-patternlab
+    command: npm run compile:js:watch-prod
+    volumes:
+      - ./hra/patternlab:/app

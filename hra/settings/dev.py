@@ -33,8 +33,10 @@ WAGTAILSEARCH_BACKENDS = {
 }
 
 # For Database performance debugging...
-MIDDLEWARE_CLASSES = ['hra.rec.middleware.QueryCountDebugMiddleware', ] + MIDDLEWARE_CLASSES
-LOGGING['loggers']['hra.rec.middleware'] = {'level': 'DEBUG', 'handlers': ['console']}
+MIDDLEWARE_CLASSES = [
+    'hra.rec.middleware.QueryCountDebugMiddleware', ] + MIDDLEWARE_CLASSES
+LOGGING['loggers']['hra.rec.middleware'] = {
+    'level': 'DEBUG', 'handlers': ['console']}
 # LOGGING['loggers']['django.db.backends'] = {'level': 'DEBUG', 'handlers': ['console']}
 LOGGING['handlers']['console']['level'] = 'DEBUG'
 
@@ -49,6 +51,8 @@ AWS_S3_SECURE_URLS = False
 AWS_DEFAULT_ACL = 'public-read'
 AWS_LOCATION = 'media/'
 MEDIA_URL = 'http://localhost:4572/hra/media/'
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 try:
     from .local import *  # noqa
