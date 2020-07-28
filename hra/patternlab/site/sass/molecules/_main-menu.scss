@@ -3,108 +3,175 @@
 \*------------------------------------*/
 
 .main-menu {
+  display: inline-block;
+  vertical-align: top;
+
+  @include media-query(laptop) {
+    position: absolute;
+    top: 100px;
+    left: 0;
+    z-index: $z-zeta;
+    display: table;
+    width: 100vw;
+    padding: 10px 0;
+    text-align: center;
+    background-color: #fff;
+  }
+
+  @include media-query(mobile) {
+    top: 64px;
+    display: block;
+    padding: 0;
+    height: 100px;
+
+    word-wrap: nowrap;
+    max-width: 650px;
+    margin: 0 auto;
+
+    z-index: 1;
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: start;
+    -webkit-justify-content: flex-start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    -webkit-flex-wrap: nowrap;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+
+    background: #fff no-repeat;
+    background-image: -webkit-radial-gradient(0 50%, farthest-side, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)), -webkit-radial-gradient(100% 50%, farthest-side, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0));
+    background-image: -o-radial-gradient(0 50%, farthest-side, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)), -o-radial-gradient(100% 50%, farthest-side, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0));
+    background-image: radial-gradient(farthest-side at 0 50%, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)), radial-gradient(farthest-side at 100% 50%, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0));
+    background-position: 0 0, 100% 0;
+    background-size: 1rem 100%;
+
+    &::before,
+    &::after {
+      content: "";
+      position: relative;
+      z-index: -1;
+      display: block;
+      margin: 0;
+      -webkit-box-flex: 1;
+      -webkit-flex: 1 0 auto;
+      -ms-flex: 1 0 auto;
+      flex: 1 0 auto;
+    }
+
+    &::before {
+      min-width: 4rem;
+      max-width: 2rem;
+      background: -webkit-gradient(linear, left top, right top, from(#fff), color-stop(50%, #fff), to(rgba(255, 255, 255, 0)));
+      background: -webkit-linear-gradient(left, #fff, #fff 50%, rgba(255, 255, 255, 0));
+      background: -o-linear-gradient(left, #fff, #fff 50%, rgba(255, 255, 255, 0));
+      background: linear-gradient(to right, #fff, #fff 50%, rgba(255, 255, 255, 0));
+    }
+
+    &::after {
+      min-width: 8rem;
+      background: -webkit-gradient(linear, left top, right top, from(rgba(255, 255, 255, 0)), color-stop(50%, #fff), to(#fff));
+      background: -webkit-linear-gradient(left, rgba(255, 255, 255, 0), #fff 50%, #fff);
+      background: -o-linear-gradient(left, rgba(255, 255, 255, 0), #fff 50%, #fff);
+      background: linear-gradient(to right, rgba(255, 255, 255, 0), #fff 50%, #fff);
+    }
+
+    > ul {
+      white-space: nowrap;
+      margin: 0;
+      margin-left: -2rem;
+    }
+  }
+
+  &__item {
     display: inline-block;
-    vertical-align: top;
+    padding: 10px 30px;
+    vertical-align: -16px;
+    border-right: 1px solid $color--border;
+    white-space: normal;
+
+    @include media-query(desktop) {
+      padding: 10px 20px;
+    }
 
     @include media-query(laptop) {
-        position: absolute;
-        top: 100px;
-        left: 0;
-        z-index: $z-zeta;
-        display: table;
-        width: 100vw;
-        padding: 10px 0;
-        text-align: center;
-        background-color: #fff;
+      width: (100% / 3);
+      padding: 0;
+      text-align: center;
+      vertical-align: top;
     }
 
     @include media-query(mobile) {
-        top: 64px;
-        display: block;
-        padding: 10px 20px;
+      min-height: 57px;
+      padding-top: 10px;
     }
 
-    &__item {
-        display: inline-block;
-        padding: 10px 30px;
-        vertical-align: -16px;
-        border-right: 1px solid $color--border;
+    &:first-of-type {
+      padding-left: 0;
+    }
 
-        @include media-query(desktop) {
-            padding: 10px 20px;
-        }
+    &:last-of-type {
+      padding-right: 0;
+      border-right: 0;
+    }
+
+    > a {
+      position: relative;
+      padding-bottom: 8px;
+      font-family: $font--secondary;
+      color: #425563;
+
+      @include media-query(laptop) {
+        @include font-size(milli);
+        display: block;
+        padding: 7px 15px;
+        text-align: center;
+      }
+
+      &::after {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: $color--primary;
+        content: "";
+        opacity: 0;
+        transform: translate3d(0, 3px, 0);
+        transition: opacity $default-transition-speed ease, transform $default-transition-speed ease;
 
         @include media-query(laptop) {
-            width: (100% / 3);
-            padding: 0;
-            text-align: center;
-            vertical-align: top;
+          display: none;
         }
+      }
 
-        @include media-query(mobile) {
-            min-height: 57px;
+      &:hover {
+        &::after {
+          opacity: 1;
+          transform: translate3d(0, 0, 0);
         }
-
-        &:first-of-type {
-            padding-left: 0;
-        }
-
-        &:last-of-type {
-            padding-right: 0;
-            border-right: 0;
-        }
-
-        > a {
-            position: relative;
-            padding-bottom: 8px;
-            font-family: $font--secondary;
-            color: #425563;
-
-            @include media-query(laptop) {
-                @include font-size(milli);
-                display: block;
-                padding: 7px 15px;
-                text-align: center;
-            }
-
-            &::after {
-                position: absolute;
-                right: 0;
-                bottom: 0;
-                left: 0;
-                width: 100%;
-                height: 2px;
-                background-color: $color--primary;
-                content: '';
-                opacity: 0;
-                transform: translate3d(0, 3px, 0);
-                transition: opacity $default-transition-speed ease, transform $default-transition-speed ease;
-
-                @include media-query(laptop) {
-                    display: none;
-                }
-            }
-
-            &:hover {
-                &::after {
-                    opacity: 1;
-                    transform: translate3d(0, 0, 0);
-                }
-            }
-        }
-
-        &--active {
-            > a {
-
-                @include media-query(laptop) {
-                    color: $color--primary;
-                }
-
-                &::after {
-                    opacity: 1;
-                    transform: translate3d(0, 0, 0);
-                }
-            }
-        }
+      }
     }
+
+    &--active {
+      > a {
+        @include media-query(laptop) {
+          color: $color--primary;
+        }
+
+        &::after {
+          opacity: 1;
+          transform: translate3d(0, 0, 0);
+        }
+      }
+    }
+  }
 }
