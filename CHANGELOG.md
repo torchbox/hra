@@ -1,7 +1,8 @@
 1.0.23 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- HRA-218 Hero text background
+- HRA-217 fix top level nav (#173)
 
 
 1.0.22 (2020-05-14)
