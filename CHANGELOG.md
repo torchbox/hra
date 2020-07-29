@@ -1,4 +1,4 @@
-1.0.23 (unreleased)
+1.0.23 (2020-07-29)
 -------------------
 
 - HRA-218 Hero text background
