@@ -25,7 +25,10 @@
     &__content {
         max-width: $standard-body-width;
         margin: 200px auto 0;
+        background-color: rgba(9,89,169,0.8);
         color: #fff;
+        padding: 20px;
+        margin-bottom: 20px;
 
         @include media-query(tablet) {
             margin-top: 0;
