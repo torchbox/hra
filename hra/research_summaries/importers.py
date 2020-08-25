@@ -6,6 +6,7 @@ from hra.research_summaries.models import ResearchSummaryPage, ResearchType
 
 
 DEFERRED = 'Publication of this data is currently deferred.'
+NOT_APPLICABLE = 'N/A'
 
 
 class PageImporter:
@@ -49,7 +50,7 @@ class PageImporter:
 
 def get_decision_date(data):
     # Ignore decision date if publication deferred
-    if data['DecisionDate'] and data['DecisionDate'] != DEFERRED:
+    if data['DecisionDate'] and data['DecisionDate'] not in (DEFERRED, NOT_APPLICABLE,):
         return parse_date(data['DecisionDate'])
     return None
 
