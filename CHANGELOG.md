@@ -1,7 +1,7 @@
 1.0.24 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- HRA-221 HARP data fix
 
 
 1.0.23 (2020-07-29)
