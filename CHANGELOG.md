@@ -1,7 +1,7 @@
 1.0.25 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Django, Wagtail upgrade
 
 
 1.0.24 (2020-08-25)
