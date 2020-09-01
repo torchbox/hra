@@ -1,4 +1,4 @@
-from wagtail.wagtailcore.models import PageViewRestriction, Page
+from wagtail.core.models import PageViewRestriction, Page
 
 from hra.standardpage.models import StandardPage
 

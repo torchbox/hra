@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 
 from django.db import migrations, models
 import django.db.models.deletion
-import wagtail.wagtailcore.fields
+import wagtail.core.fields
 
 
 class Migration(migrations.Migration):
@@ -24,7 +24,7 @@ class Migration(migrations.Migration):
                 ('link_url', models.URLField(blank=True)),
                 ('link_text', models.CharField(blank=True, max_length=255)),
                 ('title', models.CharField(max_length=255)),
-                ('summary', wagtail.wagtailcore.fields.RichTextField(blank=True, max_length=255)),
+                ('summary', wagtail.core.fields.RichTextField(blank=True, max_length=255)),
                 ('image', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='+', to='images.CustomImage')),
                 ('link_page', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='wagtailcore.Page')),
             ],

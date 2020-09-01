@@ -1,5 +1,5 @@
 from rest_framework.fields import Field
-from wagtail.wagtailcore.rich_text import expand_db_html
+from wagtail.core.rich_text import expand_db_html
 
 
 class RenderedRichTextField(Field):

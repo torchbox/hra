@@ -13,13 +13,16 @@ except ImportError:
     has_uwsgi = False
 
 
-def single_instance_command(command_name):
+def single_instance_command(command_name, args=None):
     """Runs command only on one instance of a uWSGI legion"""
 
     if os.getenv("CFG_I_AM_CRON"):
         print("I am the lord.")
         print("Running %s" % command_name)
-        call_command(command_name, interactive=False)
+        if args:
+            call_command(command_name, interactive=False)
+        else:
+            call_command(command_name, args, interactive=False)
 
 
 if has_uwsgi:
@@ -29,7 +32,7 @@ if has_uwsgi:
 
     @cron(0, 0, -1, -1, -1, target='mule')
     def update_index(signum):
-        single_instance_command('update_index')
+        single_instance_command('update_index', '--chunk_size=50')
 
     def import_research_summaries(signum):
         """

@@ -6,13 +6,13 @@ from django.utils.functional import cached_property
 
 from modelcluster.fields import ParentalKey
 
-from wagtail.wagtailcore.models import Page
-from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
-from wagtail.wagtailcore.fields import StreamField, RichTextField
-from wagtail.wagtailadmin.edit_handlers import (
+from wagtail.core.models import Page
+from wagtail.snippets.edit_handlers import SnippetChooserPanel
+from wagtail.core.fields import StreamField, RichTextField
+from wagtail.admin.edit_handlers import (
     StreamFieldPanel, FieldPanel, InlinePanel,
     PageChooserPanel)
-from wagtail.wagtailsearch import index
+from wagtail.search import index
 
 from hra.utils.models import ListingFields, SocialFields, RelatedPage, get_adjacent_pages
 from hra.utils.blocks import StoryBlock
@@ -21,7 +21,8 @@ from hra.utils.blocks import StoryBlock
 class NewsPageCategory(models.Model):
     page = ParentalKey(
         'news.NewsPage',
-        related_name='category_relationships'
+        related_name='category_relationships',
+        on_delete=models.CASCADE
     )
     category = models.ForeignKey(
         'categories.Category',
@@ -37,7 +38,8 @@ class NewsPageCategory(models.Model):
 class NewsPageRelatedPage(RelatedPage):
     source_page = ParentalKey(
         'news.NewsPage',
-        related_name='related_pages'
+        related_name='related_pages',
+        on_delete=models.CASCADE
     )
 
 
@@ -91,7 +93,7 @@ class NewsPage(Page, SocialFields, ListingFields):
 
 
 class NewsIndexFeaturedPage(RelatedPage):
-    source_page = ParentalKey('news.NewsIndex', related_name='featured_pages')
+    source_page = ParentalKey('news.NewsIndex', related_name='featured_pages', on_delete=models.CASCADE)
 
     panels = [
         PageChooserPanel('page', page_type='news.NewsPage'),

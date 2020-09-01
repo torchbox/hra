@@ -1,25 +1,25 @@
-Django==1.11.29
-wagtail==1.11.1
+Django==2.2.12
+wagtail==2.7.2
 psycopg2==2.7.3.1
 elasticsearch==5.4.0
-django-redis==4.3.0
-Pillow==3.3.2
-django-extensions==1.7.4
-Werkzeug==0.11.11
+django-redis==4.11.0
+Pillow==4.0.0
+django-extensions==2.2.9
+Werkzeug==0.12
 django-template-debug==0.3.5
-wagtail-django-recaptcha==0.1
+wagtail-django-recaptcha==1.0
 uwsgidecorators==1.1.0
 python-dateutil==2.6.0
 
 # Production dependencies
-dj-database-url==0.4.1
+dj-database-url==0.5.0
 whitenoise==4.0b3
 uwsgi==2.0.15
 ConcurrentLogHandler==0.9.1
-sentry-sdk==0.7.2
-django-cache-url==1.3.1
-django-storages==1.6.5
+sentry-sdk==0.14.3
+django-cache-url==2.0.0
+django-storages==1.8
 boto3==1.4.6
 requests-aws4auth==0.9
 watchtower==0.4.1
-redis>=2.10.0,<3.0.0  # until django-redis is >=4.10.0
+redis==3.4.1

@@ -1,4 +1,7 @@
-class ESIMiddleware:
+from django.utils.deprecation import MiddlewareMixin
+
+
+class ESIMiddleware(MiddlewareMixin):
     """
     Adds "X-ESI: 1" header into the response if and ESI include has been used
     """

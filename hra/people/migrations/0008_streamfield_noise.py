@@ -6,11 +6,11 @@ from django.db import migrations
 import hra.utils.blocks
 import hra.utils.models
 import wagtail.contrib.table_block.blocks
-import wagtail.wagtailcore.blocks
-import wagtail.wagtailcore.fields
-import wagtail.wagtailembeds.blocks
-import wagtail.wagtailimages.blocks
-import wagtail.wagtailsnippets.blocks
+import wagtail.core.blocks
+import wagtail.core.fields
+import wagtail.embeds.blocks
+import wagtail.images.blocks
+import wagtail.snippets.blocks
 
 
 class Migration(migrations.Migration):
@@ -23,6 +23,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='personpage',
             name='biography',
-            field=wagtail.wagtailcore.fields.StreamField((('heading', wagtail.wagtailcore.blocks.CharBlock(classname='full title', icon='title')), ('paragraph', wagtail.wagtailcore.blocks.RichTextBlock()), ('image', wagtail.wagtailcore.blocks.StructBlock((('image', wagtail.wagtailimages.blocks.ImageChooserBlock()), ('caption', wagtail.wagtailcore.blocks.CharBlock(required=False)), ('longdesc', wagtail.wagtailcore.blocks.PageChooserBlock(help_text='If this image conveys infomation not given in the page text, provide a page with an full description for non-sighted users.', label='Long description', required=False, target_model=['standardpage.StandardPage']))))), ('quote', wagtail.wagtailcore.blocks.StructBlock((('quote', wagtail.wagtailcore.blocks.RichTextBlock()), ('quotee', wagtail.wagtailcore.blocks.CharBlock(required=False)), ('image', wagtail.wagtailimages.blocks.ImageChooserBlock(required=False))))), ('embed', wagtail.wagtailembeds.blocks.EmbedBlock()), ('call_to_action', wagtail.wagtailcore.blocks.StructBlock((('call_to_action', wagtail.wagtailsnippets.blocks.SnippetChooserBlock(hra.utils.models.CallToActionSnippet)), ('side_text', wagtail.wagtailcore.blocks.RichTextBlock())))), ('highlight', wagtail.wagtailcore.blocks.StructBlock((('title', wagtail.wagtailcore.blocks.CharBlock()), ('text', wagtail.wagtailcore.blocks.RichTextBlock()), ('image', wagtail.wagtailimages.blocks.ImageChooserBlock(required=False))))), ('table', wagtail.contrib.table_block.blocks.TableBlock(template='blocks/table_block.html')), ('lms_login', hra.utils.blocks.LMSLoginBlock())), blank=True),
+            field=wagtail.core.fields.StreamField((('heading', wagtail.core.blocks.CharBlock(classname='full title', icon='title')), ('paragraph', wagtail.core.blocks.RichTextBlock()), ('image', wagtail.core.blocks.StructBlock((('image', wagtail.images.blocks.ImageChooserBlock()), ('caption', wagtail.core.blocks.CharBlock(required=False)), ('longdesc', wagtail.core.blocks.PageChooserBlock(help_text='If this image conveys infomation not given in the page text, provide a page with an full description for non-sighted users.', label='Long description', required=False, target_model=['standardpage.StandardPage']))))), ('quote', wagtail.core.blocks.StructBlock((('quote', wagtail.core.blocks.RichTextBlock()), ('quotee', wagtail.core.blocks.CharBlock(required=False)), ('image', wagtail.images.blocks.ImageChooserBlock(required=False))))), ('embed', wagtail.embeds.blocks.EmbedBlock()), ('call_to_action', wagtail.core.blocks.StructBlock((('call_to_action', wagtail.snippets.blocks.SnippetChooserBlock(hra.utils.models.CallToActionSnippet)), ('side_text', wagtail.core.blocks.RichTextBlock())))), ('highlight', wagtail.core.blocks.StructBlock((('title', wagtail.core.blocks.CharBlock()), ('text', wagtail.core.blocks.RichTextBlock()), ('image', wagtail.images.blocks.ImageChooserBlock(required=False))))), ('table', wagtail.contrib.table_block.blocks.TableBlock(template='blocks/table_block.html')), ('lms_login', hra.utils.blocks.LMSLoginBlock())), blank=True),
         ),
     ]

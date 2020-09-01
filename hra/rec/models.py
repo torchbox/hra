@@ -1,12 +1,12 @@
 from django.db import models
 from django.utils import timezone
 from modelcluster.fields import ParentalKey
-from wagtail.wagtailadmin.edit_handlers import FieldPanel, InlinePanel, MultiFieldPanel
-from wagtail.wagtailcore.fields import RichTextField
-from wagtail.wagtailcore.models import Page, Orderable
-from wagtail.wagtailsearch import index
-from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
-from wagtail.wagtailsnippets.models import register_snippet
+from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, MultiFieldPanel
+from wagtail.core.fields import RichTextField
+from wagtail.core.models import Page, Orderable
+from wagtail.search import index
+from wagtail.snippets.edit_handlers import SnippetChooserPanel
+from wagtail.snippets.models import register_snippet
 
 from hra.utils.datetime import range_month
 from hra.utils.models import SocialFields, ListingFields
@@ -37,7 +37,7 @@ class CommitteeFlag(models.Model):
 
 
 class CommitteePagePreviousName(Orderable):
-    source_page = ParentalKey('rec.CommitteePage', related_name='previous_names')
+    source_page = ParentalKey('rec.CommitteePage', related_name='previous_names', on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
 
     def __str__(self):
@@ -45,7 +45,7 @@ class CommitteePagePreviousName(Orderable):
 
 
 class CommitteePagePhone(Orderable):
-    source_page = ParentalKey('rec.CommitteePage', related_name='phone_numbers')
+    source_page = ParentalKey('rec.CommitteePage', related_name='phone_numbers', on_delete=models.CASCADE)
     phone = models.CharField(max_length=255)
 
     def __str__(self):
@@ -53,7 +53,7 @@ class CommitteePagePhone(Orderable):
 
 
 class CommitteePageEmail(Orderable):
-    source_page = ParentalKey('rec.CommitteePage', related_name='email_addresses')
+    source_page = ParentalKey('rec.CommitteePage', related_name='email_addresses', on_delete=models.CASCADE)
     email = models.EmailField(max_length=255)
 
     def __str__(self):
@@ -61,7 +61,7 @@ class CommitteePageEmail(Orderable):
 
 
 class CommitteePageMeetingDate(models.Model):
-    source_page = ParentalKey('rec.CommitteePage', related_name='meeting_dates')
+    source_page = ParentalKey('rec.CommitteePage', related_name='meeting_dates', on_delete=models.CASCADE)
     date = models.DateField()
 
     class Meta:
@@ -69,8 +69,8 @@ class CommitteePageMeetingDate(models.Model):
 
 
 class CommitteePageType(Orderable):
-    source_page = ParentalKey('rec.CommitteePage', related_name='committee_types')
-    committee_type = models.ForeignKey('rec.CommitteeType', related_name='+')
+    source_page = ParentalKey('rec.CommitteePage', related_name='committee_types', on_delete=models.CASCADE)
+    committee_type = models.ForeignKey('rec.CommitteeType', related_name='+', on_delete=models.CASCADE)
 
     panels = [
         SnippetChooserPanel('committee_type')
@@ -78,8 +78,8 @@ class CommitteePageType(Orderable):
 
 
 class CommitteePageFlag(Orderable):
-    source_page = ParentalKey('rec.CommitteePage', related_name='committee_flags')
-    committee_flag = models.ForeignKey('rec.CommitteeFlag', related_name='+')
+    source_page = ParentalKey('rec.CommitteePage', related_name='committee_flags', on_delete=models.CASCADE)
+    committee_flag = models.ForeignKey('rec.CommitteeFlag', related_name='+', on_delete=models.CASCADE)
 
     panels = [
         SnippetChooserPanel('committee_flag')

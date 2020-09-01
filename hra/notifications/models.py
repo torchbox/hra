@@ -1,8 +1,8 @@
 from django.db import models
 from wagtail.contrib.settings.models import BaseSetting
 from wagtail.contrib.settings.registry import register_setting
-from wagtail.wagtailadmin.edit_handlers import FieldPanel, PageChooserPanel
-from wagtail.wagtailcore.fields import RichTextField
+from wagtail.admin.edit_handlers import FieldPanel, PageChooserPanel
+from wagtail.core.fields import RichTextField
 
 from hra.esi import purge_esi
 

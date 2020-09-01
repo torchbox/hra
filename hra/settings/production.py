@@ -76,10 +76,10 @@ if 'EMAIL_SUBJECT_PREFIX' in env:
     EMAIL_SUBJECT_PREFIX = env['EMAIL_SUBJECT_PREFIX']
 
 if 'CACHE_PURGE_URL' in env:
-    INSTALLED_APPS += ('wagtail.contrib.wagtailfrontendcache', )  # noqa
+    INSTALLED_APPS += ('wagtail.contrib.frontend_cache', )  # noqa
     WAGTAILFRONTENDCACHE = {
         'default': {
-            'BACKEND': 'wagtail.contrib.wagtailfrontendcache.backends.HTTPBackend',
+            'BACKEND': 'wagtail.contrib.frontend_cache.backends.HTTPBackend',
             'LOCATION': env['CACHE_PURGE_URL'],
         },
     }
@@ -115,7 +115,7 @@ if 'DATABASE_URL' in os.environ:
 elif 'DATABASE_SCHEMA' in os.environ:
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'ENGINE': 'django.db.backends.postgresql',
             'NAME': env['DATABASE_SCHEMA'],
             'USER': env['DATABASE_USERNAME'],
             'PASSWORD': env['DATABASE_PASSWORD'],
@@ -148,7 +148,7 @@ if 'BROKER_URL' in env:
 if 'ES_HOST' in env:
     WAGTAILSEARCH_BACKENDS = {
         'default': {
-            'BACKEND': 'wagtail.wagtailsearch.backends.elasticsearch5',
+            'BACKEND': 'wagtail.search.backends.elasticsearch5',
             'INDEX': env['ES_INDEX'],
             'TIMEOUT': 30,
             'HOSTS': [{

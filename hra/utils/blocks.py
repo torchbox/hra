@@ -2,10 +2,10 @@ from django.utils.html import format_html
 from django.core import validators
 
 from wagtail.contrib.table_block.blocks import TableBlock
-from wagtail.wagtailcore import blocks
-from wagtail.wagtailimages.blocks import ImageChooserBlock
-from wagtail.wagtailembeds.blocks import EmbedBlock
-from wagtail.wagtailsnippets.blocks import SnippetChooserBlock
+from wagtail.core import blocks
+from wagtail.images.blocks import ImageChooserBlock
+from wagtail.embeds.blocks import EmbedBlock
+from wagtail.snippets.blocks import SnippetChooserBlock
 
 from .models import CallToActionSnippet
 
@@ -63,8 +63,14 @@ class LMSLoginBlock(blocks.StaticBlock):
 
 
 class CookieOptionsBlock(blocks.StructBlock):
-    measurement_desc = blocks.RichTextBlock()
-    necessary_desc = blocks.RichTextBlock()
+    measurement_desc = blocks.RichTextBlock(
+        label='Measurement cookies description',
+        help_text='Use this to describe how measurement cookies are used on the site. This section is shown only if the relevant cookies are actually in use.'
+    )
+    necessary_desc = blocks.RichTextBlock(
+        label='Necessary cookies description',
+        help_text='Use this to describe how necessary cookies are used on the site.'
+    )
 
     class Meta:
         icon = "cog"

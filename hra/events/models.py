@@ -10,14 +10,14 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils.functional import cached_property
 
 from modelcluster.fields import ParentalKey
-from wagtail.wagtailadmin.edit_handlers import (
+from wagtail.admin.edit_handlers import (
     FieldPanel, FieldRowPanel, InlinePanel, MultiFieldPanel, StreamFieldPanel,
     PageChooserPanel)
-from wagtail.wagtailcore.fields import RichTextField, StreamField
-from wagtail.wagtailcore.models import Page
-from wagtail.wagtailsearch import index
-from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
-from wagtail.wagtailsnippets.models import register_snippet
+from wagtail.core.fields import RichTextField, StreamField
+from wagtail.core.models import Page
+from wagtail.search import index
+from wagtail.snippets.edit_handlers import SnippetChooserPanel
+from wagtail.snippets.models import register_snippet
 
 from hra.utils.blocks import StoryBlock
 from hra.utils.models import ListingFields, RelatedPage, SocialFields, get_adjacent_pages
@@ -34,7 +34,7 @@ class EventType(models.Model):
 
 
 class EventPageRelatedPage(RelatedPage):
-    source_page = ParentalKey('events.EventPage', related_name='related_pages')
+    source_page = ParentalKey('events.EventPage', related_name='related_pages', on_delete=models.CASCADE)
 
 
 class EventPageEventType(models.Model):
@@ -42,7 +42,7 @@ class EventPageEventType(models.Model):
         'events.EventType',
         on_delete=models.CASCADE
     )
-    page = ParentalKey('events.EventPage', related_name='event_types')
+    page = ParentalKey('events.EventPage', related_name='event_types', on_delete=models.CASCADE)
 
     panels = [
         SnippetChooserPanel('event_type'),
@@ -143,7 +143,7 @@ class EventPage(Page, SocialFields, ListingFields):
 
 
 class EventIndexPageFeaturedPage(RelatedPage):
-    source_page = ParentalKey('events.EventIndexPage', related_name='featured_pages')
+    source_page = ParentalKey('events.EventIndexPage', related_name='featured_pages', on_delete=models.CASCADE)
 
     panels = [
         PageChooserPanel('page', page_type='events.EventPage'),

@@ -1,15 +1,15 @@
 from django.core.exceptions import ValidationError
 from django.db import models
 
-from wagtail.wagtailadmin.edit_handlers import (
+from wagtail.admin.edit_handlers import (
     FieldPanel,
     MultiFieldPanel,
     PageChooserPanel
 )
-from wagtail.wagtailcore.models import Orderable, Page
-from wagtail.wagtaildocs.edit_handlers import DocumentChooserPanel
-from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
-from wagtail.wagtailsnippets.models import register_snippet
+from wagtail.core.models import Orderable, Page
+from wagtail.documents.edit_handlers import DocumentChooserPanel
+from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtail.snippets.models import register_snippet
 from wagtail.contrib.settings.models import BaseSetting, register_setting
 
 
@@ -69,7 +69,7 @@ class LinkFields(models.Model):
 
         return self.link_url
 
-    content_panels = [
+    panels = [
         MultiFieldPanel([
             PageChooserPanel('link_page'),
             FieldPanel('link_url'),
@@ -156,7 +156,7 @@ class CallToActionSnippet(LinkFields):
     panels = [
         FieldPanel('title'),
         FieldPanel('summary'),
-    ] + LinkFields.content_panels + [
+    ] + LinkFields.panels + [
         ImageChooserPanel('image'),
     ]
 

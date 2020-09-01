@@ -24,7 +24,7 @@ CACHES = {'default': django_cache_url.config()}
 
 WAGTAILSEARCH_BACKENDS = {
     'default': {
-        'BACKEND': 'wagtail.wagtailsearch.backends.elasticsearch5',
+        'BACKEND': 'wagtail.search.backends.elasticsearch5',
         'INDEX': 'hra',
         'HOSTS': [{
             'host': 'search',
@@ -33,8 +33,7 @@ WAGTAILSEARCH_BACKENDS = {
 }
 
 # For Database performance debugging...
-MIDDLEWARE_CLASSES = [
-    'hra.rec.middleware.QueryCountDebugMiddleware', ] + MIDDLEWARE_CLASSES
+MIDDLEWARE = ['hra.rec.middleware.QueryCountDebugMiddleware', ] + MIDDLEWARE
 LOGGING['loggers']['hra.rec.middleware'] = {
     'level': 'DEBUG', 'handlers': ['console']}
 # LOGGING['loggers']['django.db.backends'] = {'level': 'DEBUG', 'handlers': ['console']}

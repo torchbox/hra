@@ -126,4 +126,4 @@ def _post_deploy():
     )
 
     # update search index
-    run('django-admin update_index')
+    run('django-admin update_index --chunk_size=50')

@@ -1,7 +1,7 @@
 from django import template
 from django.conf import settings
 
-from wagtail.wagtailcore.utils import camelcase_to_underscore
+from wagtail.core.utils import camelcase_to_underscore
 
 from hra.events.models import EventPage
 from hra.forms.models import FormPage
@@ -37,7 +37,7 @@ def field_type(bound_field):
     return camelcase_to_underscore(bound_field.field.__class__.__name__)
 
 
-@register.assignment_tag()
+@register.simple_tag()
 def to_list(*args):
     return args
 
@@ -49,7 +49,7 @@ def newsletter_signup_form():
     }
 
 
-@register.assignment_tag(name='page_verbose_names')
+@register.simple_tag(name='page_verbose_names')
 def page_verbose_names(page):
     """
     Accepts a page object or page class and

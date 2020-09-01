@@ -4,8 +4,8 @@ from __future__ import unicode_literals
 
 from django.db import migrations, models
 import django.db.models.deletion
-import wagtail.wagtailcore.blocks
-import wagtail.wagtailcore.fields
+import wagtail.core.blocks
+import wagtail.core.fields
 
 
 class Migration(migrations.Migration):
@@ -20,9 +20,9 @@ class Migration(migrations.Migration):
             name='NavigationSettings',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('header_links', wagtail.wagtailcore.fields.StreamField((('item', wagtail.wagtailcore.blocks.StructBlock((('page', wagtail.wagtailcore.blocks.PageChooserBlock()), ('title', wagtail.wagtailcore.blocks.TextBlock(help_text="Leave blank to use the page's own title", required=False))))),), blank=True)),
-                ('footer_links', wagtail.wagtailcore.fields.StreamField((('column', wagtail.wagtailcore.blocks.StructBlock((('column_heading', wagtail.wagtailcore.blocks.TextBlock()), ('subitems', wagtail.wagtailcore.blocks.ListBlock(wagtail.wagtailcore.blocks.StructBlock((('page', wagtail.wagtailcore.blocks.PageChooserBlock()), ('title', wagtail.wagtailcore.blocks.TextBlock(help_text="Leave blank to use the page's own title", required=False))), label='Sub-item')))))),), blank=True)),
-                ('footer_secondary_links', wagtail.wagtailcore.fields.StreamField((('item', wagtail.wagtailcore.blocks.StructBlock((('page', wagtail.wagtailcore.blocks.PageChooserBlock()), ('title', wagtail.wagtailcore.blocks.TextBlock(help_text="Leave blank to use the page's own title", required=False))))),), blank=True)),
+                ('header_links', wagtail.core.fields.StreamField((('item', wagtail.core.blocks.StructBlock((('page', wagtail.core.blocks.PageChooserBlock()), ('title', wagtail.core.blocks.TextBlock(help_text="Leave blank to use the page's own title", required=False))))),), blank=True)),
+                ('footer_links', wagtail.core.fields.StreamField((('column', wagtail.core.blocks.StructBlock((('column_heading', wagtail.core.blocks.TextBlock()), ('subitems', wagtail.core.blocks.ListBlock(wagtail.core.blocks.StructBlock((('page', wagtail.core.blocks.PageChooserBlock()), ('title', wagtail.core.blocks.TextBlock(help_text="Leave blank to use the page's own title", required=False))), label='Sub-item')))))),), blank=True)),
+                ('footer_secondary_links', wagtail.core.fields.StreamField((('item', wagtail.core.blocks.StructBlock((('page', wagtail.core.blocks.PageChooserBlock()), ('title', wagtail.core.blocks.TextBlock(help_text="Leave blank to use the page's own title", required=False))))),), blank=True)),
                 ('site', models.OneToOneField(editable=False, on_delete=django.db.models.deletion.CASCADE, to='wagtailcore.Site')),
             ],
             options={

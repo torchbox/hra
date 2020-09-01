@@ -17,8 +17,8 @@ PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
 
 
-APP_VERSION = open(os.path.join(BASE_DIR, 'version.txt')).read().strip('\n\r \t')
-
+with open(os.path.join(BASE_DIR, 'version.txt')) as f:
+    APP_VERSION = f.read().strip('\n\r \t')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
@@ -46,20 +46,20 @@ INSTALLED_APPS = [
     'hra.utils',
     'hra.waf',
 
-    'wagtail.contrib.wagtailsearchpromotions',
+    'wagtail.contrib.search_promotions',
     'wagtail.contrib.settings',
     'wagtail.contrib.table_block',
-    'wagtail.wagtailforms',
-    'wagtail.wagtailredirects',
-    'wagtail.wagtailembeds',
-    'wagtail.wagtailsites',
-    'wagtail.wagtailusers',
-    'wagtail.wagtailsnippets',
-    'wagtail.wagtaildocs',
-    'wagtail.wagtailimages',
-    'wagtail.wagtailsearch',
-    'wagtail.wagtailadmin',
-    'wagtail.wagtailcore',
+    'wagtail.contrib.forms',
+    'wagtail.contrib.redirects',
+    'wagtail.embeds',
+    'wagtail.sites',
+    'wagtail.users',
+    'wagtail.snippets',
+    'wagtail.documents',
+    'wagtail.images',
+    'wagtail.search',
+    'wagtail.admin',
+    'wagtail.core',
     'wagtail.api.v2',
 
     'modelcluster',
@@ -81,7 +81,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
-MIDDLEWARE_CLASSES = [
+MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'hra.aws.ELBHealthCheck',
     'django.middleware.security.SecurityMiddleware',
@@ -93,8 +93,8 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
-    'wagtail.wagtailcore.middleware.SiteMiddleware',
-    'wagtail.wagtailredirects.middleware.RedirectMiddleware',
+    'wagtail.core.middleware.SiteMiddleware',
+    'wagtail.contrib.redirects.middleware.RedirectMiddleware',
     'hra.esi.middleware.ESIMiddleware',
 ]
 
@@ -128,7 +128,7 @@ WSGI_APPLICATION = 'hra.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'hra',
     }
 }

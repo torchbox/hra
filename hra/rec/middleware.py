@@ -1,12 +1,13 @@
 import logging
 
 from django.db import connection
+from django.utils.deprecation import MiddlewareMixin
 
 logger = logging.getLogger(__name__)
 
 
 # based on https://www.dabapps.com/blog/logging-sql-queries-django-13/
-class QueryCountDebugMiddleware(object):
+class QueryCountDebugMiddleware(MiddlewareMixin):
     """
     This middleware will log the number of queries run
     and the total time taken for each request.

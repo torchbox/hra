@@ -5,17 +5,17 @@ from django.conf import settings
 
 from modelcluster.fields import ParentalKey
 
-from wagtail.wagtailcore.models import Page
-from wagtail.wagtailcore.fields import StreamField, RichTextField
-from wagtail.wagtailadmin.edit_handlers import (
+from wagtail.core.models import Page
+from wagtail.core.fields import StreamField, RichTextField
+from wagtail.admin.edit_handlers import (
     FieldPanel,
     InlinePanel,
     MultiFieldPanel,
     StreamFieldPanel
 )
-from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
-from wagtail.wagtailsnippets.models import register_snippet
-from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
+from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtail.snippets.models import register_snippet
+from wagtail.snippets.edit_handlers import SnippetChooserPanel
 
 from hra.utils.blocks import StoryBlock
 from hra.utils.models import ListingFields, SocialFields, get_adjacent_pages
@@ -24,7 +24,8 @@ from hra.utils.models import ListingFields, SocialFields, get_adjacent_pages
 class SocialMediaProfile(models.Model):
     person_page = ParentalKey(
         'PersonPage',
-        related_name='social_media_profile'
+        related_name='social_media_profile',
+        on_delete=models.CASCADE
     )
     site_titles = (
         ('twitter', "Twitter"),
@@ -67,11 +68,13 @@ class PersonCategory(models.Model):
 class PersonPagePersonCategory(models.Model):
     page = ParentalKey(
         'PersonPage',
-        related_name='category_relationships'
+        related_name='category_relationships',
+        on_delete=models.CASCADE
     )
     category = models.ForeignKey(
         'PersonCategory',
-        related_name='+'
+        related_name='+',
+        on_delete=models.CASCADE
     )
 
     panels = [

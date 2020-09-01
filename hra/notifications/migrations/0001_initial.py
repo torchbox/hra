@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 
 from django.db import migrations, models
 import django.db.models.deletion
-import wagtail.wagtailcore.fields
+import wagtail.core.fields
 
 
 class Migration(migrations.Migration):
@@ -22,7 +22,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('type', models.CharField(blank=True, choices=[('default', 'Notification'), ('error', 'Error'), ('success', 'Success')], help_text='Set empty type to hide the notification', max_length=32)),
                 ('title', models.CharField(max_length=128)),
-                ('text', wagtail.wagtailcore.fields.RichTextField(blank=True, max_length=128)),
+                ('text', wagtail.core.fields.RichTextField(blank=True, max_length=128)),
                 ('updated_at', models.DateTimeField(auto_now=True)),
                 ('site', models.OneToOneField(editable=False, on_delete=django.db.models.deletion.CASCADE, to='wagtailcore.Site')),
             ],

@@ -35,7 +35,7 @@ EOF
                 echo "Migrating database"
                 docker-compose run --rm web /app/manage.py migrate || return 1
                 echo "Initialising search"
-                docker-compose run --rm web bash -c "/app/manage.py update_index"
+                docker-compose run --rm web bash -c "/app/manage.py update_index --chunk_size=50"
                 echo "Stopping containers"
                 docker-compose stop
 

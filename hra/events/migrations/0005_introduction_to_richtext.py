@@ -3,7 +3,7 @@
 from __future__ import unicode_literals
 
 from django.db import migrations
-import wagtail.wagtailcore.fields
+import wagtail.core.fields
 from django.utils.html import linebreaks
 
 
@@ -25,7 +25,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='eventpage',
             name='introduction',
-            field=wagtail.wagtailcore.fields.RichTextField(blank=True),
+            field=wagtail.core.fields.RichTextField(blank=True),
         ),
         migrations.RunPython(convert_textfield_into_richtext, migrations.RunPython.noop),
     ]

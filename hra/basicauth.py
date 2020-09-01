@@ -3,11 +3,12 @@ import os
 from base64 import standard_b64decode
 
 from django.http import HttpResponse
+from django.utils.deprecation import MiddlewareMixin
 
 logger = logging.getLogger(__name__)
 
 
-class BasicAuth(object):
+class BasicAuth(MiddlewareMixin):
 
     """
     We can't do firewalls with CloudFront. So basic auth is a must.
